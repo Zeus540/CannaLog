@@ -1,0 +1,46 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../lib/axios";
+import { BASE_URL_PROD } from "../../lib/Constants";
+import {deletePlantLocally} from './myPlantsSlice'
+
+export const fetchMyPlants = createAsyncThunk('myPlants/fetch',()=>{
+  return axios.get(`${BASE_URL_PROD}/plants`)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    throw new Error('Failed to fetch plants');
+  });
+})
+
+export const addPlants = createAsyncThunk('myPlants/add',(values)=>{
+  return axios.post(`${BASE_URL_PROD}/plants/add`,values)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    throw new Error('Failed to add plant');
+  });
+})
+
+
+export const deletePlant = createAsyncThunk('myPlants/delete',async (values, { dispatch }) => {
+  try {
+    await axios.delete(`${BASE_URL_PROD}/plants/delete/${values}`);
+    dispatch(deletePlantLocally(values));
+  } catch (error) {
+    throw new Error('Failed to delete plant');
+  }
+}
+);
+
+
+export const takeAction = createAsyncThunk('myPlants/takeAction',(values)=>{
+  return axios.post(`${BASE_URL_PROD}/plants/take_action/${values.plant_action_type_id}`,values)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    throw new Error('Failed to take plant action');
+  });
+})

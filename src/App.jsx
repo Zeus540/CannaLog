@@ -1,0 +1,84 @@
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import AnimatedRoutes from './lib/AnimatedRoutes'
+import { fetchPublicPlants, fetchEnvironmentTypes } from './features/'
+import { ThemeProvider } from 'styled-components'
+
+
+let light_theme = {
+  primary: '#ffffff',
+  primary_light: '#f3f4f6',
+  secondary: '#f3f4f6',
+  accent: '#8bab50',
+  text: '#0e1e3f',
+  warn: "#f44336",
+  drawer: {
+    primary: '#ffffff',
+    secondary: '#f3f4f6',
+  },
+  btn: {
+    primary: '#3f3838',
+    secondary: '#0000009c',
+    text: '#8bab50',
+    hover: '#8bab50bd'
+  },
+  divider: {
+    primary: '#3f3838',
+  },
+  modal: {
+    primary: '#ffffff',
+    secondary: '#c7c7c79c',
+    text: 'black',
+  },
+}
+
+let dark_theme = {
+  primary: ' #000000',
+  primary_light: '#121212',
+  secondary: '#121212',
+  accent: '#8bab50',
+  text: 'white',
+  warn: "#f44336",
+  drawer: {
+    primary: 'black',
+    secondary: '#0000009c',
+  },
+  btn: {
+    primary: 'black',
+    secondary: '#0000009c',
+    text: 'white',
+    hover: '#8bab50bd'
+  },
+  divider: {
+    primary: '#ffffff73',
+  },
+  modal: {
+    primary: '#000000',
+    secondary: '#121212c4',
+    text: 'black',
+  },
+}
+
+
+function App() {
+
+  const dispatch = useDispatch()
+
+
+  const [theme, setTheme] = useState(light_theme)
+
+  useEffect(() => {
+    dispatch(fetchPublicPlants())
+   setTheme(dark_theme)
+  }, [])
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <AnimatedRoutes />
+      </ThemeProvider>
+    </>
+  )
+}
+
+export default App
