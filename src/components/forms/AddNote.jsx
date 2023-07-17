@@ -3,14 +3,15 @@ import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
 import { ButtonOutlined } from '../../utils/global_styles';
-import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive } from './Form_styles'
+import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive,StyledTextareaAutosize } from './Form_styles'
 import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment-timezone';
+import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { selectStages, fetchStages,takeAction } from '../../features';
+
 
 const AddNote = ({ plant,modalType,openModal,data }) => {
 
@@ -21,14 +22,14 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
     }, [])
 
 
-    const stages = useSelector(selectStages)
+
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 
     const AddNoteSchema = Yup.object().shape({
         creation_date: Yup.string()
             .required('Required'),
-        notes: Yup.string()
+        plant_note: Yup.string()
              .required('Required'),
         plant_action_type_id: Yup.number()
              .required('Required')
@@ -37,13 +38,12 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
     });
 
     let intialValues = {
-        creation_date: moment(),
-        timezone: userTimezone || moment.tz.guess(),
-        stage_id: '',
+        creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
+        timezone: userTimezone ,
+        plant_note: '',
         plant_id:plant.plant_id,
         plant_action_type_id:data.plant_action_type_id,
     }
-
 
 
     const handleDate = (values,date) => {
@@ -51,7 +51,7 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
     }
 
     const handleAction = async(values, setSubmitting) => {
-        console.log("values", values)
+        console.log("handleAction", values)
         setSubmitting(true)
 
         let res = await  dispatch(takeAction(values))
@@ -62,13 +62,13 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
        
     }
 
+
     return (
         <div>
             <Formik
                 initialValues={intialValues}
                 validationSchema={AddNoteSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    console.log("values",values)
                     setTimeout(() => {
                         handleAction(values, setSubmitting)
                     }, 400);
@@ -80,19 +80,22 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
                             <StyledDateTimePicker
                                 name="creation_date"
                                 maxDate={new Date()}
-                                displayWeekNumber={true}
+                             
                                 minDate={new Date(getLocalizeTime(plant.creation_date))}
                                 defaultValue={new Date()}
-                                onChange={(value) => { handleDate(values,value.format('YYYY-MM-DD HH:mm:ss')) }}
-                                formatDensity="dense"
+                                onChange={(value) => { handleDate(values,format(value,'yyyy-MM-dd HH:mm:ss')) }}
+                              
                             />
                         </LocalizationProvider>
+                            <StyledTextareaAutosize
+                            aria-label="textarea"
+                            minRows={3}
+                            name="plant_note"
+                            onChange={handleChange}
+                            placeholder="Enter your text"
+                            style={{ width: '100%' }}
+                            />
 
-                        {/* {stages?.map((t, index) => {
-                                return (
-                              
-                                )
-                            })} */}
                         <ButtonHolder>
                             <ButtonOutlined type="submit" >
                                 Submit

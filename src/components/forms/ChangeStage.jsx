@@ -8,7 +8,7 @@ import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment-timezone';
+import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { selectStages, fetchStages,takeAction } from '../../features';
 
@@ -61,8 +61,8 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
     });
 
     let intialValues = {
-        creation_date: moment(),
-        timezone: userTimezone || moment.tz.guess(),
+        creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
+        timezone: userTimezone ,
         stage_id: '',
         plant_id:plant.plant_id,
         plant_action_type_id:data.plant_action_type_id,
@@ -114,11 +114,10 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
                             <StyledDateTimePicker
                                 name="creation_date"
                                 maxDate={new Date()}
-                                displayWeekNumber={true}
                                 minDate={new Date(getLocalizeTime(plant.creation_date))}
                                 defaultValue={new Date()}
-                                onChange={(value) => { handleDate(values,value.format('YYYY-MM-DD HH:mm:ss')) }}
-                                formatDensity="dense"
+                                onChange={(value) => { handleDate(values,format(value,'yyyy-MM-dd HH:mm:ss')) }}
+                              
                             />
                         </LocalizationProvider>
 

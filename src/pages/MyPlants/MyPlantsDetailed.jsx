@@ -64,7 +64,8 @@ function MyPlantsDetailed() {
     const [modalOpen, setModalOpen] = useState(false)
     const [modalData, setModalData] = useState([])
     const [modalType, setModalType] = useState('')
-
+    const [currentStage, setCurrentStage] = useState()
+    
     let plants = useSelector(selectMyPlants)
     let environments = useSelector(selectEnvironments)
     let plant_action_types = useSelector(selectPlantActionTypes)
@@ -76,8 +77,22 @@ function MyPlantsDetailed() {
     }, [])
 
     useEffect(() => {
+    
+    }, [])
+
+    
+    useEffect(() => {
         setPlant(plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0])
 
+      
+        axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
+        .then((response)=>{
+            setCurrentStage(response.data)
+        console.log("current_stage",response.data)
+        })
+        .catch((err)=>{
+            console.log("err",err)
+        })
     }, [plants])
 
     useEffect(() => {
@@ -127,8 +142,10 @@ function MyPlantsDetailed() {
 
                         <div>
                             <h1>{plant?.plant_name}</h1>
-                            
-                            {console.log("plant", plant)}
+                            <Tag bg={currentStage?.stage_color}>
+                            {currentStage?.stage_name}
+                            </Tag>
+                         
                     
 
                         </div>

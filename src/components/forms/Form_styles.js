@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Select, MenuItem,InputLabel, TextField } from '@mui/material';
 import {motion as m} from 'framer-motion'
 import { MobileDateTimePicker   } from '@mui/x-date-pickers';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 const btnAnimation = (theme) => keyframes`
 0%{
@@ -15,6 +16,14 @@ const btnAnimation = (theme) => keyframes`
   width: 100%;
 }
 `
+export const StyledTextareaAutosize = styled(TextareaAutosize)`
+white-space: unset;
+overflow-wrap: break-word;
+background:${props => props.theme.secondary}!important;
+padding: 16.5px 14px;
+border-radius: 5px;
+`
+
 
 
 export const StyledDateTimePicker = styled(MobileDateTimePicker )`
