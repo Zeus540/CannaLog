@@ -8,14 +8,15 @@ import { deleteEnvironment,deletePlant } from '../../features';
 import { useDispatch } from 'react-redux';
 import AddEvironment from '../forms/AddEvironment';
 import AddPlant from '../forms/AddPlant';
-import TakeAction from '../forms/TakeAction';
+import ChangeStage from '../forms/ChangeStage';
+import AddNote from '../forms/AddNote';
 
 const PopupModal = ({ openModal, data, modalType,plant }) => {
   
 const dispatch = useDispatch()
 
 
-  console.log("data",data?.plant_action_type_id)
+
   const handleSubmit = async(e)=>{
    
 
@@ -73,7 +74,7 @@ const dispatch = useDispatch()
           }
 
           {(modalType == "addEnvironment") &&
-       <AddEvironment modalType={modalType} openModal={openModal} />
+       <AddEvironment modalType={modalType} openModal={openModal} data={data}/>
           }
           {(modalType == "editEnvironment") &&
             <AddEvironment modalType={modalType} openModal={openModal} data={data}/>
@@ -83,8 +84,11 @@ const dispatch = useDispatch()
             <AddPlant modalType={modalType} openModal={openModal} data={data}/>
           }
 
-          {(data.plant_action_type_id == 14) &&
-            <TakeAction modalType={modalType} openModal={openModal} data={data} plant={plant}/>
+          {(data?.plant_action_type_id == 14) &&
+            <ChangeStage modalType={modalType} openModal={openModal} data={data} plant={plant}/>
+          }
+          {(data?.plant_action_type_id == 13) &&
+            <AddNote modalType={modalType} openModal={openModal} data={data} plant={plant}/>
           }
 
 

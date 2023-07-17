@@ -71,6 +71,7 @@ function cleanName(name) {
               </div>
               <div>
                 {getLocalizeTime(data.creation_date)}
+            
               </div>
             </div>
            </PlantCardTextTopInner>
@@ -105,7 +106,7 @@ function cleanName(name) {
               <GiGreenhouse />
             </PlantCardTextLogo>
             <PlantCardTextInner>
-              {data.name}
+              {data.environment_name}
             </PlantCardTextInner>
           </PlantCardText>
         </PlantCardTextHolder>

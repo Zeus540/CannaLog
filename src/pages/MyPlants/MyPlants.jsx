@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import {
   selectMyPlants,
   isLoadingMyPlants,
+  selectUser,
 } from '../../features'
 import PlantCard from '../../components/cards/PlantCard'
 import PopupModal from '../../components/popupModal/PopupModal'
@@ -36,28 +37,41 @@ const MyPlants = () => {
   const myPlants = useSelector(selectMyPlants)
 
   {console.log("myPlants",myPlants)}
-  // const { socket } = useWebSocket();
+  
 
+  const user = useSelector(selectUser)
 
+  useEffect(() => {
+    
+    if (socket) {
 
-  // useEffect(() => {
-  //   console.log(socket);
-  //   if (socket) {
-  //     socket.on("environment_add", (data) => {
-  //       // dispatch(addEnvironmentLocally(data));
-  //       // console.log(data);
-  //     });
+      socket.on(`environment_added${user.user_id}`, (data) => {
+        dispatch(addEnvironmentLocally(data));
+        console.log(data);
+      });
 
-  //     socket.on("environment_edited", (data) => {
-  //       // dispatch(editEnvironmentLocally(data));
-  //       // console.log(data);
-  //     });
-  //   }
-  // }, [socket]);
+       socket.on(`environment_edited${user.user_id}`, (data) => {
+         dispatch(editEnvironmentLocally(data));
+         console.log(data);
+       });
+
+       socket.on(`environment_deleted${user.user_id}`, (data) => {
+        dispatch(deleteEnvironmentLocally(parseInt(data)));
+        console.log("dispatch",data);
+      });
+
+    }
+
+  }, [socket]);
+
 
 
   const openModal = (type, data) => {
     switch (type) {
+      case "addPlant":
+        setModalType("addPlant")
+        setModalOpen(!modalOpen)
+        break;
       case "editPlant":
         setModalType("editPlant")
         setModalData(data)
@@ -68,11 +82,6 @@ const MyPlants = () => {
         setModalData(data)
         setModalOpen(!modalOpen)
         break;
-      case "addPlant":
-        setModalType("addPlant")
-        setModalOpen(!modalOpen)
-        break;
-
     }
   }
 

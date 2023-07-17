@@ -20,7 +20,6 @@ import { fetchStrains } from "./strains/strainThunk.js"
 import { irrigationTypesSlice,selectIrrigationTypes } from "./irrigationTypes/irrigationTypesSlice.js"
 import { fetchIrrigationTypes } from "./irrigationTypes/irrigationTypesThunk.js"
 
-import { webSocketSlice,connect,disconnet,useWebSocket } from "./webSocket/webSocketSlice.js"
 import { selectStages,stagesSlice } from "./stages/stagesSlice.js"
 import {fetchStages} from './stages/stagesThunk.js'
 
@@ -48,10 +47,6 @@ export {
     fetchPublicPlants,
     selectEnvironmentsTypes,
     addEnvironment,
-    webSocketSlice,
-    connect,
-    disconnet,
-    useWebSocket,
     addEnvironmentLocally,
     editEnvironmentLocally,
     editEnvironment,

@@ -93,7 +93,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
                         {environments?.map((t, index) => {
                             return (
                                 <Item key={index} value={t.environment_id}>
-                                    <div> {t.name}</div>
+                                    <div> {t.environment_name}</div>
             
                                     <ItemTextAccent> {t.environment_type_name}</ItemTextAccent>
                                 </Item>

@@ -45,6 +45,9 @@ export const environmentsSlice = createSlice({
         .addCase(deleteEnvironment.pending, (state) => {
           state.error = null;
         })
+        .addCase(deleteEnvironment.fulfilled, (state) => {
+          state.loading = false;
+        })
         .addCase(deleteEnvironment.rejected, (state, action) => {
           state.error = action.error.message;
         })

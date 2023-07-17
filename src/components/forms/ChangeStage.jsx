@@ -6,13 +6,13 @@ import { ButtonOutlined } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive } from './Form_styles'
 import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment-timezone';
-import { getLocalizeTimeSql } from '../../helpers/getLocalizeTimeSql';
+import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { selectStages, fetchStages,takeAction } from '../../features';
 
-const TakeAction = ({ plant,modalType,openModal,data }) => {
+const ChangeStage = ({ plant,modalType,openModal,data }) => {
     const [indexHover, setIndexHover] = useState('')
     const containerRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -110,13 +110,13 @@ const TakeAction = ({ plant,modalType,openModal,data }) => {
             >
                 {({ isSubmitting, handleBlur, handleChange, values }) => (
                     <FormHolder>
-                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <StyledDateTimePicker
                                 name="creation_date"
-                                maxDate={moment()}
+                                maxDate={new Date()}
                                 displayWeekNumber={true}
-                                minDate={moment(getLocalizeTimeSql(plant.creation_date))}
-                                defaultValue={moment()}
+                                minDate={new Date(getLocalizeTime(plant.creation_date))}
+                                defaultValue={new Date()}
                                 onChange={(value) => { handleDate(values,value.format('YYYY-MM-DD HH:mm:ss')) }}
                                 formatDensity="dense"
                             />
@@ -153,4 +153,4 @@ const TakeAction = ({ plant,modalType,openModal,data }) => {
     )
 }
 
-export default TakeAction
+export default ChangeStage

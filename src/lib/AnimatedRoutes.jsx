@@ -26,6 +26,7 @@ import Environments from '../pages/Environments/Environments'
 import MyPlants from '../pages/MyPlants/MyPlants'
 import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
 import Footer from '../components/footer/Footer'
+import WebSocketListener from '../components/WebSocketListener';
 
 const Root = styled.div`
 
@@ -84,6 +85,7 @@ function AnimatedRoutes() {
                     }
                 </Routes>
                 <Footer />
+                <WebSocketListener/>
             </Root>
         </AnimatePresence>
 

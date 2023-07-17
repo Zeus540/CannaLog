@@ -56,7 +56,7 @@ const HomePage = () => {
       <HeroBanner>
 
         <HeroBannerTextHolder>
-          <HeroTextBig>Welcome to <br /> Sweet<HeroTextBigSpan>Leaf</HeroTextBigSpan>   <HeroTextBigSup>&#174;</HeroTextBigSup>	</HeroTextBig>
+          <HeroTextBig>Welcome to <br /> <HeroTextBigSpan>CANNA</HeroTextBigSpan>LOG   <HeroTextBigSup>&#174;</HeroTextBigSup>	</HeroTextBig>
 
           <MenuLinkHolder>
 

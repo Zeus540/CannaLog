@@ -127,19 +127,9 @@ function MyPlantsDetailed() {
 
                         <div>
                             <h1>{plant?.plant_name}</h1>
+                            
                             {console.log("plant", plant)}
-                            {(plant?.stage_name.toLowerCase().includes('ger') || plant?.stage_name.toLowerCase().includes('see') || plant?.stage_name.toLowerCase().includes('veg')) &&
-                                <Tag bg="green">{plant?.stage_name}</Tag>
-                            }
-                            {plant?.stage_name.toLowerCase().includes('flo') &&
-                                <Tag bg="Orange">{plant?.stage_name}</Tag>
-                            }
-                            {plant?.stage_name.toLowerCase().includes('har') &&
-                                <Tag bg="red">{plant?.stage_name}</Tag>
-                            }
-                            <p>Strain: {plant?.strain_name}</p>
-                            <p>Irrigation: {plant?.irrigation_type}</p>
-
+                    
 
                         </div>
                         <ImgHolderTopInfoInnerRight>
@@ -170,24 +160,24 @@ function MyPlantsDetailed() {
                 </Heading>
 
                 <div>
-                    {plantEnvironment?.name}   {plantEnvironment?.environment_type_name}
+                    {plantEnvironment?.environment_name}   {plantEnvironment?.environment_type_name}
                 </div>
 
                 <ExposureItemHolderOutter>
                     <div>Light Exposure</div>
                     <ExposureItemHolder>
-                        {plantEnvironment?.light_exposure !== 0 &&
-                            <ExposureItemGroup width={(plantEnvironment?.light_exposure / 24) * 100}>
+                        {plantEnvironment?.environment_light_exposure !== 0 &&
+                            <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
 
                                 <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
-                                <p>{plantEnvironment?.light_exposure} hrs On</p>
+                                <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
                             </ExposureItemGroup>
                         }
-                        {24 - plantEnvironment?.light_exposure !== 0 &&
-                            <ExposureItemGroup width={((24 - plantEnvironment?.light_exposure) / 24) * 100}>
+                        {24 - plantEnvironment?.environment_light_exposure !== 0 &&
+                            <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
 
                                 <ExposureItem radius="0px 5px 5px 0px" bg1="#001f3b" bg2="#001f3b"></ExposureItem>
-                                <p> {24 - plantEnvironment?.light_exposure} hrs Off</p>
+                                <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
                             </ExposureItemGroup>
                         }
                     </ExposureItemHolder>

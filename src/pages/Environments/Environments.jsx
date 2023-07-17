@@ -13,13 +13,15 @@ import {
   selectEnvironmentsIsLoading,
   addEnvironmentLocally,
   editEnvironmentLocally,
-  useWebSocket
+  selectUser,
+  deleteEnvironmentLocally
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
 import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
 import { AnimatePresence } from 'framer-motion'
 import { IoMdAdd } from "react-icons/io";
+import { socket } from '../../lib/socket'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -45,54 +47,55 @@ const Environments = () => {
   const myPlants = useSelector(selectMyPlants)
 
   let environmentsLength = environments.length
-  const { socket } = useWebSocket();
 
-  // useEffect(() => {
-  //   dispatch(fetchMyPlants())
-  //   dispatch(fetchEnvironments())
-  //   dispatch(fetchEnvironmentTypes())
-
-  // }, [])
-
+  const user = useSelector(selectUser)
 
   useEffect(() => {
-    console.log(socket);
+    
     if (socket) {
-      socket.on("environment_add", (data) => {
+
+      socket.on(`environment_added${user.user_id}`, (data) => {
         dispatch(addEnvironmentLocally(data));
         console.log(data);
       });
 
-      socket.on("environment_edited", (data) => {
-        dispatch(editEnvironmentLocally(data));
-        console.log(data);
+       socket.on(`environment_edited${user.user_id}`, (data) => {
+         dispatch(editEnvironmentLocally(data));
+         console.log(data);
+       });
+
+       socket.on(`environment_deleted${user.user_id}`, (data) => {
+        dispatch(deleteEnvironmentLocally(parseInt(data)));
+        console.log("dispatch",data);
       });
+
     }
+
   }, [socket]);
 
 
   const openModal = (type, data) => {
     switch (type) {
+      case "addEnvironment":
+        setModalType("addEnvironment")
+        setModalOpen(!modalOpen)
+        break;
       case "editEnvironment":
         setModalType("editEnvironment")
         setModalData(data)
         setModalOpen(!modalOpen)
         break;
+        case "deleteEnvironment":
+          setModalType("deleteEnvironment")
+          setModalData(data)
+          setModalOpen(!modalOpen)
+          break;
       case "addEnvironmentLog":
         setModalType("addEnvironmentLog")
         setModalData(data)
         setModalOpen(!modalOpen)
         break;
-      case "deleteEnvironment":
-        setModalType("deleteEnvironment")
-        setModalData(data)
-        setModalOpen(!modalOpen)
-        break;
-      case "addEnvironment":
-        setModalType("addEnvironment")
-        setModalOpen(!modalOpen)
-        break;
-
+  
     }
   }
 
@@ -135,10 +138,10 @@ const Environments = () => {
                       length={environmentsLength}
                       index={index}
                       data={e}
-                      cover_img={e.cover_img}
-                      name={e.name}
+                      cover_img={e.environment_cover_img}
+                      name={e.environment_name}
                       environment_type_name={e.environment_type_name}
-                      light_exposure={e.light_exposure}
+                      light_exposure={e.environment_light_exposure}
                       creation_date={e.creation_date}
                       last_updated={e.last_updated}
                       myPlants={myPlants.filter((p) => p.environment_id == e.environment_id)}

@@ -94,15 +94,15 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
             })}
           </PlantHolderOutter>
           <Divider></Divider>
-         {(data.length !== null || data.width !== null || data.height !== null) && 
+         {(data.environment_length !== null || data.environment_width !== null || data.environment_height !== null) && 
 
         <>
       
         <EnviromentHolderHeading>Dimension</EnviromentHolderHeading>
         <EnviromentInfoFlex>
-          <EnviromentInfoFlexHolder>{data.length == null ? "" : `${data.length} cm` }</EnviromentInfoFlexHolder>
-          <EnviromentInfoFlexHolder>{data.width == null ? "" : `${data.width} cm` }</EnviromentInfoFlexHolder>
-          <EnviromentInfoFlexHolder>{data.height == null ? "" : `${data.height} cm` }</EnviromentInfoFlexHolder>
+          <EnviromentInfoFlexHolder>{data.environment_length == null ? "" : `${data.environment_length} cm` }</EnviromentInfoFlexHolder>
+          <EnviromentInfoFlexHolder>{data.environment_width == null ? "" : `${data.environment_width} cm` }</EnviromentInfoFlexHolder>
+          <EnviromentInfoFlexHolder>{data.environment_height == null ? "" : `${data.environment_height} cm` }</EnviromentInfoFlexHolder>
         </EnviromentInfoFlex>
         </>
          }

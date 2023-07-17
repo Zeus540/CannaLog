@@ -10,21 +10,21 @@ import { addEnvironment, editEnvironment } from '../../features';
 import { useDispatch } from 'react-redux';
 
 const AddEnvironmentSchema = Yup.object().shape({
-    name: Yup.string()
+    environment_name: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
-    light_exposure: Yup.number()
+        environment_light_exposure: Yup.number()
         .min(0)
         .max(24)
         .nullable(),
-    length: Yup.number()
+        environment_length: Yup.number()
         .min(0)
         .nullable(),
-    height: Yup.number()
+        environment_height: Yup.number()
         .min(0)
         .nullable(),
-    width: Yup.number()
+        environment_width: Yup.number()
         .min(0)
         .nullable()
 
@@ -37,41 +37,32 @@ const AddEvironment = ({ openModal, modalType, data }) => {
     const [type, setType] = useState("")
     const [dataModified, setDataModified] = useState(null)
 
-
-
     let intialValues = {
-        name: '',
+        environment_name: '',
         environment_type_id: type,
-        light_exposure: 12,
-        length: '',
-        width: '',
-        height: ''
+        environment_light_exposure: 12,
+        environment_length:'',
+        environment_width:'',
+        environment_height:''
     }
 
+
+
     useEffect(() => {
-
-        if (data) {
-
-            if (data.light_exposure == null) {
-                const updatedObject = { ...data, light_exposure: 0 };
-                setDataModified(updatedObject)
-                setType(data?.environment_type_id)
-            } else {
-                setDataModified(data)
-                setType(data?.environment_type_id)
-            }
-
-
-
-
+        console.log("data.environment_id ",data?.environment_id )
+        if (data?.environment_id !== undefined ) {
+            setDataModified(data)
+            setType(data?.environment_type_id)
         } else {
-
+            setDataModified(null)
             setType(data?.environment_type_id)
         }
 
     }, [])
 
-    const handleType = (id) => {
+
+    const handleType = (id,e) => {
+        e.preventDefault()
         setType(id)
 
     }
@@ -79,13 +70,16 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
     const handleAddEnvironemt = async (values, setSubmitting) => {
 
-
-        if (dataModified == null) {
-            console.log("adding", type)
+        console.log("values", values)
+        if (data?.environment_id == undefined ) {
+      
             if (type !== "") {
 
                 const updatedObject = { ...values, environment_type_id: type };
+          
+        
                 let res = await dispatch(addEnvironment(updatedObject))
+              
                 if (res.payload.affectedRows > 0) {
                     openModal(modalType)
                     setSubmitting(false)
@@ -115,11 +109,12 @@ const AddEvironment = ({ openModal, modalType, data }) => {
     return (
 
         <Formik
-            initialValues={dataModified ? dataModified : intialValues}
-            enableReinitialize
+        initialValues={data?.environment_id == undefined ? intialValues : data}
+            
             validationSchema={AddEnvironmentSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
+                    console.log("sadsadsad",values)
                     handleAddEnvironemt(values, setSubmitting)
                 }, 400);
 
@@ -129,8 +124,8 @@ const AddEvironment = ({ openModal, modalType, data }) => {
             {({ isSubmitting, handleBlur, handleChange, values }) => (
                 <FormHolder>
                     {/* <Label htmlFor='name'>Name</Label> */}
-                    <Input type="text" name="name" placeholder="Environemt Name" onChange={handleChange} onBlur={handleBlur} />
-                    <Error name="name" component="p" />
+                    <Input type="text" name="environment_name" placeholder="Environemt Name" onChange={handleChange} onBlur={handleBlur} value={values?.environment_name}/>
+                    <Error name="environment_name" component="p" />
 
 
                     <TypeHolder>
@@ -143,9 +138,9 @@ const AddEvironment = ({ openModal, modalType, data }) => {
                                         {type == t.environment_type_id ?
                                             <TypeButtonActive
 
-                                                type="button"
+                                              
                                                 name="environment_type_id"
-                                                onClick={() => { handleType(t.environment_type_id) }}
+                                                onClick={(e) => { handleType(t.environment_type_id,e) }}
                                                 onBlur={handleBlur}
                                             >
                                                 {t.environment_type_name}
@@ -153,9 +148,9 @@ const AddEvironment = ({ openModal, modalType, data }) => {
                                             :
                                             <TypeButton
 
-                                                type="button"
+                                      
                                                 name="environment_type_id"
-                                                onClick={() => { handleType(t.environment_type_id) }}
+                                                onClick={(e) => { handleType(t.environment_type_id,e) }}
                                                 onBlur={handleBlur}
                                             >
                                                 {t.environment_type_name}
@@ -171,8 +166,8 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
 
                     <>
-                        <Label htmlFor='name'>{values.light_exposure} hrs Light Exposure</Label>
-                        <InputRangeField type="range" name="light_exposure" min="0" max="24" value={values.light_exposure} onChange={handleChange} onBlur={handleBlur} />
+                        <Label htmlFor='environment_light_exposure'>{values?.environment_light_exposure} hrs Light Exposure</Label>
+                        <InputRangeField type="range" name="environment_light_exposure" min="0" max="24" value={values?.environment_light_exposure} onChange={handleChange} onBlur={handleBlur} />
                         <Error name="light_exposure" component="p" />
                     </>
 
@@ -180,18 +175,18 @@ const AddEvironment = ({ openModal, modalType, data }) => {
                     <InputFieldGroup>
                         {/* <Label htmlFor='length'>Length</Label> */}
                         <InputFieldGFlex>
-                            <Input type="text" name="length" placeholder="Length" onChange={handleChange} onBlur={handleBlur} />
-                            <Error name="length" component="p" />
+                            <Input type="text" name="environment_length" placeholder="Length" onChange={handleChange} onBlur={handleBlur} value={values?.environment_length} />
+                            <Error name="environment_length" component="p" />
                         </InputFieldGFlex>
                         <InputFieldGFlex>
                             {/* <Label htmlFor='width'>Width</Label> */}
-                            <Input type="text" name="width" placeholder="Width" onChange={handleChange} onBlur={handleBlur} />
-                            <Error name="width" component="p" />
+                            <Input type="text" name="environment_width" placeholder="Width" onChange={handleChange} onBlur={handleBlur} value={values?.environment_width}/>
+                            <Error name="environment_width" component="p" />
                         </InputFieldGFlex>
                         <InputFieldGFlex>
                             {/* <Label htmlFor='height'>Height</Label> */}
-                            <Input type="text" name="height" placeholder="Height" onChange={handleChange} onBlur={handleBlur} />
-                            <Error name="height" component="p" />
+                            <Input type="text" name="environment_height" placeholder="Height" onChange={handleChange} onBlur={handleBlur} value={values?.environment_height}/>
+                            <Error name="environment_height" component="p" />
                         </InputFieldGFlex>
                     </InputFieldGroup>
 
