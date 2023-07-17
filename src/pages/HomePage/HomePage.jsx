@@ -84,7 +84,7 @@ const HomePage = () => {
                   if (index < 6) {
                     return (
                       <Diary
-                        to={`/public-journals/overview/${d.DiaryId}`} key={index}
+                        to={`/public-plants/overview/${d.DiaryId}`} key={index}
                       >
                         <DiaryImageHolder style={{ background: `url(${d?.cover_img == "" ? PlaceHolder : d?.cover_img})` }}>
 

@@ -13,7 +13,7 @@ const Inner = styled.div`
 background-image: url(${Back2});
 
 background-size: cover;
-
+min-height: calc(100vh - 308px);
 width: 100%;
 background-position: center;
 margin: 0 auto;
@@ -33,7 +33,7 @@ const TextHolder = styled.div`
 const Heading = styled.h1`
 font-size: 10em;
 text-align: center;
-color: white!important;
+color:  ${props => props.theme.accent};
 margin: 20px 0px;
 line-height: 0.8em;
 @media (max-width: 425px) {

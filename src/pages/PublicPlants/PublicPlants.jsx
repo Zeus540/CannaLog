@@ -5,15 +5,14 @@ import { Holder, Root, Heading, FlexRowEnd, Button, ButtonOutlined, ButtonText }
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
-  selectMyPlants,
+  selectPublicJournal,
   isLoadingMyPlants,
-  selectUser,
 } from '../../features'
-import PlantCard from '../../components/cards/PlantCard'
-import PopupModal from '../../components/popupModal/PopupModal'
+import PlantCardPublic from '../../components/cards/PlantCardPublic'
 import Loader from '../../components/loader/Loader'
 import { AnimatePresence } from 'framer-motion'
 import { socket } from '../../lib/socket'
+
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
 display:flex;
@@ -24,52 +23,36 @@ flex-wrap: wrap;
 }
 `
 
-const MyPlants = () => {
+const PublicPlants = () => {
 
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalData, setModalData] = useState([])
-  const [modalType, setModalType] = useState('')
 
-  const dispatch = useDispatch()
-
-  
   const isLoadingPlants = useSelector(isLoadingMyPlants)
-  const myPlants = useSelector(selectMyPlants)
+  const publicPlants = useSelector(selectPublicJournal)
 
-  {console.log("myPlants",myPlants)}
-  
-
-  const user = useSelector(selectUser)
-
+console.log("publicPlants",publicPlants.plants)
   useEffect(() => {
     
     if (socket) {
 
+    //   socket.on(`environment_added${user.user_id}`, (data) => {
+    //     dispatch(addEnvironmentLocally(data));
+    //     console.log(data);
+    //   });
+
+    //    socket.on(`environment_edited${user.user_id}`, (data) => {
+    //      dispatch(editEnvironmentLocally(data));
+    //      console.log(data);
+    //    });
+
+    //    socket.on(`environment_deleted${user.user_id}`, (data) => {
+    //     dispatch(deleteEnvironmentLocally(parseInt(data)));
+    //     console.log("dispatch",data);
+    //   });
 
     }
 
   }, [socket]);
 
-
-
-  const openModal = (type, data) => {
-    switch (type) {
-      case "addPlant":
-        setModalType("addPlant")
-        setModalOpen(!modalOpen)
-        break;
-      case "editPlant":
-        setModalType("editPlant")
-        setModalData(data)
-        setModalOpen(!modalOpen)
-        break;
-      case "deletePlant":
-        setModalType("deletePlant")
-        setModalData(data)
-        setModalOpen(!modalOpen)
-        break;
-    }
-  }
 
   return (
 
@@ -86,31 +69,26 @@ const MyPlants = () => {
           transition={{ duration: 0.25 }}
           exit={{ opacity: 0 }}
         >
-          {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
+         
           <Holder>
-            <FlexRowEnd
-            >
-
-              <ButtonOutlined onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></ButtonOutlined>
-
-            </FlexRowEnd>
+          
             <Heading
             >
-              My Plants
+              Public Plants
             </Heading>
 
             <EnviromentHolder
             >
 
               <AnimatePresence >
-                {myPlants?.map((p, index) => {
+                {publicPlants.plants?.map((p, index) => {
                   return (
                     <>
                     {console.log(p)}
                     
-                    <PlantCard 
+                    <PlantCardPublic 
                       key={index}
-                      length={myPlants.length}
+                      length={publicPlants.plants.length}
                       index={index}
                       data={p}
                       cover_img={p.cover_img}
@@ -119,8 +97,7 @@ const MyPlants = () => {
                       light_exposure={p.light_exposure}
                       creation_date={p.creation_date}
                       last_updated={p.last_updated}
-                  
-                      openModal={openModal} />
+                 />
                     </>
                   )
                 })}
@@ -136,4 +113,4 @@ const MyPlants = () => {
   )
 }
 
-export default MyPlants
+export default PublicPlants

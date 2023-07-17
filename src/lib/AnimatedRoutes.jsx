@@ -7,6 +7,11 @@ import { useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import HomePage from '../pages/HomePage/HomePage'
 import PublicJournals from '../pages/PublicJournals/PublicJournals'
+import Terms from '../pages/Terms/Terms';
+import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
+import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
+import Growers from '../pages/Growers/Growers';
+import PublicPlants from '../pages/PublicPlants/PublicPlants';
 
 import {
     fetchEnvironments,
@@ -65,20 +70,29 @@ function AnimatedRoutes() {
                 <Routes location={location} key={location.pathname}>
                     {isLoggedIn ?
                         <>
+                            <Route path="/public-plants" element={<PublicPlants />} />
                             <Route path="/" element={<PreLoader Page={PublicJournals} data={publicPlants.loading} />} />
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
-                            
+                            <Route path="/growers" element={<Growers />} />
+                            <Route path="/terms" element={<Terms />} />
+                            <Route path="/cookie-policy" element={<CookiePolicy />} />
+                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                             <Route path="*" element={<NotFoundPage />} />
+                            
                         </>
                         :
                         <>
+                          <Route path="/public-plants" element={<PublicPlants />} />
                             <Route path="/" element={<PreLoader Page={HomePage} data={publicPlants.loading} />} />
                             <Route path="/sign-in" element={<Login />} />
                             <Route path="/sign-up" element={<Register />} />
                             <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
                             <Route path="/verify/:token" element={<Verify />} />
+                            <Route path="/terms" element={<Terms />} />
+                            <Route path="/cookie-policy" element={<CookiePolicy />} />
+                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                             <Route path="*" element={<NotFoundPage />} />
                         </>
 

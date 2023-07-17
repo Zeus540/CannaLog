@@ -1,7 +1,7 @@
 import React,{useState,useContext, useEffect} from 'react'
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom'
-import Logo from "../../assets/images/logoLogin.png";
+import Logo from "../../assets/images/leaf.png";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import axios from "axios"
@@ -9,21 +9,23 @@ import { Helmet } from "react-helmet";
 import {BASE_URL_PROD} from '../../lib/Constants'
 import { useSnackbar} from 'notistack';
 const Root = styled.div`
-//background:#27555726;
+background:  ${props => props.theme.secondary};
 
 padding-top: 0px;
-color:white;
-min-height: calc(100vh - 60px);
+color:  ${props => props.theme.text};
+min-height: calc(100vh - 260px);
 display: flex;
 flex-direction: column;
 justify-content: center;
-
+@media(min-width:0px) and (max-width:768px){
+  min-height: calc(100vh - 308px);
+}
 `;
 const RootInner = styled.div`
 width:480px;
 align-self: center;
-background: #ffffff;
-padding: 15px 5px;
+background:  ${props => props.theme.primary};
+padding: 20px;
 border-radius: 5px;
 @media(max-width:425px){
   margin: 16px;
@@ -37,25 +39,35 @@ width: 90%;
 }
 `;
 
+const InputHolder = styled.div`
+
+
+
+padding-top: 0px;
+color:  ${props => props.theme.text};
+display: flex;
+flex-direction: column;
+`;
 const InputGrp = styled.div`
 min-width: calc(100% /2 - 20px);
 margin: 0px 10px;
 
 padding-top: 0px;
-color:white;
+color:  ${props => props.theme.text};
 display: flex;
 flex-direction: column;
 `;
 const InputGrpFlex = styled.div`
 display: flex;
+margin: 0px -10px;
 `;
 
 const Label = styled.label`
-color:#354f41;
+color:  ${props => props.theme.text};
 font-weight:bold;
 `;
 const LabelT = styled.label`
-color:#354f41;
+color:  ${props => props.theme.text};
 
 margin-left: 10px;
 `;
@@ -66,40 +78,60 @@ padding: 15px 15px;
 border-radius:5px;
 border:none;
 background:#4e5f612e;
+color:  ${props => props.theme.text};
 `;
 
 
 
 
 const ErrorText = styled.p`
-color: #f44336;
+color:  ${props => props.theme.warn};
     margin: 0px;
     font-size: 12px;
 `;
 
+
 const Button = styled.button`
 padding: 8px 25px;
 width: fit-content;
-border: 1px #8bab50 solid;
-margin-bottom: 0px;
-background: #ffffff;
-color:#8bab50;
+border:none;
+background:  ${props => props.theme.primary};
+color:  ${props => props.theme.text};
+
 border-radius:5px;
 cursor:pointer;
-margin: 15px ;
+border: 1px ${props => props.theme.accent} solid;
+margin-top: 15px;
+`;
+const Heading = styled.h1`
+margin: 0px;
+font-size: 30px;
+padding:10px 0px;
+color:  ${props => props.theme.text};
+text-align:center;
+
 `;
 
-const Heading = styled.div`
-margin: 0px;
-padding:0px;
-color:white;
-text-align:center;
+const HeadingAccent = styled.span`
+font-size: 30px;
+color:  ${props => props.theme.accent};
+font-weight: bold;
+position: relative;
 `;
+const HeadingImg = styled.img`
+position: absolute;
+left: -30px;
+top: 0px;
+height: 30px;
+width: 30px;
+object-fit: contain;
+`;
+
 
 const ErrM = styled.h1`
 margin: 0px;
 padding-bottom: 10px;
-color:#f44336;
+color:  ${props => props.theme.warn};
 text-align:center;
 font-size: 14px;
 `;
@@ -172,9 +204,7 @@ function Register() {
       </Helmet>
 
      <RootInner>
-     <Heading>
-  <img src={Logo} width="60%" />
-    </Heading>
+     <Heading>  <HeadingAccent><HeadingImg src={Logo} width="40px" />CANNA</HeadingAccent>LOG   </Heading>
 {errorM !== "" && <ErrM>{errorM}</ErrM>}
     <Formik
       initialValues={{
@@ -193,24 +223,24 @@ function Register() {
       {({ errors, touched,handleSubmit,values }) => (
       <Form  >
 
-      <InputGrp>
+      <InputHolder>
         <Label htmlFor="userName">UserName</Label>
-        <Input id="userName" name="userName"  placeholder="Type Here" />
+        <Input id="userName" name="userName"  placeholder="UserName" />
         {errors.userName && touched.userName ? (<ErrorText>{errors.userName}</ErrorText>) : null}
 
-        </InputGrp>
+        </InputHolder>
 
        <InputGrpFlex>
        <InputGrp>
         <Label htmlFor="name">Name</Label>
-        <Input id="name" name="name"  placeholder="Type Here" />
+        <Input id="name" name="name"  placeholder="Name" />
         {errors.name && touched.name ? (<ErrorText>{errors.name}</ErrorText>) : null}
 
         </InputGrp>
 
         <InputGrp>
         <Label htmlFor="surname">Surname</Label>
-        <Input id="surname" name="surname"  placeholder="Type Here" />
+        <Input id="surname" name="surname"  placeholder="Surname" />
         {errors.surname && touched.surname ? (<ErrorText>{errors.surname}</ErrorText>) : null}
 
         </InputGrp>
@@ -219,18 +249,18 @@ function Register() {
        <InputGrpFlex>
         <InputGrp>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" placeholder="Type Here" type="email"/>
+        <Input id="email" name="email" placeholder="Email" type="email"/>
         {errors.email && touched.email ? (<ErrorText>{errors.email}</ErrorText>) : null}
       </InputGrp>
 
         <InputGrp>
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" placeholder="Type Here" type="password"/>
+        <Input id="password" name="password" placeholder="Password" type="password"/>
         {errors.password && touched.password ? (<ErrorText>{errors.password}</ErrorText>) : null}
       </InputGrp>
       </InputGrpFlex>
 
-      <InputGrp>
+      <InputHolder>
       <label >
                   <Field
                     name="age"
@@ -240,7 +270,7 @@ function Register() {
                   <LabelT>I am 18 years old</LabelT>
                 </label>
       {errors.age && touched.age ? (<ErrorText>{errors.age}</ErrorText>) : null}
-      </InputGrp>
+      </InputHolder>
   
 
       <Button type="submit">Sign Up</Button>

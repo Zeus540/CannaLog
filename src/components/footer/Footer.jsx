@@ -90,12 +90,7 @@ const user = useSelector(selectUser)
         <SectionHolder>      
     <Section>
     {/* <MenuLinkMobileHeading>Links</MenuLinkMobileHeading> */}
-        <MenuLinkMobile to="/public-journals" >
-                     <FlexLink>
-                     
-                       Public Journals
-                     </FlexLink>
-                   </MenuLinkMobile>
+  
 
                    {isLoggedIn && 
                    
@@ -126,6 +121,12 @@ const user = useSelector(selectUser)
                    </MenuLinkMobile>
                    </>
                    }
+                         <MenuLinkMobile to="/public-plants" >
+                     <FlexLink>
+                     
+                       Public Plants
+                     </FlexLink>
+                   </MenuLinkMobile>
       </Section>
 
       <Section>

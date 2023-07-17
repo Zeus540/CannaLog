@@ -16,7 +16,6 @@ const PopupModal = ({ openModal, data, modalType,plant }) => {
 const dispatch = useDispatch()
 
 
-
   const handleSubmit = async(e)=>{
    
 

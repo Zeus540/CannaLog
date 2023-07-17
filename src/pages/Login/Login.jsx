@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'
-import Logo from "../../assets/images/logo.png";
-import LogoW from "../../assets/images/logo.png";
+import Logo from "../../assets/images/leaf.png";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import axios from "axios"
@@ -17,11 +16,14 @@ import { getCookieValue } from '../../helpers/getCookieValue';
 const Root = styled.div`
 padding-top: 0px;
 color:  ${props => props.theme.text};
-min-height: calc(100vh - 60px);
+min-height: calc(100vh - 260px);
 display: flex;
 flex-direction: column;
 justify-content: center;
 background:  ${props => props.theme.secondary};
+@media(min-width:0px) and (max-width:768px){
+  min-height: calc(100vh - 308px);
+}
 `;
 const RootInner = styled.div`
 width:480px;
@@ -34,12 +36,12 @@ border-radius: 5px;
 @media(max-width:425px){
   margin: 16px;
 padding: 20px;
-width:unset;
+width:90%;
 }
 @media(min-width:426px) and (max-width:768px){
   margin: 16px;
   padding: 20px;
-  width:unset;
+  width:90%;
 }
 `;
 
@@ -89,9 +91,26 @@ border: 1px #8bab50 solid;
 
 const Heading = styled.h1`
 margin: 0px;
+font-size: 30px;
 padding:10px 0px;
-color:white;
+color:  ${props => props.theme.text};
 text-align:center;
+
+`;
+
+const HeadingAccent = styled.span`
+font-size: 30px;
+color:  ${props => props.theme.accent};
+font-weight: bold;
+position: relative;
+`;
+const HeadingImg = styled.img`
+position: absolute;
+left: -30px;
+top: 0px;
+height: 30px;
+width: 30px;
+object-fit: contain;
 `;
 
 const ErrMsg = styled.p`
@@ -179,9 +198,10 @@ function Login() {
       </Helmet>
 
       <RootInner>
-        <Heading>
-          <img src={Logo} width="60%" />
-        </Heading>
+       
+           
+            <Heading>  <HeadingAccent><HeadingImg src={Logo} width="40px" />CANNA</HeadingAccent>LOG   </Heading>
+     
 
         <Formik
           initialValues={{
@@ -200,14 +220,14 @@ function Login() {
               <ErrMsg >{errMsg}</ErrMsg>
               <InputGrp>
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" name="email" placeholder="Type Here" />
+                <Input id="email" name="email" placeholder="Email" />
                 {errors.email && touched.email ? (<ErrorText>{errors.email}</ErrorText>) : null}
 
               </InputGrp>
 
               <InputGrp>
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" name="password" placeholder="Type Here" type="password" />
+                <Input id="password" name="password" placeholder="Password" type="password" />
                 {errors.password && touched.password ? (<ErrorText>{errors.password}</ErrorText>) : null}
               </InputGrp>
 

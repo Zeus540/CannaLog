@@ -386,10 +386,10 @@ const user = useSelector(selectUser)
           <LinkHolderM>
         
 
-            <MenuLinkMobile to="/public-journals" onClick={() => {  props.setMobileMenu(false); }}>
+            <MenuLinkMobile to="/public-plants" onClick={() => {  props.setMobileMenu(false); }}>
               <FlexLink>
 
-                <FlexLinkText>Public Journals</FlexLinkText>
+                <FlexLinkText>Public Plants</FlexLinkText>
               </FlexLink>
             </MenuLinkMobile>
 
