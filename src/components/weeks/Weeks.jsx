@@ -15,12 +15,12 @@ import { utcToZonedTime } from 'date-fns-tz';
 
 
 
-const Weeks = ({startDate,actions}) => {
+const Weeks = ({startDate,actions,handleActiveWeeks,activeWeek}) => {
 
 const [weeks, setWeeks] = useState([])
 const [actionsList, setActionsList] = useState([])
 
-const [activeWeek, setActiveWeek] = useState('')   // Determine the user's timezone
+  // Determine the user's timezone
 
 
  // Helper function to remove duplicate weeks
@@ -54,11 +54,11 @@ useEffect(() => {
 
   setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
   setActionsList(localizedData.sort((a, b) => a.week - b.week));
-  setActiveWeek(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
+  handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
 }, [actions]);
 
-const handleActiveWeek = (w)=>{
-  setActiveWeek(w)
+const handleActiveWeekSelect = (w)=>{
+  handleActiveWeeks(w)
 }
 
   return (
@@ -71,12 +71,12 @@ const handleActiveWeek = (w)=>{
         return(
           <>
             {activeWeek == w.week ? 
-            <WeekActive onClick={()=>handleActiveWeek(w.week)}>
+            <WeekActive onClick={()=>handleActiveWeekSelect(w.week)}>
             <WeekTextTop>Week</WeekTextTop>
             <WeekTextBottom>{w.week}</WeekTextBottom>
           </WeekActive>
           :
-          <Week onClick={()=>handleActiveWeek(w.week)}>
+          <Week onClick={()=>handleActiveWeekSelect(w.week)}>
           <WeekTextTop>Week</WeekTextTop>
           <WeekTextBottom>{w.week}</WeekTextBottom>
         </Week>

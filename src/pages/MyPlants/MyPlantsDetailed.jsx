@@ -28,6 +28,7 @@ import { FiEdit } from 'react-icons/fi'
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
 import Timeline from '../../components/timeline/Timeline'
+import TimelineNotes from '../../components/timelineNotes/TimelineNotes'
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 
@@ -65,7 +66,8 @@ function MyPlantsDetailed() {
     const [modalData, setModalData] = useState([])
     const [modalType, setModalType] = useState('')
     const [currentStage, setCurrentStage] = useState()
-    
+    const [activeWeek, setActiveWeek] = useState('') 
+
     let plants = useSelector(selectMyPlants)
     let environments = useSelector(selectEnvironments)
     let plant_action_types = useSelector(selectPlantActionTypes)
@@ -116,10 +118,19 @@ function MyPlantsDetailed() {
                 setModalData(action)
                 setModalOpen(!modalOpen)
                 break;
-
+                case "deleteNote":
+                    setModalType("deleteNote")
+                    setModalData(action)
+                    setModalOpen(!modalOpen)
+                    break;
+                
         }
     }
 
+
+    const handleActiveWeeks = (week)=>{
+        setActiveWeek(week)
+    }
     return (
         <Root
             initial={{ opacity: 0 }}
@@ -202,7 +213,8 @@ function MyPlantsDetailed() {
 
             </Section>
             <Timeline plant={plant}/>
-
+         
+            
             <QuickActionHolder>
 
                 <Heading>
@@ -229,8 +241,8 @@ function MyPlantsDetailed() {
                 </QuickActionHolderInner>
             </QuickActionHolder>
 
-            <Weeks startDate={plant?.creation_date} actions={plantActions} />
-
+            <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
+            <TimelineNotes plant={plant} activeWeek={activeWeek}/>
         </Root>
 
     )
