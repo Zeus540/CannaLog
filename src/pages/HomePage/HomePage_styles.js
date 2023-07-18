@@ -137,7 +137,8 @@ align-items: center;
 text-align: center;
 width: calc(100% / 3 - 160px);
 margin: 40px;
-background: #121212;
+
+background: ${props => props.theme.secondary};
 border-radius: 5px;
   @media (min-width: 0px) and (max-width: 768px) {
     width: calc(100% / 1 );
