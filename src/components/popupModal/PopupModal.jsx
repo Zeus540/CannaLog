@@ -31,6 +31,14 @@ const dispatch = useDispatch()
     
     openModal(modalType)
   }
+
+  const handleSubmitDeleteNote = async(e)=>{
+    console.log("e",e)
+
+  
+    
+    openModal(modalType)
+  }
   
   return (
     <Root >
@@ -67,6 +75,23 @@ const dispatch = useDispatch()
 
               <ModalCloseHolder>
                 <ButtonModalOutlined onClick={()=>{handleSubmitDeletePlant(data)}}>Yes</ButtonModalOutlined>
+                <ButtonModalOutlined onClick={() => openModal(modalType)}>Cancel</ButtonModalOutlined>
+              </ModalCloseHolder>
+            </>
+          }
+
+{modalType == "deleteNote" &&
+            <>
+              <ModalContentText>
+                Are you sure you want to delete this note ?
+              </ModalContentText>
+             
+              <Warn>
+                Warning this action is irreversible !
+              </Warn>
+
+              <ModalCloseHolder>
+                <ButtonModalOutlined onClick={()=>{handleSubmitDeleteNote(data)}}>Yes</ButtonModalOutlined>
                 <ButtonModalOutlined onClick={() => openModal(modalType)}>Cancel</ButtonModalOutlined>
               </ModalCloseHolder>
             </>

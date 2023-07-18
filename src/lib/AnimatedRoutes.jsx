@@ -70,8 +70,8 @@ function AnimatedRoutes() {
                 <Routes location={location} key={location.pathname}>
                     {isLoggedIn ?
                         <>
-                            <Route path="/public-plants" element={<PublicPlants />} />
-                            <Route path="/" element={<PreLoader Page={PublicJournals} data={publicPlants.loading} />} />
+                           
+                            <Route path="/" element={<PreLoader Page={PublicPlants} data={publicPlants.loading} />} />
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />

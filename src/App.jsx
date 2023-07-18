@@ -6,11 +6,12 @@ import { ThemeProvider } from 'styled-components'
 
 
 let light_theme = {
-  primary: '#ffffff',
+  primary: ' #f3f4f6',
   primary_light: '#f3f4f6',
-  secondary: '#f3f4f6',
+  secondary: '#ffffff',
   accent: '#8bab50',
   text: '#0e1e3f',
+  textW: '#ffffff',
   warn: "#f44336",
   drawer: {
     primary: '#ffffff',
@@ -30,14 +31,19 @@ let light_theme = {
     secondary: '#c7c7c79c',
     text: 'black',
   },
+  nav: {
+    primary: '#ffffff',
+    secondary: '#f3f4f6',
+  },
 }
 
 let dark_theme = {
   primary: ' #000000',
   primary_light: '#121212',
-  secondary: '#121212',
+  secondary: '#151515',
   accent: '#8bab50',
   text: 'white',
+  textW: '#ffffff',
   warn: "#f44336",
   drawer: {
     primary: 'black',
@@ -57,6 +63,10 @@ let dark_theme = {
     secondary: '#121212c4',
     text: 'black',
   },
+  nav: {
+    primary: ' #000000',
+    secondary: '#151515',
+  },
 }
 
 
@@ -69,7 +79,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchPublicPlants())
-   setTheme(dark_theme)
+  //  setTheme(dark_theme)
   }, [])
 
   return (

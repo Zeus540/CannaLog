@@ -35,9 +35,9 @@ const CookiePolicy = () => {
   return (
     <div>
         <Inner>
-        <Heading>Cookie Policy for SweetLeaf</Heading>
+        <Heading>Cookie Policy for CannaLog</Heading>
 
-<p>This is the Cookie Policy for SweetLeaf</p>
+<p>This is the Cookie Policy for CannaLog</p>
 
 <p><strong>What Are Cookies</strong></p>
 

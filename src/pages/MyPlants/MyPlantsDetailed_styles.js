@@ -9,6 +9,7 @@ width: fit-content;
     padding: 0px 10px;
     border-radius: 50px;
     margin: 10px 0px;
+    color: ${props => props.theme.textW}!important;
 `
 
 export const Root = styled(m.div)`
@@ -31,7 +32,7 @@ padding: 20px;
 
 export const EditPlant = styled(m.div)`
 font-size: 23px;
-background: linear-gradient(180deg, ${(props) => `${props.theme.primary}`}, transparent);
+//background: linear-gradient(180deg, ${(props) => `${props.theme.primary}`}, transparent);
 svg{
   stroke:${(props) => `${props.theme.accent}`};
 }
@@ -165,7 +166,9 @@ color:${(props) => `${props.theme.accent}`};
 `
 
 export const DayHolderOutter = styled.div`
-background:${(props) => `${props.theme.primary}`};
+
+
+width: 100%;
 
 `
 export const DayHolder = styled.div`

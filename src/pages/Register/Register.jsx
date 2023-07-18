@@ -199,7 +199,7 @@ function Register() {
 
 <Helmet>
         <meta charSet="utf-8" />
-        <title>{`SweetLeaf - Sign Up`}</title>
+        <title>{`CannaLog - Sign Up`}</title>
         <link rel="canonical" href={`https://sweetleaf.co.za/sign-up`} />
       </Helmet>
 

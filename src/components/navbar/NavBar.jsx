@@ -14,7 +14,7 @@ position: sticky;
     top: 0;
     z-index:50;
     box-shadow:  0px 0px 20px #00000012;
-    background:  ${props => props.theme.primary};
+    background:  ${props => props.theme.nav.primary};
   @media (max-width: 425px) {
     margin: 0px 0px;
     margin-top: 0px;
@@ -407,7 +407,7 @@ const user = useSelector(selectUser)
                     <FlexLinkText>My Plants</FlexLinkText>
                   </FlexLink>
                 </MenuLinkMobile>
-                {user?.user_id == 6 && 
+                {/* {user?.user_id == 6 && 
                 <MenuLinkMobile to="/my-devices" onClick={() => {  props.setMobileMenu(false); }}>
                   <FlexLink>
 
@@ -415,7 +415,7 @@ const user = useSelector(selectUser)
                   </FlexLink>
                 </MenuLinkMobile>
    }
-    
+     */}
                 <MenuLinkMobile to="/growers" onClick={() => {  props.setMobileMenu(false); }}>
                 <FlexLink>
 

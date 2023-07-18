@@ -172,14 +172,16 @@ function MyPlantsDetailed() {
                             </div>
                         </ImgHolderTopInfoInnerRight>
                     </ImgHolderTopInfoInner>
-                </ImgHolderTopInfo>
-            </ImgHolderTop>
-
-            <DayHolderOutter>
+                    <DayHolderOutter>
                 <DayHolderOutterInner>
                     {getCurrentDayMonthYear().fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
                 </DayHolderOutterInner>
             </DayHolderOutter>
+                </ImgHolderTopInfo>
+           
+            </ImgHolderTop>
+
+         
 
             <Section>
 

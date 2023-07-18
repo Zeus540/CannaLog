@@ -8,7 +8,7 @@ import { selectIsLoggedIn,selectUser } from "../../features";
 const Root = styled.div`
 box-shadow:  0px 0px 20px #00000012;
 margin: 0px;
-background:  ${props => props.theme.primary};
+background:  ${props => props.theme.nav.primary};
 color: ${props => props.theme.text};
     padding: 0px 0px;
     box-shadow:  0px 0px 20px #00000012;
@@ -107,12 +107,12 @@ const user = useSelector(selectUser)
                       My Plants
                      </FlexLink>
                    </MenuLinkMobile>
-                   <MenuLinkMobile to="/my-devices" >
+                   {/* <MenuLinkMobile to="/my-devices" >
                      <FlexLink>
                      
                       My Devices
                      </FlexLink>
-                   </MenuLinkMobile>
+                   </MenuLinkMobile> */}
                    <MenuLinkMobile to="/growers" >
                      <FlexLink>
                      
@@ -121,7 +121,7 @@ const user = useSelector(selectUser)
                    </MenuLinkMobile>
                    </>
                    }
-                         <MenuLinkMobile to="/public-plants" >
+                         <MenuLinkMobile to="/" >
                      <FlexLink>
                      
                        Public Plants
@@ -163,7 +163,7 @@ const user = useSelector(selectUser)
       
   
       </SectionHolder>     
-        <LegalText>&copy; {new Date().getFullYear()} Copyright - SweetLeaf 	&#174;</LegalText>
+        <LegalText>&copy; {new Date().getFullYear()} Copyright - CANNALOG 	&#174;</LegalText>
     </Inner>
     </Root>
   )

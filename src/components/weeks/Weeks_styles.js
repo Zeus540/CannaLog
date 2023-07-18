@@ -24,7 +24,7 @@ export const Week = styled(m.div)`
 border:2px solid ${props => props.theme.primary};
 background:${props => props.theme.primary};
 width: 90px;
-color: white;
+color: ${props => props.theme.text}!important;
 padding: 20px;
 border-radius: 5px;
 text-align: center;
@@ -39,8 +39,9 @@ transition: all 0.5s ease;
 export const WeekActive = styled(m.div)`
 border:2px solid ${props => props.theme.accent};
 background:${props => props.theme.primary};
+color: ${props => props.theme.text}!important;
 width: 90px;
-color: white;
+
 padding: 20px;
 border-radius: 5px;
 text-align: center;
@@ -50,13 +51,13 @@ margin: 10px 10px;
 
 export const WeekTextTop = styled(m.div)`
 border-radius: 5px 5px 0px 0px;
-color: white;
+
 
 
 `
 export const WeekTextBottom = styled(m.div)`
 
-color: white;
+
 
 
 border-radius: 0px 0px 5px 5px;

@@ -10,7 +10,7 @@ import { utcToZonedTime } from 'date-fns-tz';
 import { FiEdit } from "react-icons/fi";
  import { RiDeleteBin5Line } from 'react-icons/ri';
 import { ItemHodler} from '../forms/Form_styles'
-
+import PopupModal from '../../components/popupModal/PopupModal'
 
 export const Root = styled(m.div)`
 max-width: 1920px;
@@ -78,6 +78,7 @@ background: #8bab50;
 padding: 0px 15px;
 width: fit-content;
 border-radius: 50px;
+color: ${props => props.theme.textW}!important;
 `
 
 export const ItemInnerUpper = styled(m.div)`
@@ -126,6 +127,9 @@ const TimelineNotes = ({plant,activeWeek}) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [scrollLeftStart, setScrollLeftStart] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalData, setModalData] = useState([])
+  const [modalType, setModalType] = useState('')
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -170,18 +174,32 @@ const TimelineNotes = ({plant,activeWeek}) => {
 
 
       setActionData(localizedData)
-      console.log("localizedData",localizedData)
+
     }).catch((err)=>{
       console.log("err",err)
     })
   };
 
-  console.log("activeWeek",activeWeek)
-  
+  const openModal = (type, data) => {
+    console.log("openModal",type)
+    switch (type) {
+
+      case "deleteNote":
+        setModalType("deleteNote")
+        setModalData(data)
+        setModalOpen(!modalOpen)
+        break;
+            
+    }
+}
+
+
   return (
     <Root>
+      {actionData.length > 0 &&
+      <>
          <Heading>Notes</Heading>
-        
+         {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
          <TimeLineHolder
 
           ref={containerRef}
@@ -223,8 +241,8 @@ const TimelineNotes = ({plant,activeWeek}) => {
 
         }
              </TimeLineHolder>
-          
-            
+          </>
+        }
     </Root>
   )
 }

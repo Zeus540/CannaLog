@@ -58,10 +58,10 @@ margin: 0px 20px;
 }
 `
 export const ItemInner = styled.div`
-color: ${props => props.theme.text}!important;
+
 cursor: pointer;
 border-radius: 50px;
-background: ${props => props.theme.primary}!important;
+background: ${props => props.border};
 padding: 5px 10px;
 position: relative;
 display: flex;
@@ -69,6 +69,7 @@ border:2px solid ${props => props.border};
 transition: all 0.5s ease;
 z-index: 2;
 justify-content: space-between;
+color: ${props => props.theme.textW}!important;
 `
 
 
