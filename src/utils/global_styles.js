@@ -24,9 +24,9 @@ background:  ${props => props.theme.secondary};
 // align-items: center;
 justify-content: center;
 position: relative;
-min-height: calc(100vh - 260px);
-@media (max-width: 768px) {
-  min-height: calc(100vh - 392px);
+min-height: calc(100vh - 232px);
+@media(min-width:0px) and (max-width:768px){
+  min-height: calc(100vh - 280px);
 }
 
 `

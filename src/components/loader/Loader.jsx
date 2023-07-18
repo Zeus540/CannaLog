@@ -6,7 +6,7 @@ import {motion as m} from 'framer-motion'
 const LoaderHolder = styled(m.div)`
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 260px);
+    min-height: calc(100vh - 280px);
     display: flex;
 `
 

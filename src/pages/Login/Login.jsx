@@ -16,7 +16,7 @@ import { getCookieValue } from '../../helpers/getCookieValue';
 const Root = styled.div`
 padding-top: 0px;
 color:  ${props => props.theme.text};
-min-height: calc(100vh - 260px);
+min-height: calc(100vh - 232px);
 display: flex;
 flex-direction: column;
 justify-content: center;
