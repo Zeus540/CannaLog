@@ -206,10 +206,10 @@ function MyPlantsDetailed() {
                         {24 - plantEnvironment?.environment_light_exposure !== 0 &&
                             <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
 
-                                <ExposureItem radius="0px 5px 5px 0px" bg1="#001f3b" bg2="#001f3b"></ExposureItem>
+                                <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
                                 <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
                             </ExposureItemGroup>
-                        }
+                        } 
                     </ExposureItemHolder>
                 </ExposureItemHolderOutter>
 

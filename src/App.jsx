@@ -43,7 +43,7 @@ let dark_theme = {
   secondary: '#151515',
   accent: '#8bab50',
   text: 'white',
-  textW: '#ffffff',
+  textW: '#000000',
   warn: "#f44336",
   drawer: {
     primary: 'black',
@@ -75,17 +75,29 @@ function App() {
   const dispatch = useDispatch()
 
 
-  const [theme, setTheme] = useState(light_theme)
+  const [theme, setTheme] = useState(dark_theme)
+  const [themeType, setThemeType] = useState("dark")
+
+
+  const toggleTheme = ()=>{
+    if(themeType == "dark"){
+      setTheme(light_theme)
+      setThemeType("light")
+    }else{
+      setTheme(dark_theme)
+      setThemeType("dark")
+    }
+  }
 
   useEffect(() => {
     dispatch(fetchPublicPlants())
-  //  setTheme(dark_theme)
+  
   }, [])
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AnimatedRoutes />
+        <AnimatedRoutes themeType={themeType} toggleTheme={toggleTheme}/>
       </ThemeProvider>
     </>
   )

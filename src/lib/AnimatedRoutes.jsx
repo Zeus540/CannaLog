@@ -38,7 +38,7 @@ const Root = styled.div`
 background:  ${props => props.theme.secondary};
 `;
 
-function AnimatedRoutes() {
+function AnimatedRoutes({themeType,toggleTheme}) {
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const publicPlants = useSelector(selectPublicJournal);
     const location = useLocation()
@@ -66,7 +66,7 @@ function AnimatedRoutes() {
 
         <AnimatePresence mode="wait">
             <Root>
-                <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} />
+                <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
                 <Routes location={location} key={location.pathname}>
                     {isLoggedIn ?
                         <>

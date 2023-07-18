@@ -89,7 +89,7 @@ background:${(props) => `linear-gradient(0deg, ${props.theme.primary}, transpare
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 45vh;
+min-height: 40vh;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
     align-items: center;
