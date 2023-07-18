@@ -18,7 +18,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 @media(min-width:0px) and (max-width:768px){
-  min-height: calc(100vh - 308px);
+  min-height: calc(100vh - 280px);
 }
 `;
 const RootInner = styled.div`
@@ -29,12 +29,12 @@ padding: 20px;
 border-radius: 5px;
 @media(max-width:425px){
   margin: 16px;
-padding: 15px 5px;
+
 width: 90%;
 }
 @media(min-width:426px) and (max-width:768px){
   margin: 16px;
-  padding: 15px 5px;
+
   width:unset;
 }
 `;

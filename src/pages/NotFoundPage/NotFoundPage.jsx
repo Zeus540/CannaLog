@@ -13,7 +13,7 @@ const Inner = styled.div`
 background-image: url(${Back2});
 
 background-size: cover;
-min-height: calc(100vh - 308px);
+min-height: calc(100vh - 280px);
 width: 100%;
 background-position: center;
 margin: 0 auto;

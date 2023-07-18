@@ -22,7 +22,7 @@ flex-direction: column;
 justify-content: center;
 background:  ${props => props.theme.secondary};
 @media(min-width:0px) and (max-width:768px){
-  min-height: calc(100vh - 308px);
+  min-height: calc(100vh - 280px);
 }
 `;
 const RootInner = styled.div`
