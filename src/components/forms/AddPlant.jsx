@@ -3,12 +3,14 @@ import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
 import { ButtonOutlined } from '../../utils/global_styles';
-import { FormHolder, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item,ItemGerm,ItemHarv,ItemTextAccent } from './Form_styles'
+import { FormHolder, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, InputFull, Item,ItemGerm,ItemHarv,ItemTextAccent,StyledDateTimePicker  } from './Form_styles'
 import { useSelector } from 'react-redux';
 import { selectEnvironments, fetchStrains, selectStrains, fetchIrrigationTypes, selectIrrigationTypes,addPlants,selectStages,fetchStages } from '../../features';
 import { useDispatch } from 'react-redux';
-
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { RadioGroup, Radio,FormControlLabel } from '@mui/material';
+import { format } from 'date-fns';
 
 const AddEnvironmentSchema = Yup.object().shape({
     name: Yup.string()
@@ -35,8 +37,10 @@ const AddPlant = ({ openModal, modalType, data }) => {
     }, [])
 
     console.log("stages", stages)
-
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let intialValues = {
+        creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
+        timezone: userTimezone ,
         name: '',
         environment: 0,
         strain: 0,
@@ -55,6 +59,9 @@ const AddPlant = ({ openModal, modalType, data }) => {
       
     }
 
+    const handleDate = (values,date) => {
+        values.creation_date = date
+    }
     return (
 
         <Formik
@@ -72,9 +79,17 @@ const AddPlant = ({ openModal, modalType, data }) => {
         >
             {({ isSubmitting, handleBlur, handleChange, values }) => (
                 <FormHolder>
+ <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <StyledDateTimePicker
+                                name="creation_date"
+                                maxDate={new Date()}
+                                defaultValue={new Date()}
+                                onChange={(value) => { handleDate(values,format(value,'yyyy-MM-dd HH:mm:ss')) }}
+                              
+                            />
+                        </LocalizationProvider>
 
-
-                    <Input
+                    <InputFull
                         autoComplete="false"
                         name="name"
                         label="Name"
@@ -82,7 +97,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
                         onChange={handleChange}
                     />
 
-                    <Input
+                    <InputFull
 
                         name="environment"
                         label="Environment"
@@ -99,9 +114,9 @@ const AddPlant = ({ openModal, modalType, data }) => {
                                 </Item>
                             )
                         })}
-                    </Input>
+                    </InputFull>
 
-                    <Input
+                    <InputFull
 
                         name="stage"
                         label="Stage"
@@ -122,9 +137,9 @@ const AddPlant = ({ openModal, modalType, data }) => {
                               
                             )
                         })}
-                    </Input>
+                    </InputFull>
 
-                    <Input
+                    <InputFull
 
                         name="irrigation"
                         label="Irrigation Type"
@@ -141,9 +156,9 @@ const AddPlant = ({ openModal, modalType, data }) => {
                                 </Item>
                             )
                         })}
-                    </Input>
+                    </InputFull>
 
-                    <Input
+                    <InputFull
 
                         name="strain"
                         label="Strain"
@@ -160,7 +175,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
                                 </Item>
                             )
                         })}
-                    </Input>
+                    </InputFull>
 
                     <RadioGroup
                         defaultValue={values.public}

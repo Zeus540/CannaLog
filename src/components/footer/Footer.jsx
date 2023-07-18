@@ -7,6 +7,7 @@ import { selectIsLoggedIn,selectUser } from "../../features";
 
 const Root = styled.div`
 box-shadow:  0px 0px 20px #00000012;
+position: relative;
 margin: 0px;
 background:  ${props => props.theme.nav.primary};
 color: ${props => props.theme.text};
@@ -153,12 +154,12 @@ const user = useSelector(selectUser)
                      </FlexLink>
                    </MenuLinkMobile>
 
-                   <MenuLinkMobile to="/cookie-policy" >
+                   {/* <MenuLinkMobile to="/cookie-policy" >
                      <FlexLink>
                      
                        Popi
                      </FlexLink>
-                   </MenuLinkMobile>
+                   </MenuLinkMobile> */}
       </Section>
       
   

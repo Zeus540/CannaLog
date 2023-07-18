@@ -7,8 +7,16 @@ border-radius: 5px;
 margin: 20px 10px;
 position: relative;
 cursor:pointer;
-@media (max-width: 425px) {
+@media (max-width: 600px) {
     width: calc(100% - 20px);
+    margin: 10px;
+}
+@media (min-width: 601px) and (max-width: 768px) {
+    width: calc(50% - 20px);
+    margin: 10px;
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    width: calc(100% / 3 - 20px);
     margin: 10px;
 }
 `
@@ -60,6 +68,7 @@ export const EnviromentCardTextMainHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
 padding:10px 10px;
 position: relative;
+
 z-index: 2;
 border-radius:${props => props.readMore ? "0px":"0px 0px 5px 5px"};
  ;
@@ -70,7 +79,7 @@ background:  ${props => props.theme.primary};
 padding:10px 10px;
 // display: ${props => props.readMore ? "block":"none"};
 transform:${props => props.readMore ? "translateY(-2%)":"translateY(-100%)"};
-transition: all 0.5s ease-in-out;
+transition: transform 0.5s ease-in-out;
 width: 100%;
 position: ${props => props.readMore ? "unset":"absolute"};
 opacity: ${props => props.readMore ? "unset":0};

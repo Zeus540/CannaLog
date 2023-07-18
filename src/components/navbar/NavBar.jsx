@@ -16,7 +16,7 @@ position: sticky;
     z-index:50;
     box-shadow:  0px 0px 20px #00000012;
     background:  ${props => props.theme.nav.primary};
-    transition: background 0.5s ease;
+  
   @media (max-width: 425px) {
     margin: 0px 0px;
     margin-top: 0px;
@@ -57,10 +57,10 @@ h1{
   color:${props => props.theme.text};
   text-align:center;
   font-size: 25px;
-  transition: color 0.5s ease;
+
   span{
     color:${props => props.theme.accent};
-    transition: color 0.5s ease;
+ 
     text-align:center;
     font-family: baloonB!important;
   }
@@ -116,7 +116,7 @@ const LinkHolderMobile = styled.div`
   background: linear-gradient(90deg, ${props => props.theme.drawer.primary}, ${props => props.theme.drawer.secondary});
   left: 0;
   min-width: 200px;
-  transition: all 0.5s ease;
+
   bottom:0px;
   flex-direction: column;
   transition: 0.5s all ease;
@@ -156,7 +156,7 @@ const MenuLinkTop = styled(NavLink)`
 const Svg = styled.svg`
 width:20px;
 margin-right:10px;
-fill: ${props => props.theme.primary};
+fill: ${props => props.theme.accent};
 `;
 const MenuLinkActive = styled(NavLink)`
   margin: 0px 0px;
@@ -309,7 +309,7 @@ width: 18px;
 
 `;
 const ThemeToggleHolder = styled.div`
-
+margin-right:15px;
 cursor: pointer;
 `;
 const ThemeSvg = styled.div`
@@ -362,6 +362,10 @@ console.log(themeType)
 
         <Div>
           <LinkHolder>
+          <ThemeToggleHolder>
+{theme == "light" && <ThemeSvg fill="#005bad" onClick={()=>{toggleTheme()}}><IoMoon /></ThemeSvg>}
+{theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/></ThemeSvg>}
+</ThemeToggleHolder>
             {!isLoggedIn && (
               <>
                 <MenuLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</MenuLink>
@@ -369,10 +373,7 @@ console.log(themeType)
                   <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</MenuLink>
               </>
             )}
-<ThemeToggleHolder>
-{theme == "light" && <ThemeSvg fill="#2196f3" onClick={()=>{toggleTheme()}}><IoMoon /></ThemeSvg>}
-{theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/></ThemeSvg>}
-</ThemeToggleHolder>
+
             {isLoggedIn && (
               <>
                 <MenuLinkTop to={`/profile/${user?.user_name}/${user?.user_id}`}>

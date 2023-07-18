@@ -7,8 +7,16 @@ width: calc(100% / 6 - 20px);
 margin: 20px 10px;
 position: relative;
 
-@media (max-width: 425px) {
+@media (max-width: 600px) {
     width: calc(100% - 20px);
+    margin: 10px;
+}
+@media (min-width: 601px) and (max-width: 768px) {
+    width: calc(50% - 20px);
+    margin: 10px;
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    width: calc(100% / 3 - 20px);
     margin: 10px;
 }
 `
@@ -60,8 +68,8 @@ object-fit: cover;
 aspect-ratio: 16/20;
 border-radius: 5px ;
 cursor: pointer;
-@media (max-width: 425px) {
-    aspect-ratio: 16 / 9;
+@media (max-width: 768px) {
+    aspect-ratio: 16 / 12;
 }
 `
 export const PlantCardTextHolder = styled(m.div)`

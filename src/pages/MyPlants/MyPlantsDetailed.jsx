@@ -155,7 +155,9 @@ function MyPlantsDetailed() {
                             <h1>{plant?.plant_name}</h1>
                             <Tag bg={currentStage?.stage_color}>
                             {currentStage?.stage_name}
+                         
                             </Tag>
+                            {plant?.user_name}
                          
                     
 

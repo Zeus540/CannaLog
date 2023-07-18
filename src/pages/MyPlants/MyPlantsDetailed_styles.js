@@ -120,7 +120,7 @@ display: flex;
 margin: 0px -10px;
 position: relative;
 @media (max-width: 768px) {
- margin-top:20px;
+ margin-top:0px;
  justify-content: right;
   }
 p{

@@ -9,9 +9,16 @@ const Inner = styled.div`
 padding: 0px 0px;
 margin: 40px auto;
 max-width: calc(1770px - 40px);
-background: white;
+
+background:${(props) => `${props.theme.secondary}`};
+color:${(props) => `${props.theme.text}`};
 padding: 20px 20px;
 border-radius: 5px;
+h2{
+  margin: 20px 0px;
+  color:${(props) => `${props.theme.accent}`};
+},
+
 @media (max-width: 425px) {
     margin: 20px;
     padding-top: 0px;
@@ -26,8 +33,8 @@ border-radius: 5px;
 `;
 
 const Heading = styled.h1`
-
-
+font-size: 25px;
+text-align: center;
 margin-top: 0px;
 
 `;
@@ -36,7 +43,7 @@ const PrivacyPolicy = () => {
   return (
     <div>
         <Inner>
-        <Heading>Privacy Policy for CannaLog</Heading>
+        <Heading>Privacy Policy</Heading>
 
 <p>At CannaLog,  one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by CannaLog and how we use it.</p>
 

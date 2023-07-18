@@ -178,7 +178,36 @@ color:${props => props.theme.text};
 }
 `
 
+export const InputFull= styled(TextField)`
 
+
+border:none;
+width: 100%;
+border-radius: 5px!important;
+box-shadow:  inset 0px 0px 2px 1px ${props => props.theme.secondary};
+border: 1px solid ${props => props.theme.secondary};
+background-color:${props => props.theme.secondary}!important;
+color:${props => props.theme.text}!important;
+margin-bottom: 15px!important;
+&&{
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: all 5000s ease;
+
+}
+}
+div {
+  color:${props => props.theme.text}!important;
+}
+label {
+  color:${props => props.theme.text}!important;
+}
+svg {
+  color:${props => props.theme.text}!important;
+}
+`
 export const Input= styled(TextField)`
 
 
@@ -189,6 +218,7 @@ box-shadow:  inset 0px 0px 2px 1px ${props => props.theme.secondary};
 border: 1px solid ${props => props.theme.secondary};
 background-color:${props => props.theme.secondary}!important;
 color:${props => props.theme.text}!important;
+
 &&{
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

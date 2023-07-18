@@ -4,7 +4,6 @@ import { motion as m } from 'framer-motion'
 import { Heading } from '../../utils/global_styles'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
-import moment from 'moment-timezone'
 import { getLocalizedDate } from '../../helpers/getLocalizeDate'
 import { ItemHodler} from '../forms/Form_styles'
 
