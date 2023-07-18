@@ -311,6 +311,9 @@ width: 18px;
 const ThemeToggleHolder = styled.div`
 margin-right:15px;
 cursor: pointer;
+@media (max-width: 768px){
+  margin:15px;
+}
 `;
 const ThemeSvg = styled.div`
 display: flex;
@@ -464,9 +467,17 @@ console.log(themeType)
 
         {!isLoggedIn &&
 
+<>
+
 
 
           <LinkHolderMLogin>
+
+          <ThemeToggleHolder>
+{theme == "light" && <ThemeSvg fill="#005bad" onClick={()=>{toggleTheme()}}><IoMoon /></ThemeSvg>}
+{theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/></ThemeSvg>}
+</ThemeToggleHolder>
+
             <MenuLinkMobile to="/sign-in" onClick={() => {  setMobileMenu(false); }}>
               <FlexLink>
                 <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>
@@ -481,6 +492,7 @@ console.log(themeType)
               </FlexLink>
             </MenuLinkMobile>
           </LinkHolderMLogin>
+</>
         }
 
         {isLoggedIn &&
