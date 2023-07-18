@@ -409,15 +409,24 @@ console.log(themeType)
           <LinkHolderM>
         
 
-            <MenuLinkMobile to="/" onClick={() => {  setMobileMenu(false); }}>
+          {!isLoggedIn &&
+          <MenuLinkMobile to="/public-plants" onClick={() => {  setMobileMenu(false); }}>
+              <FlexLink>
+
+                <FlexLinkText>Public Plants</FlexLinkText>
+              </FlexLink>
+            </MenuLinkMobile>
+            }
+
+            {isLoggedIn &&
+              <>
+                  <MenuLinkMobile to="/" onClick={() => {  setMobileMenu(false); }}>
               <FlexLink>
 
                 <FlexLinkText>Public Plants</FlexLinkText>
               </FlexLink>
             </MenuLinkMobile>
 
-            {isLoggedIn &&
-              <>
                 <MenuLinkMobile to="/my-environments" onClick={() => {  setMobileMenu(false); }}>
                   <FlexLink>
 

@@ -26,7 +26,7 @@ flex-wrap: wrap;
 const PublicPlants = () => {
 
 
-  const isLoadingPlants = useSelector(isLoadingMyPlants)
+  const isLoadingPlants = useSelector(selectPublicJournal)
   const publicPlants = useSelector(selectPublicJournal)
 
 console.log("publicPlants",publicPlants.plants)
@@ -57,7 +57,7 @@ console.log("publicPlants",publicPlants.plants)
   return (
 
     <>
-      {isLoadingPlants ?
+      {isLoadingPlants.loading ?
         <>
           <Loader />
         </>
