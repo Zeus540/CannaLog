@@ -10,7 +10,7 @@ background: ${props => props.theme.secondary};
 `;
 
 export const HeroBanner = styled.div`
-min-height:calc(100vh - 57px);
+min-height:calc(60vh - 57px);
 background-image:url(${Back});
 flex-direction: column;
 background-color: #0000008a;
