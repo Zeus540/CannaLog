@@ -159,6 +159,10 @@ export const Image = styled(m.img)`
 aspect-ratio: 16/12;
 
 `
+export const RootInner = styled(m.div)`
+margin:10px 0px;
+
+`
 
 const TimelineNotes = ({plant,activeWeek,title,actionTypeData}) => {
   const [actionData, setActionData] = useState([]);
@@ -268,18 +272,18 @@ console.log("getPlantActionsByType",type)
     }
 }
 
-
+console.log("actionData.length > 0",actionData.length > 0)
   return (
     <Root>
       {actionData.length > 0 &&
       <>
          <Heading>{title}</Heading>
+         <RootInner>
          {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
          <Swiper
      spaceBetween={50}
      slidesPerView={4}
-
      breakpoints={{
        0: {
          slidesPerView: 1,
@@ -374,6 +378,7 @@ console.log("getPlantActionsByType",type)
         }
     
     </Swiper>
+    </RootInner>
           </>
         }
     </Root>

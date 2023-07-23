@@ -39,20 +39,27 @@ export const Modal = styled(m.div)`
 animation: ${fadeIn} 0.75s ease;
 background:  ${props => props.theme.modal.primary};
 backdrop-filter: blur(5px);
-min-width: 40%;
+max-width: 40%;
 border-radius: 5px;
 padding:15px;
+width:100%;
 @media (min-width: 0px) and (max-width: 600px)  {
-    min-width: 100%;
+    max-width: unset;
+    width:100%;
+ 
 }
 @media (min-width: 601px) and (max-width: 768px) {
-    min-width: 80%;
+    max-width: 80%;
+    width:100%;
+ 
 }
 @media (min-width: 769px) and (max-width: 1440px) {
-    min-width: 40%;
+    max-width: 40%;
+    width:100%
 }
 @media (min-width: 2560px)  {
-    min-width: 20%;
+    max-width: 20%;
+    width:100%
 }
 
 

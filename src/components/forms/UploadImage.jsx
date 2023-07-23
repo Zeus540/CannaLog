@@ -13,9 +13,16 @@ margin: 0px auto;
 margin-top: 15px;
 
 `
+export const PreviewImage = styled.img`
+
+aspect-ratio: 16/9;
+object-fit: contain;
+
+`
 
 function UploadImage({modalType,openModal,data,plant}) {
     const [loading, setLoading] = useState(false)
+    const [imagePreview, setImagePreview] = useState(null); 
 const params = useParams()
     const [formObject,setFormObject] = useState({
         "file":""
@@ -44,15 +51,25 @@ const params = useParams()
 
     }
   
-    const handleChange = (e,type)=>{
+    const handleChange = (e, type) => {
         switch (type) {
-            case "file":
-                setFormObject({...formObject,file : e.target.files[0]})
-                break;
-            default:
-                break;
+          case 'file':
+            setFormObject({ ...formObject, file: e.target.files[0] });
+            // Update the image preview when a file is selected
+            if (e.target.files && e.target.files[0]) {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                setImagePreview(e.target.result);
+              };
+              reader.readAsDataURL(e.target.files[0]);
+            } else {
+              setImagePreview(null);
+            }
+            break;
+          default:
+            break;
         }
-    }
+      };
 
     useEffect(() => {
 
@@ -61,6 +78,13 @@ const params = useParams()
     
   return (
     <form encType='multipart/form-data' onSubmit={(e)=>{handleSubmit(e)}}>
+           {imagePreview && (
+        <PreviewImage
+          src={imagePreview}
+          alt="Preview"
+          
+        />
+      )}
         <Input type='file' name="file" onChange={(e)=>{handleChange(e,"file")}}/>
    <ActionHolder>
    {!loading ? <Button >Submit</Button> : <ThreeDots 
