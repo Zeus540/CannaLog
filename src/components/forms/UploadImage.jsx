@@ -43,6 +43,7 @@ const params = useParams()
          .then((response)=>{
              if(response.status == 200){
                 openModal(modalType)
+                setLoading(false)
              }
          })
          .catch((err)=>{
@@ -88,10 +89,10 @@ const params = useParams()
         <Input type='file' name="file" onChange={(e)=>{handleChange(e,"file")}}/>
    <ActionHolder>
    {!loading ? <Button >Submit</Button> : <ThreeDots 
-height="80" 
-width="80" 
+height="40" 
+width="40" 
 radius="9"
-color="#4fa94d" 
+color="#8bab50" 
 ariaLabel="three-dots-loading"
 wrapperStyle={{}}
 wrapperClassName=""

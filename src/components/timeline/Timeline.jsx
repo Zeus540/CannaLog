@@ -1,15 +1,15 @@
-import React,{useState ,useEffect,useRef }from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Heading } from '../../utils/global_styles'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
-import { getLocalizedDate,getWeekandDay } from '../../helpers/getLocalizeDate'
+import { getLocalizedDate, getWeekandDay } from '../../helpers/getLocalizeDate'
 import { format, startOfWeek, addWeeks, differenceInWeeks } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import { FiEdit } from "react-icons/fi";
- import { RiDeleteBin5Line } from 'react-icons/ri';
-import { ItemHodler} from '../forms/Form_styles'
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { ItemHodler } from '../forms/Form_styles'
 import PopupModal from '../popupModal/PopupModal'
 import { socket } from '../../lib/socket'
 import { useParams } from 'react-router-dom'
@@ -164,7 +164,7 @@ margin:10px 0px;
 
 `
 
-const TimelineNotes = ({plant,activeWeek,title,actionTypeData}) => {
+const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
   const [actionData, setActionData] = useState([]);
   const containerRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -177,13 +177,13 @@ const TimelineNotes = ({plant,activeWeek,title,actionTypeData}) => {
 
   useEffect(() => {
     if (socket) {
-        socket.on(`note_added${params.plant_id}`, (data) => {
-          console.log("note_added",data)
-          group_by([...actionData, data].sort((a,b) => new Date(b.creation_date) - new Date(a.creation_date)))
-        
-        });
+      socket.on(`note_added${params.plant_id}`, (data) => {
+        console.log("note_added", data)
+        group_by([...actionData, data].sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
+
+      });
     }
-})
+  })
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -204,63 +204,70 @@ const TimelineNotes = ({plant,activeWeek,title,actionTypeData}) => {
 
   useEffect(() => {
 
-  getPlantActionsByType(plant,actionTypeData)
+    getPlantActionsByType(plant, actionTypeData)
   }, [plant]);
 
 
-  const getPlantActionsByType = (d,type) => {
-console.log("getPlantActionsByType",type)
+  const getPlantActionsByType = (d, type) => {
+    console.log("getPlantActionsByType", type)
     switch (type) {
       case 13:
         axios.post(`${BASE_URL_PROD}/plants/actions/13`, d)
-        .then((response)=>{
-    
-          group_by(response.data)
-    
-        }).catch((err)=>{
-          console.log("err",err)
-        })
+          .then((response) => {
+            if (response.data.length > 0) {
+              group_by(response.data)
+            } else {
+              setActionData([])
+            }
+
+          }).catch((err) => {
+            console.log("err", err)
+          })
         break;
 
-        case 4:
-          axios.post(`${BASE_URL_PROD}/plants/actions/4`, d)
-          .then((response)=>{
-      
-            group_by(response.data)
-      
-          }).catch((err)=>{
-            console.log("err",err)
+      case 4:
+        axios.post(`${BASE_URL_PROD}/plants/actions/4`, d)
+          .then((response) => {
+            if (response.data.length > 0) {
+              group_by(response.data)
+            } else {
+              setActionData([])
+            }
+
+
+          }).catch((err) => {
+            console.log("err", err)
           })
-          break;
-    
+        break;
+
       default:
         break;
     }
-  
+
   };
 
 
-  const group_by = (data)=>{
-          // Assuming you have the necessary data and variables
-          const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-          const startDateIn = new Date(getLocalizedDate(plant.creation_date))
-          
+  const group_by = (data) => {
+    // Assuming you have the necessary data and variables
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const startDateIn = new Date(getLocalizedDate(plant.creation_date))
 
-          // Localize each date in the object and calculate the week number
-          const localizedData =  data.map((item) => {
-              const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
-              const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
-              const week = differenceInWeeks(localizedDate, startDateLocalized) + 1;
-              return { ...item, creation_date: localizedDate, week };
-          });
+
+    // Localize each date in the object and calculate the week number
+    const localizedData = data.map((item) => {
+      const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
+      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
+      const week = differenceInWeeks(localizedDate, startDateLocalized) + 1;
+      return { ...item, creation_date: localizedDate, week };
+    });
 
 
 
     setActionData(localizedData)
   }
-  
+
   const openModal = (type, data) => {
-    console.log("openModal",type)
+    console.log("openModal", type)
     switch (type) {
 
       case "deleteNote":
@@ -268,119 +275,120 @@ console.log("getPlantActionsByType",type)
         setModalData(data)
         setModalOpen(!modalOpen)
         break;
-            
-    }
-}
 
-console.log("actionData.length > 0",actionData.length > 0)
+    }
+  }
+
+  console.log("actionData.length > 0", actionData.length > 0)
+  console.log("actionData", actionData)
   return (
     <Root>
       {actionData.length > 0 &&
-      <>
-         <Heading>{title}</Heading>
-         <RootInner>
-         {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
+        <>
+          <Heading>{title}</Heading>
+          <RootInner>
+            {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
-         <Swiper
-     spaceBetween={50}
-     slidesPerView={4}
-     breakpoints={{
-       0: {
-         slidesPerView: 1,
-         spaceBetween: 20,
-       },
-       600: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-       768: {
-         slidesPerView: 2,
-         spaceBetween: 40,
-       },
-       1024: {
-         slidesPerView: 4,
-         spaceBetween: 50,
-       },
-     }}
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={4}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                600: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+              }}
 
 
-     loop={true}
-      // onSlideChange={() => console.log('slide change')}
-      // onSwiper={(swiper) => console.log(swiper)}
-    >
+              loop={true}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
+            >
 
-      {actionData?.filter((a) => a.week == activeWeek )?.map((a)=>{
-          return(
-            <SwiperSlide>
-          
-              {actionTypeData == 13 &&
-            <Item >
-              <ItemInner >
-              
-                <ItemInnerUpper>
-                <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                <h2>{getLocalizedDate(a.creation_date)}</h2>
-               
-                
-                </ItemInnerUpper>
+              {actionData?.filter((a) => a.week == activeWeek)?.map((a) => {
+                return (
+                  <SwiperSlide>
 
-                <ItemInnerContent>
-                <h2>{a.plant_note}</h2>
-                </ItemInnerContent>
+                    {actionTypeData == 13 &&
+                      <Item >
+                        <ItemInner >
 
-                <ItemInnerActionHolder>
+                          <ItemInnerUpper>
+                            <Tag>{getWeekandDay(a.creation_date).day}</Tag>
+                            <h2>{getLocalizedDate(a.creation_date)}</h2>
 
-                <TextButtonSvg onClick={()=> openModal('editNote',a)}><FiEdit/></TextButtonSvg>
-                <TextButtonSvgDelete onClick={()=> openModal('deleteNote',a)}><RiDeleteBin5Line/></TextButtonSvgDelete>
-                </ItemInnerActionHolder>
-                
-              </ItemInner>
-              </Item>
+
+                          </ItemInnerUpper>
+
+                          <ItemInnerContent>
+                            <h2>{a.plant_note}</h2>
+                          </ItemInnerContent>
+
+                          <ItemInnerActionHolder>
+
+                            <TextButtonSvg onClick={() => openModal('editNote', a)}><FiEdit /></TextButtonSvg>
+                            <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
+                          </ItemInnerActionHolder>
+
+                        </ItemInner>
+                      </Item>
+                    }
+
+                    {actionTypeData == 4 &&
+                      <Item >
+                        <ImageItemInner >
+
+                          <ImageItemInnerUpper>
+                            <Tag>{getWeekandDay(a.creation_date).day}</Tag>
+                            <h2>{getLocalizedDate(a.creation_date)}</h2>
+
+
+                          </ImageItemInnerUpper>
+
+                          <ItemInnerContentImage>
+                            <picture>
+                              <source src={a.thumbnail_img_next_gen} type="image/webp" />
+
+                              <Image src={a.thumbnail_img} width="100%" />
+                            </picture>
+                          </ItemInnerContentImage>
+
+
+
+                          <ImageItemInnerActionHolder>
+
+
+                            <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
+                          </ImageItemInnerActionHolder>
+
+                        </ImageItemInner>
+                      </Item>
+                    }
+
+                  </SwiperSlide>
+
+                )
+              })
+
+
               }
 
-              {actionTypeData == 4 &&
-            <Item >
-              <ImageItemInner >
-           
-              <ImageItemInnerUpper>
-                <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                <h2>{getLocalizedDate(a.creation_date)}</h2>
-               
-                
-                </ImageItemInnerUpper>
-
-                <ItemInnerContentImage>
-                <picture>
-                  <source src={a.thumbnail_img_next_gen} type="image/webp"/>
-
-                  <Image src={a.thumbnail_img}  width="100%"/>
-                  </picture>
-                </ItemInnerContentImage>
-
-   
-       
-                <ImageItemInnerActionHolder>
-
-                
-                <TextButtonSvgDelete onClick={()=> openModal('deleteNote',a)}><RiDeleteBin5Line/></TextButtonSvgDelete>
-                </ImageItemInnerActionHolder>
-                
-              </ImageItemInner>
-              </Item>
-              }
-             
-              </SwiperSlide>
-          
-          )
-        })
-
-
-        }
-    
-    </Swiper>
-    </RootInner>
-          </>
-        }
+            </Swiper>
+          </RootInner>
+        </>
+      }
     </Root>
   )
 }
