@@ -28,7 +28,7 @@ padding: 80px;
 align-items: center;
 animation: ${fadeIn} 0.5s ease;
 @media (min-width: 0px) and (max-width: 425px)  {
-    padding: 40px;
+    padding: 20px;
 }
 @media (min-width: 426px) and (max-width: 768px) {
     padding: 40px;

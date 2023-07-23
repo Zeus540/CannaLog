@@ -4,15 +4,23 @@ import { motion as m } from 'framer-motion'
 import { Heading } from '../../utils/global_styles'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
-import { getLocalizedDate } from '../../helpers/getLocalizeDate'
+import { getLocalizedDate,getWeekandDay } from '../../helpers/getLocalizeDate'
+import { format, startOfWeek, addWeeks, differenceInWeeks } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+import { FiEdit } from "react-icons/fi";
+ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { ItemHodler} from '../forms/Form_styles'
-
+import PopupModal from '../popupModal/PopupModal'
+import { socket } from '../../lib/socket'
+import { useParams } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 0px 20px;
-
+margin-bottom: 20px;
 `
 export const TimeLineHolder = styled(m.div)`
 display: flex;
@@ -24,8 +32,7 @@ user-select: none;
 
 export const Item = styled(m.div)`
 position: relative;
-min-width: calc(100% / 5);
-max-width: calc(100% / 5);
+
 width: 100%;
 margin: 0px 20px;
 &:not(:first-child)::after {
@@ -49,35 +56,130 @@ margin: 0px 20px;
 }
 
 @media (min-width: 0px) and (max-width: 425px)  {
-  min-width: calc(100% / 1.5);
-  max-width: calc(100% / 1.5);
+
 }
 @media (min-width: 426px) and (max-width: 768px) {
-  padding: 40px;
+
 }
 `
 export const ItemInner = styled.div`
-
+color: ${props => props.theme.text}!important;
 cursor: pointer;
-border-radius: 50px;
-background: ${props => props.border};
-padding: 5px 10px;
+border-radius: 5px;
+background: ${props => props.theme.primary}!important;
+padding: 15px;
 position: relative;
-display: flex;
-border:2px solid ${props => props.border};
+
+
 transition: all 0.5s ease;
 z-index: 2;
 justify-content: space-between;
+`
+export const ImageItemInner = styled.div`
+color: ${props => props.theme.text}!important;
+cursor: pointer;
+border-radius: 5px;
+background: ${props => props.theme.primary}!important;
+position: relative;
+
+
+transition: all 0.5s ease;
+z-index: 2;
+justify-content: space-between;
+`
+export const Tag = styled(m.div)`
+background: #8bab50;
+padding: 0px 15px;
+width: fit-content;
+border-radius: 50px;
 color: ${props => props.theme.textW}!important;
 `
 
+export const ItemInnerUpper = styled(m.div)`
+display: flex;
+justify-content: space-between;
+`
+export const ImageItemInnerUpper = styled(m.div)`
+display: flex;
+justify-content: space-between;
+padding:15px
+`
+export const ItemInnerContent = styled(m.div)`
+padding: 10px;
+background: white;
+color:black;
+margin: 15px 0px;
+border-radius: 5px;
+`
+export const ItemInnerContentImage = styled(m.div)`
 
-const Timeline = ({plant}) => {
+
+color:black;
+
+border-radius: 5px;
+`
+
+export const ItemInnerActionHolder = styled(m.div)`
+display: flex;
+justify-content: end;
+`
+export const ImageItemInnerActionHolder = styled(m.div)`
+padding: 15px;
+display: flex;
+justify-content: end;
+`
+
+export const TextButtonSvg = styled(m.div)`
+svg{
+    color:  ${props => props.theme.accent};
+    font-size: 20px;
+    margin-right: 10px;
+    path{
+      stroke:  ${props => props.theme.accent};
+    }
+  }
+`
+export const TextButtonSvgDelete = styled(m.div)`
+color:  ${props => props.theme.warn};;
+font-size: 20px;
+
+font-weight: bold;
+cursor:pointer;
+display: flex;
+
+svg{
+  path{
+    stroke:  ${props => props.theme.warn};
+  }
+}
+`
+export const Image = styled(m.img)`
+
+
+aspect-ratio: 16/12;
+
+`
+
+const TimelineNotes = ({plant,activeWeek,title,actionTypeData}) => {
   const [actionData, setActionData] = useState([]);
   const containerRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [scrollLeftStart, setScrollLeftStart] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalData, setModalData] = useState([])
+  const [modalType, setModalType] = useState('')
+  const params = useParams()
+
+  useEffect(() => {
+    if (socket) {
+        socket.on(`note_added${params.plant_id}`, (data) => {
+          console.log("note_added",data)
+          group_by([...actionData, data].sort((a,b) => new Date(b.creation_date) - new Date(a.creation_date)))
+        
+        });
+    }
+})
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -98,54 +200,184 @@ const Timeline = ({plant}) => {
 
   useEffect(() => {
 
-  getPlantActionsByType(plant)
+  getPlantActionsByType(plant,actionTypeData)
   }, [plant]);
 
 
-  const getPlantActionsByType = (d) => {
-    axios.post(`${BASE_URL_PROD}/plants/actions/14`, d)
-    .then((response)=>{
-      setActionData(response.data)
-      console.log("response",response)
-    }).catch((err)=>{
-      console.log("err",err)
-    })
+  const getPlantActionsByType = (d,type) => {
+console.log("getPlantActionsByType",type)
+    switch (type) {
+      case 13:
+        axios.post(`${BASE_URL_PROD}/plants/actions/13`, d)
+        .then((response)=>{
+    
+          group_by(response.data)
+    
+        }).catch((err)=>{
+          console.log("err",err)
+        })
+        break;
+
+        case 4:
+          axios.post(`${BASE_URL_PROD}/plants/actions/4`, d)
+          .then((response)=>{
+      
+            group_by(response.data)
+      
+          }).catch((err)=>{
+            console.log("err",err)
+          })
+          break;
+    
+      default:
+        break;
+    }
+  
   };
+
+
+  const group_by = (data)=>{
+          // Assuming you have the necessary data and variables
+          const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+          const startDateIn = new Date(getLocalizedDate(plant.creation_date))
+          
+
+          // Localize each date in the object and calculate the week number
+          const localizedData =  data.map((item) => {
+              const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
+              const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
+              const week = differenceInWeeks(localizedDate, startDateLocalized) + 1;
+              return { ...item, creation_date: localizedDate, week };
+          });
+
+
+
+    setActionData(localizedData)
+  }
+  
+  const openModal = (type, data) => {
+    console.log("openModal",type)
+    switch (type) {
+
+      case "deleteNote":
+        setModalType("deleteNote")
+        setModalData(data)
+        setModalOpen(!modalOpen)
+        break;
+            
+    }
+}
+
 
   return (
     <Root>
-         <Heading>Stages</Heading>
-        
-         <TimeLineHolder
+      {actionData.length > 0 &&
+      <>
+         <Heading>{title}</Heading>
+         {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
-          ref={containerRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onTouchStart={handleMouseDown}
-          onTouchMove={handleMouseMove}
-          onTouchEnd={handleMouseUp}
-         >
-        {actionData.map((a)=>{
+         <Swiper
+     spaceBetween={50}
+     slidesPerView={4}
+
+     breakpoints={{
+       0: {
+         slidesPerView: 1,
+         spaceBetween: 20,
+       },
+       600: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+       768: {
+         slidesPerView: 2,
+         spaceBetween: 40,
+       },
+       1024: {
+         slidesPerView: 4,
+         spaceBetween: 50,
+       },
+     }}
+
+
+     loop={true}
+      // onSlideChange={() => console.log('slide change')}
+      // onSwiper={(swiper) => console.log(swiper)}
+    >
+
+      {actionData?.filter((a) => a.week == activeWeek )?.map((a)=>{
           return(
-            <Item bg={a.stage_color} border={a.stage_color}>
-              <ItemInner bg={a.stage_color} border={a.stage_color}>
-               <h2>{a.stage_name}</h2>
+            <SwiperSlide>
+          
+              {actionTypeData == 13 &&
+            <Item >
+              <ItemInner >
+              
+                <ItemInnerUpper>
+                <Tag>{getWeekandDay(a.creation_date).day}</Tag>
                 <h2>{getLocalizedDate(a.creation_date)}</h2>
-             
+               
+                
+                </ItemInnerUpper>
+
+                <ItemInnerContent>
+                <h2>{a.plant_note}</h2>
+                </ItemInnerContent>
+
+                <ItemInnerActionHolder>
+
+                <TextButtonSvg onClick={()=> openModal('editNote',a)}><FiEdit/></TextButtonSvg>
+                <TextButtonSvgDelete onClick={()=> openModal('deleteNote',a)}><RiDeleteBin5Line/></TextButtonSvgDelete>
+                </ItemInnerActionHolder>
+                
               </ItemInner>
               </Item>
+              }
+
+              {actionTypeData == 4 &&
+            <Item >
+              <ImageItemInner >
+           
+              <ImageItemInnerUpper>
+                <Tag>{getWeekandDay(a.creation_date).day}</Tag>
+                <h2>{getLocalizedDate(a.creation_date)}</h2>
+               
+                
+                </ImageItemInnerUpper>
+
+                <ItemInnerContentImage>
+                <picture>
+                  <source src={a.thumbnail_img_next_gen} type="image/webp"/>
+
+                  <Image src={a.thumbnail_img}  width="100%"/>
+                  </picture>
+                </ItemInnerContentImage>
+
+   
+       
+                <ImageItemInnerActionHolder>
+
+                
+                <TextButtonSvgDelete onClick={()=> openModal('deleteNote',a)}><RiDeleteBin5Line/></TextButtonSvgDelete>
+                </ImageItemInnerActionHolder>
+                
+              </ImageItemInner>
+              </Item>
+              }
+             
+              </SwiperSlide>
           
           )
         })
 
 
         }
-             </TimeLineHolder>
-          
-            
+    
+    </Swiper>
+          </>
+        }
     </Root>
   )
 }
 
-export default Timeline
+export default TimelineNotes

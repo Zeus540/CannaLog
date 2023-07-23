@@ -28,7 +28,6 @@ import { FiEdit } from 'react-icons/fi'
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
 import Timeline from '../../components/timeline/Timeline'
-import TimelineNotes from '../../components/timelineNotes/TimelineNotes'
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 
@@ -56,7 +55,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizeTime } from '../../helpers/getLocalizeTime'
 import { getWeeksElapsed } from '../../helpers/getWeeksElapsed'
-
+import { socket } from '../../lib/socket'
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -79,8 +78,18 @@ function MyPlantsDetailed() {
     }, [])
 
     useEffect(() => {
-    
-    }, [])
+        if (socket) {
+            socket.on(`action_taken${params.plant_id}`, (data) => {
+                setPlantActions(data)
+            });
+
+            socket.on(`stage_changed${params.plant_id}`, (data) => {
+                setCurrentStage(data)
+              });
+        }
+
+     
+    })
 
     
     useEffect(() => {
@@ -216,7 +225,7 @@ function MyPlantsDetailed() {
                 </ExposureItemHolderOutter>
 
             </Section>
-            <Timeline plant={plant}/>
+           
          
             
             <QuickActionHolder>
@@ -246,7 +255,10 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <TimelineNotes plant={plant} activeWeek={activeWeek}/>
+            <Timeline plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13}/>
+
+            <Timeline plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4}/>
+
         </Root>
 
     )

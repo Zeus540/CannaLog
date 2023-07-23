@@ -10,6 +10,7 @@ import AddEvironment from '../forms/AddEvironment';
 import AddPlant from '../forms/AddPlant';
 import ChangeStage from '../forms/ChangeStage';
 import AddNote from '../forms/AddNote';
+import UploadImage from '../forms/UploadImage';
 
 const PopupModal = ({ openModal, data, modalType,plant }) => {
   
@@ -114,7 +115,9 @@ const dispatch = useDispatch()
           {(data?.plant_action_type_id == 13) &&
             <AddNote modalType={modalType} openModal={openModal} data={data} plant={plant}/>
           }
-
+          {(data?.plant_action_type_id == 4) &&
+            <UploadImage modalType={modalType} openModal={openModal} data={data} plant={plant}/>
+          }
 
         </ModalContent>
 
