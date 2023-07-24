@@ -32,6 +32,8 @@ import MyPlants from '../pages/MyPlants/MyPlants'
 import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
 import Footer from '../components/footer/Footer'
 import WebSocketListener from '../components/WebSocketListener';
+import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
+import { fetchPublicPlants,fetchPublicPlantsSingedIn } from '../features';
 
 const Root = styled.div`
 
@@ -45,7 +47,17 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     const [mobileMenu, setMobileMenu] = useState(false);
     const dispatch = useDispatch()
 
- 
+   useEffect(() => {
+    if(isLoggedIn){
+        dispatch(fetchPublicPlantsSingedIn())
+    }else{
+        dispatch(fetchPublicPlants())
+    }
+    console.log("isLoggedIn",isLoggedIn)
+
+    
+    
+  }, [isLoggedIn])
     const OffClick = () => {
         if (mobileMenu == true) {
             setMobileMenu(false);
@@ -75,6 +87,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
+                            <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
+                           
                             <Route path="/growers" element={<Growers />} />
                             <Route path="/terms" element={<Terms />} />
                             <Route path="/cookie-policy" element={<CookiePolicy />} />
@@ -85,6 +99,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                         :
                         <>
                           <Route path="/public-plants" element={<PublicPlants />} />
+                          <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                             <Route path="/" element={<PreLoader Page={HomePage} data={publicPlants.loading} />} />
                             <Route path="/sign-in" element={<Login />} />
                             <Route path="/sign-up" element={<Register />} />

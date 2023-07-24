@@ -13,3 +13,13 @@ export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',()=>{
       });
 })
 
+export const fetchPublicPlantsSingedIn = createAsyncThunk('publicPlants/fetch',()=>{
+  return axios.get(`${BASE_URL_PROD}/plants/public_signed_in`)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    throw new Error('Failed to fetch public plants');
+  });
+})
+

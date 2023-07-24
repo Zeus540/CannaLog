@@ -44,7 +44,7 @@ function cleanName(name) {
   const handleRedirect = ()=>{
    
 
-    navigate(`/my-plants/${cleanName(data.plant_name)}/${data.environment_id}/${data.plant_id}`)
+    navigate(`/public-plant/${cleanName(data.plant_name)}/${data.environment_id}/${data.plant_id}`)
    
   }
   

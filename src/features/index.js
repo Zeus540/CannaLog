@@ -1,7 +1,7 @@
 import {authSlice,auth,logout,selectIsLoggedIn,selectUser} from "./auth/authSlice.js"
 
 import {publicPlantsSlice,selectPublicJournal} from "./plants/publicPlantsSlice.js"
-import {fetchPublicPlants} from "./plants/publicPlantsThunk.js"
+import {fetchPublicPlants,fetchPublicPlantsSingedIn} from "./plants/publicPlantsThunk.js"
 
 import {myPlantsSlice,selectMyPlants,isLoadingMyPlants} from "./plants/myPlantsSlice.js"
 import {fetchMyPlants,addPlants,deletePlant,takeAction} from "./plants/myPlantsThunk.js"
@@ -46,6 +46,7 @@ export {
     environmentTypesSlice,
     fetchMyPlants,
     fetchPublicPlants,
+    fetchPublicPlantsSingedIn,
     selectEnvironmentsTypes,
     addEnvironment,
     addEnvironmentLocally,

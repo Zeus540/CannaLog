@@ -166,7 +166,7 @@ export const RootInner = styled(m.div)`
 
 `
 
-const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCoverImage }) => {
+const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCoverImage, publicPage }) => {
   const [notes, setNotes] = useState([]);
   const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
@@ -198,7 +198,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
         axios.post(`${BASE_URL_PROD}/plants/actions/13`, d)
           .then((response) => {
             if (response.data.length > 0) {
-              group_by(response.data,setNotes)
+              group_by(response.data, setNotes)
             } else {
               setActionData([])
             }
@@ -212,7 +212,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
         axios.post(`${BASE_URL_PROD}/plants/actions/4`, d)
           .then((response) => {
             if (response.data.length > 0) {
-              group_by(response.data,setImages)
+              group_by(response.data, setImages)
             } else {
               setActionData([])
             }
@@ -230,8 +230,8 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
   };
 
 
-  const group_by = (data,setter) => {
-    console.log("group_by",plant.creation_date)
+  const group_by = (data, setter) => {
+    console.log("group_by", plant.creation_date)
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
@@ -247,7 +247,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
 
 
 
-    setter(localizedData.sort((a,b)=> new Date(b.creation_date) - new Date(a.creation_date)))
+    setter(localizedData.sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
   }
 
   const openModal = (type, data) => {
@@ -275,10 +275,10 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
             <Swiper
-                pagination={{
-                  dynamicBullets: true,
-                }}
-                modules={[Pagination]}
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
               spaceBetween={50}
               slidesPerView={4}
               breakpoints={{
@@ -320,12 +320,14 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
                           <ItemInnerContent>
                             <h2>{a.plant_note}</h2>
                           </ItemInnerContent>
+                          {!publicPage &&
+                            <ItemInnerActionHolder>
 
-                          <ItemInnerActionHolder>
+                              <TextButtonSvg onClick={() => openModal('editNote', a)}><FiEdit /></TextButtonSvg>
+                              <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
+                            </ItemInnerActionHolder>
+                          }
 
-                            <TextButtonSvg onClick={() => openModal('editNote', a)}><FiEdit /></TextButtonSvg>
-                            <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
-                          </ItemInnerActionHolder>
 
                         </ItemInner>
                       </Item>
@@ -344,7 +346,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
         </>
       }
 
-{images.length > 0 &&
+      {images.length > 0 &&
         <>
           <Heading>{title}</Heading>
           <RootInner>
@@ -382,36 +384,36 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCover
                 return (
                   <SwiperSlide>
 
-                      <Item >
-                        <ImageItemInner >
+                    <Item >
+                      <ImageItemInner >
 
-                          <ImageItemInnerUpper>
-                            <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                            <h2>{getLocalizedDate(a.creation_date)}</h2>
-
-
-                          </ImageItemInnerUpper>
-
-                          <ItemInnerContentImage>
-                            <picture>
-                              <source src={a.thumbnail_img_next_gen} type="image/webp" />
-
-                              <Image src={a.thumbnail_img} width="100%" />
-                            </picture>
-                          </ItemInnerContentImage>
+                        <ImageItemInnerUpper>
+                          <Tag>{getWeekandDay(a.creation_date).day}</Tag>
+                          <h2>{getLocalizedDate(a.creation_date)}</h2>
 
 
+                        </ImageItemInnerUpper>
 
+                        <ItemInnerContentImage>
+                          <picture>
+                            <source src={a.thumbnail_img_next_gen} type="image/webp" />
+
+                            <Image src={a.thumbnail_img} width="100%" />
+                          </picture>
+                        </ItemInnerContentImage>
+
+
+                        {!publicPage &&
                           <ImageItemInnerActionHolder>
 
 
-        <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img)}><FiEdit /></TextButtonSvg>
+                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img)}><FiEdit /></TextButtonSvg>
                             <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                           </ImageItemInnerActionHolder>
+                        }
+                      </ImageItemInner>
+                    </Item>
 
-                        </ImageItemInner>
-                      </Item>
-                
 
                   </SwiperSlide>
 

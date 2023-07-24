@@ -77,3 +77,7 @@ textarea {
 .swiper-slide {
   min-width: 90px
 }
+picture {
+  line-height: 0px;
+  display: block;
+}

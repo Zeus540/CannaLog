@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import AnimatedRoutes from './lib/AnimatedRoutes'
-import { fetchPublicPlants, fetchEnvironmentTypes } from './features/'
+
 import { ThemeProvider } from 'styled-components'
 
 
@@ -89,10 +89,7 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    dispatch(fetchPublicPlants())
-  
-  }, [])
+
 
   return (
     <>
