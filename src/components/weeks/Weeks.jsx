@@ -88,7 +88,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
           initialSlide={4}
           updateOnWindowResize={true}
           onSwiper={setSwiper}
-          spaceBetween={20}
+          spaceBetween={weeks.length > 1 ? 20 : 0}
           slidesPerView={4}
           activeIndex={activeWeek}
 
@@ -96,27 +96,27 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
             320: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: weeks.length > 1 ? 20 : 0,
             },
             375: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: weeks.length > 1 ? 20 : 0,
             },
             425: {
               slidesPerView: 4,
-              spaceBetween: 20,
+              spaceBetween: weeks.length > 1 ? 20 : 0,
             },
             600: {
               slidesPerView: 5,
-              spaceBetween: 20,
+              spaceBetween: weeks.length > 1 ? 20 : 0,
             },
             768: {
               slidesPerView: 7,
-              spaceBetween: 20,
+              spaceBetween: weeks.length > 1 ? 20 : 0,
             },
             1024: {
               slidesPerView: 7,
-              spaceBetween: 20,
+              spaceBetween: weeks.length > 1 ? 20 : 0,
             },
           }}
 
