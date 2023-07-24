@@ -78,25 +78,20 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
       <Heading>Weeks</Heading>
       <WeekHolder>
         <Swiper
-        pagination={{
-          dynamicBullets: true,
-        }}
-        normalizeSlideIndex={true}
-        resistance={true}
-        resistanceRatio={20}
-        modules={[Pagination]}
-          edgeSwipeThreshold={20}
-          followFinger={false}
-          grabCursor={true}
+          pagination={{
+            dynamicBullets: true,
+          }}
+          normalizeSlideIndex={true}
+
+          modules={[Pagination]}
+
           initialSlide={4}
-          longSwipes={false}
-          threshold={10}
           updateOnWindowResize={true}
           onSwiper={setSwiper}
           spaceBetween={20}
           slidesPerView={4}
           activeIndex={activeWeek}
-        
+
           breakpoints={{
 
             320: {

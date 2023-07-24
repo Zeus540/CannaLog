@@ -247,7 +247,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
 
 
 
-    setter(localizedData)
+    setter(localizedData.sort((a,b)=> new Date(b.creation_date) - new Date(a.creation_date)))
   }
 
   const openModal = (type, data) => {
