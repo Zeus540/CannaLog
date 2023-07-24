@@ -89,7 +89,7 @@ background:${(props) => `linear-gradient(0deg, ${props.theme.primary}, transpare
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 40vh;
+min-height: 45vh;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
     align-items: center;
@@ -109,7 +109,7 @@ color:${(props) => `${props.theme.text}`};
     align-items: unset;
   }
 h1{
-    font-size: 45px;
+    font-size: 30px;
 }
 p{
     font-size: 18px;

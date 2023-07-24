@@ -166,7 +166,7 @@ export const RootInner = styled(m.div)`
 
 `
 
-const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
+const TimelineNotes = ({ plant, activeWeek, title, actionTypeData,handleSetCoverImage }) => {
   const [notes, setNotes] = useState([]);
   const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
@@ -299,11 +299,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
                   spaceBetween: 50,
                 },
               }}
-
-
               loop={true}
-            // onSlideChange={() => console.log('slide change')}
-            // onSwiper={(swiper) => console.log(swiper)}
             >
 
               {notes?.filter((a) => a.week == activeWeek)?.map((a) => {
@@ -332,37 +328,6 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
                           </ItemInnerActionHolder>
 
                         </ItemInner>
-                      </Item>
-                    }
-
-                    {actionTypeData == 4 &&
-                      <Item >
-                        <ImageItemInner >
-
-                          <ImageItemInnerUpper>
-                            <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                            <h2>{getLocalizedDate(a.creation_date)}</h2>
-
-
-                          </ImageItemInnerUpper>
-
-                          <ItemInnerContentImage>
-                            <picture>
-                              <source src={a.thumbnail_img_next_gen} type="image/webp" />
-
-                              <Image src={a.thumbnail_img} width="100%" />
-                            </picture>
-                          </ItemInnerContentImage>
-
-
-
-                          <ImageItemInnerActionHolder>
-
-
-                            <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
-                          </ImageItemInnerActionHolder>
-
-                        </ImageItemInner>
                       </Item>
                     }
 
@@ -440,6 +405,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
                           <ImageItemInnerActionHolder>
 
 
+        <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img)}><FiEdit /></TextButtonSvg>
                             <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                           </ImageItemInnerActionHolder>
 

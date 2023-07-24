@@ -66,6 +66,7 @@ function MyPlantsDetailed() {
     const [modalType, setModalType] = useState('')
     const [currentStage, setCurrentStage] = useState()
     const [activeWeek, setActiveWeek] = useState('') 
+    const [coverImage, setCoverImage] = useState('') 
 
     let plants = useSelector(selectMyPlants)
     let environments = useSelector(selectEnvironments)
@@ -94,7 +95,7 @@ function MyPlantsDetailed() {
     
     useEffect(() => {
         setPlant(plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0])
-
+        setCoverImage(plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0]?.cover_img)
       
         axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
         .then((response)=>{
@@ -104,6 +105,7 @@ function MyPlantsDetailed() {
         .catch((err)=>{
             console.log("err",err)
         })
+
     }, [plants])
 
     useEffect(() => {
@@ -140,6 +142,21 @@ function MyPlantsDetailed() {
     const handleActiveWeeks = (week)=>{
         setActiveWeek(week)
     }
+    const handleSetCoverImage = (image)=>{
+        console.log("handleSetCoverImage",image)
+        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`,{cover_img:image})
+        .then((response)=>{
+            if(response.status == 200){
+                setCoverImage(image)
+            }
+           
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+      
+    }
+    
     return (
         <Root
             initial={{ opacity: 0 }}
@@ -147,7 +164,7 @@ function MyPlantsDetailed() {
             transition={{ duration: 0.25 }}
             exit={{ opacity: 0 }}
         >
-            <ImgHolderTop img={plant?.cover_img}>
+            <ImgHolderTop img={coverImage}>
                 <EditPlant>
                     <EditPlantInner>
                         <FiEdit />
@@ -255,9 +272,9 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <Timeline plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13}/>
+            <Timeline plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage}/>
 
-            <Timeline plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4}/>
+            <Timeline plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage}/>
 
         </Root>
 
