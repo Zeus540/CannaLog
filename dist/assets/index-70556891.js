@@ -2346,9 +2346,7 @@ text-align: center;
 margin: 10px 0px;
 transition: all 0.5s ease;
     cursor: pointer;
-    &:hover{
-      border:${e=>`2px ${e.theme.accent} solid`};
-  }
+
 `,hve=R(he.div)`
 border:2px solid ${e=>e.theme.accent};
 background:${e=>e.theme.primary};
@@ -2370,7 +2368,7 @@ border-radius: 5px 5px 0px 0px;
 
 
 border-radius: 0px 0px 5px 5px;
-`,mve=({startDate:e,actions:t,handleActiveWeeks:n,activeWeek:r})=>{const[i,o]=b.useState([]),[s,a]=b.useState([]),[l,c]=b.useState(null);function u(f){const h=new Set;return f.filter(m=>h.has(m.week)?!1:(h.add(m.week),!0))}b.useEffect(()=>{var w;const f=Intl.DateTimeFormat().resolvedOptions().timeZone,h=new Date(e),m=t.map(y=>{const g=uR(y.creation_date,f),x=Si(h,{weekStartsOn:1}),S=Mm(g,x)+1;return{...y,creation_date:g,week:S}}),v=u(m);o(v.sort((y,g)=>y.week-g.week)),a(m.sort((y,g)=>y.week-g.week)),n((w=v[v.length-1])==null?void 0:w.week)},[t]);const d=f=>{n(f)};return p.jsxs(dve,{children:[p.jsx(Oi,{children:"Weeks"}),p.jsx(fve,{children:p.jsx(yh,{pagination:{dynamicBullets:!0},normalizeSlideIndex:!0,resistance:!0,resistanceRatio:20,preventInteractionOnTranstition:!0,modules:[ij],edgeSwipeThreshold:20,followFinger:!1,grabCursor:!0,initialSlide:4,longSwipes:!1,threshold:10,updateOnWindowResize:!0,onSwiper:c,spaceBetween:20,slidesPerView:4,activeIndex:r,breakpoints:{320:{slidesPerView:3,spaceBetween:20},375:{slidesPerView:3,spaceBetween:20},425:{slidesPerView:4,spaceBetween:20},600:{slidesPerView:5,spaceBetween:20},768:{slidesPerView:7,spaceBetween:20},1024:{slidesPerView:7,spaceBetween:20}},children:i.map(f=>p.jsx(xh,{children:r==f.week?p.jsxs(hve,{onClick:()=>d(f.week),children:[p.jsx(dM,{children:"Week"}),p.jsx(fM,{children:f.week})]}):p.jsxs(pve,{onClick:()=>d(f.week),children:[p.jsx(dM,{children:"Week"}),p.jsx(fM,{children:f.week})]})}))})})]})},gve=R(he.div)`
+`,mve=({startDate:e,actions:t,handleActiveWeeks:n,activeWeek:r})=>{const[i,o]=b.useState([]),[s,a]=b.useState([]),[l,c]=b.useState(null);function u(f){const h=new Set;return f.filter(m=>h.has(m.week)?!1:(h.add(m.week),!0))}b.useEffect(()=>{var w;const f=Intl.DateTimeFormat().resolvedOptions().timeZone,h=new Date(e),m=t.map(y=>{const g=uR(y.creation_date,f),x=Si(h,{weekStartsOn:1}),S=Mm(g,x)+1;return{...y,creation_date:g,week:S}}),v=u(m);o(v.sort((y,g)=>y.week-g.week)),a(m.sort((y,g)=>y.week-g.week)),n((w=v[v.length-1])==null?void 0:w.week)},[t]);const d=f=>{n(f)};return p.jsxs(dve,{children:[p.jsx(Oi,{children:"Weeks"}),p.jsx(fve,{children:p.jsx(yh,{pagination:{dynamicBullets:!0},normalizeSlideIndex:!0,resistance:!0,resistanceRatio:20,modules:[ij],edgeSwipeThreshold:20,followFinger:!1,grabCursor:!0,initialSlide:4,longSwipes:!1,threshold:10,updateOnWindowResize:!0,onSwiper:c,spaceBetween:20,slidesPerView:4,activeIndex:r,breakpoints:{320:{slidesPerView:3,spaceBetween:20},375:{slidesPerView:3,spaceBetween:20},425:{slidesPerView:4,spaceBetween:20},600:{slidesPerView:5,spaceBetween:20},768:{slidesPerView:7,spaceBetween:20},1024:{slidesPerView:7,spaceBetween:20}},children:i.map(f=>p.jsx(xh,{children:r==f.week?p.jsxs(hve,{onClick:()=>d(f.week),children:[p.jsx(dM,{children:"Week"}),p.jsx(fM,{children:f.week})]}):p.jsxs(pve,{onClick:()=>d(f.week),children:[p.jsx(dM,{children:"Week"}),p.jsx(fM,{children:f.week})]})}))})})]})},gve=R(he.div)`
 background:${e=>`${e.bg}`};
 width: fit-content;
     padding: 0px 10px;
