@@ -106,14 +106,14 @@ const MyPlants = () => {
                 {myPlants?.map((p, index) => {
                   return (
                     <>
-                    {console.log(p)}
+                    {console.log('pppp',p)}
                     
                     <PlantCard 
                       key={index}
                       length={myPlants.length}
                       index={index}
                       data={p}
-                      cover_img={p.cover_img}
+                      cover_thumbnail={p.cover_thumbnail}
                       name={p.name}
                       environment_type_name={p.environment_type_name}
                       light_exposure={p.light_exposure}

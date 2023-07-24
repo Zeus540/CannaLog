@@ -354,7 +354,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
 
             <Swiper
               spaceBetween={50}
-              slidesPerView={4}
+              slidesPerView={5}
               breakpoints={{
                 0: {
                   slidesPerView: 1,
@@ -369,7 +369,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
                   spaceBetween: 40,
                 },
                 1024: {
-                  slidesPerView: 4,
+                  slidesPerView: 5,
                   spaceBetween: 50,
                 },
               }}
@@ -406,8 +406,8 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
                         {!publicPage &&
                           <ImageItemInnerActionHolder>
 
-
-                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img)}><FiEdit /></TextButtonSvg>
+                        
+                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img,a.mid_img)}><FiEdit /></TextButtonSvg>
                             <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                           </ImageItemInnerActionHolder>
                         }

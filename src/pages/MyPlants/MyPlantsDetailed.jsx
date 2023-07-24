@@ -142,9 +142,9 @@ function MyPlantsDetailed() {
     const handleActiveWeeks = (week)=>{
         setActiveWeek(week)
     }
-    const handleSetCoverImage = (image)=>{
+    const handleSetCoverImage = (image,thumbnail)=>{
         console.log("handleSetCoverImage",image)
-        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`,{cover_img:image})
+        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`,{cover_img:image,cover_thumbnail:thumbnail})
         .then((response)=>{
             if(response.status == 200){
                 setCoverImage(image)

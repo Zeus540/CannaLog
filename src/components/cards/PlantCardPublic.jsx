@@ -29,7 +29,7 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 
-const PlantCardPublic = ({ cover_img, name, light_exposure, creation_date, last_updated, environment_type_name, openModal, data, index, length }) => {
+const PlantCardPublic = ({ cover_thumbnail, name, light_exposure, creation_date, last_updated, environment_type_name, openModal, data, index, length }) => {
 
   const elementRef = useRef(null);
 
@@ -83,7 +83,7 @@ function cleanName(name) {
 
         </PlantCardTextHolderTop>
 
-        <EnviromentCardImage src={cover_img} width="100%"  onClick={() => handleRedirect()}/>
+        <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
         <PlantCardTextHolder onClick={() => handleRedirect()}>
           <PlantCardText>
             <PlantCardTextLogo>
