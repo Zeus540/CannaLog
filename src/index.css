@@ -66,3 +66,11 @@ textarea {
 :where([draggable="true"]) {
   -webkit-user-drag: element;
 }
+
+.swiper {
+  padding-bottom: 30px;
+}
+
+:root {
+  --swiper-theme-color: #8bab50;
+}

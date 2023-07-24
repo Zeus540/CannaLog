@@ -21,7 +21,7 @@ top: 0;
 bottom: 0;
 right: 0;
 left: 0;
-z-index: 3;
+z-index: 51;
 display: flex;
 justify-content: center;
 padding: 80px;
@@ -82,7 +82,8 @@ margin: 0px -10px;
 justify-content: center;
 `
 export const ModalContent = styled(m.div)`
-
+max-height: 60vh;
+overflow: auto;
 color:  ${props => props.theme.text};
 `
 export const Warn = styled(m.p)`

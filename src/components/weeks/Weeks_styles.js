@@ -10,25 +10,29 @@ text-align: center;
 
 export const WeekHolder = styled(m.div)`
 display: flex;
-margin: 10px -10px;
+margin: 10px auto;
 overflow: auto;
-@media (min-width: 768px) {
+width: 80%;
+max-width:766px;
+@media (max-width: 768px) {
+  width: unset;
 
-  flex-wrap: wrap;
-  justify-content: center;
- 
 }
+@media (min-width: 769px) and (max-width: 1024px) {
+  width: 80%;
+}
+
 `
 
 export const Week = styled(m.div)`
 border:2px solid ${props => props.theme.primary};
 background:${props => props.theme.primary};
-width: 90px;
+
 color: ${props => props.theme.text}!important;
 padding: 20px;
 border-radius: 5px;
 text-align: center;
-margin: 10px 10px;
+margin: 10px 0px;
 transition: all 0.5s ease;
     cursor: pointer;
     &:hover{
@@ -40,12 +44,11 @@ export const WeekActive = styled(m.div)`
 border:2px solid ${props => props.theme.accent};
 background:${props => props.theme.primary};
 color: ${props => props.theme.text}!important;
-width: 90px;
 
 padding: 20px;
 border-radius: 5px;
 text-align: center;
-margin: 10px 10px;
+margin: 10px 0px;
     cursor: pointer;
 `
 

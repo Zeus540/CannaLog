@@ -13,8 +13,10 @@ import { ItemHodler } from '../forms/Form_styles'
 import PopupModal from '../popupModal/PopupModal'
 import { socket } from '../../lib/socket'
 import { useParams } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/pagination';
 
 export const Root = styled(m.div)`
 max-width: 1920px;
@@ -34,7 +36,7 @@ export const Item = styled(m.div)`
 position: relative;
 
 width: 100%;
-margin: 0px 20px;
+margin: 10px 20px;
 &:not(:first-child)::after {
   content: "";
   position: absolute;
@@ -160,16 +162,13 @@ aspect-ratio: 16/12;
 
 `
 export const RootInner = styled(m.div)`
-margin:10px 0px;
+
 
 `
 
 const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
-  const [actionData, setActionData] = useState([]);
-  const containerRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [scrollLeftStart, setScrollLeftStart] = useState(0);
+  const [notes, setNotes] = useState([]);
+  const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
@@ -179,28 +178,12 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
     if (socket) {
       socket.on(`note_added${params.plant_id}`, (data) => {
         console.log("note_added", data)
-        group_by([...actionData, data].sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
+        group_by([...notes, data].sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
 
       });
     }
   })
 
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setDragStartX(e.pageX || e.touches[0].pageX);
-    setScrollLeftStart(containerRef.current.scrollLeft);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    const x = e.pageX || e.touches[0].pageX;
-    const dragDistance = x - dragStartX;
-    containerRef.current.scrollLeft = scrollLeftStart - dragDistance;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
 
   useEffect(() => {
 
@@ -215,7 +198,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
         axios.post(`${BASE_URL_PROD}/plants/actions/13`, d)
           .then((response) => {
             if (response.data.length > 0) {
-              group_by(response.data)
+              group_by(response.data,setNotes)
             } else {
               setActionData([])
             }
@@ -229,7 +212,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
         axios.post(`${BASE_URL_PROD}/plants/actions/4`, d)
           .then((response) => {
             if (response.data.length > 0) {
-              group_by(response.data)
+              group_by(response.data,setImages)
             } else {
               setActionData([])
             }
@@ -247,7 +230,8 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
   };
 
 
-  const group_by = (data) => {
+  const group_by = (data,setter) => {
+    console.log("group_by",plant.creation_date)
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
@@ -263,7 +247,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
 
 
 
-    setActionData(localizedData)
+    setter(localizedData)
   }
 
   const openModal = (type, data) => {
@@ -279,17 +263,22 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
     }
   }
 
-  console.log("actionData.length > 0", actionData.length > 0)
-  console.log("actionData", actionData)
+
+  console.log("notes", notes)
+  console.log("images", images)
   return (
     <Root>
-      {actionData.length > 0 &&
+      {notes.length > 0 &&
         <>
           <Heading>{title}</Heading>
           <RootInner>
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
             <Swiper
+                pagination={{
+                  dynamicBullets: true,
+                }}
+                modules={[Pagination]}
               spaceBetween={50}
               slidesPerView={4}
               breakpoints={{
@@ -317,7 +306,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
             // onSwiper={(swiper) => console.log(swiper)}
             >
 
-              {actionData?.filter((a) => a.week == activeWeek)?.map((a) => {
+              {notes?.filter((a) => a.week == activeWeek)?.map((a) => {
                 return (
                   <SwiperSlide>
 
@@ -376,6 +365,87 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData }) => {
                         </ImageItemInner>
                       </Item>
                     }
+
+                  </SwiperSlide>
+
+                )
+              })
+
+
+              }
+
+            </Swiper>
+          </RootInner>
+        </>
+      }
+
+{images.length > 0 &&
+        <>
+          <Heading>{title}</Heading>
+          <RootInner>
+            {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
+
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={4}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                600: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+              }}
+
+
+              loop={true}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
+            >
+
+              {images?.filter((a) => a.week == activeWeek)?.map((a) => {
+                return (
+                  <SwiperSlide>
+
+                      <Item >
+                        <ImageItemInner >
+
+                          <ImageItemInnerUpper>
+                            <Tag>{getWeekandDay(a.creation_date).day}</Tag>
+                            <h2>{getLocalizedDate(a.creation_date)}</h2>
+
+
+                          </ImageItemInnerUpper>
+
+                          <ItemInnerContentImage>
+                            <picture>
+                              <source src={a.thumbnail_img_next_gen} type="image/webp" />
+
+                              <Image src={a.thumbnail_img} width="100%" />
+                            </picture>
+                          </ItemInnerContentImage>
+
+
+
+                          <ImageItemInnerActionHolder>
+
+
+                            <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
+                          </ImageItemInnerActionHolder>
+
+                        </ImageItemInner>
+                      </Item>
+                
 
                   </SwiperSlide>
 
