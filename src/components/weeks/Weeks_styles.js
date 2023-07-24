@@ -35,9 +35,7 @@ text-align: center;
 margin: 10px 0px;
 transition: all 0.5s ease;
     cursor: pointer;
-    &:hover{
-      border:${(props) => `2px ${props.theme.accent} solid`};
-  }
+
 `
 
 export const WeekActive = styled(m.div)`

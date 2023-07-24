@@ -84,7 +84,6 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
         normalizeSlideIndex={true}
         resistance={true}
         resistanceRatio={20}
-        preventInteractionOnTranstition={true}
         modules={[Pagination]}
           edgeSwipeThreshold={20}
           followFinger={false}
