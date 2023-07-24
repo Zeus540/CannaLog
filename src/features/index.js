@@ -1,4 +1,4 @@
-import {authSlice,auth,selectIsLoggedIn,selectUser} from "./auth/authSlice.js"
+import {authSlice,auth,logout,selectIsLoggedIn,selectUser} from "./auth/authSlice.js"
 
 import {publicPlantsSlice,selectPublicJournal} from "./plants/publicPlantsSlice.js"
 import {fetchPublicPlants} from "./plants/publicPlantsThunk.js"
@@ -29,6 +29,7 @@ import { fetchPlantActionTypes } from "./plantActionTypes/plantActionTypesThunk.
 export {
     authSlice,
     auth,
+    logout,
     selectIsLoggedIn,
     selectUser,
     publicPlantsSlice,

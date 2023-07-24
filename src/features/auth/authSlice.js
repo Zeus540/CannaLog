@@ -15,10 +15,15 @@ export const authSlice = createSlice({
             state.user = action.payload.user
             state.isLoggedIn = action.payload.isLoggedIn
         },
+        logout:(state,action) => {
+            state.user = null
+            state.isLoggedIn = false
+            
+        },
     }
 })
 
-export const {auth} = authSlice.actions
+export const {auth,logout} = authSlice.actions
 
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectUser = (state) => state.auth.user;

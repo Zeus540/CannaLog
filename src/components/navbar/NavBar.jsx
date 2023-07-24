@@ -2,12 +2,17 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/logo.png";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn,selectUser } from "../../features";
+import { selectIsLoggedIn,selectUser,logout } from "../../features";
 import { FaSun } from "react-icons/fa";
 import { IoMoon } from "react-icons/io5";
-
+import { FiSettings } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+import axios from "../../lib/axios";
+import { BASE_URL_PROD } from "../../lib/Constants";
+import { useDispatch } from 'react-redux';
 
 const Root = styled.div`
 
@@ -105,9 +110,20 @@ const LinkHolder = styled.div`
 
   align-items: center;
   justify-content: end;
-  @media (min-width: 0px) and (max-width: 767px) {
-    display: none;
-  }
+
+`;
+const LinkHolderMenu = styled.div`
+background: ${props => props.theme.drawer.secondary};
+    position: absolute;
+    transition: 0.5s ease top;
+ 
+    top:  ${props => props.menuOpen}px;
+`;
+const LinkHolderMenuInnerItem = styled.div`
+
+
+    padding: 15px 20px;
+
 `;
 const LinkHolderMobile = styled.div`
   display: flex;
@@ -140,6 +156,45 @@ const MenuLink = styled(NavLink)`
  
 
 `;
+const MenuLinkLeft = styled.div`
+display: flex;
+@media (max-width: 768px){
+  
+  display:none
+}
+
+`;
+
+const MenuLinkDrop = styled(NavLink)`
+  margin: 0px 0px;
+
+  color: ${props => props.theme.text};
+
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+ svg{
+  color: ${props => props.theme.accent};
+  margin-right:10px;
+  font-size: 20px !important;
+ }
+
+`;
+const MenuDropItem = styled.div`
+  margin: 0px 0px;
+
+  color: ${props => props.theme.text};
+
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+ svg{
+  color: ${props => props.theme.accent};
+  margin-right:10px;
+  font-size: 20px !important;
+ }
+
+`;
 
 const MenuLinkTop = styled(NavLink)`
   margin: 0px 0px;
@@ -158,16 +213,7 @@ width:20px;
 margin-right:10px;
 fill: ${props => props.theme.accent};
 `;
-const MenuLinkActive = styled(NavLink)`
-  margin: 0px 0px;
-  padding: 16px 30px;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid #8bab50;
-  color: ${props => props.theme.text};
-  text-decoration: none;
 
-
-`;
 const MenuLinkMobile = styled(NavLink)`
   margin: 0px 0px;
   padding: 15px 15px;
@@ -189,31 +235,7 @@ const MenuLinklogo = styled(NavLink)`
   justify-content: center;
 `;
 
-const LogOut = styled.p`
-  margin: 0px 0px;
-  padding: 30px 30px;
-  border-bottom: 2px solid transparent;
-  color: ${props => props.theme.text};
-  &:hover {
-    border-bottom: 2px solid #354f41;
-  }
-`;
-const Button = styled.button`
-padding: 20px 20px;
-display: flex;
-width: fit-content;
-border: none;
-background: #8bab50;
-color: ${props => props.theme.text};
 
-cursor: pointer;
-
-
-@media (min-width: 0px) and (max-width: 767px) {
-  margin: 10px;
-  display:none
-}
-`;
 const ButtonM = styled.button`
 
 width: fit-content;
@@ -247,12 +269,6 @@ const FlexLinkText = styled.p`
  
 color: ${props => props.theme.text};
 `;
-const Pattie = styled.div`
-  width: 20px;
-  min-height: 2px;
-  background: #fefefe;
-  margin: 5px  0px;
-`;
 
 const LinkHolderM = styled.div`
 display: flex;
@@ -284,7 +300,7 @@ align-items: center;
 const UserInfoTop = styled.div`
 display: flex;
 
-padding: 0px 10px;
+padding-right: 20px;
 align-items: center;
 `;
 
@@ -312,26 +328,66 @@ const ThemeToggleHolder = styled.div`
 margin-right:15px;
 cursor: pointer;
 @media (max-width: 768px){
-  margin:15px;
+
 }
 `;
+const ThemeToggleHolderBottom = styled.div`
+padding: 15px;
+cursor: pointer;
+@media (max-width: 768px){
+
+}
+`;
+
 const ThemeSvg = styled.div`
 display: flex;
+
+color:  ${props => props.theme.text};
 svg{
   fill:  ${props => props.fill};
   width: 20px!important;
   height: unset;
+  margin-right: 10px;
 }
 
 `;
 
 const NavBar = ({toggleTheme,themeType,OffClick,setMobileMenu,mobileMenu}) => {
-
+const [menuOpen, setMenuOpen] = useState(-300)
 const isLoggedIn = useSelector(selectIsLoggedIn)
 const user = useSelector(selectUser)
+const dispatch = useDispatch()
 const theme = themeType
+const navigate = useNavigate()
 
+// calc(60px)
 console.log(themeType)
+
+const logOut = () => {
+  axios.post(`${BASE_URL_PROD}/logout`).then((results)=>{
+  if(results.status == 200){
+
+      dispatch(logout())
+      navigate('/')
+  
+  }
+  })
+}
+
+
+const handleMenuOpen = ()=>{
+  if(menuOpen == -300){
+    setMenuOpen(60)
+  }else{
+    setMenuOpen(-300)
+  }
+
+}
+
+const handleMenuClose= ()=>{
+  setMenuOpen(-300)
+  setMobileMenu(false)
+}
   return (
 
     <Root onClick={() => {
@@ -363,38 +419,69 @@ console.log(themeType)
           </MenuLinklogo>
         </Div>
 
+   
+
         <Div>
           <LinkHolder>
-          <ThemeToggleHolder>
-{theme == "light" && <ThemeSvg fill="#005bad" onClick={()=>{toggleTheme()}}><IoMoon /></ThemeSvg>}
-{theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/></ThemeSvg>}
-</ThemeToggleHolder>
-            {!isLoggedIn && (
-              <>
-                <MenuLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</MenuLink>
-                <MenuLink to="/sign-up">
-                  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</MenuLink>
-              </>
-            )}
+    
+  
 
             {isLoggedIn && (
               <>
-                <MenuLinkTop to={`/profile/${user?.user_name}/${user?.user_id}`}>
+             
 
-                  <UserInfoTop>
+                  <UserInfoTop onClick={() => {  handleMenuOpen() }}>
                     <UserAvatar>
                       {user?.user_name?.charAt(0)}
                     </UserAvatar>
                   
                   </UserInfoTop>
-                </MenuLinkTop>
+              
 
-                {/* <Button onClick={() => { logOut() }}>
-                  <SvgW xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M534.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L434.7 224 224 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM192 96c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-53 0-96 43-96 96l0 256c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" /></SvgW>
-                </Button> */}
 
               </>
             )}
+
+{isLoggedIn && 
+            <LinkHolderMenu menuOpen={menuOpen}>
+
+            <LinkHolderMenuInnerItem>
+              <ThemeToggleHolder>
+              {theme == "light" && <ThemeSvg fill="#005bad" onClick={()=>{toggleTheme()}}><IoMoon />Dark Mode</ThemeSvg>}
+              {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/> Light Mode</ThemeSvg>}
+              </ThemeToggleHolder>
+              </LinkHolderMenuInnerItem>
+
+              <LinkHolderMenuInnerItem>
+              <MenuLinkDrop to={`/profile/${user?.user_name}/${user?.user_id}`} onClick={() => { handleMenuClose()}}>
+              <CgProfile/>My Profile
+            </MenuLinkDrop>
+            </LinkHolderMenuInnerItem>
+
+              <LinkHolderMenuInnerItem>
+              <MenuLinkDrop to="/" onClick={() => { handleMenuClose()}}>
+              <FiSettings/> Settings
+            </MenuLinkDrop>
+            </LinkHolderMenuInnerItem>
+
+        
+
+            <LinkHolderMenuInnerItem>
+              <MenuDropItem  onClick={() => { logOut() }} >
+              <RiLogoutCircleRLine fill="#f44336"/>Log Out 
+            </MenuDropItem>
+            </LinkHolderMenuInnerItem>
+            </LinkHolderMenu>
+}
+
+{!isLoggedIn && (
+              <MenuLinkLeft>
+                <MenuLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</MenuLink>
+                <MenuLink to="/sign-up">
+                  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</MenuLink>
+              </MenuLinkLeft>
+            )}
+
           </LinkHolder>
         </Div>
 
@@ -442,15 +529,7 @@ console.log(themeType)
                     <FlexLinkText>My Plants</FlexLinkText>
                   </FlexLink>
                 </MenuLinkMobile>
-                {/* {user?.user_id == 6 && 
-                <MenuLinkMobile to="/my-devices" onClick={() => {  setMobileMenu(false); }}>
-                  <FlexLink>
-
-                    <FlexLinkText>My Devices</FlexLinkText>
-                  </FlexLink>
-                </MenuLinkMobile>
-   }
-     */}
+      
                 <MenuLinkMobile to="/growers" onClick={() => {  setMobileMenu(false); }}>
                 <FlexLink>
 
@@ -473,10 +552,11 @@ console.log(themeType)
 
           <LinkHolderMLogin>
 
-          <ThemeToggleHolder>
-{theme == "light" && <ThemeSvg fill="#005bad" onClick={()=>{toggleTheme()}}><IoMoon /></ThemeSvg>}
-{theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/></ThemeSvg>}
-</ThemeToggleHolder>
+
+<ThemeToggleHolderBottom>
+              {theme == "light" && <ThemeSvg fill="#005bad" onClick={()=>{toggleTheme()}}><IoMoon />Dark Mode</ThemeSvg>}
+              {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={()=>{toggleTheme()}}><FaSun/> Light Mode</ThemeSvg>}
+              </ThemeToggleHolderBottom>
 
             <MenuLinkMobile to="/sign-in" onClick={() => {  setMobileMenu(false); }}>
               <FlexLink>
