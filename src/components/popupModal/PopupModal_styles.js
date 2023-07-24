@@ -83,7 +83,8 @@ justify-content: center;
 `
 export const ModalContent = styled(m.div)`
 max-height: 60vh;
-overflow: auto;
+overflow-y: auto;
+overflow-x: hidden;
 color:  ${props => props.theme.text};
 `
 export const Warn = styled(m.p)`

@@ -1787,7 +1787,8 @@ margin: 0px -10px;
 justify-content: center;
 `,$te=R(he.div)`
 max-height: 60vh;
-overflow: auto;
+overflow-y: auto;
+overflow-x: hidden;
 color:  ${e=>e.theme.text};
 `,Y0=R(he.p)`
 text-align: center;
