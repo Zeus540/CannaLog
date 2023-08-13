@@ -105,7 +105,8 @@ margin-right: 10px;
 
 export const PlantImageHolder = styled(m.img)`
 width: 40px;
-height: 40px;
+aspect-ratio: 16/16;
+object-fit: cover;
 border-radius: 50%;
 margin-bottom: 5px;
 `

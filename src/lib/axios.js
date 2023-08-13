@@ -1,9 +1,6 @@
 import Axios from "axios";
 
 
-import {BASE_URL_PROD,BASE_URL_PROD_SOCKET} from './Constants'
-
-
 let axios = Axios.create()
 
 

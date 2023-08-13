@@ -44,3 +44,15 @@ export const takeAction = createAsyncThunk('myPlants/takeAction',(values)=>{
     throw new Error('Failed to take plant action');
   });
 })
+
+
+export const deleteAction = createAsyncThunk('myPlants/deleteAction',(values)=>{
+
+  return axios.delete(`${BASE_URL_PROD}/plants/${values.plant_id}/delete_action/${values.plant_action_id}`,values)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    throw new Error('Failed to delete plant action');
+  });
+})

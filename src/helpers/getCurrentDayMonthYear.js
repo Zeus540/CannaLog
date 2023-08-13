@@ -26,6 +26,7 @@ const dayNames = [
 ];
 
 export function getCurrentDayMonthYear() {
+
   const currentDate = new Date();
   const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   

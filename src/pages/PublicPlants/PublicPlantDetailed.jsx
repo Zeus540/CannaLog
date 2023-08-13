@@ -27,7 +27,8 @@ import { FiEdit } from 'react-icons/fi'
 
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
-import Timeline from '../../components/timeline/Timeline'
+import TimelineNotes from '../../components/timeline/TimelineNotes'
+import TimelineImages from '../../components/timeline/TimelineImages'
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 
@@ -252,10 +253,9 @@ function PublicPlantDetailed() {
        
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <Timeline plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage} publicPage={true}/>
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage} publicPage={true}/>
 
-            <Timeline plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage} publicPage={true}/>
-
+            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage} publicPage={true}/>
         </Root>
 
     )

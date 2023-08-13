@@ -49,7 +49,7 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
 
     useEffect(() => {
-        console.log("data.environment_id ",data?.environment_id )
+
         if (data?.environment_id !== undefined ) {
             setDataModified(data)
             setType(data?.environment_type_id)
@@ -70,7 +70,6 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
     const handleAddEnvironemt = async (values, setSubmitting) => {
 
-        console.log("values", values)
         if (data?.environment_id == undefined ) {
       
             if (type !== "") {
@@ -92,7 +91,7 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
             if (type !== "") {
 
-                console.log("editing", type)
+         
                 const updatedObject = { ...values, environment_type_id: type };
                 let res = await dispatch(editEnvironment(updatedObject))
                 if (res.payload.affectedRows > 0) {
@@ -114,7 +113,7 @@ const AddEvironment = ({ openModal, modalType, data }) => {
             validationSchema={AddEnvironmentSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                    console.log("sadsadsad",values)
+              
                     handleAddEnvironemt(values, setSubmitting)
                 }, 400);
 

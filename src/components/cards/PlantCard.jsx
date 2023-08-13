@@ -31,7 +31,7 @@ import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 
 const PlantCard = ({ cover_thumbnail, name, light_exposure, creation_date, last_updated, environment_type_name, openModal, data, index, length }) => {
 
-  console.log("cover_thumbnail",cover_thumbnail)
+
   const elementRef = useRef(null);
 
 const navigate = useNavigate()

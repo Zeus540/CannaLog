@@ -5,11 +5,11 @@ import './index.css'
 import { Provider } from 'react-redux'
 import {store} from  './store.js'
 import { BrowserRouter as Router } from 'react-router-dom'
-
+import { StrictMode } from 'react'
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <Router>
-      <App />
+        <App />
       </Router>
     </Provider>
 )

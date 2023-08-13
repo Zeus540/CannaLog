@@ -4,7 +4,7 @@ import {publicPlantsSlice,selectPublicJournal} from "./plants/publicPlantsSlice.
 import {fetchPublicPlants,fetchPublicPlantsSingedIn} from "./plants/publicPlantsThunk.js"
 
 import {myPlantsSlice,selectMyPlants,isLoadingMyPlants} from "./plants/myPlantsSlice.js"
-import {fetchMyPlants,addPlants,deletePlant,takeAction} from "./plants/myPlantsThunk.js"
+import {fetchMyPlants,addPlants,deletePlant,takeAction,deleteAction} from "./plants/myPlantsThunk.js"
 import {environmentsSlice,selectEnvironments,deleteEnvironmentLocally,selectEnvironmentsIsLoading,addEnvironmentLocally,editEnvironmentLocally} from "./enviroments/environmentsSlice.js"
 import {deleteEnvironment} from "./enviroments/deleteEnvironmentThunk.js"
 import {fetchEnvironments} from "./enviroments/environmentsThunk.js"
@@ -61,6 +61,7 @@ export {
     selectIrrigationTypes,
     addPlants,
     takeAction,
+    deleteAction,
     deletePlant,
     selectStages,
     stagesSlice,

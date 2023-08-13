@@ -76,7 +76,7 @@ transition: 2s width ease;
 `
 
 export const ImgHolderTop = styled.div`
-
+background-repeat: no-repeat;
 overflow: hidden;
 background-image:${(props) => `url(${props.img})`};
 background-size: cover;
@@ -85,11 +85,12 @@ background-position: center center;
 `
 
 export const ImgHolderTopInfo = styled.div`
-background:${(props) => `linear-gradient(0deg, ${props.theme.primary}, transparent)`};
+background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transparent)`};
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 45vh;
+min-height: 50vh;
+background-repeat: no-repeat;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
     align-items: center;

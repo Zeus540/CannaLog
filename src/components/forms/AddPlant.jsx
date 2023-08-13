@@ -36,7 +36,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
 
     }, [])
 
-    console.log("stages", stages)
+   
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let intialValues = {
         creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
@@ -69,7 +69,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
 
             validationSchema={AddEnvironmentSchema}
             onSubmit={(values, { setSubmitting }) => {
-                console.log("values", values)
+          
                 setTimeout(() => {
                     handleAddPlant(values, setSubmitting)
                 }, 400);

@@ -27,7 +27,9 @@ import { FiEdit } from 'react-icons/fi'
 
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
-import Timeline from '../../components/timeline/Timeline'
+import TimelineNotes from '../../components/timeline/TimelineNotes'
+import TimelineImages from '../../components/timeline/TimelineImages'
+
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 
@@ -67,12 +69,24 @@ function MyPlantsDetailed() {
     const [currentStage, setCurrentStage] = useState()
     const [activeWeek, setActiveWeek] = useState('') 
     const [coverImage, setCoverImage] = useState('') 
-
+    const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate) 
     let plants = useSelector(selectMyPlants)
     let environments = useSelector(selectEnvironments)
     let plant_action_types = useSelector(selectPlantActionTypes)
 
     const params = useParams()
+
+    useEffect(() => {
+
+        const intervalId = setInterval(() => {
+            setFullDate(getCurrentDayMonthYear().fullDate) 
+        }, 30000); // Update every minute
+    
+        return () => {
+          clearInterval(intervalId);
+        };
+      }, []);
+
 
     useEffect(() => {
         getActions()
@@ -202,7 +216,7 @@ function MyPlantsDetailed() {
                     </ImgHolderTopInfoInner>
                     <DayHolderOutter>
                 <DayHolderOutterInner>
-                    {getCurrentDayMonthYear().fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
+                    {fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
                 </DayHolderOutterInner>
             </DayHolderOutter>
                 </ImgHolderTopInfo>
@@ -272,9 +286,9 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <Timeline plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage}/>
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage}/>
 
-            <Timeline plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage}/>
+            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage}/>
 
         </Root>
 

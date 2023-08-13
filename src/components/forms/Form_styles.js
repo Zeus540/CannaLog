@@ -164,7 +164,7 @@ export const ItemTextAccent = styled.p`
 color:${props => props.theme.accent}!important;
 font-size: 12px;
 `
-export const InputFieldSelect= styled.select`
+export const InputFieldSelect= styled(Select)`
 padding:10px;
 border:none;
 width: 100%;

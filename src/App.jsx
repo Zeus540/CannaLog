@@ -38,7 +38,7 @@ let light_theme = {
 }
 
 let dark_theme = {
-  primary: ' #000000',
+  primary: '#000000',
   primary_light: '#121212',
   secondary: '#151515',
   accent: '#8bab50',

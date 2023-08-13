@@ -19,7 +19,7 @@ import 'swiper/css/bundle';
 const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
   const [weeks, setWeeks] = useState([])
-  const [actionsList, setActionsList] = useState([])
+
   const [swiper, setSwiper] = useState(null);
 
   function removeDuplicateWeeks(data) {
@@ -49,20 +49,8 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     const uniqueLocalizedData = removeDuplicateWeeks(localizedData);
 
     setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
-    setActionsList(localizedData.sort((a, b) => a.week - b.week));
     handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
   }, [actions]);
-
-
-
-  // useEffect(() => {
-  //   if (swiper) {
-  //     // If the activeWeek is larger than or equal to the total slides,
-  //     // scroll to the last slide. Otherwise, scroll to the activeWeek slide.
-  //     const slideIndex = Math.min(activeWeek, weeks.length - 1);
-  //     swiper.slideTo(slideIndex, 0, false); // Use 'false' to disable animation
-  //   }
-  // }, [swiper, activeWeek]);
 
 
   const handleActiveWeekSelect = (w) => {

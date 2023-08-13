@@ -32,17 +32,17 @@ const MyPlants = () => {
 
   const dispatch = useDispatch()
 
-  
+
   const isLoadingPlants = useSelector(isLoadingMyPlants)
   const myPlants = useSelector(selectMyPlants)
 
-  {console.log("myPlants",myPlants)}
-  
+  { console.log("myPlants", myPlants) }
+
 
   const user = useSelector(selectUser)
 
   useEffect(() => {
-    
+
     if (socket) {
 
 
@@ -105,10 +105,7 @@ const MyPlants = () => {
               <AnimatePresence >
                 {myPlants?.map((p, index) => {
                   return (
-                    <>
-                    {console.log('pppp',p)}
-                    
-                    <PlantCard 
+                    <PlantCard
                       key={index}
                       length={myPlants.length}
                       index={index}
@@ -119,9 +116,7 @@ const MyPlants = () => {
                       light_exposure={p.light_exposure}
                       creation_date={p.creation_date}
                       last_updated={p.last_updated}
-                  
                       openModal={openModal} />
-                    </>
                   )
                 })}
               </AnimatePresence>

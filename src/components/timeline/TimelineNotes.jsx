@@ -168,70 +168,49 @@ export const RootInner = styled(m.div)`
 
 const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCoverImage, publicPage }) => {
   const [notes, setNotes] = useState([]);
-  const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const params = useParams()
 
   useEffect(() => {
-    if (socket) {
+    if (plant) {
       socket.on(`note_added${params.plant_id}`, (data) => {
-        console.log("note_added", data)
-        group_by([...notes, data].sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
-
+        console.log(data)
+        let arr = [...notes, data];
+        group_by(arr, setNotes, plant);
       });
+
+      socket.on(`action_deleted${params.plant_id}`, (data) => {
+        console.log('action_deleted',data)
+        setNotes(notes.filter((i)=> i.plant_action_id !== parseInt(data.plant_action_id)))
+      });
+
     }
-  })
+
+  }, [plant, notes]);
 
 
   useEffect(() => {
 
-    getPlantActionsByType(plant, actionTypeData)
+    if (plant) {
+      axios.post(`${BASE_URL_PROD}/plants/actions/13`, plant)
+        .then((response) => {
+          if (response.data.length > 0) {
+            group_by(response.data, setNotes, plant)
+          } else {
+
+          }
+
+        }).catch((err) => {
+          console.log("err", err)
+        })
+    }
   }, [plant]);
 
 
-  const getPlantActionsByType = (d, type) => {
-    console.log("getPlantActionsByType", type)
-    switch (type) {
-      case 13:
-        axios.post(`${BASE_URL_PROD}/plants/actions/13`, d)
-          .then((response) => {
-            if (response.data.length > 0) {
-              group_by(response.data, setNotes)
-            } else {
-              setActionData([])
-            }
+  const group_by = (data, setter, plant) => {
 
-          }).catch((err) => {
-            console.log("err", err)
-          })
-        break;
-
-      case 4:
-        axios.post(`${BASE_URL_PROD}/plants/actions/4`, d)
-          .then((response) => {
-            if (response.data.length > 0) {
-              group_by(response.data, setImages)
-            } else {
-              setActionData([])
-            }
-
-
-          }).catch((err) => {
-            console.log("err", err)
-          })
-        break;
-
-      default:
-        break;
-    }
-
-  };
-
-
-  const group_by = (data, setter) => {
-    console.log("group_by", plant.creation_date)
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
@@ -264,8 +243,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
   }
 
 
-  console.log("notes", notes)
-  console.log("images", images)
+
   return (
     <Root>
       {notes.length > 0 &&
@@ -299,7 +277,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
                   spaceBetween: 50,
                 },
               }}
-              loop={true}
+            // loop={true}
             >
 
               {notes?.filter((a) => a.week == activeWeek)?.map((a) => {
@@ -332,88 +310,6 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
                         </ItemInner>
                       </Item>
                     }
-
-                  </SwiperSlide>
-
-                )
-              })
-
-
-              }
-
-            </Swiper>
-          </RootInner>
-        </>
-      }
-
-      {images.length > 0 &&
-        <>
-          <Heading>{title}</Heading>
-          <RootInner>
-            {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
-
-            <Swiper
-              spaceBetween={50}
-              slidesPerView={5}
-              breakpoints={{
-                0: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-                },
-                600: {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-                },
-                768: {
-                  slidesPerView: 2,
-                  spaceBetween: 40,
-                },
-                1024: {
-                  slidesPerView: 5,
-                  spaceBetween: 50,
-                },
-              }}
-
-
-              loop={true}
-            // onSlideChange={() => console.log('slide change')}
-            // onSwiper={(swiper) => console.log(swiper)}
-            >
-
-              {images?.filter((a) => a.week == activeWeek)?.map((a) => {
-                return (
-                  <SwiperSlide>
-
-                    <Item >
-                      <ImageItemInner >
-
-                        <ImageItemInnerUpper>
-                          <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                          <h2>{getLocalizedDate(a.creation_date)}</h2>
-
-
-                        </ImageItemInnerUpper>
-
-                        <ItemInnerContentImage>
-                          <picture>
-                            <source src={a.thumbnail_img_next_gen} type="image/webp" />
-
-                            <Image src={a.thumbnail_img} width="100%" />
-                          </picture>
-                        </ItemInnerContentImage>
-
-
-                        {!publicPage &&
-                          <ImageItemInnerActionHolder>
-
-                        
-                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img,a.mid_img)}><FiEdit /></TextButtonSvg>
-                            <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
-                          </ImageItemInnerActionHolder>
-                        }
-                      </ImageItemInner>
-                    </Item>
-
 
                   </SwiperSlide>
 

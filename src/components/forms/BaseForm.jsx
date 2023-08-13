@@ -1,48 +1,35 @@
 import React, { useEffect, useState,useRef } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
-
 import { ButtonOutlined } from '../../utils/global_styles';
-import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive,StyledTextareaAutosize } from './Form_styles'
-import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import { FormHolder, StyledDateTimePicker, ButtonHolder } from './Form_styles'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
-import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
-import { selectStages, fetchStages,takeAction } from '../../features';
+import { takeAction } from '../../features';
+import { format } from 'date-fns';
 
+const BaseForm = ({ plant,modalType,openModal,data }) => {
 
-const AddNote = ({ plant,modalType,openModal,data }) => {
+    // const dispatch = useDispatch()
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchStages())
-    }, [])
-
-
+    // useEffect(() => {
+    //     dispatch(fetchStages())
+    // }, [])
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 
-    const AddNoteSchema = Yup.object().shape({
+    const BaseFormSchema = Yup.object().shape({
         creation_date: Yup.string()
             .required('Required'),
-        plant_note: Yup.string()
-             .required('Required'),
-        plant_action_type_id: Yup.number()
-             .required('Required')
-             .min(1)
-             .max(16),
+
     });
 
     let intialValues = {
         creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
         timezone: userTimezone ,
-        plant_note: '',
-        plant_id:plant.plant_id,
-        plant_action_type_id:data.plant_action_type_id,
     }
 
 
@@ -51,7 +38,7 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
     }
 
     const handleAction = async(values, setSubmitting) => {
-      
+        console.log("handleAction", values)
         setSubmitting(true)
 
         let res = await  dispatch(takeAction(values))
@@ -67,7 +54,7 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
         <div>
             <Formik
                 initialValues={intialValues}
-                validationSchema={AddNoteSchema}
+                validationSchema={BaseFormSchema}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         handleAction(values, setSubmitting)
@@ -87,14 +74,6 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
                               
                             />
                         </LocalizationProvider>
-                            <StyledTextareaAutosize
-                            aria-label="textarea"
-                            minRows={3}
-                            name="plant_note"
-                            onChange={handleChange}
-                            placeholder="Enter your text"
-                            style={{ width: '100%' }}
-                            />
 
                         <ButtonHolder>
                             <ButtonOutlined type="submit" >
@@ -109,4 +88,4 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
     )
 }
 
-export default AddNote
+export default BaseForm
