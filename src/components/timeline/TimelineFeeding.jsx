@@ -309,6 +309,7 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
   const [feedingData, setFeedingData] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
+  const [feedingDataFound, setFeedingDataFound] = useState(false)
   
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
@@ -343,7 +344,6 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
           } else {
 
           }
-
 
         }).catch((err) => {
           console.log("err", err)
@@ -387,7 +387,12 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
     }, {});
 
     setter(result)
-
+    if(result){
+      setFeedingDataFound(true)
+    }else{
+      setFeedingDataFound(false)
+    }
+  
   }
 
   const openModal = (type, data) => {
@@ -404,6 +409,9 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
 
 
   return (
+   
+       <>
+        {feedingDataFound  && 
     <Root>
 
 
@@ -509,6 +517,10 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
         </Swiper>
       </RootInner>
     </Root>
+      }
+    </>
+
+ 
   )
 }
 

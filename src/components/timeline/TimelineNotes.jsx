@@ -22,7 +22,6 @@ import 'swiper/css/pagination';
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px 20px;
-
 `
  const TimeLineHolder = styled(m.div)`
 display: flex;
@@ -116,6 +115,7 @@ background: ${props => props.theme.input};
  const ItemInnerActionHolder = styled(m.div)`
 display: flex;
 justify-content: end;
+padding-top: 15px;
 `
 
  const TextButtonSvg = styled(m.div)`
@@ -225,11 +225,11 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
   }
 
 
-
+{console.log("notes?.filter((a) => a.week == activeWeek).length > 0",notes?.filter((a) => a.week == activeWeek).length > 0)}
   return (
-    <Root>
+    <>
       {notes?.filter((a) => a.week == activeWeek).length > 0 &&
-        <>
+        <Root>
           {/* <Heading>{title}</Heading> */}
           <RootInner>
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
@@ -304,9 +304,9 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
 
             </Swiper>
           </RootInner>
-        </>
+        </Root>
       }
-    </Root>
+    </>
   )
 }
 

@@ -131,10 +131,10 @@ display: flex;
 justify-content: end;
 `
 export const ImageItemInnerActionHolder = styled(m.div)`
-padding: 15px;
+padding: 15px 0px;
 display: flex;
 justify-content: end;
-background: ${props => props.theme.primary}!important;
+
 `
 
 export const TextButtonSvg = styled(m.div)`
@@ -258,11 +258,11 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
 
 
   return (
-    <Root>
+    <>
 
 
       {images?.filter((a) => a.week == activeWeek).length > 0 &&
-        <>
+        <Root>
           {/* <Heading>{title}</Heading> */}
           <RootInner>
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
@@ -352,9 +352,9 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
 
             </Swiper>
           </RootInner>
-        </>
+        </Root>
       }
-    </Root>
+    </>
   )
 }
 
