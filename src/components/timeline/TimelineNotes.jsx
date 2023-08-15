@@ -246,7 +246,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
 
   return (
     <Root>
-      {notes.length > 0 &&
+      {notes?.filter((a) => a.week == activeWeek).length > 0 &&
         <>
           <Heading>{title}</Heading>
           <RootInner>

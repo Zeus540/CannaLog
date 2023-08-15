@@ -255,7 +255,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
     <Root>
 
 
-      {images && images.length > 0 &&
+      {images?.filter((a) => a.week == activeWeek).length > 0 &&
         <>
           <Heading>{title}</Heading>
           <RootInner>
@@ -282,7 +282,19 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
                   spaceBetween: 40,
                 },
                 1024: {
-                  slidesPerView: 5,
+                  slidesPerView: 3,
+                  spaceBetween: 50,
+                },
+                1440: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+                1920: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+                2560: {
+                  slidesPerView: 4,
                   spaceBetween: 50,
                 },
               }}

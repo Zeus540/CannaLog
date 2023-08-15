@@ -208,16 +208,19 @@ svg {
   color:${props => props.theme.text}!important;
 }
 `
+
+
 export const Input= styled(TextField)`
 
 
 border:none;
-width: 100%;
+width:${props => props.width ? `${props.width}%`: "100%"};
 border-radius: 5px!important;
 box-shadow:  inset 0px 0px 2px 1px ${props => props.theme.secondary};
 border: 1px solid ${props => props.theme.secondary};
 background-color:${props => props.theme.secondary}!important;
 color:${props => props.theme.text}!important;
+margin:${props => props.margin ? `${props.margin}!important`: "0px"};
 
 &&{
 input:-webkit-autofill,
@@ -348,4 +351,18 @@ export const ButtonHolder = styled(m.div)`
 margin-top: 15px;
 
 
+`
+
+export const NutrientHolcer = styled(m.div)`
+width: 100%;
+margin-top: 15px;
+
+p{
+  padding-bottom: 10px;
+}
+`
+export const InputHolder = styled(m.div)`
+margin:${props => props.margin ? `${props.margin}!important`: "0px"};
+display: flex;
+width:${props => props.width ? `${props.width}%!important`: "unset"};
 `

@@ -29,6 +29,7 @@ import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
+import TimelineFeeding from '../../components/timeline/TimelineFeeding'
 
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
@@ -114,7 +115,7 @@ function MyPlantsDetailed() {
         axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
         .then((response)=>{
             setCurrentStage(response.data)
-        console.log("current_stage",response.data)
+     
         })
         .catch((err)=>{
             console.log("err",err)
@@ -287,9 +288,10 @@ function MyPlantsDetailed() {
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
             <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage}/>
-
+            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" actionTypeData={1} handleSetCoverImage={handleSetCoverImage}/>
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage}/>
 
+        
         </Root>
 
     )

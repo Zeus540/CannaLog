@@ -101,7 +101,7 @@ function PublicPlantDetailed() {
         axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
         .then((response)=>{
             setCurrentStage(response.data)
-        console.log("current_stage",response.data)
+       
         })
         .catch((err)=>{
             console.log("err",err)
