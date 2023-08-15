@@ -24,7 +24,7 @@ import { current } from '@reduxjs/toolkit'
 export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 0px 20px;
+padding: 15px 20px;
 margin-bottom: 20px;
 width: 80%;
 @media (max-width: 600px) {
@@ -189,15 +189,18 @@ export const ItemInnerLeft = styled(m.div)`
 width: 35%;
 padding:40px;
 padding-left: 0px;
+padding-bottom: 0px;
 align-items: center;
 display: flex;
 @media (max-width: 600px) {
   width: unset;
-  padding:40px;
+  padding:40px 0px;
+  padding-bottom: 0px;
 }
 @media (min-width: 601px) and (max-width: 768px) {
   width: unset;
   padding:40px;
+  padding-bottom: 0px;
 }
 `
 
@@ -217,6 +220,9 @@ border-radius: 5px;
 @media (min-width: 601px) and (max-width: 768px) {
   width: unset;
   margin:0px;
+}
+h1{
+  margin-bottom:10px;
 }
 `
 
@@ -248,6 +254,8 @@ margin-bottom: 20px;
 export const ItemInnerRightItemText = styled(m.div)`
 display: flex;
 font-size: 18px;
+justify-content: space-between;
+width: 100%;
 span{
   white-space: nowrap;
 margin:0px 10px;
@@ -265,7 +273,7 @@ transform: ${props => props.showMore ? "translateY(0%)": "translateY(-100%)"};
 position: ${props => props.showMore ? "unset": " absolute"};
 opacity: ${props => props.showMore ? "100%": " 0%"};
 padding: 0px 20px;
-background: black;
+background: ${props => props.theme.primary};
 border-radius: 0px 0px 10px 10px;
 transition: all 0.5s ease;
 width: 100%;
@@ -279,6 +287,7 @@ display: flex;
 justify-content: space-between;
 padding: 15px 0px;
 border-bottom: 2px solid ${props => props.theme.secondary};
+
 `
 export const ItemInnerRightItemEnd = styled(m.div)`
 display: flex;
@@ -405,24 +414,24 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
             dynamicBullets: true,
           }}
           modules={[Pagination]}
-          spaceBetween={50}
+     
           slidesPerView={1}
           breakpoints={{
             0: {
               slidesPerView: 1,
-              spaceBetween: 20,
+           
             },
             600: {
               slidesPerView: 1,
-              spaceBetween: 20,
+          
             },
             768: {
               slidesPerView: 1,
-              spaceBetween: 40,
+             
             },
             1024: {
               slidesPerView: 1,
-              spaceBetween: 50,
+         
             },
           }}
 
@@ -443,10 +452,13 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
                       </ItemInnerLeft >
 
                       <ItemInnerRightOutter >
-                      <ItemInnerRight showMore={showMore}>
+                      {/* <Heading>{title}</Heading>   */}
                       <ItemInnerRightTop>
-                        <Heading>{title}</Heading>  <Tag>{feedingData[i][0].day}</Tag>
+                        <Tag>{feedingData[i][0].day}</Tag>
                         </ItemInnerRightTop>
+                      <ItemInnerRight showMore={showMore}>
+                        
+                   
                       
                         <ItemInnerRightItemEnd>{feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) } Litres of Water Used </ItemInnerRightItemEnd>
                         <ItemInnerRightItemEnd>Ph Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>

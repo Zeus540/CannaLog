@@ -18,13 +18,13 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export const Root = styled(m.div)`
+ const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 0px 20px;
-margin-bottom: 20px;
+padding: 15px 20px;
+
 `
-export const TimeLineHolder = styled(m.div)`
+ const TimeLineHolder = styled(m.div)`
 display: flex;
 margin-top: 10px;
 overflow: hidden;
@@ -32,7 +32,7 @@ user-select: none;
 `
 
 
-export const Item = styled(m.div)`
+ const Item = styled(m.div)`
 position: relative;
 
 width: 100%;
@@ -64,12 +64,23 @@ margin: 10px 20px;
 
 }
 `
-export const ItemInner = styled.div`
+ const ItemInner = styled.div`
 color: ${props => props.theme.text}!important;
 cursor: pointer;
 border-radius: 5px;
-background: ${props => props.theme.primary}!important;
-padding: 15px;
+
+padding: 0px 0px;
+position: relative;
+padding-bottom: 0px;
+transition: all 0.5s ease;
+z-index: 2;
+justify-content: space-between;
+`
+ const ImageItemInner = styled.div`
+color: ${props => props.theme.text}!important;
+cursor: pointer;
+border-radius: 5px;
+
 position: relative;
 
 
@@ -77,19 +88,7 @@ transition: all 0.5s ease;
 z-index: 2;
 justify-content: space-between;
 `
-export const ImageItemInner = styled.div`
-color: ${props => props.theme.text}!important;
-cursor: pointer;
-border-radius: 5px;
-background: ${props => props.theme.primary}!important;
-position: relative;
-
-
-transition: all 0.5s ease;
-z-index: 2;
-justify-content: space-between;
-`
-export const Tag = styled(m.div)`
+ const Tag = styled(m.div)`
 background: #8bab50;
 padding: 0px 15px;
 width: fit-content;
@@ -97,41 +96,29 @@ border-radius: 50px;
 color: ${props => props.theme.textW}!important;
 `
 
-export const ItemInnerUpper = styled(m.div)`
+ const ItemInnerUpper = styled(m.div)`
 display: flex;
 justify-content: space-between;
+padding: 15px 0px;
+color: ${props => props.theme.text}!important;
 `
-export const ImageItemInnerUpper = styled(m.div)`
-display: flex;
-justify-content: space-between;
-padding:15px
-`
-export const ItemInnerContent = styled(m.div)`
-padding: 10px;
-background: white;
-color:black;
-margin: 15px 0px;
-border-radius: 5px;
-`
-export const ItemInnerContentImage = styled(m.div)`
+
+ const ItemInnerContent = styled(m.div)`
+padding: 20px;
 
 
 color:black;
-
+margin: 0px 0px;
 border-radius: 5px;
+background: ${props => props.theme.input};
 `
 
-export const ItemInnerActionHolder = styled(m.div)`
-display: flex;
-justify-content: end;
-`
-export const ImageItemInnerActionHolder = styled(m.div)`
-padding: 15px;
+ const ItemInnerActionHolder = styled(m.div)`
 display: flex;
 justify-content: end;
 `
 
-export const TextButtonSvg = styled(m.div)`
+ const TextButtonSvg = styled(m.div)`
 svg{
     color:  ${props => props.theme.accent};
     font-size: 20px;
@@ -141,7 +128,7 @@ svg{
     }
   }
 `
-export const TextButtonSvgDelete = styled(m.div)`
+ const TextButtonSvgDelete = styled(m.div)`
 color:  ${props => props.theme.warn};;
 font-size: 20px;
 
@@ -155,13 +142,8 @@ svg{
   }
 }
 `
-export const Image = styled(m.img)`
 
-
-aspect-ratio: 16/12;
-
-`
-export const RootInner = styled(m.div)`
+ const RootInner = styled(m.div)`
 
 
 `
@@ -248,7 +230,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
     <Root>
       {notes?.filter((a) => a.week == activeWeek).length > 0 &&
         <>
-          <Heading>{title}</Heading>
+          {/* <Heading>{title}</Heading> */}
           <RootInner>
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
@@ -286,17 +268,18 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
 
                     {actionTypeData == 13 &&
                       <Item >
-                        <ItemInner >
-
-                          <ItemInnerUpper>
+                         <ItemInnerUpper>
                             <Tag>{getWeekandDay(a.creation_date).day}</Tag>
                             <h2>{getLocalizedDate(a.creation_date)}</h2>
 
 
                           </ItemInnerUpper>
 
+                        <ItemInner >
+
+                         
                           <ItemInnerContent>
-                            <h2>{a.plant_note}</h2>
+                            <p>{a.plant_note}</p>
                           </ItemInnerContent>
                           {!publicPage &&
                             <ItemInnerActionHolder>

@@ -6,29 +6,18 @@ import {
     selectPlantActionTypes
 } from '../../features'
 import { useParams } from 'react-router-dom'
-
 import { AiOutlineEye } from 'react-icons/ai'
 import { BiLike } from 'react-icons/bi'
 import { Heading, Button } from '../../utils/global_styles'
-import { MdOutlineWaterDrop } from 'react-icons/md'
-import { LiaCutSolid } from 'react-icons/lia'
 import axios from '../../lib/axios'
-import { GiChemicalDrop } from 'react-icons/gi'
-import { AiOutlineCamera } from 'react-icons/ai'
-import { RiScales2Line } from 'react-icons/ri'
-import { TfiPaintBucket } from 'react-icons/tfi'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { GiBackwardTime } from 'react-icons/gi'
-import { TbNotes } from 'react-icons/tb'
-import { TbArrowsExchange } from 'react-icons/tb'
-import { TbExchange } from 'react-icons/tb'
-import { PiPottedPlantLight } from 'react-icons/pi'
-import { FiEdit } from 'react-icons/fi'
-
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
+import TimelineFeeding from '../../components/timeline/TimelineFeeding'
+
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 
@@ -41,9 +30,6 @@ import {
     DayHolderOutterInner,
     DayHolder,
     Section,
-    QuickActionHolder,
-    QuickActionHolderInner,
-    QuickAction,
     Root,
     Tag,
     ExposureItemHolder,
@@ -172,11 +158,7 @@ function PublicPlantDetailed() {
             exit={{ opacity: 0 }}
         >
             <ImgHolderTop img={coverImage}>
-                <EditPlant>
-                    <EditPlantInner>
-                        
-                    </EditPlantInner>
-                </EditPlant>
+       
 
                 <ImgHolderTopInfo>
 
@@ -253,8 +235,8 @@ function PublicPlantDetailed() {
        
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage} publicPage={true}/>
-
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13}  publicPage={true}/>
+            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" actionTypeData={1}  publicPage={true}/>
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage} publicPage={true}/>
         </Root>
 

@@ -13,6 +13,7 @@ let light_theme = {
   text: '#0e1e3f',
   textW: '#ffffff',
   warn: "#f44336",
+  input:"#f3f4f6",
   drawer: {
     primary: '#ffffff',
     secondary: '#f3f4f6',
@@ -45,6 +46,7 @@ let dark_theme = {
   text: 'white',
   textW: '#000000',
   warn: "#f44336",
+  input:"#ffffff",
   drawer: {
     primary: 'black',
     secondary: '#0000009c',

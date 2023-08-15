@@ -89,7 +89,7 @@ background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transpa
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 50vh;
+min-height: 45vh;
 background-repeat: no-repeat;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
@@ -99,7 +99,7 @@ export const ImgHolderTopInfoInner = styled.div`
 max-width: 1920px;
 width: 100%;
 padding: 20px;
-
+text-wrap: balance;
 display: flex;
 justify-content: space-between;
 align-items: end;

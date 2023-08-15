@@ -21,7 +21,7 @@ import 'swiper/css/pagination';
 export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 0px 20px;
+padding: 15px 20px;
 margin-bottom: 20px;
 `
 export const TimeLineHolder = styled(m.div)`
@@ -81,7 +81,7 @@ export const ImageItemInner = styled.div`
 color: ${props => props.theme.text}!important;
 cursor: pointer;
 border-radius: 5px;
-background: ${props => props.theme.primary}!important;
+
 position: relative;
 
 
@@ -104,7 +104,8 @@ justify-content: space-between;
 export const ImageItemInnerUpper = styled(m.div)`
 display: flex;
 justify-content: space-between;
-padding:15px
+padding:15px 0px;
+
 `
 export const ItemInnerContent = styled(m.div)`
 padding: 10px;
@@ -119,6 +120,10 @@ export const ItemInnerContentImage = styled(m.div)`
 color:black;
 
 border-radius: 5px;
+picture,source,img{
+  
+border-radius: 5px;
+}
 `
 
 export const ItemInnerActionHolder = styled(m.div)`
@@ -129,6 +134,7 @@ export const ImageItemInnerActionHolder = styled(m.div)`
 padding: 15px;
 display: flex;
 justify-content: end;
+background: ${props => props.theme.primary}!important;
 `
 
 export const TextButtonSvg = styled(m.div)`
@@ -257,7 +263,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
 
       {images?.filter((a) => a.week == activeWeek).length > 0 &&
         <>
-          <Heading>{title}</Heading>
+          {/* <Heading>{title}</Heading> */}
           <RootInner>
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 

@@ -91,7 +91,7 @@ function MyPlantsDetailed() {
 
     useEffect(() => {
         getActions()
-    }, [])
+    }, [plants])
 
     useEffect(() => {
         if (socket) {
@@ -287,7 +287,7 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage}/>
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage} />
             <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" actionTypeData={1} handleSetCoverImage={handleSetCoverImage}/>
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage}/>
 
