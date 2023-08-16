@@ -488,7 +488,7 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
                               <ItemInnerRightItemText>
                                 
                                 <p>{a.nutrient_name}</p>
-                                <span>{a.nutrient_amount} {a.nutrient_measurement_unit}</span>
+                                <span>{a.nutrient_amount} {a.measurement_unit}</span>
                               </ItemInnerRightItemText>
                              
 

@@ -122,7 +122,7 @@ const user = useSelector(selectUser)
                    </MenuLinkMobile>
                    </>
                    }
-                         <MenuLinkMobile to="/" >
+                         <MenuLinkMobile to="/public-plants" >
                      <FlexLink>
                      
                        Public Plants
