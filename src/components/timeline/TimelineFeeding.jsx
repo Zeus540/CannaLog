@@ -318,16 +318,16 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
   useEffect(() => {
     if (plant) {
 
-      socket.on(`image_added${params.plant_id}`, (data) => {
-        let arr = [...feedingData, data];
-        console.log('image_added')
-        group_by(arr, setFeedingData, plant);
-      });
+      // socket.on(`image_added${params.plant_id}`, (data) => {
+      //   let arr = [...feedingData, data];
+      //   console.log('image_added')
+      //   group_by(arr, setFeedingData, plant);
+      // });
 
-      socket.on(`action_deleted${params.plant_id}`, (data) => {
-        console.log('action_deleted', data)
-        setFeedingData(feedingData.filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)))
-      });
+      // socket.on(`action_deleted${params.plant_id}`, (data) => {
+      //   console.log('action_deleted', data)
+      //   setFeedingData(feedingData.filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)))
+      // });
 
     }
   }, [plant, feedingData]);
