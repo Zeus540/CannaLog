@@ -50,10 +50,11 @@ const Environments = () => {
 
   const user = useSelector(selectUser)
 
-  useEffect(() => {
-    
-    if (socket) {
 
+
+  useEffect(() => {
+ 
+      console.log("socket",socket.connected);
       socket.on(`environment_added${user.user_id}`, (data) => {
         dispatch(addEnvironmentLocally(data));
         console.log(data);
@@ -69,9 +70,15 @@ const Environments = () => {
         console.log("dispatch",data);
       });
 
-    }
 
-  }, [socket]);
+    return ()=>{
+      socket.disconnect()
+    }
+  }, [user]);
+
+  useEffect(() => {
+    console.log("user.user_id",user.user_id);
+  }, [user])
 
 
   const openModal = (type, data) => {
