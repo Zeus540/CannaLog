@@ -41,7 +41,7 @@ padding:20px;
 overflow:hidden;
 transition: all 1s ease;
 @media (max-width: 425px) {
-  margin: 10px;
+  margin: 40px 0px;
 }
 `
 

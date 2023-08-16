@@ -387,13 +387,18 @@ const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCo
     }, {});
 
     setter(result)
-    if(result){
+  
+  
+  }
+
+  useEffect(() => {
+    if(Object.values(feedingData)[0]?.map((a)=> a.week ).includes(activeWeek)){
       setFeedingDataFound(true)
     }else{
       setFeedingDataFound(false)
     }
-  
-  }
+ 
+  }, [activeWeek,feedingData])
 
   const openModal = (type, data) => {
     switch (type) {
