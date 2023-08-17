@@ -2,11 +2,12 @@ import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 
 export const Root = styled(m.div)`
-width: calc(100% / 4 - 20px);
+width: calc(100% / 5 - 20px);
 border-radius: 5px;
 margin: 20px 10px;
 position: relative;
 cursor:pointer;
+
 @media (max-width: 600px) {
     width: calc(100% - 20px);
     margin: 10px;
@@ -76,16 +77,18 @@ border-radius:${props => props.readMore ? "0px":"0px 0px 5px 5px"};
 
 export const EnviromentCardTextHiddenHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
-padding:10px 10px;
-// display: ${props => props.readMore ? "block":"none"};
-transform:${props => props.readMore ? "translateY(-2%)":"translateY(-100%)"};
-transition: transform 0.5s ease-in-out;
+
 width: 100%;
-position: ${props => props.readMore ? "unset":"absolute"};
-opacity: ${props => props.readMore ? "unset":0};
+max-height: ${props => props.readMore ? "600px":"0px"};
+transition: all 0.5s cubic-bezier(0, 0, .58, .58);
+overflow:hidden;
+visibility:${props => props.readMore ? "visible":"hidden"};
 border-radius: 0px 0px 5px 5px;
 `
 
+export const EnviromentCardTextHiddenHolderInner = styled(m.div)`
+padding:10px 10px;
+`
 export const PlantHolderOutter = styled(m.div)`
 display: flex;
 flex-wrap: wrap;

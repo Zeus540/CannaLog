@@ -26,7 +26,7 @@ display: flex;
 justify-content: center;
 padding: 80px;
 align-items: center;
-animation: ${fadeIn} 0.5s ease;
+animation: ${fadeIn} 0.25s ease;
 @media (min-width: 0px) and (max-width: 425px)  {
     padding: 20px;
 }
@@ -36,7 +36,7 @@ animation: ${fadeIn} 0.5s ease;
 `
 
 export const Modal = styled(m.div)`
-animation: ${fadeIn} 0.75s ease;
+animation: ${fadeIn} 0.25s ease;
 background:  ${props => props.theme.modal.primary};
 backdrop-filter: blur(5px);
 max-width: 40%;
@@ -90,6 +90,8 @@ color:  ${props => props.theme.text};
 export const Warn = styled(m.p)`
 text-align: center;
 color: red;
+padding-top: 40px;
+font-size: 14px;
 padding: 15px 0px;
 `
 export const ModalContentText = styled(m.p)`

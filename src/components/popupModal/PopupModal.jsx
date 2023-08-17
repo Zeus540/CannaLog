@@ -13,17 +13,19 @@ import AddNote from '../forms/AddNote';
 import UploadImage from '../forms/UploadImage';
 import AddWatering from '../forms/AddWatering';
 
+
 const PopupModal = ({ openModal, data, modalType, plant }) => {
 
   const dispatch = useDispatch()
-
+  
+  
 
   const handleSubmit = async (e) => {
 
+await dispatch(deleteEnvironment(e.environment_id))
 
-    await dispatch(deleteEnvironment(e.environment_id))
-
-    openModal(modalType)
+      openModal(modalType)
+    
   }
 
   const handleSubmitDeletePlant = async (e) => {
@@ -48,12 +50,13 @@ const PopupModal = ({ openModal, data, modalType, plant }) => {
           {modalType == "deleteEnvironment" &&
             <>
               <ModalContentText>
-                Are you sure you want to delete<br />
-                {data.name} ?
+                You are about to delete this environment<br />
+                {data.environment_name} ?
+             
               </ModalContentText>
 
               <Warn>
-                Warning this action will delete all information relating to {data?.name} this action is irreversible !
+              This action will delete all information relating to this environment {data?.naenvironment_nameme} <br /> this action is irreversible !
               </Warn>
 
               <ModalCloseHolder>

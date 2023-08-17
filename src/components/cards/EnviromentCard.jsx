@@ -21,6 +21,7 @@ import {
   EnviromentInfoFlex,
   Divider,
   EnviromentCardTextHiddenHolder,
+  EnviromentCardTextHiddenHolderInner,
   PlantHolderOutter,
   PlantHolder,
   ActionHolder,
@@ -66,8 +67,7 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
     animate={{ opacity: 1 }}
     transition={{ duration: 0.1 }}
     exit={{ opacity: 0, transition: { duration: 0.1 } }}
-    ref={elementRef}
-    onClick={()=> console.log(elementRef)}
+
     >
       <EnviromentCardImageHolder onClick={() => { setReadMore(!readMore) }}>
         <EnviromentCardImage src={cover_img} width="100%" />
@@ -80,6 +80,7 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
     
         <EnviromentCardTextHiddenHolder readMore={readMore}>
      
+     <EnviromentCardTextHiddenHolderInner readMore={readMore}>
         <Divider></Divider>
           <EnviromentHolderHeading>{myPlants?.length > 1 ? `${myPlants?.length} Plants` : `${myPlants?.length} Plant`} </EnviromentHolderHeading>
           <PlantHolderOutter>
@@ -104,9 +105,10 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
           <EnviromentInfoFlexHolder>{data.environment_width == null ? "" : `${data.environment_width} cm` }</EnviromentInfoFlexHolder>
           <EnviromentInfoFlexHolder>{data.environment_height == null ? "" : `${data.environment_height} cm` }</EnviromentInfoFlexHolder>
         </EnviromentInfoFlex>
+        <Divider></Divider>
         </>
          }
-        <Divider></Divider>
+     
           <ActionHolder>
             <ActionHolderInner>
           <TextButtonSvg onClick={()=> openModal('addEnvironmentLog',data)}><IoMdAdd/>Log</TextButtonSvg>
@@ -115,8 +117,9 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
 
           <TextButtonSvgDelete onClick={()=> openModal('deleteEnvironment',data)}><RiDeleteBin5Line/></TextButtonSvgDelete>
           </ActionHolder>
+          </EnviromentCardTextHiddenHolderInner>
         </EnviromentCardTextHiddenHolder>
-
+  
       </EnviromentCardTextHolder>
     </Root>
 

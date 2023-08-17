@@ -22,7 +22,7 @@ import Loader from '../../components/loader/Loader'
 import { AnimatePresence } from 'framer-motion'
 import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
-
+import { useSnackbar } from 'notistack';
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
 display:flex;
@@ -50,7 +50,7 @@ const Environments = () => {
 
   const user = useSelector(selectUser)
   const socket = useSocket()
- 
+  const { enqueueSnackbar } = useSnackbar()
   useEffect(() => {
       
     console.log("socket",socket);
@@ -59,17 +59,20 @@ const Environments = () => {
 
        socket.on(`environment_added${user.user_id}`, (data) => {
          dispatch(addEnvironmentLocally(data));
+         enqueueSnackbar(`${data.environment_name} Added`, { variant: 'success' })
          console.log(data);
        });
 
       
         socket.on(`environment_edited${user.user_id}`, (data) => {
           dispatch(editEnvironmentLocally(data));
+          enqueueSnackbar(`${data.environment_name} Edited`, { variant: 'success' })
           console.log(data);
         });
      
         socket.on(`environment_deleted${user.user_id}`, (data) => {
          dispatch(deleteEnvironmentLocally(parseInt(data)));
+         enqueueSnackbar(`${data.environment_name} Deleted`, { variant: 'success' })
          console.log("dispatch",data);
        });
 

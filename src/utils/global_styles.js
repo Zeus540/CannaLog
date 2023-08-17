@@ -25,6 +25,7 @@ background:  ${props => props.theme.secondary};
 justify-content: center;
 position: relative;
 min-height: calc(100vh - 232px);
+
 @media(min-width:0px) and (max-width:768px){
   min-height: calc(100vh - 280px);
 }

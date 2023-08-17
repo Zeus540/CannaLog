@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import HomePage from '../pages/HomePage/HomePage'
-import PublicJournals from '../pages/PublicJournals/PublicJournals'
+import { SnackbarProvider } from 'notistack'
 import Terms from '../pages/Terms/Terms';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
@@ -77,6 +77,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     return (
 
         <AnimatePresence >
+                 <SnackbarProvider>
             <Root>
                 <SocketProvider>
                 <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
@@ -118,6 +119,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 {/* <WebSocketListener/> */}
                 </SocketProvider>
             </Root>
+            </SnackbarProvider>
         </AnimatePresence>
 
 
