@@ -12,7 +12,7 @@ import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import Growers from '../pages/Growers/Growers';
 import PublicPlants from '../pages/PublicPlants/PublicPlants';
-
+import { SocketProvider } from '../context/SocketContext';
 import {
     fetchEnvironments,
     fetchEnvironmentTypes,
@@ -76,8 +76,9 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     
     return (
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence >
             <Root>
+                <SocketProvider>
                 <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
                 <Routes location={location} key={location.pathname}>
                     {isLoggedIn ?
@@ -114,7 +115,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                     }
                 </Routes>
                 <Footer />
-                <WebSocketListener/>
+                {/* <WebSocketListener/> */}
+                </SocketProvider>
             </Root>
         </AnimatePresence>
 

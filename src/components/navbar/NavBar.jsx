@@ -13,6 +13,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 import { useDispatch } from 'react-redux';
+import { socket } from "../../lib/socket";
 
 const Root = styled.div`
 
@@ -361,15 +362,17 @@ const theme = themeType
 const navigate = useNavigate()
 
 // calc(60px)
-console.log(themeType)
+
 
 const logOut = () => {
   axios.post(`${BASE_URL_PROD}/logout`).then((results)=>{
   if(results.status == 200){
-
+    socket.on("disconnect", (reason) => {
+      // console.log(reason); prints "io client disconnect"
+    });
+    
       dispatch(logout())
       navigate('/')
-  
   }
   })
 }

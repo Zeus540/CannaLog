@@ -21,7 +21,7 @@ import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
 import { AnimatePresence } from 'framer-motion'
 import { IoMdAdd } from "react-icons/io";
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -49,36 +49,37 @@ const Environments = () => {
   let environmentsLength = environments.length
 
   const user = useSelector(selectUser)
-
-
-
-  useEffect(() => {
+  const socket = useSocket()
  
-      console.log("socket",socket.connected);
-      socket.on(`environment_added${user.user_id}`, (data) => {
-        dispatch(addEnvironmentLocally(data));
-        console.log(data);
-      });
+  useEffect(() => {
+      
+    console.log("socket",socket);
 
-       socket.on(`environment_edited${user.user_id}`, (data) => {
-         dispatch(editEnvironmentLocally(data));
+    if(socket.connected){
+
+       socket.on(`environment_added${user.user_id}`, (data) => {
+         dispatch(addEnvironmentLocally(data));
          console.log(data);
        });
 
-       socket.on(`environment_deleted${user.user_id}`, (data) => {
-        dispatch(deleteEnvironmentLocally(parseInt(data)));
-        console.log("dispatch",data);
-      });
+      
+        socket.on(`environment_edited${user.user_id}`, (data) => {
+          dispatch(editEnvironmentLocally(data));
+          console.log(data);
+        });
+     
+        socket.on(`environment_deleted${user.user_id}`, (data) => {
+         dispatch(deleteEnvironmentLocally(parseInt(data)));
+         console.log("dispatch",data);
+       });
 
+      }
 
-    return ()=>{
-      socket.disconnect()
-    }
-  }, [user]);
+      //might add cleanup
+      
+  },[socket]);
 
-  useEffect(() => {
-    console.log("user.user_id",user.user_id);
-  }, [user])
+ 
 
 
   const openModal = (type, data) => {
