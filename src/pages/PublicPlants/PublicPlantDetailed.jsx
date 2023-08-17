@@ -42,7 +42,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizeTime } from '../../helpers/getLocalizeTime'
 import { getWeeksElapsed } from '../../helpers/getWeeksElapsed'
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
 
 function PublicPlantDetailed() {
     const [plant, setPlant] = useState()
@@ -60,11 +60,13 @@ function PublicPlantDetailed() {
     let plant_action_types = useSelector(selectPlantActionTypes)
 
     const params = useParams()
+    const socket = useSocket()
 
     useEffect(() => {
         getActions()
     }, [])
 
+ 
     useEffect(() => {
         if (socket) {
             socket.on(`action_taken${params.plant_id}`, (data) => {
@@ -76,8 +78,7 @@ function PublicPlantDetailed() {
               });
         }
 
-     
-    })
+    },[socket])
 
     
     useEffect(() => {

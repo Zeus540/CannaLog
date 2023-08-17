@@ -13,7 +13,8 @@ import PlantCard from '../../components/cards/PlantCard'
 import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
 import { AnimatePresence } from 'framer-motion'
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
+
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
 display:flex;
@@ -40,7 +41,8 @@ const MyPlants = () => {
 
 
   const user = useSelector(selectUser)
-
+  const socket = useSocket()
+  
   useEffect(() => {
 
     if (socket) {

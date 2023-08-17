@@ -25,13 +25,15 @@ object-fit: contain;
 
 function UploadImage({ modalType, openModal, data, plant }) {
   const [loading, setLoading] = useState(false)
-  const [uploadDate, setUploadDate] = useState(new Date())
+  const [uploadDate, setUploadDate] = useState(format(new Date(),'yyyy-MM-dd HH:mm:ss'))
   const [imagePreview, setImagePreview] = useState(null);
   const params = useParams()
   const [formObject, setFormObject] = useState({
-    "file": ""
+    "file": "",
   })
 
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  
   const handleSubmit = (e) => {
     setLoading(true)
     e.preventDefault()
@@ -41,6 +43,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
     formData.append("file", formObject.file)
     formData.append("plant_id", params.plant_id)
     formData.append("creation_date", uploadDate)
+    formData.append("timezone", userTimezone)
 
 
     axios.post(`${BASE_URL_PROD}/plants/take_action/${4}`, formData)
@@ -86,7 +89,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
           maxDate={new Date()}
           minDate={new Date(getLocalizeTime(plant.creation_date))}
           defaultValue={new Date()}
-          onChange={(value) => { handleDate(format(value, 'yyyy-MM-dd HH:mm:ss')) }}
+          onChange={(value) => { handleDate(format(value,'yyyy-MM-dd HH:mm:ss')) }}
 
         />
       </LocalizationProvider>

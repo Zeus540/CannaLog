@@ -11,7 +11,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { ItemHodler } from '../forms/Form_styles'
 import PopupModal from '../popupModal/PopupModal'
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
 import { useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -154,9 +154,11 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const params = useParams()
+  const socket = useSocket()
 
   useEffect(() => {
-    if (plant) {
+
+    if (plant && socket) {
       socket.on(`note_added${params.plant_id}`, (data) => {
         console.log(data)
         let arr = [...notes, data];
@@ -170,7 +172,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
 
     }
 
-  }, [plant, notes]);
+  }, [plant, notes,socket]);
 
 
   useEffect(() => {

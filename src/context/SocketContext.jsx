@@ -7,7 +7,6 @@ import {selectUser} from '../features/index'
 const SocketContext = createContext()
 
 
-
 export const useSocket = () => useContext(SocketContext)
 
 export const SocketProvider = ({children}) =>{
@@ -31,7 +30,6 @@ export const SocketProvider = ({children}) =>{
       return () => {
         socketConfig.disconnect()
       }
-
     }, [user])
 
     return(

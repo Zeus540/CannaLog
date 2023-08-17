@@ -58,7 +58,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizeTime } from '../../helpers/getLocalizeTime'
 import { getWeeksElapsed } from '../../helpers/getWeeksElapsed'
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -76,6 +76,7 @@ function MyPlantsDetailed() {
     let plant_action_types = useSelector(selectPlantActionTypes)
 
     const params = useParams()
+    const socket = useSocket()
 
     useEffect(() => {
 
@@ -104,8 +105,7 @@ function MyPlantsDetailed() {
               });
         }
 
-     
-    })
+    },[socket])
 
     
     useEffect(() => {
