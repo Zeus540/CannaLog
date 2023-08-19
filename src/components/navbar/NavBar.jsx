@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/logo.png";
-
+import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn,selectUser,logout } from "../../features";
@@ -461,7 +461,9 @@ const handleMenuClose= ()=>{
              <NotificationHolder>
               
               <NotificationCount newNotification={newNotification}/>
-             <BiBell/>
+              <Link to="/notifications">
+             <BiBell />
+             </Link>
              </NotificationHolder>
 
                   <UserInfoTop onClick={() => {  handleMenuOpen() }}>

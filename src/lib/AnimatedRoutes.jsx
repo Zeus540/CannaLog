@@ -11,6 +11,7 @@ import Terms from '../pages/Terms/Terms';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import Growers from '../pages/Growers/Growers';
+import Notifications from '../pages/Notifications/Notifications';
 import PublicPlants from '../pages/PublicPlants/PublicPlants';
 import { SocketProvider } from '../context/SocketContext';
 import { NotificationProvider } from '../context/NotificationContext';
@@ -92,7 +93,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
                             <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
-                           
+                            <Route path="/notifications" element={<Notifications />} />
                             <Route path="/growers" element={<Growers />} />
                             <Route path="/terms" element={<Terms />} />
                             <Route path="/cookie-policy" element={<CookiePolicy />} />
