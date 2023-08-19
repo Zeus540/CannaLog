@@ -1,9 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { authSlice, publicPlantsSlice,environmentsSlice,myPlantsSlice,environmentTypesSlice,strainSlice,irrigationTypesSlice,stagesSlice,plantActionTypesSlice } from './features'
+import { authSlice, publicPlantsSlice,environmentsSlice,myPlantsSlice,environmentTypesSlice,strainSlice,irrigationTypesSlice,stagesSlice,plantActionTypesSlice,notificationSlice } from './features'
 
 const rootReducers = combineReducers(
     {
         auth: authSlice.reducer,
+        notifications:notificationSlice.reducer,
         strains:strainSlice.reducer,
         irrigationTypes:irrigationTypesSlice.reducer,
         publicPlants: publicPlantsSlice.reducer,

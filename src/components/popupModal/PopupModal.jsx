@@ -22,8 +22,8 @@ const PopupModal = ({ openModal, data, modalType, plant }) => {
 
   const handleSubmit = async (e) => {
 
-await dispatch(deleteEnvironment(e.environment_id))
-
+let res = await dispatch(deleteEnvironment(e.environment_id))
+console.log("deleteEnvironment",res.payload)
       openModal(modalType)
     
   }

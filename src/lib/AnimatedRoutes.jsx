@@ -13,6 +13,8 @@ import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import Growers from '../pages/Growers/Growers';
 import PublicPlants from '../pages/PublicPlants/PublicPlants';
 import { SocketProvider } from '../context/SocketContext';
+import { NotificationProvider } from '../context/NotificationContext';
+
 import {
     fetchEnvironments,
     fetchEnvironmentTypes,
@@ -48,30 +50,29 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     const dispatch = useDispatch()
 
    useEffect(() => {
+
     if(isLoggedIn){
         dispatch(fetchPublicPlantsSingedIn())
+        dispatch(fetchMyPlants())
+        dispatch(fetchEnvironments())
+        dispatch(fetchEnvironmentTypes())
+        dispatch(fetchPlantActionTypes())
+        console.log("LoggedIn",isLoggedIn)
     }else{
         dispatch(fetchPublicPlants())
     }
-    console.log("isLoggedIn",isLoggedIn)
 
-    
-    
   }, [isLoggedIn])
+
+ 
+
     const OffClick = () => {
         if (mobileMenu == true) {
             setMobileMenu(false);
         }
     }
 
-    useEffect(() => {
-        if(isLoggedIn == true){
-            dispatch(fetchMyPlants())
-            dispatch(fetchEnvironments())
-            dispatch(fetchEnvironmentTypes())
-            dispatch(fetchPlantActionTypes())
-        }
-      }, [isLoggedIn])
+  
 
     
     return (
@@ -79,6 +80,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
         <AnimatePresence >
                  <SnackbarProvider>
             <Root>
+            <NotificationProvider>
                 <SocketProvider>
                 <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
                 <Routes location={location} key={location.pathname}>
@@ -116,8 +118,9 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                     }
                 </Routes>
                 <Footer />
-                {/* <WebSocketListener/> */}
+                <WebSocketListener/> 
                 </SocketProvider>
+               </NotificationProvider>
             </Root>
             </SnackbarProvider>
         </AnimatePresence>

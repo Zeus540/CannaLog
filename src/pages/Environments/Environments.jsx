@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
   fetchEnvironments,
-  fetchEnvironmentTypes,
   fetchMyPlants,
   selectMyPlants,
   selectEnvironments,
@@ -51,36 +50,39 @@ const Environments = () => {
   const user = useSelector(selectUser)
   const socket = useSocket()
   const { enqueueSnackbar } = useSnackbar()
-  useEffect(() => {
+
+  
+  // useEffect(() => {
+ 
+  //   if(socket.connected){
+
+  //      socket.on(`environment_added${user.user_id}`, (data) => {
+  //        dispatch(addEnvironmentLocally(data));
+  //        enqueueSnackbar(`${data.environment_name} Added`, { variant: 'success' })
+  //      });
+
       
-    console.log("socket",socket);
-
-    if(socket.connected){
-
-       socket.on(`environment_added${user.user_id}`, (data) => {
-         dispatch(addEnvironmentLocally(data));
-         enqueueSnackbar(`${data.environment_name} Added`, { variant: 'success' })
-         console.log(data);
-       });
-
-      
-        socket.on(`environment_edited${user.user_id}`, (data) => {
-          dispatch(editEnvironmentLocally(data));
-          enqueueSnackbar(`${data.environment_name} Edited`, { variant: 'success' })
-          console.log(data);
-        });
+  //       socket.on(`environment_edited${user.user_id}`, (data) => {
+  //         dispatch(editEnvironmentLocally(data));
+  //         enqueueSnackbar(`${data.environment_name} Edited`, { variant: 'success' })
+  //       });
      
-        socket.on(`environment_deleted${user.user_id}`, (data) => {
-         dispatch(deleteEnvironmentLocally(parseInt(data)));
-         enqueueSnackbar(`${data.environment_name} Deleted`, { variant: 'success' })
-         console.log("dispatch",data);
-       });
+  //       socket.on(`environment_deleted${user.user_id}`, (data) => {
+  //        dispatch(deleteEnvironmentLocally(parseInt(data)));
+  //        enqueueSnackbar(`${data.environment_name} Deleted`, { variant: 'success' })
+  //      });
 
-      }
+  //     }
 
-      //might add cleanup
-      
-  },[socket]);
+  //     return () =>{
+  //       if(socket.connected){
+  //       socket.off(`environment_added${user.user_id}`)
+  //       socket.off(`environment_edited${user.user_id}`)
+  //       socket.off(`environment_deleted${user.user_id}`)
+  //       }
+  //     }
+    
+  // },[socket]);
 
  
 
@@ -96,17 +98,16 @@ const Environments = () => {
         setModalData(data)
         setModalOpen(!modalOpen)
         break;
-        case "deleteEnvironment":
-          setModalType("deleteEnvironment")
-          setModalData(data)
-          setModalOpen(!modalOpen)
-          break;
+      case "deleteEnvironment":
+        setModalType("deleteEnvironment")
+        setModalData(data)
+        setModalOpen(!modalOpen)
+        break;
       case "addEnvironmentLog":
         setModalType("addEnvironmentLog")
         setModalData(data)
         setModalOpen(!modalOpen)
         break;
-  
     }
   }
 

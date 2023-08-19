@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BallTriangle } from 'react-loader-spinner'
+import { Triangle } from 'react-loader-spinner'
 import {motion as m} from 'framer-motion'
 
 const LoaderHolder = styled(m.div)`
@@ -18,16 +18,15 @@ const Loader = () => {
         transition={{ duration: 1 }}
         exit={{opacity: 0}}
         >
-            <BallTriangle
-                height={100}
-                width={100}
-                radius={5}
-                color="#8bab50"
-                ariaLabel="ball-triangle-loading"
-                wrapperClass={{}}
-                wrapperStyle=""
-                visible={true}
-            />
+        <Triangle
+  height="80"
+  width="80"
+  color="#4fa94d"
+  ariaLabel="triangle-loading"
+  wrapperStyle={{}}
+  wrapperClassName=""
+  visible={true}
+/>
         </LoaderHolder>
     )
 }

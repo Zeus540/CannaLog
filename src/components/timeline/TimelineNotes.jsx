@@ -227,7 +227,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
   }
 
 
-{console.log("notes?.filter((a) => a.week == activeWeek).length > 0",notes?.filter((a) => a.week == activeWeek).length > 0)}
+
   return (
     <>
       {notes?.filter((a) => a.week == activeWeek).length > 0 &&

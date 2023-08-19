@@ -14,6 +14,8 @@ import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 import { useDispatch } from 'react-redux';
 import { socket } from "../../lib/socket";
+import { BiBell } from "react-icons/bi";
+import { useNotification } from "../../context/NotificationContext";
 
 const Root = styled.div`
 
@@ -353,6 +355,30 @@ svg{
 
 `;
 
+const NotificationHolder = styled.div`
+display: flex;
+position: relative;
+color:  ${props => props.theme.text};
+svg{
+  fill:  ${props => props.fill};
+  width: 25px!important;
+  height: unset;
+  margin-right: 15px;
+}
+
+`;
+const NotificationCount = styled.div`
+background: red;
+height: 10px;
+position: absolute;
+border-radius: 50%;
+top: 0px;
+right: 14px;
+width: 10px;
+opacity:${(props)=> props.newNotification ? '100%' : "0%"};
+transition: opacity 0.2s ease;
+`;
+
 const NavBar = ({toggleTheme,themeType,OffClick,setMobileMenu,mobileMenu}) => {
 const [menuOpen, setMenuOpen] = useState(-300)
 const isLoggedIn = useSelector(selectIsLoggedIn)
@@ -361,7 +387,8 @@ const dispatch = useDispatch()
 const theme = themeType
 const navigate = useNavigate()
 
-// calc(60px)
+
+const {newNotification} = useNotification()
 
 
 const logOut = () => {
@@ -431,7 +458,11 @@ const handleMenuClose= ()=>{
 
             {isLoggedIn && (
               <>
-             
+             <NotificationHolder>
+              
+              <NotificationCount newNotification={newNotification}/>
+             <BiBell/>
+             </NotificationHolder>
 
                   <UserInfoTop onClick={() => {  handleMenuOpen() }}>
                     <UserAvatar>

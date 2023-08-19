@@ -27,6 +27,11 @@ export const SocketProvider = ({children}) =>{
           setSocket(socketConfig)
         })
 
+
+        socketConfig.on('disconnect',()=>{
+          console.log("disconnect socket",socketConfig.id)
+          setSocket('')
+        })
       return () => {
         socketConfig.disconnect()
       }

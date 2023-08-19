@@ -20,8 +20,6 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
   const [weeks, setWeeks] = useState([])
 
-  const [swiper, setSwiper] = useState(null);
-
   function removeDuplicateWeeks(data) {
     const uniqueWeeks = new Set();
     return data.filter((item) => {
@@ -38,7 +36,6 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(startDate)
 
-
     const localizedData = actions.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
       const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 });
@@ -52,16 +49,12 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
   }, [actions]);
 
-
   const handleActiveWeekSelect = (w) => {
     handleActiveWeeks(w)
   }
 
-
-
   return (
     <Root>
-
 
       <Heading>Weeks</Heading>
       <WeekHolder>
@@ -70,16 +63,13 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
             dynamicBullets: true,
           }}
           normalizeSlideIndex={true}
-
           modules={[Pagination]}
-
           initialSlide={4}
           updateOnWindowResize={true}
-          onSwiper={setSwiper}
+        
           spaceBetween={weeks.length > 1 ? 20 : 0}
           slidesPerView={4}
           activeIndex={activeWeek}
-
           breakpoints={{
 
             320: {
@@ -108,10 +98,6 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
             },
           }}
 
-
-
-        // onSlideChange={() => console.log('slide change')}
-        // onSwiper={(swiper) => console.log(swiper)}
         >
           {weeks.map((w) => {
             return (

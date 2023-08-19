@@ -4,8 +4,8 @@ import { BASE_URL_PROD } from "../../lib/Constants";
 
 export const deleteEnvironment = createAsyncThunk('environments/delete',async (data, { dispatch }) => {
     try {
-      await axios.delete(`${BASE_URL_PROD}/environments/delete/${data}`);
-      console.log("datadatadatadata",data)
+      let res = await axios.delete(`${BASE_URL_PROD}/environments/delete/${data}`);
+      return res.data
     } catch (error) {
       throw new Error('Failed to delete environment');
     }
