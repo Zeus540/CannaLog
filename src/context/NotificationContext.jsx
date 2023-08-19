@@ -34,8 +34,13 @@ export const NotificationProvider = ({children}) =>{
 
     }, [user])
 
+    const incomingNotifacation = ()=>{
+      setNewNotification(true)
+    }
+
+
     return(
-        <NotificationContext.Provider value={{newNotification}}>
+        <NotificationContext.Provider value={{newNotification,incomingNotifacation}}>
         {children}
         </NotificationContext.Provider>
     )

@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import {
     selectPublicJournal,
     selectEnvironments,
-    selectPlantActionTypes
+    selectPlantActionTypes,
+    selectIsLoggedIn
 } from '../../features'
 import { useParams } from 'react-router-dom'
 import { AiOutlineEye } from 'react-icons/ai'
@@ -17,7 +18,7 @@ import { getElapsedDays } from '../../helpers/getElapsedDays'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
-
+import { format } from 'date-fns';
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 
@@ -56,17 +57,22 @@ function PublicPlantDetailed() {
     const [coverImage, setCoverImage] = useState('') 
 
     let plants = useSelector(selectPublicJournal)
+    let LoggedIn = useSelector(selectIsLoggedIn)
+    
     let environments = useSelector(selectEnvironments)
     let plant_action_types = useSelector(selectPlantActionTypes)
 
     const params = useParams()
     const socket = useSocket()
 
-    useEffect(() => {
-        getActions()
-    }, [])
+
 
  
+    useEffect(() => {
+        getActions()
+   
+    }, [])
+
     useEffect(() => {
         if (socket) {
             socket.on(`action_taken${params.plant_id}`, (data) => {
@@ -82,8 +88,14 @@ function PublicPlantDetailed() {
 
     
     useEffect(() => {
-        setPlant(plants.plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0])
-        setCoverImage(plants.plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0]?.cover_img)
+
+        let plant = plants.plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0]
+
+        if(LoggedIn){
+            updateView(plant)
+        }
+        setPlant(plant)
+        setCoverImage(plant?.cover_img)
       
         axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
         .then((response)=>{
@@ -114,6 +126,27 @@ function PublicPlantDetailed() {
             }).catch((err) => {
                 console.log(err)
             })
+    }
+
+    const updateView = async (plant) => {
+       
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        let data = {
+            creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
+            timezone: userTimezone,
+            plant_user_id:plant.user_id
+        }
+
+        axios.post(`${BASE_URL_PROD}/plants/viewed/${params.plant_id}`,data)
+        .then((response)=>{
+            console.log(response)
+        })
+        
+        .catch((err)=>{
+            console.log(err)
+        })
+
     }
 
     const openModal = (type, action) => {
@@ -186,7 +219,7 @@ function PublicPlantDetailed() {
                                 <p><BiLike /> {plant?.likes}</p>
                             </div>
                             <div>
-                                <p><GoCommentDiscussion /> {plant?.likes}</p>
+                                <p><GoCommentDiscussion /> 0</p>
                             </div>
                         </ImgHolderTopInfoInnerRight>
                     </ImgHolderTopInfoInner>

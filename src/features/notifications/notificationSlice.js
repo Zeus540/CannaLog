@@ -12,7 +12,10 @@ export const notificationSlice = createSlice({
     name:'notifications',
     initialState,
     reducers:{
-
+      incomingNotification:(state,payload)=>{
+        state.notifications.push(payload.payload)
+      },
+     
     },
     extraReducers:(builder)=>{
         builder
@@ -32,5 +35,6 @@ export const notificationSlice = createSlice({
     }
 })
 
+export const {incomingNotification} =  notificationSlice.actions;
 export const selectNotifications = (state) => state.notifications.notifications;
 export const selectNotificationsIsLoading = (state) => state.notifications.loading;
