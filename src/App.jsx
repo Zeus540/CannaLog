@@ -35,6 +35,10 @@ let light_theme = {
     primary: '#ffffff',
     secondary: '#f3f4f6',
   },
+  notification_card:{
+    active:'#000000',
+    inactive:'#101010'
+  }
 }
 
 let dark_theme = {
@@ -68,6 +72,10 @@ let dark_theme = {
     primary: ' #000000',
     secondary: '#151515',
   },
+  notification_card:{
+    active:'#000000',
+    inactive:'#101010'
+  }
 }
 
 
@@ -93,11 +101,11 @@ function App() {
 
 
   return (
-    <>
+    <div onClick={()=>{console.log("trigger sound")}}>
       <ThemeProvider theme={theme}>
         <AnimatedRoutes themeType={themeType} toggleTheme={toggleTheme}/>
       </ThemeProvider>
-    </>
+    </div>
   )
 }
 

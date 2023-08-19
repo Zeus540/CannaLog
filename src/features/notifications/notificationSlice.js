@@ -13,7 +13,7 @@ export const notificationSlice = createSlice({
     initialState,
     reducers:{
       incomingNotification:(state,payload)=>{
-        state.notifications.push(payload.payload)
+        state.notifications.unshift(payload.payload)
       },
      
     },

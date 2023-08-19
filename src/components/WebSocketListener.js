@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 import { useSocket } from '../context/SocketContext'
 import { useNotification } from '../context/NotificationContext'
 import { useSnackbar } from 'notistack';
-import Beep from '../assets/sounds/notify.mp3'
+import Beep from '../assets/sounds/livechat.mp3'
 
 const WebSocketListener = () => {
     const user = useSelector(selectUser)
