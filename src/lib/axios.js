@@ -13,16 +13,24 @@ axios.interceptors.response.use(
 
     function (error){
 
-    
-    //    if(error.response.status === 401){
-    
-    //     axios.post(`${BASE_URL_PROD}/logout`).then((results)=>{
-    //         window.location.replace('/')
-    //         })
-    //    }
-
        return Promise.reject(error)
     }
 )
+
+axios.interceptors.request.use(
+    function (config) {
+
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      config.data = {
+        ...config.data,
+        timezone: userTimezone,
+      };
+  
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
 export default axios

@@ -10,6 +10,7 @@ import {
   selectMyPlants,
   selectEnvironments,
   selectEnvironmentsIsLoading,
+  selectEnvironmentsHasMore,
   addEnvironmentLocally,
   editEnvironmentLocally,
   selectUser,
@@ -22,6 +23,8 @@ import { AnimatePresence } from 'framer-motion'
 import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
+import { useInView } from "framer-motion"
+
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
 display:flex;
@@ -32,26 +35,52 @@ flex-wrap: wrap;
 }
 `
 
+const LoadMoreHolder = styled(m.div)`
+margin: 20px;
+color: ${(props)=>props.theme.accent};
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+font-size: 18px;
+button{
+  cursor: pointer;
+}
+`
+
 const Environments = () => {
 
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
-
+  const [pageBottom, setPageBottom] = useState(false)
+  
   const dispatch = useDispatch()
 
   const environments = useSelector(selectEnvironments)
   const environmentsIsLoading = useSelector(selectEnvironmentsIsLoading)
 
   const myPlants = useSelector(selectMyPlants)
-
+  const hasMore = useSelector(selectEnvironmentsHasMore)
+  
   let environmentsLength = environments.length
 
-  const user = useSelector(selectUser)
-  const socket = useSocket()
-  const { enqueueSnackbar } = useSnackbar()
 
+  const lastCard = useRef(null);
   
+  pageBottom
+
+  useEffect(() => {
+    if(pageBottom){
+      console.log("hasMore",hasMore)
+      if(hasMore){
+        dispatch(fetchEnvironments(environments[environments.length - 1]))
+      }
+      
+    }
+   
+
+  }, [pageBottom])
+
   // useEffect(() => {
  
   //   if(socket.connected){
@@ -84,7 +113,33 @@ const Environments = () => {
     
   // },[socket]);
 
- 
+  useEffect(() => {
+    if(environments?.length == 0){
+      dispatch(fetchEnvironments())
+    }
+
+  }, [])
+
+ useEffect(() => {
+
+  const handleScroll = () => {
+   
+    const lastCardRect = lastCard.current.getBoundingClientRect();
+
+    const isElementInViewport = (
+      lastCardRect.top >= 0 &&
+      lastCardRect.bottom <= window.innerHeight
+    );
+
+    setPageBottom(isElementInViewport)
+  };
+
+  window.addEventListener('scroll',handleScroll)
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, [lastCard])
 
 
   const openModal = (type, data) => {
@@ -125,6 +180,7 @@ const Environments = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.25 }}
           exit={{ opacity: 0 }}
+          
         >
           {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
           <Holder>
@@ -142,10 +198,11 @@ const Environments = () => {
             <EnviromentHolder
             >
 
-              <AnimatePresence >
+              
                 {environments?.map((e, index) => {
-                  return (
+                   return (
                     <EnviromentCard
+                   
                       key={index}
                       length={environmentsLength}
                       index={index}
@@ -160,11 +217,18 @@ const Environments = () => {
                       openModal={openModal} />
                   )
                 })}
-              </AnimatePresence>
+            
 
             </EnviromentHolder>
 
-
+      {hasMore ? 
+      <LoadMoreHolder ref={lastCard} >
+        <button onClick={()=>{setPageBottom(true)}}>Load More</button>
+      </LoadMoreHolder> 
+      : 
+      <LoadMoreHolder>
+        No More Date to Load
+      </LoadMoreHolder>}
           </Holder>
         </Root>
       }

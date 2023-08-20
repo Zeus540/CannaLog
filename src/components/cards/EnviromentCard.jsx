@@ -33,11 +33,10 @@ import {
  import { FiEdit } from "react-icons/fi";
  import { RiDeleteBin5Line } from 'react-icons/ri';
 
- 
-const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_updated, myPlants,environment_type_name,openModal,data,index,length }) => {
+const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_updated, myPlants,environment_type_name,openModal,data,index,length,refValue }) => {
   const [height, setHeight] = useState(0);
   const [readMore, setReadMore] = useState(false);
-  const elementRef = useRef(null);
+
   const navigate = useNavigate()
   
   useEffect(() => {
@@ -59,7 +58,7 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
    
   }
   
-
+  
   return (
   
     <Root 
@@ -67,7 +66,7 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
     animate={{ opacity: 1 }}
     transition={{ duration: 0.1 }}
     exit={{ opacity: 0, transition: { duration: 0.1 } }}
-
+    ref={index == length - 1 ? refValue : null}
     >
       <EnviromentCardImageHolder onClick={() => { setReadMore(!readMore) }}>
         <EnviromentCardImage src={cover_img} width="100%" />
@@ -84,7 +83,7 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
         <Divider></Divider>
           <EnviromentHolderHeading>{myPlants?.length > 1 ? `${myPlants?.length} Plants` : `${myPlants?.length} Plant`} </EnviromentHolderHeading>
           <PlantHolderOutter>
-            {myPlants?.map((p,index) => {
+            {JSON?.parse(data.plants)?.map((p,index) => {
               return (
                 <PlantHolder key={index} onClick={()=>{handleRedirect(p)}}>
                   <PlantImageHolder src={p.cover_img} width="100%" />

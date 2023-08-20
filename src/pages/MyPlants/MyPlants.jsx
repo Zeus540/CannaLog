@@ -8,6 +8,7 @@ import {
   selectMyPlants,
   isLoadingMyPlants,
   selectUser,
+  fetchMyPlants
 } from '../../features'
 import PlantCard from '../../components/cards/PlantCard'
 import PopupModal from '../../components/popupModal/PopupModal'
@@ -45,10 +46,7 @@ const MyPlants = () => {
   
   useEffect(() => {
 
-    if (socket) {
-
-
-    }
+    dispatch(fetchMyPlants())
 
   }, [socket]);
 

@@ -6,6 +6,7 @@ import { editEnvironment } from "./editEnvironmentThunk";
 
 let initialState = {
     loading:true,
+    hasMore:true,
     environments:[],
     error:'',
 }
@@ -31,12 +32,13 @@ export const environmentsSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(fetchEnvironments.pending, (state) => {
-          state.loading = true;
+          state.loading = false;
           state.error = null;
         })
         .addCase(fetchEnvironments.fulfilled, (state, action) => {
           state.loading = false;
-          state.environments = action.payload;
+          state.environments = [...state.environments,...action.payload.data];
+          state.hasMore = action.payload.total > state.environments.length
         })
         .addCase(fetchEnvironments.rejected, (state, action) => {
           state.loading = false;
@@ -80,3 +82,5 @@ export const {deleteEnvironmentLocally,addEnvironmentLocally,editEnvironmentLoca
 
 export const selectEnvironments = (state) => state.environments.environments;
 export const selectEnvironmentsIsLoading = (state) => state.environments.loading;
+export const selectEnvironmentsHasMore = (state) => state.environments.hasMore;
+

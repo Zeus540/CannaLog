@@ -146,9 +146,9 @@ const Notifications = () => {
                     
 
                    {getElapsedDaysNotificationsFull(n.creation_date).minutesDifference < 59 ? 
-                   <>{getElapsedDaysNotificationsFull(n.creation_date).minutesDifference} Mins ago</> 
+                   <>{getElapsedDaysNotificationsFull(n.creation_date).minutesDifference < 1 ? <>now</> : <>{getElapsedDaysNotificationsFull(n.creation_date).minutesDifference}m ago</>}</> 
                    : 
-                   <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference > 24 ? <>{getElapsedDaysNotifications(n.creation_date) > 1 ? <>{getElapsedDaysNotifications(n.creation_date)} Day ago</> : <>{getElapsedDaysNotifications(n.creation_date)} Days ago</>}</> : <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference < 2 ? <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference} Hour ago</> :<>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference} Hours ago</> } </>}</>
+                   <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference > 24 ? <>{getElapsedDaysNotifications(n.creation_date) > 1 ? <>{getElapsedDaysNotifications(n.creation_date)} day ago</> : <>{getElapsedDaysNotifications(n.creation_date)} days ago</>}</> : <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference < 2 ? <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference} hour ago</> :<>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference} hours ago</> } </>}</>
                    }
 
                    </NotificationCardDate>
