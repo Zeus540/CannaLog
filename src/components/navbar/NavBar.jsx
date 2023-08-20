@@ -310,7 +310,7 @@ align-items: center;
 const UserAvatar = styled.p`
 width: 15px;
 height: 15px;
-color: ${props => props.theme.text};
+color: white;
     padding: 15px;
     background:  ${props => props.theme.accent};
    
@@ -340,6 +340,10 @@ cursor: pointer;
 @media (max-width: 768px){
 
 }
+`;
+
+const StyledLink = styled(Link)`
+display: flex;
 `;
 
 const ThemeSvg = styled.div`
@@ -461,9 +465,9 @@ const handleMenuClose= ()=>{
              <NotificationHolder>
               
               <NotificationCount newNotification={newNotification}/>
-              <Link to="/notifications">
+              <StyledLink to="/notifications">
              <BiBell />
-             </Link>
+             </StyledLink>
              </NotificationHolder>
 
                   <UserInfoTop onClick={() => {  handleMenuOpen() }}>
@@ -611,7 +615,7 @@ const handleMenuClose= ()=>{
 </>
         }
 
-        {isLoggedIn &&
+        {/* {isLoggedIn &&
 
 
 
@@ -628,7 +632,7 @@ const handleMenuClose= ()=>{
               </ButtonM>
             </div> 
           </UserInfoHolder>
-        }
+        } */}
 
 
 

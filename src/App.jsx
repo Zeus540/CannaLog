@@ -36,8 +36,8 @@ let light_theme = {
     secondary: '#f3f4f6',
   },
   notification_card:{
-    active:'#000000',
-    inactive:'#101010'
+    active:'#ffffff',
+    inactive:'#ebebeb',
   }
 }
 

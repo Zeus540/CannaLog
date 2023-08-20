@@ -72,7 +72,7 @@ height: 9px;
 const NotificationCardAvatar = styled.p`
 width: 15px;
 height: 15px;
-color: ${props => props.theme.text}!important;
+color: white!important;
     padding: 15px;
     background:  ${props => props.theme.accent};
    
@@ -90,6 +90,10 @@ margin-top: 15px;
 const NotificationCardText = styled.div`
 display: flex;
 align-items: center;
+
+p{
+
+}
 `
 const NotificationCardDate = styled.div`
 display: flex;
@@ -102,7 +106,7 @@ sub{
 
 const NotificationAmount = styled.h3`
 display: flex;
-color: ${(props)=>props.theme.text};
+color: white;
 background: ${(props)=>props.theme.accent};
 border-radius: 5px;
 width: fit-content;
@@ -136,7 +140,7 @@ const Notifications = () => {
 
                     <NotificationCardTextHolder>
                    <NotificationCardText>
-                   <h1>{n.actor_user_name}</h1>&nbsp;&nbsp;{n.notification_action_type}&nbsp;&nbsp;your plant<p>&nbsp;&nbsp;{n.plant_id}</p> <NotificationCardActiveDot/>
+                   <h1>{n.actor_user_name}</h1>&nbsp;&nbsp;{n.notification_action_type}&nbsp;&nbsp;your plant<h1>&nbsp;&nbsp;{n.plant_id}</h1> <NotificationCardActiveDot/>
                    </NotificationCardText>
                    <NotificationCardDate>
                     
@@ -155,17 +159,24 @@ const Notifications = () => {
             }else{
                 return(
                     <NotificationCard>
-                
-                <NotificationCardAvatar>
+             
+             <NotificationCardAvatar>
                     {n?.actor_user_name?.charAt(0)}
                     </NotificationCardAvatar>
 
                     <NotificationCardTextHolder>
                    <NotificationCardText>
-                   <h1>{n.actor_user_name}</h1>&nbsp;&nbsp;{n.notification_action_type}&nbsp;&nbsp;your plant<p>&nbsp;&nbsp;{n.plant_id}</p>
+                   <h1>{n.actor_user_name}</h1>&nbsp;&nbsp;{n.notification_action_type}&nbsp;&nbsp;your plant<h1>&nbsp;&nbsp;{n.plant_id}</h1>
                    </NotificationCardText>
                    <NotificationCardDate>
-        
+                    
+
+                   {getElapsedDaysNotificationsFull(n.creation_date).minutesDifference < 59 ? 
+                   <>{getElapsedDaysNotificationsFull(n.creation_date).minutesDifference} Mins ago</> 
+                   : 
+                   <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference > 24 ? <>{getElapsedDaysNotifications(n.creation_date) > 1 ? <>{getElapsedDaysNotifications(n.creation_date)} Day ago</> : <>{getElapsedDaysNotifications(n.creation_date)} Days ago</>}</> : <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference < 2 ? <>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference} Hour ago</> :<>{getElapsedDaysNotificationsFull(n.creation_date).hoursDifference} Hours ago</> } </>}</>
+                   }
+
                    </NotificationCardDate>
                    </NotificationCardTextHolder>
                    </NotificationCard>
