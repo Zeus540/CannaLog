@@ -226,9 +226,7 @@ const Environments = () => {
         <button onClick={()=>{setPageBottom(true)}}>Load More</button>
       </LoadMoreHolder> 
       : 
-      <LoadMoreHolder>
-        No More Date to Load
-      </LoadMoreHolder>}
+      null}
           </Holder>
         </Root>
       }
