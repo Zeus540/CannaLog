@@ -110,7 +110,7 @@ const MyPlants = () => {
                       length={myPlants.length}
                       index={index}
                       data={p}
-                      cover_thumbnail={p.cover_thumbnail}
+                      cover_thumbnail={p?.cover_thumbnail}
                       name={p.name}
                       environment_type_name={p.environment_type_name}
                       light_exposure={p.light_exposure}

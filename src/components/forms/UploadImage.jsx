@@ -28,9 +28,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
   const [uploadDate, setUploadDate] = useState(format(new Date(),'yyyy-MM-dd HH:mm:ss'))
   const [imagePreview, setImagePreview] = useState(null);
   const params = useParams()
-  const [formObject, setFormObject] = useState({
-    "file": "",
-  })
+  const [image, setImage] = useState('')
 
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   
@@ -38,15 +36,21 @@ function UploadImage({ modalType, openModal, data, plant }) {
     setLoading(true)
     e.preventDefault()
 
-    let formData = new FormData()
-
-    formData.append("file", formObject.file)
-    formData.append("plant_id", params.plant_id)
-    formData.append("creation_date", uploadDate)
-    formData.append("timezone", userTimezone)
 
 
-    axios.post(`${BASE_URL_PROD}/plants/take_action/${4}`, formData)
+    let formData = {
+      file:image,
+      plant_id:params.plant_id,
+      creation_date:uploadDate
+    }
+
+
+    axios.post(`${BASE_URL_PROD}/plants/take_action/${4}`, formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Important for sending form data
+      },
+    })
       .then((response) => {
         if (response.status == 200) {
           openModal(modalType)
@@ -61,7 +65,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
 
   const handleChange = (e, type) => {
 
-    setFormObject({ ...formObject, file: e.target.files[0] });
+    setImage(e.target.files[0]);
 
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
@@ -81,7 +85,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
   }
 
   return (
-    <form encType='multipart/form-data' onSubmit={(e) => { handleSubmit(e) }}>
+    <form  onSubmit={(e) => { handleSubmit(e) }}>
  
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StyledDateTimePicker

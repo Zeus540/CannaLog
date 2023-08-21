@@ -55,6 +55,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     if(isLoggedIn){
         dispatch(fetchPublicPlantsSingedIn())
         dispatch(fetchEnvironmentTypes())
+        dispatch(fetchMyPlants())
         dispatch(fetchPlantActionTypes())
         console.log("LoggedIn",isLoggedIn)
     }else{
