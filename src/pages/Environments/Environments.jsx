@@ -11,6 +11,7 @@ import {
   selectEnvironments,
   selectEnvironmentsIsLoading,
   selectEnvironmentsHasMore,
+  selectNextCursor,
   addEnvironmentLocally,
   editEnvironmentLocally,
   selectUser,
@@ -61,26 +62,14 @@ const Environments = () => {
 
   const myPlants = useSelector(selectMyPlants)
   const hasMore = useSelector(selectEnvironmentsHasMore)
-  
+
+
+const next_cursor = useSelector(selectNextCursor)
   let environmentsLength = environments.length
 
 
-  const lastCard = useRef(null);
+ 
   
-  pageBottom
-
-  useEffect(() => {
-    if(pageBottom){
-      console.log("hasMore",hasMore)
-      if(hasMore){
-        dispatch(fetchEnvironments(environments[environments.length - 1]))
-      }
-      
-    }
-   
-
-  }, [pageBottom])
-
   // useEffect(() => {
  
   //   if(socket.connected){
@@ -113,34 +102,49 @@ const Environments = () => {
     
   // },[socket]);
 
+  const lastCard = useRef(null);
+  
   useEffect(() => {
     if(environments?.length == 0){
-      dispatch(fetchEnvironments())
+      dispatch(fetchEnvironments(""))
     }
 
   }, [])
 
  useEffect(() => {
 
-  const handleScroll = () => {
-   
-    const lastCardRect = lastCard.current.getBoundingClientRect();
+    const handleScroll = () => {
+      const lastCardRect = lastCard.current.getBoundingClientRect();
+      if(lastCard.current !== null){
+ 
+  
+      const isElementInViewport = (
+        lastCardRect.top >= 0 &&
+        lastCardRect.bottom <= window.innerHeight
+      );
 
-    const isElementInViewport = (
-      lastCardRect.top >= 0 &&
-      lastCardRect.bottom <= window.innerHeight
-    );
+      setPageBottom(isElementInViewport)
+    }
+    };
 
-    setPageBottom(isElementInViewport)
-  };
+  
+
 
   window.addEventListener('scroll',handleScroll)
-
   return () => {
     window.removeEventListener('scroll', handleScroll);
   };
 }, [lastCard])
 
+useEffect(() => {
+  if(pageBottom){
+
+    if(hasMore){
+      dispatch(fetchEnvironments(next_cursor))
+    }
+    
+  }
+}, [pageBottom])
 
   const openModal = (type, data) => {
     switch (type) {
@@ -202,7 +206,7 @@ const Environments = () => {
                 {environments?.map((e, index) => {
                    return (
                     <EnviromentCard
-                   
+                    refValue={lastCard}
                       key={index}
                       length={environmentsLength}
                       index={index}

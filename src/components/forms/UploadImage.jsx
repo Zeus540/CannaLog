@@ -75,7 +75,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
   };
 
   const handleDate = (date ) => {
-    console.log("date",date)
+    
     setUploadDate(date)
 
   }

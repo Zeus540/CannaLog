@@ -13,11 +13,9 @@ function Login() {
   const handleChange = (type, e) => {
     switch (type) {
       case "name":
-        console.log({ ...userObj, name: e.target.value })
         setUserObj({ ...userObj, name: e.target.value })
         break;
       case "password":
-        console.log({ ...userObj, password: e.target.value })
         setUserObj({ ...userObj, password: e.target.value })
         break;
       default:

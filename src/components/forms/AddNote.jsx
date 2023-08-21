@@ -47,7 +47,7 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
 
 
     const handleDate = (values,date) => {
-        console.log("date",date)
+        
         values.creation_date = date
     }
 

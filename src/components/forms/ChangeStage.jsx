@@ -85,7 +85,7 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
     }
 
     const handleAction = async(values, setSubmitting) => {
-        console.log("values", values)
+    
         setSubmitting(true)
 
         let res = await  dispatch(takeAction(values))
@@ -102,7 +102,6 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
                 initialValues={intialValues}
                 validationSchema={AddActionSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    console.log("values",values)
                     setTimeout(() => {
                         handleAction(values, setSubmitting)
                     }, 400);
