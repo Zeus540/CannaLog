@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
@@ -18,12 +18,14 @@ import { BiBell } from "react-icons/bi";
 import { useNotification } from "../../context/NotificationContext";
 
 const Root = styled.div`
-
-position: sticky;
+background:${(props) => props.scrollDistance >= 60 ? `${props.theme.primary}`: ""};
+position: fixed;
+transition: background 0.5s ease;
     top: 0;
     z-index:50;
+    width: 100%;
     box-shadow:  0px 0px 20px #00000012;
-    background:  ${props => props.theme.nav.primary};
+ 
   
   @media (max-width: 425px) {
     margin: 0px 0px;
@@ -33,7 +35,9 @@ position: sticky;
 `;
 
 const Inner = styled.div`
-height: 60px;
+
+padding:10px 20px;
+
 margin: 0px auto;
 max-width: 1920px;
 
@@ -48,12 +52,6 @@ max-width: 1920px;
 
 
 
-const Empty = styled.div`
-width: calc(30px + 5px);
-@media (min-width: 768px) {
-  display: none;
-}
-`;
 
 
 
@@ -81,32 +79,28 @@ h1{
     font-size: 20px;
   }
 `;
-const Img = styled.img`
-
-`;
 
 
 const Div = styled.div`
-width: calc(100% / 3);
+display: flex;
+align-items: center;
+transition: all 0.5s ease;
+:nth-child(1){
+  transform:${(props) => props.scrollDistance >= 60 ? "translateX(0px)": "translateX(-25px)"};
 
+}
 `;
 const DivMenu = styled.div`
-width: calc(100% / 3 );
-padding-left: 20px;
+transition: all 0.5s ease;
+opacity:${(props) => props.scrollDistance >= 60 ? 100: 0};
+visibility:${(props) => props.scrollDistance >= 60 ? "visible": " collapse"};
+
+padding-right: 15px;
 @media (min-width: 1920px) {
-  padding-left: 0px;
+  padding-right: 0px;
 }
 `;
 
-const LogoHolderText = styled.span`
-
-font-size: 12px;
-margin-top: -14px;
-display: block;
-text-align: end;
-padding-bottom: 3px;
-color: ${props => props.theme.text};
-`;
 
 const LinkHolder = styled.div`
   display: flex;
@@ -132,16 +126,16 @@ const LinkHolderMobile = styled.div`
   display: flex;
   position: fixed;
 
-  background: linear-gradient(90deg, ${props => props.theme.drawer.primary}, ${props => props.theme.drawer.secondary});
+  background: linear-gradient(90deg, ${props => props.theme.drawer.primary}, ${props => props.theme.drawer.primary});
   left: 0;
   min-width: 200px;
 
-  bottom:0px;
+
   flex-direction: column;
   transition: 0.5s all ease;
   transform: ${(props) => !props.mobileMenu ? "translateX(-101%)" : "translateX(0%)"};
   justify-content: space-between;
-  min-height:calc(100vh - 56px) ;
+  // min-height:calc(100vh - 56px) ;
   z-index: 50;
   box-shadow:  0px 0px 20px #00000012;
   @media (min-width: 0px) and (max-width: 767px) {
@@ -199,17 +193,6 @@ const MenuDropItem = styled.div`
 
 `;
 
-const MenuLinkTop = styled(NavLink)`
-  margin: 0px 0px;
-  padding: 0px 10px;
-
-
-  align-items: center;
-  text-decoration: none;
-  display: flex;
- 
-
-`;
 
 const Svg = styled.svg`
 width:20px;
@@ -227,7 +210,7 @@ const MenuLinkMobile = styled(NavLink)`
 
 
   &:hover {
-    border-bottom: 4px solid #8bab50;
+    border-bottom: 4px solid #8bc34a;
   }
 
 `;
@@ -239,21 +222,6 @@ const MenuLinklogo = styled(NavLink)`
 `;
 
 
-const ButtonM = styled.button`
-
-width: fit-content;
-border: none;
-background: #F44336;
-color: ${props => props.theme.text};
-padding: 15px;
-cursor: pointer;
-
-display: flex;
-@media (min-width: 768px){
-  
-  display:block
-}
-`;
 const BurgerMenuHolder = styled.div`
 cursor: pointer;
 
@@ -286,19 +254,6 @@ flex-direction: column;
 }
 `;
 
-const UserInfoHolder = styled.div`
-display: flex;
-justify-content: space-between;
-
-
-`;
-
-const UserInfo = styled.div`
-display: flex;
-color: ${props => props.theme.text};
-padding: 0px 10px;
-align-items: center;
-`;
 
 const UserInfoTop = styled.div`
 display: flex;
@@ -394,6 +349,22 @@ const navigate = useNavigate()
 
 const {newNotification} = useNotification()
 
+const [scrollDistance, setScrollDistance] = useState(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+    console.log(window.scrollY)
+    setScrollDistance(window.scrollY);
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+
 
 const logOut = () => {
   axios.post(`${BASE_URL_PROD}/logout`).then((results)=>{
@@ -424,11 +395,15 @@ const handleMenuClose= ()=>{
 }
   return (
 
-    <Root onClick={() => {
+    <Root
+    scrollDistance={scrollDistance}
+    onClick={() => {
       OffClick();
     }}>
-      <Inner>
-        <DivMenu>
+      <Inner scrollDistance={scrollDistance}  >
+
+      <Div scrollDistance={scrollDistance}>
+      <DivMenu scrollDistance={scrollDistance}>
           <BurgerMenuHolder onClick={() => {
             setMobileMenu(!mobileMenu);
           }}>
@@ -442,8 +417,6 @@ const handleMenuClose= ()=>{
 
           </BurgerMenuHolder>
         </DivMenu>
-
-        <Div>
           <MenuLinklogo to="/">
             <LogoHolder>
               {/* <Img src={Logo} width="100%" /> */}
@@ -452,15 +425,19 @@ const handleMenuClose= ()=>{
             </LogoHolder>
           </MenuLinklogo>
         </Div>
+        
+      
 
-   
+     
 
+        {isLoggedIn && (
+      
         <Div>
           <LinkHolder>
     
-  
+        
 
-            {isLoggedIn && (
+            
               <>
              <NotificationHolder>
               
@@ -480,7 +457,7 @@ const handleMenuClose= ()=>{
 
 
               </>
-            )}
+          
 
 {isLoggedIn && 
             <LinkHolderMenu menuOpen={menuOpen}>
@@ -514,42 +491,39 @@ const handleMenuClose= ()=>{
             </LinkHolderMenu>
 }
 
-{!isLoggedIn && (
+
+          </LinkHolder>
+        </Div>
+ )}
+
+ 
+        {!isLoggedIn && (
               <MenuLinkLeft>
                 <MenuLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</MenuLink>
                 <MenuLink to="/sign-up">
                   <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</MenuLink>
               </MenuLinkLeft>
             )}
-
-          </LinkHolder>
-        </Div>
-
       </Inner>
 
       {/* //mobile */}
 
 
+      
       <LinkHolderMobile mobileMenu={ mobileMenu} >
 
-
-
-
-        <section>
+       
           <LinkHolderM>
         
-
-          {!isLoggedIn &&
           <MenuLinkMobile to="/public-plants" onClick={() => {  setMobileMenu(false); }}>
               <FlexLink>
 
                 <FlexLinkText>Public Plants</FlexLinkText>
               </FlexLink>
             </MenuLinkMobile>
-            }
-
-            {isLoggedIn &&
-              <>
+            {isLoggedIn && <>
+            
+           
                   <MenuLinkMobile to="/" onClick={() => {  setMobileMenu(false); }}>
               <FlexLink>
 
@@ -576,13 +550,13 @@ const handleMenuClose= ()=>{
                   <FlexLinkText>Growers</FlexLinkText>
                 </FlexLink>
               </MenuLinkMobile>
-
+              </>}
        
-              </>
-            }
+           
+          
           </LinkHolderM>
 
-        </section>
+    
 
         {!isLoggedIn &&
 
@@ -615,29 +589,7 @@ const handleMenuClose= ()=>{
 </>
         }
 
-        {/* {isLoggedIn &&
-
-
-
-          <UserInfoHolder>
-            <UserInfo>
-              <UserAvatar>
-              {user?.user_name?.charAt(0)}
-              </UserAvatar>
-              
-            </UserInfo>
-            <div >
-              <ButtonM >
-                <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M534.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L434.7 224 224 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM192 96c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-53 0-96 43-96 96l0 256c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" /></Svg>
-              </ButtonM>
-            </div> 
-          </UserInfoHolder>
-        } */}
-
-
-
-
-
+      
       </LinkHolderMobile>
 
 

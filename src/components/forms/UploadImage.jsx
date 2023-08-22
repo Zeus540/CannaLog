@@ -110,7 +110,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
           height="40"
           width="40"
           radius="9"
-          color="#8bab50"
+          color="#8bc34a"
           ariaLabel="three-dots-loading"
           wrapperStyle={{}}
           wrapperClassName=""

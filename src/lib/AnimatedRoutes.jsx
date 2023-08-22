@@ -104,7 +104,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                         <>
                           <Route path="/public-plants" element={<PublicPlants />} />
                           <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
-                            <Route path="/" element={<PreLoader Page={HomePage} data={publicPlants.loading} />} />
+                            <Route path="/" element={<HomePage />} />
                             <Route path="/sign-in" element={<Login />} />
                             <Route path="/sign-up" element={<Register />} />
                             <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />

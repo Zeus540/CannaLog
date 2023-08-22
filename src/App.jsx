@@ -2,17 +2,21 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import AnimatedRoutes from './lib/AnimatedRoutes'
 import { ThemeProvider } from 'styled-components'
-
+import Black from './assets/images/black.jpg'
+import White from './assets/images/white.jpg'
 
 let light_theme = {
   primary: '#ffffff',
   primary_light: '#f3f4f6',
   secondary: ' #f3f4f6',
-  accent: '#8bab50',
+  accent: '#8bc34a',
   text: '#0e1e3f',
   textW: '#ffffff',
   warn: "#f44336",
   input:"#ffffff",
+  banner:{
+    image:White
+  },
   drawer: {
     primary: '#ffffff',
     secondary: '#ffffff',
@@ -20,11 +24,11 @@ let light_theme = {
   btn: {
     primary: '#3f3838',
     secondary: '#0000009c',
-    text: '#8bab50',
+    text: '#8bc34a',
     hover: '#8bab50bd'
   },
   divider: {
-    primary: '#8bab50',
+    primary: '#8bc34a',
   },
   modal: {
     primary: '#ffffff',
@@ -45,11 +49,14 @@ let dark_theme = {
   primary: '#000000',
   primary_light: '#121212',
   secondary: '#151515',
-  accent: '#8bab50',
+  accent: '#8bc34a',
   text: 'white',
   textW: '#000000',
   warn: "#f44336",
   input:"#ffffff",
+  banner:{
+    image:Black
+  },
   drawer: {
     primary: 'black',
     secondary: 'black',

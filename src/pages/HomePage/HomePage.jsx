@@ -3,22 +3,14 @@ import { Link } from 'react-router-dom';
 import {
   Root,
   HeroBanner,
+  HeroOverLay,
   HeroBannerTextHolder,
   HeroTextBig,
-  HeroTextBigSpan,
-  HeroTextBigSup,
-  MenuLinkHolder,
-  Section,
-  SectionInnerTop,
   HeroText,
-  DiaryHolder,
-  Diary,
-  DiaryImageHolder,
-  DiaryTextHolder,
-  DiaryText,
+  Divider,
+  HeroTextHolder,
   PricingItemHeading,
   PricingItemText,
-  WaveImg,
   FeatureSection,
   PricingSectionHeadingW,
   SectionInner,
@@ -33,10 +25,9 @@ import {
   Li,
   MenuLink 
   } from './HomePage_styles'
-  import { ButtonOutlined } from '../../utils/global_styles';
+  import { ButtonOutlined,Button } from '../../utils/global_styles';
 import { useSelector } from 'react-redux';
 import { selectPublicJournal } from '../../features'
-import Wave from '../../assets/images/wave.svg'
 import { useDispatch } from 'react-redux';
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
 
@@ -53,19 +44,26 @@ const HomePage = () => {
     transition={{duration:1}}
  
     > 
-      <HeroBanner>
-
+      <HeroBanner >
+        <HeroOverLay>
         <HeroBannerTextHolder>
-          <HeroTextBig>Welcome to <br /> <HeroTextBigSpan>CANNA</HeroTextBigSpan>LOG   <HeroTextBigSup>&#174;</HeroTextBigSup>	</HeroTextBig>
+          <HeroTextBig>Explore the Journey <br/>of Growth</HeroTextBig>
+          <HeroTextHolder>
+            <Divider></Divider>
+          <HeroText>
+            <p>Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</p>
+          <Button>Sign Up Now</Button>
 
-          <MenuLinkHolder>
+          </HeroText>
 
-
-          </MenuLinkHolder>
+          
+          </HeroTextHolder>
+          
         </HeroBannerTextHolder>
+        </HeroOverLay>
       </HeroBanner>
 
-      <Section >
+      {/* <Section >
 
 
 
@@ -110,11 +108,7 @@ const HomePage = () => {
 
         </SectionInnerTop>
 
-
-        {/* <WaveImg src={Wave} /> */}
-
-
-      </Section>
+      </Section> */}
 
       <FeatureSection>
         <PricingSectionHeadingW>Features</PricingSectionHeadingW>

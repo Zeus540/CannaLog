@@ -86,7 +86,7 @@ color:  ${props => props.theme.text};
 
 border-radius:5px;
 cursor:pointer;
-border: 1px #8bab50 solid;
+border: 1px #8bc34a solid;
 `;
 
 const Heading = styled.h1`
@@ -136,7 +136,7 @@ const MenuLink = styled(NavLink)`
   color:  ${props => props.theme.accent};
   text-decoration: none;
   &:hover {
-    border-bottom: 4px solid #8bab50;
+    border-bottom: 4px solid #8bc34a;
   
   }
 

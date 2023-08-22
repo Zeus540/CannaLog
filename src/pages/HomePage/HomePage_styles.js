@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion as m } from 'framer-motion'
 import { Link } from 'react-router-dom';
-import Back from '../../assets/images/1686229213603.jpg'
+
 
 export const Root = styled(m.div)`
 padding-top: 0px;
@@ -10,20 +10,24 @@ background: ${props => props.theme.secondary};
 `;
 
 export const HeroBanner = styled.div`
-min-height:calc(60vh - 57px);
-background-image:url(${Back});
-flex-direction: column;
-background-color: #0000008a;
-background-blend-mode: overlay;
-background-position: center;
+
+background-image:${(props)=>`url(${props.theme.banner.image})`};
 background-size: cover;
+background-position: 100% 60%;
+`;
+export const HeroOverLay = styled.div`
+min-height:calc(100vh);
+background: linear-gradient(360deg, black, transparent);
+width:100%;
+height:500px;
+padding: 80px 60px;
 display: flex;
-justify-content: center;
-align-items: center;
-padding: 80px 20px;
+justify-content: end;
+
+flex-direction: column;
 @media (max-width: 425px) {
     margin: 0px 0px;
-    padding: 40px 20px;
+    padding: 60px 40px;
 
   }
   @media (min-width: 426px) and (max-width: 768px) {
@@ -31,32 +35,59 @@ padding: 80px 20px;
     padding: 40px 40px;
   }
 `;
-export const HeroText = styled.p`
-padding:10px;
-color: ${props => props.theme.text};
-`;
+
 export const HeroTextBig = styled.p`
 color:white;
 line-height: 50px;
 
-text-align: center;
+
     font-size: 50px;
     font-family: baloonB!important;
 `;
 
+export const HeroText = styled.p`
+color: ${props => props.theme.text};
+padding: 0px 20px;
+button{
+  margin-top: 25px;
+  border-radius: unset;
+  padding: 10px 20px;
+}
+`;
+
+export const HeroTextHolder = styled.div`
+display: flex;
+padding: 20px 0px;
+width: 30%;
+@media (max-width: 425px) {
+  width: unset;
+
+}
+
+`;
+
+export const Divider = styled.div`
+background: white;
+width: 500px;
+height: 2px;
+margin: 20px 0px;
+
+`;
+
+
 export const HeroTextBigSpan = styled.span`
 
 
-color:#8bab50;
+color:#8bc34a;
 text-align: center;
-    font-size: 50px;
+    font-size: 20px;
     font-family: baloonB!important;
 `;
 
 export const HeroTextBigSup = styled.sup`
 
 
-color:#8bab50;
+color:#8bc34a;
 text-align: center;
     font-size: 40px;
     font-family: baloonB!important;
@@ -111,12 +142,12 @@ export const SectionInner = styled.div`
 export const SectionInnerTop = styled.div`
 position: relative;
 z-index: 1;
-
+background: ${props => props.theme.primary};
 border-radius: 10px;
 max-width: 1920px;
-margin: 40px auto;
+margin: 0px auto;
 color:white;
-padding-bottom: 40px;
+padding: 40px 0px;
 
 padding: 10px;
     @media (max-width: 425px) {
@@ -182,10 +213,10 @@ padding: 8px 25px;
 width: fit-content;
 border: none;
 background: #fff0;
-color: #8bab50 ;
+color: #8bc34a ;
 border-radius: 5px;
 cursor: pointer;
-border: 1px #8bab50 solid;
+border: 1px #8bc34a solid;
 
 `;
 
@@ -200,6 +231,7 @@ z-index: 1;
 `;
 
 export const HeroBannerTextHolder = styled.div`
+
 
 
 `;
