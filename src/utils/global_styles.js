@@ -61,8 +61,8 @@ export const Button = styled(m.button)`
 color:  ${props => props.theme.btn.text};
 background:  ${props => props.theme.accent};
 font-size: 16px;
-padding:5px 10px;
-border-radius: 5px;
+padding:10px 20px;
+border-radius: 0px;
 font-weight: bold;
 cursor:pointer;
 `

@@ -9,7 +9,7 @@ let light_theme = {
   primary: '#ffffff',
   primary_light: '#f3f4f6',
   secondary: ' #f3f4f6',
-  accent: '#8bc34a',
+  accent: '#66b394',
   text: '#0e1e3f',
   textW: '#ffffff',
   warn: "#f44336",
@@ -24,11 +24,11 @@ let light_theme = {
   btn: {
     primary: '#3f3838',
     secondary: '#0000009c',
-    text: '#8bc34a',
+    text: '#66b394',
     hover: '#8bab50bd'
   },
   divider: {
-    primary: '#8bc34a',
+    primary: '#66b394',
   },
   modal: {
     primary: '#ffffff',
@@ -42,6 +42,9 @@ let light_theme = {
   notification_card:{
     active:'#ffffff',
     inactive:'#ebebeb',
+  },
+  glass:{
+    background:' rgba( 255, 255, 255, 0.25 )'
   }
 }
 
@@ -49,7 +52,7 @@ let dark_theme = {
   primary: '#000000',
   primary_light: '#121212',
   secondary: '#151515',
-  accent: '#8bc34a',
+  accent: '#66b394',
   text: 'white',
   textW: '#000000',
   warn: "#f44336",
@@ -82,6 +85,9 @@ let dark_theme = {
   notification_card:{
     active:'#000000',
     inactive:'#101010'
+  },
+  glass:{
+    background:'#04040485'
   }
 }
 

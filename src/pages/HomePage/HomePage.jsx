@@ -7,6 +7,7 @@ import {
   HeroBannerTextHolder,
   HeroTextBig,
   HeroText,
+  HeroTextExtra,
   Divider,
   HeroTextHolder,
   PricingItemHeading,
@@ -23,9 +24,12 @@ import {
   PricingItem,
   Ul,
   Li,
-  MenuLink 
+  IntroText,
+  Accent,
+  IntroTextHeading,
+  Section 
   } from './HomePage_styles'
-  import { ButtonOutlined,Button } from '../../utils/global_styles';
+  import {Button } from '../../utils/global_styles';
 import { useSelector } from 'react-redux';
 import { selectPublicJournal } from '../../features'
 import { useDispatch } from 'react-redux';
@@ -47,11 +51,11 @@ const HomePage = () => {
       <HeroBanner >
         <HeroOverLay>
         <HeroBannerTextHolder>
-          <HeroTextBig>Explore the Journey <br/>of Growth</HeroTextBig>
+          <HeroTextBig>Explore the Journey <br/>of <Accent>Growth</Accent></HeroTextBig>
           <HeroTextHolder>
             <Divider></Divider>
           <HeroText>
-            <p>Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</p>
+            <p>Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. <HeroTextExtra>Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</HeroTextExtra></p>
           <Button>Sign Up Now</Button>
 
           </HeroText>
@@ -63,6 +67,12 @@ const HomePage = () => {
         </HeroOverLay>
       </HeroBanner>
 
+      <Section >
+      <IntroTextHeading>From <Accent>Seed</Accent> to Story<br/> <Accent>Cultivate</Accent>, Log, and Illuminate</IntroTextHeading>
+      <IntroText>
+      Prepare to dive into a world that's all about growth – where you'll not only cultivate cannabis but also your own insights and revelations. With our unique logging platform, you'll be able to track the evolution of your plants while also documenting your personal journey. Watch as your efforts blossom into a tapestry of success, and let your logs become a testament to your dedication. Get ready to log, write, reflect, and celebrate the incredible path you're on. This is more than cultivation; it's a narrative of your own growth. The adventure awaits – are you ready to grow, write, and reflect like never before?
+      </IntroText>
+      </Section >
       {/* <Section >
 
 
@@ -152,11 +162,11 @@ const HomePage = () => {
               <Li>3 Grow Journals</Li>
               {/* <li>Limited Support</li> */}
             </Ul>
-            <ButtonOutlined>
+            <Button>
             <Link to="/sign-up">
               Get Started
             </Link>
-            </ButtonOutlined>
+            </Button>
           </PricingItem>
           <PricingItem >
             <PricingItemHeading>Premium</PricingItemHeading>
@@ -165,11 +175,11 @@ const HomePage = () => {
               <Li>Unlimited Grow Journals</Li>
               {/* <li>Premium Support</li> */}
             </Ul>
-            <ButtonOutlined>
+            <Button>
             <Link to="/">
               Coming Soon
             </Link>
-            </ButtonOutlined>
+            </Button>
           </PricingItem>
         </SectionInner>
       </PricingSection>

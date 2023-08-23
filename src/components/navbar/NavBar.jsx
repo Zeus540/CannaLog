@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/leaf.png";
 import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,9 +16,13 @@ import { useDispatch } from 'react-redux';
 import { socket } from "../../lib/socket";
 import { BiBell } from "react-icons/bi";
 import { useNotification } from "../../context/NotificationContext";
+import ProgressBar from "../progressBar/ProgressBar";
 
 const Root = styled.div`
-background:${(props) => props.scrollDistance >= 60 ? `${props.theme.primary}`: ""};
+background:${(props) => props.scrollDistance >= 60 ? `${props.theme.glass.background}`: ""};
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+
 position: fixed;
 transition: background 0.5s ease;
     top: 0;
@@ -50,20 +54,25 @@ max-width: 1920px;
   }
 `;
 
-
+const Img = styled.img`
+padding-left: 0px;
+    aspect-ratio: 6/ 4;
+    object-fit: contain;
+`;
 
 
 
 
 const LogoHolder = styled.div`
-  width: 140px;
+align-items: center;
   text-transform: uppercase;
-  
+  display: flex;
+ 
 h1{
   color:${props => props.theme.text};
   text-align:center;
   font-size: 25px;
-
+  font-family: baloonB!important;
   span{
     color:${props => props.theme.accent};
  
@@ -86,11 +95,12 @@ display: flex;
 align-items: center;
 transition: all 0.5s ease;
 :nth-child(1){
-  transform:${(props) => props.scrollDistance >= 60 ? "translateX(0px)": "translateX(-25px)"};
+  transform:${(props) => props.scrollDistance >= 60 ? "translateX(0px)": "translateX(-40px)"};
 
 }
 `;
 const DivMenu = styled.div`
+
 transition: all 0.5s ease;
 opacity:${(props) => props.scrollDistance >= 60 ? 100: 0};
 visibility:${(props) => props.scrollDistance >= 60 ? "visible": " collapse"};
@@ -125,15 +135,17 @@ const LinkHolderMenuInnerItem = styled.div`
 const LinkHolderMobile = styled.div`
   display: flex;
   position: fixed;
-
-  background: linear-gradient(90deg, ${props => props.theme.drawer.primary}, ${props => props.theme.drawer.primary});
-  left: 0;
+  bottom: 0;
+  background: ${props => props.theme.nav.primary};
+  right: 0;
+  top: 0;
   min-width: 200px;
-
-
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  min-height: 100vh;
   flex-direction: column;
   transition: 0.5s all ease;
-  transform: ${(props) => !props.mobileMenu ? "translateX(-101%)" : "translateX(0%)"};
+  transform: ${(props) => !props.mobileMenu ? "translateX(100%)" : "translateX(0%)"};
   justify-content: space-between;
   // min-height:calc(100vh - 56px) ;
   z-index: 50;
@@ -210,7 +222,7 @@ const MenuLinkMobile = styled(NavLink)`
 
 
   &:hover {
-    border-bottom: 4px solid #8bc34a;
+    border-bottom: 4px solid #66b394;
   }
 
 `;
@@ -400,6 +412,7 @@ const handleMenuClose= ()=>{
     onClick={() => {
       OffClick();
     }}>
+      <ProgressBar/>
       <Inner scrollDistance={scrollDistance}  >
 
       <Div scrollDistance={scrollDistance}>
@@ -419,7 +432,7 @@ const handleMenuClose= ()=>{
         </DivMenu>
           <MenuLinklogo to="/">
             <LogoHolder>
-              {/* <Img src={Logo} width="100%" /> */}
+              <Img src={Logo} width="100%" />
               <h1><span>Canna</span>Log</h1>
               {/* <LogoHolderText>Master Your Grow</LogoHolderText> */}
             </LogoHolder>

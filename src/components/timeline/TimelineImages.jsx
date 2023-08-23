@@ -90,7 +90,7 @@ z-index: 2;
 justify-content: space-between;
 `
 export const Tag = styled(m.div)`
-background: #8bc34a;
+background: #66b394;
 padding: 0px 15px;
 width: fit-content;
 border-radius: 50px;

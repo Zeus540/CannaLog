@@ -27,7 +27,7 @@ justify-content: end;
 flex-direction: column;
 @media (max-width: 425px) {
     margin: 0px 0px;
-    padding: 60px 40px;
+    padding: 60px 20px;
 
   }
   @media (min-width: 426px) and (max-width: 768px) {
@@ -36,13 +36,13 @@ flex-direction: column;
   }
 `;
 
-export const HeroTextBig = styled.p`
+export const HeroTextBig = styled.h1`
 color:white;
-line-height: 50px;
+line-height: 55px;
 
 
     font-size: 50px;
-    font-family: baloonB!important;
+  
 `;
 
 export const HeroText = styled.p`
@@ -52,6 +52,13 @@ button{
   margin-top: 25px;
   border-radius: unset;
   padding: 10px 20px;
+}
+`;
+
+export const HeroTextExtra = styled.p`
+@media (max-width: 425px) {
+ display:none
+
 }
 `;
 
@@ -78,7 +85,7 @@ margin: 20px 0px;
 export const HeroTextBigSpan = styled.span`
 
 
-color:#8bc34a;
+color:#66b394;
 text-align: center;
     font-size: 20px;
     font-family: baloonB!important;
@@ -87,7 +94,7 @@ text-align: center;
 export const HeroTextBigSup = styled.sup`
 
 
-color:#8bc34a;
+color:#66b394;
 text-align: center;
     font-size: 40px;
     font-family: baloonB!important;
@@ -95,15 +102,17 @@ text-align: center;
 
 export const Section = styled.div`
 text-align: center;
-
+display: flex;
+flex-direction: column;
+align-items: end;
+background: ${props => props.theme.primary};
   position: relative;
+  padding:20px 40px;
   @media (max-width: 425px) {
-    padding:0px;
-    padding-bottom:40px;
+    padding:20px 40px;
   }
   @media (min-width: 426px) and (max-width: 768px) {
-    padding:0px;
-    padding-bottom:40px;
+    padding:20px 40px;
   }
 `;
 export const FeatureSection = styled.div`
@@ -169,7 +178,7 @@ text-align: center;
 width: calc(100% / 3 - 160px);
 margin: 40px;
 
-background: ${props => props.theme.secondary};
+background: ${props => props.theme.primary};
 border-radius: 5px;
   @media (min-width: 0px) and (max-width: 768px) {
     width: calc(100% / 1 );
@@ -184,10 +193,11 @@ padding-bottom: 20px;
 `;
 export const FeatureItemHeading = styled.h3`
 color: ${props => props.theme.text};
+font-size: 20px;
 `;
 export const FeatureItemText = styled.p`
 color: ${props => props.theme.text};
-
+padding-top: 15px;
 `;
 
 export const PricingItem = styled.div`
@@ -213,10 +223,10 @@ padding: 8px 25px;
 width: fit-content;
 border: none;
 background: #fff0;
-color: #8bc34a ;
+color: #66b394 ;
 border-radius: 5px;
 cursor: pointer;
-border: 1px #8bc34a solid;
+border: 1px #66b394 solid;
 
 `;
 
@@ -325,8 +335,34 @@ text-align: left;
 `;
 
 export const PricingSection = styled.div`
-background: ${props => props.theme.secondary};
+background: ${props => props.theme.primary};
 padding: 40px 0px;
+`;
+
+export const IntroTextHeading = styled.h1`
+color: ${props => props.theme.text};
+padding: 40px 0px 0px;
+font-size: 45px;
+line-height: 55px;
+text-align: right;
+`;
+export const IntroText = styled.p`
+color: ${props => props.theme.text};
+padding: 40px 0px;
+line-height: 25px;
+
+    text-align: end;
+    width: 50%;
+    @media (max-width: 425px) {
+      width: 90%;
+    }
+    @media (min-width: 426px) and (max-width: 768px) {
+      width: 50%;
+    }
+`;
+
+export const Accent = styled.span`
+color: ${props => props.theme.accent};
 `;
 
 export const PricingSectionHeading = styled.h2`

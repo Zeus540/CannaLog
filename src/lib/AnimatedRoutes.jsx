@@ -38,6 +38,7 @@ import WebSocketListener from '../components/WebSocketListener';
 import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
 import { fetchPublicPlants,fetchPublicPlantsSingedIn } from '../features';
 
+
 const Root = styled.div`
 
 background:  ${props => props.theme.secondary};
@@ -72,7 +73,11 @@ function AnimatedRoutes({themeType,toggleTheme}) {
         }
     }
 
-  
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
 
     
     return (
@@ -82,6 +87,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
             <Root>
             <NotificationProvider>
                 <SocketProvider>
+                
                 <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
                 <Routes location={location} key={location.pathname}>
                     {isLoggedIn ?

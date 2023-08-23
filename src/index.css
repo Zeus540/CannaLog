@@ -7,13 +7,27 @@
   src: url("./assets/fonts/BalooChettan2-SemiBold.ttf");
 }
 
-h1,h3,h2,h4,h6{
-  font-family: baloonB!important;
-}
-p,label,span,button,a,body{
-  font-family: baloonR!important;
+@font-face {
+  font-family: Archivo;
+  src: url("./assets/fonts/ArchivoBlack-Regular.ttf");
 }
 
+@font-face {
+  font-family: Roboto;
+  src: url("./assets/fonts/Roboto-Regular.ttf");
+}
+
+h1,h3,h2,h4,h6{
+  font-family: Archivo!important;
+}
+label,button,a,body{
+  font-family: Roboto!important;
+}
+p{
+  font-family: Roboto!important;
+  font-size: 16px;
+  line-height: 25px;
+}
 /*
   Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
   - The "symbol *" part is to solve Firefox SVG sprite bug
@@ -72,7 +86,7 @@ textarea {
 }
 
 :root {
-  --swiper-theme-color: #8bc34a;
+  --swiper-theme-color: #66b394;
 }
 .swiper-slide {
   min-width: 90px
