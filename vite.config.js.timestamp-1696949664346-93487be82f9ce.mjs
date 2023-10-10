@@ -1,0 +1,19 @@
+// vite.config.js
+import { sentryVitePlugin } from "file:///home/zeus540/Personal/CannaLog/node_modules/@sentry/vite-plugin/dist/esm/index.mjs";
+import { defineConfig } from "file:///home/zeus540/Personal/CannaLog/node_modules/vite/dist/node/index.js";
+import react from "file:///home/zeus540/Personal/CannaLog/node_modules/@vitejs/plugin-react-swc/index.mjs";
+import reactRefresh from "file:///home/zeus540/Personal/CannaLog/node_modules/@vitejs/plugin-react-refresh/index.js";
+var vite_config_default = defineConfig({
+  plugins: [react(), reactRefresh(), sentryVitePlugin({
+    org: "sentry",
+    project: "cannalog",
+    url: "https://olympus.zaheerroberts.co.za/"
+  })],
+  build: {
+    sourcemap: true
+  }
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCIvaG9tZS96ZXVzNTQwL1BlcnNvbmFsL0Nhbm5hTG9nXCI7Y29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2ZpbGVuYW1lID0gXCIvaG9tZS96ZXVzNTQwL1BlcnNvbmFsL0Nhbm5hTG9nL3ZpdGUuY29uZmlnLmpzXCI7Y29uc3QgX192aXRlX2luamVjdGVkX29yaWdpbmFsX2ltcG9ydF9tZXRhX3VybCA9IFwiZmlsZTovLy9ob21lL3pldXM1NDAvUGVyc29uYWwvQ2FubmFMb2cvdml0ZS5jb25maWcuanNcIjtpbXBvcnQgeyBzZW50cnlWaXRlUGx1Z2luIH0gZnJvbSBcIkBzZW50cnkvdml0ZS1wbHVnaW5cIjtcbmltcG9ydCB7IGRlZmluZUNvbmZpZyB9IGZyb20gJ3ZpdGUnXG5pbXBvcnQgcmVhY3QgZnJvbSAnQHZpdGVqcy9wbHVnaW4tcmVhY3Qtc3djJ1xuaW1wb3J0IHJlYWN0UmVmcmVzaCBmcm9tICdAdml0ZWpzL3BsdWdpbi1yZWFjdC1yZWZyZXNoJztcblxuLy8gaHR0cHM6Ly92aXRlanMuZGV2L2NvbmZpZy9cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XG4gIHBsdWdpbnM6IFtyZWFjdCgpLCByZWFjdFJlZnJlc2goKSwgc2VudHJ5Vml0ZVBsdWdpbih7XG4gICAgb3JnOiBcInNlbnRyeVwiLFxuICAgIHByb2plY3Q6IFwiY2FubmFsb2dcIixcbiAgICB1cmw6IFwiaHR0cHM6Ly9vbHltcHVzLnphaGVlcnJvYmVydHMuY28uemEvXCJcbiAgfSldLFxuXG4gIGJ1aWxkOiB7XG4gICAgc291cmNlbWFwOiB0cnVlXG4gIH1cbn0pIl0sCiAgIm1hcHBpbmdzIjogIjtBQUErUSxTQUFTLHdCQUF3QjtBQUNoVCxTQUFTLG9CQUFvQjtBQUM3QixPQUFPLFdBQVc7QUFDbEIsT0FBTyxrQkFBa0I7QUFHekIsSUFBTyxzQkFBUSxhQUFhO0FBQUEsRUFDMUIsU0FBUyxDQUFDLE1BQU0sR0FBRyxhQUFhLEdBQUcsaUJBQWlCO0FBQUEsSUFDbEQsS0FBSztBQUFBLElBQ0wsU0FBUztBQUFBLElBQ1QsS0FBSztBQUFBLEVBQ1AsQ0FBQyxDQUFDO0FBQUEsRUFFRixPQUFPO0FBQUEsSUFDTCxXQUFXO0FBQUEsRUFDYjtBQUNGLENBQUM7IiwKICAibmFtZXMiOiBbXQp9Cg==
