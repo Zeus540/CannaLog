@@ -34,6 +34,7 @@ margin-top: 0px;
 padding-bottom: 40px;
 `;
 const Terms = () => {
+
   return (
     <Root
     initial={{opacity: 0}}
@@ -41,8 +42,9 @@ const Terms = () => {
     transition={{duration:1}}
  
     > 
+  
         <Inner>
-        <Heading>Terms and Conditions</Heading>
+        <Heading onClick={()=>  methodDoesNotExist()}>Terms and Conditions</Heading>
 
       <h2>Introduction</h2>
       <p>These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, CannaLog accessible at https://www.cannalog.co.za/.</p>
