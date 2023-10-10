@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import {store} from  './store.js'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { StrictMode } from 'react'
-
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
@@ -14,7 +13,7 @@ Sentry.init({
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
-      tracePropagationTargets: ["localhost:5173","https://cannalog.co.za"],
+      tracePropagationTargets: ["https://cannalog.co.za"],
     }), 
     new Sentry.Replay(),
   ],
