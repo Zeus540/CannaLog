@@ -94,6 +94,7 @@ function PublicPlantDetailed() {
         if(LoggedIn){
             updateView(plant)
         }
+        
         setPlant(plant)
         setCoverImage(plant?.cover_img)
       
@@ -135,7 +136,7 @@ function PublicPlantDetailed() {
         let data = {
             creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
             timezone: userTimezone,
-            plant_user_id:plant.user_id
+            plant_user_id:plant?.user_id
         }
 
         axios.post(`${BASE_URL_PROD}/plants/viewed/${params.plant_id}`,data)
