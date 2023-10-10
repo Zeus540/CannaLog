@@ -16,7 +16,12 @@ Sentry.init({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
       tracePropagationTargets: ["https://cannalog.co.za", /^https:\/\/yourserver\.io\/api/],
     }),
-    new Sentry.Replay(),
+    new Sentry.Replay(
+      {
+        maskAllText:false,
+        blockAllMedia:false,
+      }
+    ),
   ],
   // Performance Monitoring
   tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
