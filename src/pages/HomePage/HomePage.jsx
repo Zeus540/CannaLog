@@ -34,7 +34,7 @@ import { useSelector } from 'react-redux';
 import { selectPublicJournal } from '../../features'
 import { useDispatch } from 'react-redux';
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
-
+import WaveHeading from '../../components/Headings/WaveHeading';
 
 const HomePage = () => {
 
@@ -51,7 +51,7 @@ const HomePage = () => {
       <HeroBanner >
         <HeroOverLay>
         <HeroBannerTextHolder>
-          <HeroTextBig>Explore the Journey <br/>of <Accent>Growth</Accent></HeroTextBig>
+          <HeroTextBig>Explore the Journey <br/>of <WaveHeading heading="Growth"/></HeroTextBig>
           <HeroTextHolder>
             <Divider></Divider>
           <HeroText>
@@ -68,7 +68,7 @@ const HomePage = () => {
       </HeroBanner>
 
       <Section >
-      <IntroTextHeading>From <Accent>Seed</Accent> to Story<br/> <Accent>Cultivate</Accent>, Log, and Illuminate</IntroTextHeading>
+      <IntroTextHeading>From <WaveHeading heading="Seed"/> to Story<br/> <Accent>Cultivate</Accent>, Log, and Illuminate</IntroTextHeading>
       <IntroText>
       Prepare to dive into a world that's all about growth – where you'll not only cultivate cannabis but also your own insights and revelations. With our unique logging platform, you'll be able to track the evolution of your plants while also documenting your personal journey. Watch as your efforts blossom into a tapestry of success, and let your logs become a testament to your dedication. Get ready to log, write, reflect, and celebrate the incredible path you're on. This is more than cultivation; it's a narrative of your own growth. The adventure awaits – are you ready to grow, write, and reflect like never before?
       </IntroText>

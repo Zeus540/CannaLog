@@ -21,13 +21,12 @@ const btnAnimation = (theme) => keyframes`
 export const Root = styled(m.div)`
 display: flex;
 background:  ${props => props.theme.secondary};
-// align-items: center;
 justify-content: center;
 position: relative;
-min-height: calc(100vh - 232px);
-
+min-height: calc(100vh - 180px);
+padding-top: 60px;
 @media(min-width:0px) and (max-width:768px){
-  min-height: calc(100vh - 280px);
+  min-height: calc(100vh - 230px);
 }
 
 `
@@ -37,19 +36,19 @@ max-width: 1920px;
 margin: 40px;
 width:100%;
 border-radius: 5px;
-padding:20px;
+
 
 overflow:hidden;
 transition: all 1s ease;
-@media (max-width: 425px) {
-  margin: 30px 0px;
-}
+// @media (max-width: 425px) {
+//   margin: 30px 0px;
+// }
 `
 
 export const Heading = styled(m.h1)`
 color:  ${props => props.theme.text};
 font-size: 20px;
-
+font-family: baloonB !important;
 `
 export const FlexRowEnd = styled(m.div)`
 display: flex;

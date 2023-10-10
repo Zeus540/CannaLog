@@ -13,12 +13,12 @@ background:  ${props => props.theme.secondary};
 
 padding-top: 0px;
 color:  ${props => props.theme.text};
-min-height: calc(100vh - 232px);
+min-height: calc(100vh - 180px);
 display: flex;
 flex-direction: column;
 justify-content: center;
 @media(min-width:0px) and (max-width:768px){
-  min-height: calc(100vh - 280px);
+  min-height: calc(100vh - 230px);
 }
 `;
 const RootInner = styled.div`

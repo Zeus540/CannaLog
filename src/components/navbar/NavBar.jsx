@@ -21,7 +21,7 @@ import ProgressBar from "../progressBar/ProgressBar";
 const Root = styled.div`
 background:${(props) => props.scrollDistance >= 60 ? `${props.theme.glass.background}`: ""};
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 4px );
+// backdrop-filter: blur( 4px );
 
 position: fixed;
 transition: background 0.5s ease;
@@ -72,12 +72,12 @@ h1{
   color:${props => props.theme.text};
   text-align:center;
   font-size: 25px;
-  font-family: baloonB!important;
+
   span{
     color:${props => props.theme.accent};
  
     text-align:center;
-    font-family: baloonB!important;
+
   }
 }
 
@@ -270,7 +270,7 @@ flex-direction: column;
 const UserInfoTop = styled.div`
 display: flex;
 
-padding-right: 20px;
+
 align-items: center;
 `;
 
@@ -527,13 +527,14 @@ const handleMenuClose= ()=>{
 
        
           <LinkHolderM>
-        
+          {!isLoggedIn && <>
           <MenuLinkMobile to="/public-plants" onClick={() => {  setMobileMenu(false); }}>
               <FlexLink>
 
                 <FlexLinkText>Public Plants</FlexLinkText>
               </FlexLink>
             </MenuLinkMobile>
+            </>}
             {isLoggedIn && <>
             
            

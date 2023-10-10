@@ -39,7 +39,7 @@ flex-direction: column;
 export const HeroTextBig = styled.h1`
 color:white;
 line-height: 55px;
-
+font-family: Archivo!important;
 
     font-size: 50px;
   
@@ -194,6 +194,7 @@ padding-bottom: 20px;
 export const FeatureItemHeading = styled.h3`
 color: ${props => props.theme.text};
 font-size: 20px;
+font-family: Archivo!important;
 `;
 export const FeatureItemText = styled.p`
 color: ${props => props.theme.text};
@@ -345,6 +346,8 @@ padding: 40px 0px 0px;
 font-size: 45px;
 line-height: 55px;
 text-align: right;
+font-family: Archivo!important;
+
 `;
 export const IntroText = styled.p`
 color: ${props => props.theme.text};
@@ -371,12 +374,14 @@ margin: 0;
 margin-bottom: 20px;
 font-size: 40px;
 color: ${props => props.theme.text};
+font-family: Archivo!important;
 `;
 export const PricingSectionHeadingW = styled.h2`
 text-align: center;
 margin: 0;
 margin-bottom: 20px;
 font-size: 40px;
+font-family: Archivo!important;
 color: ${props => props.theme.text};
 `;
 

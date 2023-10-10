@@ -12,9 +12,9 @@ color:  ${props => props.theme.text};
   justify-content: center;
   align-items: center;
   padding: 0px 20px;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   @media(min-width:0px) and (max-width:768px){
-    min-height: calc(100vh - 280px);
+    min-height: calc(100vh - 230px);
   }
 `;
 const Heading = styled.h1`

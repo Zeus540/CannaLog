@@ -1,47 +1,44 @@
 import React from 'react'
 import styled from "styled-components";
-
+import {Root} from '../../utils/global_styles'
 
 
 const Inner = styled.div`
 
 
-padding: 0px 0px;
-margin: 40px auto;
-max-width: calc(1770px - 40px);
-
+padding: 80px 20px;
+margin: 0px auto;
+max-width: 1920px;
 background:${(props) => `${props.theme.secondary}`};
 color:${(props) => `${props.theme.text}`};
-padding: 20px 20px;
 border-radius: 5px;
 h2{
   margin: 20px 0px;
   color:${(props) => `${props.theme.accent}`};
-},
+}
 
 @media (max-width: 425px) {
     margin: 20px;
     padding-top: 0px;
   }
-  @media (min-width: 426px) and (max-width: 768px) {
-    margin: 20px;
-    padding-top: 0px;
-  }
-  @media (min-width: 769px) and (max-width: 1770px) {
-    margin: 40px 40px;
-  }
-`;
 
+
+`;
 const Heading = styled.h1`
 font-size: 25px;
 text-align: center;
 margin-top: 0px;
-
+padding-bottom: 40px;
 `;
 
 const PrivacyPolicy = () => {
   return (
-    <div>
+    <Root
+    initial={{opacity: 0}}
+    animate={{opacity: 1}}
+    transition={{duration:1}}
+ 
+    > 
         <Inner>
         <Heading>Privacy Policy</Heading>
 
@@ -139,7 +136,7 @@ const PrivacyPolicy = () => {
 
 <p>CannaLog does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
 </Inner>
-    </div>
+    </Root>
   )
 }
 

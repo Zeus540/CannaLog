@@ -22,7 +22,7 @@ export const NotificationProvider = ({children}) =>{
 
       dispatch(fetchNotifications())
       .then((res)=>{
-        let check = res.payload.map((n)=> n.notification_read).includes(0)
+        let check = res.payload?.map((n)=> n.notification_read)?.includes(0)
        if(check){
         setNewNotification(true)
        }else{

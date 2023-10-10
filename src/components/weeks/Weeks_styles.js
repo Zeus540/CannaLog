@@ -27,7 +27,7 @@ max-width:766px;
 export const Week = styled(m.div)`
 border:2px solid ${props => props.theme.primary};
 background:${props => props.theme.primary};
-
+font-family: baloonB !important;
 color: ${props => props.theme.text}!important;
 padding: 20px;
 border-radius: 5px;
@@ -42,7 +42,7 @@ export const WeekActive = styled(m.div)`
 border:2px solid ${props => props.theme.accent};
 background:${props => props.theme.primary};
 color: ${props => props.theme.text}!important;
-
+font-family: baloonB !important;
 padding: 20px;
 border-radius: 5px;
 text-align: center;
@@ -58,7 +58,7 @@ border-radius: 5px 5px 0px 0px;
 `
 export const WeekTextBottom = styled(m.div)`
 
-
+font-family: baloonB !important;
 
 
 border-radius: 0px 0px 5px 5px;

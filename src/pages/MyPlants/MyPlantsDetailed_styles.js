@@ -78,6 +78,7 @@ transition: 2s width ease;
 export const ImgHolderTop = styled.div`
 background-repeat: no-repeat;
 overflow: hidden;
+padding-top: 60px;
 background-image:${(props) => `url(${props.img})`};
 background-size: cover;
 
@@ -111,9 +112,11 @@ color:${(props) => `${props.theme.text}`};
   }
 h1{
     font-size: 30px;
+    font-family: baloonB !important;
 }
 p{
     font-size: 18px;
+    font-family: baloonB !important;
 }
 `
 export const ImgHolderTopInfoInnerRight = styled.div`

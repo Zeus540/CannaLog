@@ -85,12 +85,12 @@ const Footer = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn)
 const user = useSelector(selectUser)
+
   return (
     <Root>
         <Inner>
         <SectionHolder>      
     <Section>
-    {/* <MenuLinkMobileHeading>Links</MenuLinkMobileHeading> */}
   
 
                    {isLoggedIn && 
@@ -108,12 +108,6 @@ const user = useSelector(selectUser)
                       My Plants
                      </FlexLink>
                    </MenuLinkMobile>
-                   {/* <MenuLinkMobile to="/my-devices" >
-                     <FlexLink>
-                     
-                      My Devices
-                     </FlexLink>
-                   </MenuLinkMobile> */}
                    <MenuLinkMobile to="/growers" >
                      <FlexLink>
                      
@@ -131,8 +125,7 @@ const user = useSelector(selectUser)
       </Section>
 
       <Section>
-    {/* <MenuLinkMobileHeading>Legal</MenuLinkMobileHeading> */}
-    
+
         <MenuLinkMobile to="/terms" >
                      <FlexLink>
                      
@@ -154,12 +147,6 @@ const user = useSelector(selectUser)
                      </FlexLink>
                    </MenuLinkMobile>
 
-                   {/* <MenuLinkMobile to="/cookie-policy" >
-                     <FlexLink>
-                     
-                       Popi
-                     </FlexLink>
-                   </MenuLinkMobile> */}
       </Section>
       
   
