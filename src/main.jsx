@@ -14,7 +14,7 @@ Sentry.init({
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
-      tracePropagationTargets: ["api.cannalog.co.za", /^https:\/\/yourserver\.io\/api/],
+      tracePropagationTargets: ["*", /^https:\/\/yourserver\.io\/api/],
     }),
     new Sentry.Replay(),
   ],
