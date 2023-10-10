@@ -10,12 +10,12 @@ import { StrictMode } from 'react'
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-  dsn: "http://f3c498e29a4614e717ab96623056cbf0@95.111.252.42:9000/2",
+  dsn: "https://7a434851b585801c4da65f59bfb06851@olympus.zaheerroberts.co.za/6",
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
-      tracePropagationTargets: ["localhost:5173","api.cannalog.co.za", /^https:\/\/yourserver\.io\/api/],
-    }), 
+      tracePropagationTargets: ["localhost:5173 cannalog.co.za", /^https:\/\/yourserver\.io\/api/],
+    }),
     new Sentry.Replay(),
   ],
   // Performance Monitoring
