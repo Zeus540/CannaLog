@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), reactRefresh(), sentryVitePlugin({
     org: "sentry",
     project: "cannalog",
-    url: "http://95.111.252.42:9000/"
+    url: "https://olympus.zaheerroberts.co.za/"
   })],
 
   build: {
