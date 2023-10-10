@@ -9,7 +9,7 @@ const Inner = styled.div`
 padding: 80px 0px;
 margin: 0px auto;
 padding-top: 80px;
-max-width: calc(1770px - 40px);
+max-width: 1920px;
 background:${(props) => `${props.theme.secondary}`};
 color:${(props) => `${props.theme.text}`};
 padding: 20px 20px;
