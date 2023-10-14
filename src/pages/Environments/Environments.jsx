@@ -108,13 +108,12 @@ const next_cursor = useSelector(selectNextCursor)
     if(environments?.length == 0){
       dispatch(fetchEnvironments(""))
     }
-
   }, [])
 
  useEffect(() => {
 
     const handleScroll = () => {
-      const lastCardRect = lastCard.current.getBoundingClientRect();
+      const lastCardRect = lastCard?.current?.getBoundingClientRect();
       if(lastCard.current !== null){
  
   

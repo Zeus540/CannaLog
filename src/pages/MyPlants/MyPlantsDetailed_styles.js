@@ -13,7 +13,7 @@ width: fit-content;
 `
 
 export const Root = styled(m.div)`
-
+background:${(props) => `${props.theme.secondary}`};
 
 `
 
@@ -45,7 +45,9 @@ margin: 0px auto;
 padding: 20px 20px;
 justify-content: end;
 display: flex;
-
+svg{
+  stroke:${(props) => `${props.theme.textW}`};
+}
 `
 
 export const ExposureItemHolderOutter = styled(m.div)`
@@ -90,7 +92,7 @@ background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transpa
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 45vh;
+min-height: 50vh;
 background-repeat: no-repeat;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;

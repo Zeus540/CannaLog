@@ -69,7 +69,7 @@ aspect-ratio: 16/20;
 border-radius: 5px ;
 cursor: pointer;
 @media (max-width: 768px) {
-    aspect-ratio: 16 / 12;
+    aspect-ratio: 16 / 14;
 }
 `
 export const PlantCardTextHolder = styled(m.div)`

@@ -47,7 +47,8 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
     setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
     handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
-  }, [actions]);
+
+  }, [startDate, actions]);
 
   const handleActiveWeekSelect = (w) => {
     handleActiveWeeks(w)
@@ -56,7 +57,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
   return (
     <Root>
 
-      <Heading>Weeks</Heading>
+      {/* <Heading>Weeks</Heading> */}
       <WeekHolder>
         <Swiper
           pagination={{

@@ -10,6 +10,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
+import { useSnackbar } from 'notistack';
+
 export const ActionHolder = styled.div`
 
 margin: 0px auto;
@@ -29,6 +31,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
   const [imagePreview, setImagePreview] = useState(null);
   const params = useParams()
   const [image, setImage] = useState('')
+  const { enqueueSnackbar } = useSnackbar()
 
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   
@@ -55,9 +58,12 @@ function UploadImage({ modalType, openModal, data, plant }) {
         if (response.status == 200) {
           openModal(modalType)
           setLoading(false)
+          enqueueSnackbar(`Noted Added`, { variant: 'success' })
         }
       })
       .catch((err) => {
+        setLoading(false)
+        enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
         console.log(err)
       })
 

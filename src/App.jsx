@@ -7,8 +7,8 @@ import White from './assets/images/white.jpg'
 
 let light_theme = {
   primary: '#ffffff',
-  primary_light: '#f3f4f6',
-  secondary: ' #f3f4f6',
+  primary_light: '#fbfcff',
+  secondary: ' #fbfcff',
   accent: '#66b394',
   text: '#0e1e3f',
   textW: '#ffffff',
@@ -49,12 +49,12 @@ let light_theme = {
 }
 
 let dark_theme = {
-  primary: '#000000',
+  primary: '#0a0a0a',
   primary_light: '#121212',
-  secondary: '#0a0a0a',
+  secondary: '#121212',
   accent: '#66b394',
   text: 'white',
-  textW: '#000000',
+  textW: '#0a0a0a',
   warn: "#f44336",
   input:"#ffffff",
   banner:{
@@ -74,16 +74,16 @@ let dark_theme = {
     primary: '#ffffff73',
   },
   modal: {
-    primary: '#000000',
+    primary: '#0a0a0a',
     secondary: '#121212c4',
     text: 'black',
   },
   nav: {
-    primary: ' #000000',
+    primary: ' #0a0a0a',
     secondary: '#151515',
   },
   notification_card:{
-    active:'#000000',
+    active:'#0a0a0a',
     inactive:'#101010'
   },
   glass:{

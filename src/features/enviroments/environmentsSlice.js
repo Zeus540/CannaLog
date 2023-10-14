@@ -6,7 +6,7 @@ import { editEnvironment } from "./editEnvironmentThunk";
 
 let initialState = {
     loading:true,
-    hasMore:true,
+    hasMore:false,
     total_count:"",
     next_cursor:"",
     environments:[],

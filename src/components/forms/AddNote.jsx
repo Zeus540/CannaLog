@@ -4,19 +4,19 @@ import * as Yup from 'yup';
 
 import { ButtonOutlined } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive,StyledTextareaAutosize } from './Form_styles'
-import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
-import { selectStages, fetchStages,takeAction } from '../../features';
-
+import { fetchStages,takeAction } from '../../features';
+import { useSnackbar } from 'notistack';
 
 const AddNote = ({ plant,modalType,openModal,data }) => {
 
     const dispatch = useDispatch()
-
+    const { enqueueSnackbar } = useSnackbar()
+    
     useEffect(() => {
         dispatch(fetchStages())
     }, [])
@@ -55,11 +55,15 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
       
         setSubmitting(true)
 
-        let res = await  dispatch(takeAction(values))
-        if (res.payload.affectedRows > 0) {
-            openModal(modalType)
-            setSubmitting(false)
-        }
+        dispatch(takeAction(values))
+        .then((response)=>{
+            if (response.payload.affectedRows > 0) {
+                openModal(modalType)
+                setSubmitting(false)
+                enqueueSnackbar(`Noted Added`, { variant: 'success' })
+            }
+        })
+     
        
     }
 

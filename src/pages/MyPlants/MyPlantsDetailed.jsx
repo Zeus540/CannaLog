@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import {
     selectMyPlants,
     selectEnvironments,
-    selectPlantActionTypes
+    selectPlantActionTypes,
+    fetchPlantActionTypes
 } from '../../features'
 import { useParams } from 'react-router-dom'
 
@@ -59,6 +60,8 @@ import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizeTime } from '../../helpers/getLocalizeTime'
 import { getWeeksElapsed } from '../../helpers/getWeeksElapsed'
 import { useSocket } from '../../context/SocketContext'
+// import { useGetStage } from '../../hooks/useGetStage'
+import { useSnackbar } from 'notistack';
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -70,13 +73,13 @@ function MyPlantsDetailed() {
     const [currentStage, setCurrentStage] = useState()
     const [activeWeek, setActiveWeek] = useState('') 
     const [coverImage, setCoverImage] = useState('') 
-    const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate) 
-    let plants = useSelector(selectMyPlants)
-    let environments = useSelector(selectEnvironments)
-    let plant_action_types = useSelector(selectPlantActionTypes)
-
+    const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate)
     const params = useParams()
     const socket = useSocket()
+    const dispatch = useDispatch()
+    const { enqueueSnackbar } = useSnackbar()
+
+    let plant_action_types = useSelector(selectPlantActionTypes)
 
     useEffect(() => {
 
@@ -91,10 +94,6 @@ function MyPlantsDetailed() {
 
 
     useEffect(() => {
-        getActions()
-    }, [plants])
-
-    useEffect(() => {
         if (socket) {
             socket.on(`action_taken${params.plant_id}`, (data) => {
                 setPlantActions(data)
@@ -106,35 +105,68 @@ function MyPlantsDetailed() {
         }
 
     },[socket])
-
-    
+  
+ 
     useEffect(() => {
-        setPlant(plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0])
-        setCoverImage(plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0]?.cover_img)
-      
-        axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
+        getPlantInfo(params.plant_id)
+        getEnvironment(params.environment_id)
+        getActions(params.plant_id)
+        getStage(params.plant_id)
+        dispatch(fetchPlantActionTypes())
+    }, [])
+    
+    const getPlantInfo = (plant_id)=>{
+
+        axios.post(`${BASE_URL_PROD}/plants/plant_id`,{plant_id:plant_id})
         .then((response)=>{
-            setCurrentStage(response.data)
-     
+           if(response.status == 200){
+               setPlant(response.data)
+               setCoverImage(response.data.cover_img)
+           
+           }
         })
         .catch((err)=>{
-            console.log("err",err)
+            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+        })
+    }
+
+    const getEnvironment = (environment_id)=>{
+        
+        axios.post(`${BASE_URL_PROD}/plants/current_environment`,{environment_id : environment_id})
+        .then((response)=>{
+            if(response.status == 200){
+                setPlantEnvironment(response.data)
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
         })
 
-    }, [plants])
+    }
 
-    useEffect(() => {
-        setPlantEnvironment(environments?.filter((e) => e.environment_id == parseInt(params?.environment_id))[0])
-    }, [environments])
-
-    const getActions = async () => {
-        axios.post(`${BASE_URL_PROD}/plants/actions`, { plant_id: parseInt(await params.plant_id) })
+    const getActions = (plant_id) => {
+        axios.post(`${BASE_URL_PROD}/plants/actions`, { plant_id: plant_id })
             .then((response) => {
-
-                setPlantActions(response.data)
+                if(response.status == 200){
+                    setPlantActions(response.data)
+                }
             }).catch((err) => {
-                console.log(err)
+                enqueueSnackbar(`${err.response.status} Unable to fetch actions for this plant`, { variant: 'error' })
             })
+    }
+
+    const getStage = (plant_id)=>{
+
+        axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : plant_id})
+        .then((response)=>{
+            if(response.status == 200 ){
+                setCurrentStage(response.data)
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.response.status} Unable to fetch actions for this plant`, { variant: 'error' })
+        })
+
     }
 
     const openModal = (type, action) => {
@@ -153,21 +185,21 @@ function MyPlantsDetailed() {
         }
     }
 
-
     const handleActiveWeeks = (week)=>{
         setActiveWeek(week)
     }
+
     const handleSetCoverImage = (image,thumbnail)=>{
-        console.log("handleSetCoverImage",image)
+
         axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`,{cover_img:image,cover_thumbnail:thumbnail})
         .then((response)=>{
             if(response.status == 200){
                 setCoverImage(image)
+                enqueueSnackbar(`Cover updated`, { variant: 'Success' })
             }
-           
         })
         .catch((err)=>{
-            console.log(err)
+            enqueueSnackbar(`${err.response.status} Cant update Cover`, { variant: 'error' })
         })
       
     }
@@ -228,14 +260,14 @@ function MyPlantsDetailed() {
 
             <Section>
 
-                <Heading>
-                    Environment
-                </Heading>
-
-                <div>
-                    {plantEnvironment?.environment_name}   {plantEnvironment?.environment_type_name}
+         
+            <div>
+                    {plantEnvironment?.environment_type_name}
                 </div>
-
+                <div>
+                    {plantEnvironment?.environment_name}
+                </div>
+             
                 <ExposureItemHolderOutter>
                     <div>Light Exposure</div>
                     <ExposureItemHolder>
@@ -262,9 +294,9 @@ function MyPlantsDetailed() {
             
             <QuickActionHolder>
 
-                <Heading>
+                {/* <Heading>
                     Quick Actions
-                </Heading>
+                </Heading> */}
                 <QuickActionHolderInner>
 
                     {plant_action_types?.map((action, index) => {

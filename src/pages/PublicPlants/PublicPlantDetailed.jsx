@@ -65,12 +65,8 @@ function PublicPlantDetailed() {
     const params = useParams()
     const socket = useSocket()
 
-
-
- 
     useEffect(() => {
         getActions()
-   
     }, [])
 
     useEffect(() => {

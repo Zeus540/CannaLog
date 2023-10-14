@@ -261,7 +261,7 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
                   spaceBetween: 50,
                 },
               }}
-            // loop={true}
+             loop={true}
             >
 
               {notes?.filter((a) => a.week == activeWeek)?.map((a) => {

@@ -89,6 +89,9 @@ textarea {
 :root {
   --swiper-theme-color: #66b394;
 }
+.swiper-pagination-bullet-active-next,.swiper-pagination-bullet-active-prev{
+  background: #66b394;
+}
 .swiper-slide {
   min-width: 90px
 }

@@ -36,7 +36,7 @@ import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
 import Footer from '../components/footer/Footer'
 import WebSocketListener from '../components/WebSocketListener';
 import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
-import { fetchPublicPlants,fetchPublicPlantsSingedIn } from '../features';
+
 
 
 const Root = styled.div`
@@ -54,13 +54,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
    useEffect(() => {
 
     if(isLoggedIn){
-        dispatch(fetchPublicPlantsSingedIn())
-        dispatch(fetchEnvironmentTypes())
-        dispatch(fetchMyPlants())
-        dispatch(fetchPlantActionTypes())
+        //dispatch(fetchEnvironmentTypes())
         console.log("LoggedIn",isLoggedIn)
-    }else{
-        dispatch(fetchPublicPlants())
     }
 
   }, [isLoggedIn])
@@ -83,7 +78,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     return (
 
         <AnimatePresence >
-                 <SnackbarProvider>
+                 <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
             <Root>
             <NotificationProvider>
                 <SocketProvider>
@@ -93,7 +88,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                     {isLoggedIn ?
                         <>
                            
-                            <Route path="/" element={<PreLoader Page={PublicPlants} data={publicPlants.loading} />} />
+                           <Route path="/" element={<PublicPlants />} />
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />

@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 import {
   selectMyPlants,
   isLoadingMyPlants,
-  selectUser,
   fetchMyPlants
 } from '../../features'
 import PlantCard from '../../components/cards/PlantCard'
@@ -38,17 +37,12 @@ const MyPlants = () => {
   const isLoadingPlants = useSelector(isLoadingMyPlants)
   const myPlants = useSelector(selectMyPlants)
 
-  { console.log("myPlants", myPlants) }
-
-
-  const user = useSelector(selectUser)
-  const socket = useSocket()
   
   useEffect(() => {
 
     dispatch(fetchMyPlants())
-
-  }, [socket]);
+ 
+  }, []);
 
 
 

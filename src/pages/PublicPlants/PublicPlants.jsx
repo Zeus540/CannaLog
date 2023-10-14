@@ -2,16 +2,18 @@ import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, Button, ButtonOutlined, ButtonText } from '../../utils/global_styles'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   selectPublicJournal,
-  isLoadingMyPlants,
+  selectIsLoggedIn,
+  fetchPublicPlants,
+  fetchPublicPlantsSingedIn
 } from '../../features'
 import PlantCardPublic from '../../components/cards/PlantCardPublic'
 import Loader from '../../components/loader/Loader'
 import { AnimatePresence } from 'framer-motion'
 import { socket } from '../../lib/socket'
+
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -24,34 +26,20 @@ flex-wrap: wrap;
 `
 
 const PublicPlants = () => {
-
-
+  const dispatch = useDispatch()
+  const isLoggedIn = useSelector(selectIsLoggedIn)
   const isLoadingPlants = useSelector(selectPublicJournal)
   const publicPlants = useSelector(selectPublicJournal)
 
-console.log("publicPlants",publicPlants.plants)
+
   useEffect(() => {
-    
-    if (socket) {
 
-    //   socket.on(`environment_added${user.user_id}`, (data) => {
-    //     dispatch(addEnvironmentLocally(data));
-    //     console.log(data);
-    //   });
-
-    //    socket.on(`environment_edited${user.user_id}`, (data) => {
-    //      dispatch(editEnvironmentLocally(data));
-    //      console.log(data);
-    //    });
-
-    //    socket.on(`environment_deleted${user.user_id}`, (data) => {
-    //     dispatch(deleteEnvironmentLocally(parseInt(data)));
-    //     console.log("dispatch",data);
-    //   });
-
+    if(isLoggedIn){
+         dispatch(fetchPublicPlantsSingedIn())
+    }else{
+         dispatch(fetchPublicPlants())
     }
-
-  }, [socket]);
+  }, [isLoggedIn])
 
 
   return (

@@ -14,6 +14,7 @@ margin: 0px auto;
 overflow: auto;
 width: 80%;
 max-width:766px;
+background:${(props) => `${props.theme.secondary}`};
 @media (max-width: 768px) {
   width: unset;
 

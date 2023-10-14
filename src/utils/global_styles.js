@@ -40,9 +40,9 @@ border-radius: 5px;
 
 overflow:hidden;
 transition: all 1s ease;
-// @media (max-width: 425px) {
-//   margin: 30px 0px;
-// }
+ @media (max-width: 425px) {
+   margin: 40px 20px;
+ }
 `
 
 export const Heading = styled(m.h1)`

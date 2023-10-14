@@ -122,15 +122,12 @@ const LinkHolder = styled.div`
 const LinkHolderMenu = styled.div`
 background: ${props => props.theme.drawer.secondary};
     position: absolute;
-    transition: 0.5s ease top;
- 
-    top:  ${props => props.menuOpen}px;
+    transition: 0.5s ease right;
+    right:${props => props.menuOpen + "%"};
+    top:  60px;
 `;
 const LinkHolderMenuInnerItem = styled.div`
-
-
     padding: 15px 20px;
-
 `;
 const LinkHolderMobile = styled.div`
   display: flex;
@@ -351,7 +348,7 @@ transition: opacity 0.2s ease;
 `;
 
 const NavBar = ({toggleTheme,themeType,OffClick,setMobileMenu,mobileMenu}) => {
-const [menuOpen, setMenuOpen] = useState(-300)
+const [menuOpen, setMenuOpen] = useState(-40)
 const isLoggedIn = useSelector(selectIsLoggedIn)
 const user = useSelector(selectUser)
 const dispatch = useDispatch()
@@ -393,16 +390,16 @@ const logOut = () => {
 
 
 const handleMenuOpen = ()=>{
-  if(menuOpen == -300){
-    setMenuOpen(60)
+  if(menuOpen == -40){
+    setMenuOpen(0)
   }else{
-    setMenuOpen(-300)
+    setMenuOpen(-40)
   }
 
 }
 
 const handleMenuClose= ()=>{
-  setMenuOpen(-300)
+  setMenuOpen(-40)
   setMobileMenu(false)
 }
   return (
@@ -498,7 +495,7 @@ const handleMenuClose= ()=>{
 
             <LinkHolderMenuInnerItem>
               <MenuDropItem  onClick={() => { logOut() }} >
-              <RiLogoutCircleRLine fill="#f44336"/>Log Out 
+              <RiLogoutCircleRLine fill="#f44336"/> Log Out 
             </MenuDropItem>
             </LinkHolderMenuInnerItem>
             </LinkHolderMenu>

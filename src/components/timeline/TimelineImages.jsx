@@ -22,7 +22,7 @@ export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px 20px;
-margin-bottom: 20px;
+padding-bottom: 20px;
 `
 export const TimeLineHolder = styled(m.div)`
 display: flex;
@@ -94,6 +94,8 @@ background: #66b394;
 padding: 0px 15px;
 width: fit-content;
 border-radius: 50px;
+align-items: center;
+display: flex;
 color: ${props => props.theme.textW}!important;
 `
 
@@ -164,7 +166,7 @@ svg{
 export const Image = styled(m.img)`
 
 
-aspect-ratio: 16/12;
+aspect-ratio: 16/15;
 
 `
 export const RootInner = styled(m.div)`
@@ -305,7 +307,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
                   spaceBetween: 50,
                 },
               }}
-            // loop={true}
+             loop={true}
             >
 
               {images?.filter((a) => a.week == activeWeek)?.map((a) => {
