@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
-import { ButtonOutlined } from '../../utils/global_styles';
+import { Button } from '../../utils/global_styles';
 import { FormHolder, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, InputFull, Item,ItemGerm,ItemHarv,ItemTextAccent,StyledDateTimePicker  } from './Form_styles'
 import { useSelector } from 'react-redux';
 import { selectEnvironments, fetchStrains, selectStrains, fetchIrrigationTypes, selectIrrigationTypes,addPlants,selectStages,fetchStages } from '../../features';
@@ -188,9 +188,9 @@ const AddPlant = ({ openModal, modalType, data }) => {
                     </RadioGroup>
 
                     <ButtonHolder>
-                        <ButtonOutlined type="submit" >
+                        <Button type="submit" >
                             Submit
-                        </ButtonOutlined>
+                        </Button>
                     </ButtonHolder>
 
                 </FormHolder>

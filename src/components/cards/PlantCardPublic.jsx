@@ -4,7 +4,7 @@ import {
   Heading,
   FlexRowEnd,
   TextButton,
-  ButtonOutlined,
+  Button,
   ButtonText,
   ButtonSvg
 } from '../../utils/global_styles'

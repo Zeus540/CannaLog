@@ -35,7 +35,7 @@ export const Holder = styled(m.div)`
 max-width: 1920px;
 margin: 40px;
 width:100%;
-border-radius: 5px;
+
 
 
 overflow:hidden;
@@ -62,7 +62,7 @@ background:  ${props => props.theme.accent};
 font-size: 16px;
 padding:10px 20px;
 border-radius: 0px;
-font-weight: bold;
+
 cursor:pointer;
 `
 
@@ -109,32 +109,6 @@ svg{
 }
 `
 
-export const ButtonOutlined = styled(m.button)`
-color:  ${props => props.theme.btn.text};
-border:  1px solid ${props => props.theme.accent};
-font-size: 16px;
-padding:5px 10px;
-border-radius: 5px;
-font-weight: bold;
-cursor:pointer;
-position: relative;
-transition: all 0.5s ease;
-&:hover{
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    animation: ${({ theme }) => btnAnimation(theme)} 1s ease-in infinite;
-   
-  }
-
-}
-
-
-`
 export const ButtonText = styled(m.p)`
 position: relative;
 display: flex;

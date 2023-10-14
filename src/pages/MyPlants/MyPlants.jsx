@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd, Button, ButtonOutlined, ButtonText } from '../../utils/global_styles'
+import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
@@ -85,7 +85,7 @@ const MyPlants = () => {
             <FlexRowEnd
             >
 
-              <ButtonOutlined onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></ButtonOutlined>
+              <Button onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></Button>
 
             </FlexRowEnd>
             <Heading

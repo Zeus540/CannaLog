@@ -43,11 +43,11 @@ color: ${props => props.theme.accent};
  
     :nth-child(1){
         color: transparent;
-        -webkit-text-stroke: 1.5px ${props => props.theme.accent};
+        -webkit-text-stroke: 0px ${props => props.theme.accent};
        
     }
     :nth-child(2){
-        color: white;
+        color: ${props => props.theme.accent};
         animation: ${Water} 4s linear infinite;
         position: absolute;
         top: 0px;

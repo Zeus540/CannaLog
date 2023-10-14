@@ -116,7 +116,7 @@ margin-bottom: 5px;
 
 export const Divider = styled(m.div)`
 background:${(props)=> props.theme.divider.primary}};
-height: 1px;
+height: 1.5px;
 `
 
 export const ActionHolder = styled(m.div)`

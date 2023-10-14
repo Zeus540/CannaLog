@@ -13,7 +13,7 @@ max-width: 1920px;
 background:${(props) => `${props.theme.secondary}`};
 color:${(props) => `${props.theme.text}`};
 padding: 20px 20px;
-border-radius: 5px;
+
 h2{
   margin: 20px 0px;
   color:${(props) => `${props.theme.accent}`};

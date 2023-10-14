@@ -7,15 +7,18 @@ import White from './assets/images/white.jpg'
 
 let light_theme = {
   primary: '#ffffff',
-  primary_light: '#fbfcff',
-  secondary: ' #fbfcff',
+  primary_light: 'aliceblue',
+  secondary: ' aliceblue',
   accent: '#66b394',
   text: '#0e1e3f',
   textW: '#ffffff',
   warn: "#f44336",
   input:"#ffffff",
+  shadow:"#d5e5f3",
   banner:{
-    image:White
+    image:White,
+    primary:'aliceblue',
+    secondary:'aliceblue'
   },
   drawer: {
     primary: '#ffffff',
@@ -24,7 +27,7 @@ let light_theme = {
   btn: {
     primary: '#3f3838',
     secondary: '#0000009c',
-    text: '#66b394',
+    text: 'white',
     hover: '#8bab50bd'
   },
   divider: {
@@ -44,7 +47,7 @@ let light_theme = {
     inactive:'#ebebeb',
   },
   glass:{
-    background:' rgba( 255, 255, 255, 0.25 )'
+    background:'#f0f8ff87'
   }
 }
 
@@ -57,6 +60,7 @@ let dark_theme = {
   textW: '#0a0a0a',
   warn: "#f44336",
   input:"#ffffff",
+  shadow:"#04040485",
   banner:{
     image:Black
   },
@@ -71,7 +75,7 @@ let dark_theme = {
     hover: '#8bab50bd'
   },
   divider: {
-    primary: '#ffffff73',
+    primary: '#66b394',
   },
   modal: {
     primary: '#0a0a0a',

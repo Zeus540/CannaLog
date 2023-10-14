@@ -46,7 +46,7 @@ padding: 20px 20px;
 justify-content: end;
 display: flex;
 svg{
-  stroke:${(props) => `${props.theme.textW}`};
+  stroke:${(props) => `${props.theme.text}`};
 }
 `
 

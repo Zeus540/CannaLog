@@ -20,15 +20,15 @@ import ProgressBar from "../progressBar/ProgressBar";
 
 const Root = styled.div`
 background:${(props) => props.scrollDistance >= 60 ? `${props.theme.glass.background}`: ""};
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-// backdrop-filter: blur( 4px );
+
+ backdrop-filter: ${(props) => props.scrollDistance >= 60 ? `blur( 2px )`: ""};
 
 position: fixed;
 transition: background 0.5s ease;
     top: 0;
     z-index:50;
     width: 100%;
-    box-shadow:  0px 0px 20px #00000012;
+
  
   
   @media (max-width: 425px) {

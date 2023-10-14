@@ -11,7 +11,7 @@ margin: 0px auto;
 max-width: 1920px;
 background:${(props) => `${props.theme.secondary}`};
 color:${(props) => `${props.theme.text}`};
-border-radius: 5px;
+
 h2{
   margin: 20px 0px;
   color:${(props) => `${props.theme.accent}`};

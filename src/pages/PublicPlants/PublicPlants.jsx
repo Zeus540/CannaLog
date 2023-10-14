@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd, Button, ButtonOutlined, ButtonText } from '../../utils/global_styles'
+import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectPublicJournal,

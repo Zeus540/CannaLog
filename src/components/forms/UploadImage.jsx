@@ -58,7 +58,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
         if (response.status == 200) {
           openModal(modalType)
           setLoading(false)
-          enqueueSnackbar(`Noted Added`, { variant: 'success' })
+          enqueueSnackbar(`Image Uploaded`, { variant: 'success' })
         }
       })
       .catch((err) => {

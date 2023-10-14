@@ -2,7 +2,7 @@ import React, { useEffect, useState,useRef } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
-import { ButtonOutlined } from '../../utils/global_styles';
+import { Button } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive,StyledTextareaAutosize } from './Form_styles'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -60,7 +60,7 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
             if (response.payload.affectedRows > 0) {
                 openModal(modalType)
                 setSubmitting(false)
-                enqueueSnackbar(`Noted Added`, { variant: 'success' })
+                enqueueSnackbar(`Noted Uploaded`, { variant: 'success' })
             }
         })
      
@@ -102,9 +102,9 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
                             />
 
                         <ButtonHolder>
-                            <ButtonOutlined type="submit" >
+                            <Button type="submit" >
                                 Submit
-                            </ButtonOutlined>
+                            </Button>
                         </ButtonHolder>
 
                     </FormHolder>

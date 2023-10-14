@@ -6,13 +6,12 @@ import { selectIsLoggedIn,selectUser } from "../../features";
 
 
 const Root = styled.div`
-box-shadow:  0px 0px 20px #00000012;
+box-shadow:  0px 0px 20px ${props => props.theme.shadow};
 position: relative;
 margin: 0px;
 background:  ${props => props.theme.nav.primary};
 color: ${props => props.theme.text};
     padding: 0px 0px;
-    box-shadow:  0px 0px 20px #00000012;
 
   @media (max-width: 425px) {
     margin: 0px 0px;

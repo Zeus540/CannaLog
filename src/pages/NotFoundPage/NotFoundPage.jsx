@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Back2 from '../../assets/images/unsplash.jpg'
 import { NavLink } from "react-router-dom";
 import {motion as m} from 'framer-motion'
-import {Button,ButtonOutlined,Root } from '../../utils/global_styles'
+import {Button,Root } from '../../utils/global_styles'
 
 
 
@@ -75,7 +75,7 @@ const NotFoundPage = () => {
         <Heading>404</Heading>
         <HeadingSmall>Oops! You seem lost</HeadingSmall>
 
-        <MenuLink to="/"><ButtonOutlined>GO HOME</ButtonOutlined></MenuLink>
+        <MenuLink to="/"><Button>GO HOME</Button></MenuLink>
         
         </TextHolder>
         </Inner>

@@ -13,13 +13,12 @@ export const HeroBanner = styled.div`
 
 background-image:${(props)=>`url(${props.theme.banner.image})`};
 background-size: cover;
-background-position: 100% 60%;
+background-position: 70% 60%;
 `;
 export const HeroOverLay = styled.div`
 min-height:calc(100vh);
-background: linear-gradient(360deg, black, transparent);
+background: linear-gradient(360deg, ${props => props.theme.secondary}, transparent);
 width:100%;
-height:500px;
 padding: 80px 60px;
 display: flex;
 justify-content: end;
@@ -37,7 +36,7 @@ flex-direction: column;
 `;
 
 export const HeroTextBig = styled.h1`
-color:white;
+color: ${props => props.theme.text};
 line-height: 55px;
 font-family: Archivo!important;
 
@@ -65,16 +64,21 @@ export const HeroTextExtra = styled.p`
 export const HeroTextHolder = styled.div`
 display: flex;
 padding: 20px 0px;
-width: 30%;
+width: 50%;
 @media (max-width: 425px) {
   width: unset;
 
 }
-
+@media (min-width: 426px) and (max-width: 1024px) {
+  width: unset;
+}
+@media (min-width: 1025px) and (max-width: 1440px) {
+  width: 60%;
+}
 `;
 
 export const Divider = styled.div`
-background: white;
+background: ${props => props.theme.accent};
 width: 500px;
 height: 2px;
 margin: 20px 0px;
@@ -105,14 +109,14 @@ text-align: center;
 display: flex;
 flex-direction: column;
 align-items: end;
-background: ${props => props.theme.primary};
+background: ${props => props.theme.secondary};
   position: relative;
-  padding:20px 40px;
+  padding:20px 20px;
   @media (max-width: 425px) {
-    padding:20px 40px;
+    padding:20px 20px;
   }
   @media (min-width: 426px) and (max-width: 768px) {
-    padding:20px 40px;
+    padding:20px 20px;
   }
 `;
 export const FeatureSection = styled.div`
@@ -120,7 +124,7 @@ text-align: center;
   padding:40px 0px;
   position: relative;
 
-  background: ${props => props.theme.primary};
+  background: ${props => props.theme.secondary};
   @media (max-width: 425px) {
     padding:20px;
   }
@@ -151,21 +155,14 @@ export const SectionInner = styled.div`
 export const SectionInnerTop = styled.div`
 position: relative;
 z-index: 1;
-background: ${props => props.theme.primary};
-border-radius: 10px;
+background: ${props => props.theme.secondary};
+width: 100%;
 max-width: 1920px;
 margin: 0px auto;
 color:white;
-padding: 40px 0px;
 
-padding: 10px;
-    @media (max-width: 425px) {
-        margin: 0px 20px;
-        
-      }
-      @media (min-width: 426px) and (max-width: 768px) {
-        margin: 0px  40px;
-      }
+
+
 `;
 
 export const FeatureItem = styled(m.div)`
@@ -182,7 +179,7 @@ background: ${props => props.theme.primary};
 border-radius: 5px;
   @media (min-width: 0px) and (max-width: 768px) {
     width: calc(100% / 1 );
-    margin: 20px;
+    margin: 20px 0px;
   }
 `;
 
@@ -207,14 +204,14 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 width: calc(100% / 3 );
-margin:10px;
+margin:20px;
 background: ${props => props.theme.primary};
 color: ${props => props.theme.text};
 border-radius: 5px;
 padding: 40px 20px;
   @media (min-width: 0px) and (max-width: 768px) {
     width: calc(100% / 1 );
-
+    margin:20px 0px;
   }
 `;
 
@@ -249,8 +246,8 @@ export const HeroBannerTextHolder = styled.div`
 
 export const Diary = styled(Link)`
 cursor: pointer;
-width: calc(100% / 6 - 20px);
-min-width: calc(100% / 6 - 20px);
+width: calc(100% / 5 - 20px);
+min-width: calc(100% / 5 - 20px);
 margin: 10px;
 border-radius: 5px;
 
@@ -280,7 +277,7 @@ export const DiaryHolder = styled.div`
   overflow: auto;
   padding:0px ;
   margin: 40px 0px;
-margin-bottom:0px;
+  margin-top: 0px;
   @media (max-width: 425px) {
     padding:0px ;
     overflow: auto;
@@ -309,8 +306,10 @@ export const DiaryImageHolder = styled.div`
   }
 `;
 export const DiaryTextHolder = styled.div`
-padding: 5px 0px;
+padding: 5px 10px;
 overflow: auto;
+background: ${props => props.theme.primary};
+border-radius: 0x 0px 5px 5px;
 `;
 
 export const Tag = styled.sup`
@@ -326,7 +325,7 @@ text-align: left;
 
 export const DiaryText = styled.p`
 font-size: 14px;
-padding-bottom: 5px;
+
 white-space: nowrap;
 font-weight: bold;
 margin: 0px;
@@ -336,8 +335,8 @@ text-align: left;
 `;
 
 export const PricingSection = styled.div`
-background: ${props => props.theme.primary};
-padding: 40px 0px;
+background: ${props => props.theme.secondary};
+padding: 40px 20px;
 `;
 
 export const IntroTextHeading = styled.h1`

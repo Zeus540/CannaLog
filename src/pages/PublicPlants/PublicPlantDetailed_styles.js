@@ -13,7 +13,7 @@ width: fit-content;
 `
 
 export const Root = styled(m.div)`
-
+background: ${(props) => `${props.theme.secondary}`};
 
 `
 
