@@ -361,8 +361,8 @@ const {newNotification} = useNotification()
 const [scrollDistance, setScrollDistance] = useState(0);
 
 useEffect(() => {
+  
   const handleScroll = () => {
-    console.log(window.scrollY)
     setScrollDistance(window.scrollY);
   };
 

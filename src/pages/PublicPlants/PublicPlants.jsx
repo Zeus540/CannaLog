@@ -72,8 +72,6 @@ const PublicPlants = () => {
                 {publicPlants.plants?.map((p, index) => {
                   return (
                     <>
-                    {console.log(p)}
-                    
                     <PlantCardPublic 
                       key={index}
                       length={publicPlants.plants.length}

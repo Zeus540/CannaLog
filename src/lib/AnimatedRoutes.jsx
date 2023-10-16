@@ -46,28 +46,14 @@ background:  ${props => props.theme.secondary};
 
 function AnimatedRoutes({themeType,toggleTheme}) {
     const isLoggedIn = useSelector(selectIsLoggedIn)
-    const publicPlants = useSelector(selectPublicJournal);
     const location = useLocation()
     const [mobileMenu, setMobileMenu] = useState(false);
-    const dispatch = useDispatch()
-
-   useEffect(() => {
-
-    if(isLoggedIn){
-        //dispatch(fetchEnvironmentTypes())
-        console.log("LoggedIn",isLoggedIn)
-    }
-
-  }, [isLoggedIn])
-
- 
 
     const OffClick = () => {
         if (mobileMenu == true) {
             setMobileMenu(false);
         }
     }
-
 
 
     useEffect(() => {

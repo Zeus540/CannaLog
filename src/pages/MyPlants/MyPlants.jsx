@@ -101,15 +101,10 @@ const MyPlants = () => {
                   return (
                     <PlantCard
                       key={index}
-                      length={myPlants.length}
-                      index={index}
+                 
                       data={p}
                       cover_thumbnail={p?.cover_thumbnail}
-                      name={p.name}
-                      environment_type_name={p.environment_type_name}
-                      light_exposure={p.light_exposure}
-                      creation_date={p.creation_date}
-                      last_updated={p.last_updated}
+
                       openModal={openModal} />
                   )
                 })}

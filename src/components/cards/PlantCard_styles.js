@@ -110,8 +110,7 @@ overflow: hidden;
 `
 export const PlantCardTextTop = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
-
-margin: 10px 10px;
+margin: 10px;
 font-size: 12px;
 justify-content: space-between;
 display: flex;
@@ -145,14 +144,26 @@ margin-bottom: 10px;
 }
 `
 export const PlantCardTextLogoTop = styled(m.div)`
-
+background: ${(props) => `${props.theme.accent}`};;
 display: flex;
 justify-content: center;
 align-items: center;
+border-radius: 50px 50px 50px 50px;
+padding:10px 14px;
+position: relative;
+z-index: 4;
+display: flex;
+flex-direction: column;
 
-&>svg{
-    margin-right: 10px;
-    width: 25px;
-    height: 25px;
-}
+`
+
+export const PlantCardTextHeading = styled(m.div)`
+padding: 10px;
+background: ${(props) => `${props.theme.secondary}`};;
+padding-right: 20px;
+padding-left: 50px;
+border-radius: 50px;
+margin-left: -40px;
+position: relative;
+z-index: 3;
 `

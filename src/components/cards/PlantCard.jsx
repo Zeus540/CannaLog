@@ -19,7 +19,8 @@ import {
   PlantCardTextTop,
   PlantCardTextLogoTop,
   PlantCardTextInner,
-  PlantCardTextTopInner
+  PlantCardTextTopInner,
+  PlantCardTextHeading
 } from './PlantCard_styles'
 import { PiDnaLight } from 'react-icons/pi';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -28,8 +29,9 @@ import { GiGreenhouse } from 'react-icons/gi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
+import { getElapsedDays } from '../../helpers/getElapsedDays';
 
-const PlantCard = ({ cover_thumbnail, name, light_exposure, creation_date, last_updated, environment_type_name, openModal, data, index, length }) => {
+const PlantCard = ({ cover_thumbnail,openModal, data, }) => {
 
 
   const elementRef = useRef(null);
@@ -61,20 +63,21 @@ function cleanName(name) {
     >
       <PlantCardImageHolder >
         <PlantCardTextHolderTop>
-          <PlantCardTextTop>
-           <PlantCardTextTopInner onClick={() => handleRedirect()}>
+          <PlantCardTextTop onClick={() => handleRedirect()}>
+
+           <PlantCardTextTopInner >
+
             <PlantCardTextLogoTop>
-              <BsCalendar2Date />
+             <div> Day</div>
+            {getElapsedDays(data?.creation_date)}
             </PlantCardTextLogoTop>
-            <div>
+
+            <PlantCardTextHeading>
               <div>
                 {data.plant_name}
               </div>
-              <div>
-                {getLocalizeTime(data.creation_date)}
-            
-              </div>
-            </div>
+           
+            </PlantCardTextHeading>
            </PlantCardTextTopInner>
 
             <ButtonSvg onClick={()=>{openModal("deletePlant",data)}}><RiDeleteBin5Line/></ButtonSvg>
@@ -85,32 +88,7 @@ function cleanName(name) {
         </PlantCardTextHolderTop>
 
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
-        <PlantCardTextHolder onClick={() => handleRedirect()}>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <PiDnaLight />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.strain_name}
-            </PlantCardTextInner>
-          </PlantCardText>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <IoWaterOutline />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.irrigation_type}
-            </PlantCardTextInner>
-          </PlantCardText>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <GiGreenhouse />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.environment_name}
-            </PlantCardTextInner>
-          </PlantCardText>
-        </PlantCardTextHolder>
+
       </PlantCardImageHolder>
 
     </Root>

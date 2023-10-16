@@ -4,6 +4,8 @@ import AnimatedRoutes from './lib/AnimatedRoutes'
 import { ThemeProvider } from 'styled-components'
 import Black from './assets/images/black.jpg'
 import White from './assets/images/white.jpg'
+import { getCookieValue } from './helpers/getCookieValue'
+import { useCookies } from 'react-cookie'
 
 let light_theme = {
   primary: '#ffffff',
@@ -99,17 +101,31 @@ let dark_theme = {
 function App() {
 
   const dispatch = useDispatch()
-
+  const [cookies, setCookie,removeCookie] = useCookies();
 
   const [theme, setTheme] = useState(dark_theme)
   const [themeType, setThemeType] = useState("dark")
 
 
+  useEffect(() => {
+     if(cookies?.theme?.theme == "dark"){
+      setTheme(dark_theme)
+      setThemeType("dark")
+    }else{
+      setTheme(light_theme)
+      setThemeType("light")
+    }
+  }, [])
+  
   const toggleTheme = ()=>{
     if(themeType == "dark"){
+      removeCookie("theme")
+      setCookie("theme",JSON.stringify({theme:"light"}))
       setTheme(light_theme)
       setThemeType("light")
     }else{
+      removeCookie("theme")
+      setCookie("theme",JSON.stringify({theme:"dark"}))
       setTheme(dark_theme)
       setThemeType("dark")
     }
@@ -118,11 +134,9 @@ function App() {
 
 
   return (
-    <div onClick={()=>{console.log("trigger sound")}}>
       <ThemeProvider theme={theme}>
         <AnimatedRoutes themeType={themeType} toggleTheme={toggleTheme}/>
       </ThemeProvider>
-    </div>
   )
 }
 
