@@ -189,14 +189,14 @@ useEffect(() => {
           <Holder>
             <FlexRowEnd
             >
-
-              <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd/>Environemt</ButtonText></Button>
-
-            </FlexRowEnd>
-            <Heading
+    <Heading
             >
               My Environments
             </Heading>
+              <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd/>Environemt</ButtonText></Button>
+
+            </FlexRowEnd>
+        
 
             <EnviromentHolder
             >

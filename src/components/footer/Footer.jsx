@@ -113,14 +113,29 @@ const user = useSelector(selectUser)
                       Growers
                      </FlexLink>
                    </MenuLinkMobile>
-                   </>
-                   }
-                         <MenuLinkMobile to="/" >
+
+                   <MenuLinkMobile to="/" >
                      <FlexLink>
                      
                        Public Plants
                      </FlexLink>
-                   </MenuLinkMobile>
+                     </MenuLinkMobile>
+                   </>
+
+                   
+                   }
+                   {!isLoggedIn && 
+                   
+                   <>
+                       <MenuLinkMobile to="/public-plants" >
+                     <FlexLink>
+                     
+                       Public Plants
+                     </FlexLink>
+                     </MenuLinkMobile>
+                   </>}
+                    
+                  
       </Section>
 
       <Section>

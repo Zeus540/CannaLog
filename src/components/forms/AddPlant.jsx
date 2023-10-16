@@ -11,6 +11,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { RadioGroup, Radio,FormControlLabel } from '@mui/material';
 import { format } from 'date-fns';
+import { useSnackbar } from 'notistack';
+import FormLoader from '../loader/FormLoader';
 
 const AddEnvironmentSchema = Yup.object().shape({
     name: Yup.string()
@@ -27,7 +29,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
     const strains = useSelector(selectStrains)
     const stages = useSelector(selectStages)
     const irrigationTypes = useSelector(selectIrrigationTypes)
-
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         dispatch(fetchStrains())
@@ -38,6 +40,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
 
    
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
     let intialValues = {
         creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
         timezone: userTimezone ,
@@ -49,19 +52,30 @@ const AddPlant = ({ openModal, modalType, data }) => {
         public:1,
     }
 
-    const handleAddPlant = async (values, setSubmitting) => {
+    const handleAddPlant =  (values, setSubmitting) => {
 
-        let res = await  dispatch(addPlants(values))
-        if (res.payload.length > 0) {
-            openModal(modalType)
+        setSubmitting(true)
+
+        dispatch(addPlants(values))
+        .then((response)=>{
+            console.log('response',response)
+            if (response.payload.length > 0) {
+                enqueueSnackbar('Plant Added',{variant:'success'})
+                openModal(modalType)
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+        })
+        .finnaly(()=>{
             setSubmitting(false)
-        }
-      
+        })
     }
 
     const handleDate = (values,date) => {
         values.creation_date = date
     }
+
     return (
 
         <Formik
@@ -69,16 +83,14 @@ const AddPlant = ({ openModal, modalType, data }) => {
 
             validationSchema={AddEnvironmentSchema}
             onSubmit={(values, { setSubmitting }) => {
-          
                 setTimeout(() => {
                     handleAddPlant(values, setSubmitting)
                 }, 400);
-
-
             }}
         >
             {({ isSubmitting, handleBlur, handleChange, values }) => (
                 <FormHolder>
+                     {!isSubmitting && <>
  <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <StyledDateTimePicker
                                 name="creation_date"
@@ -186,11 +198,17 @@ const AddPlant = ({ openModal, modalType, data }) => {
                         <FormControlLabel value={0} control={<Radio />} label="Private" />
                         <FormControlLabel value={1} control={<Radio />} label="Public" />
                     </RadioGroup>
-
+                    </>
+}
                     <ButtonHolder>
-                        <Button type="submit" >
-                            Submit
-                        </Button>
+                        {!isSubmitting ? 
+                          <Button type="submit" >
+                          Submit
+                      </Button>
+                      : 
+          <FormLoader msg="Adding Plant"/>
+        }
+                      
                     </ButtonHolder>
 
                 </FormHolder>

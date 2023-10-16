@@ -84,14 +84,14 @@ const MyPlants = () => {
           <Holder>
             <FlexRowEnd
             >
-
-              <Button onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></Button>
-
-            </FlexRowEnd>
-            <Heading
+   <Heading
             >
               My Plants
             </Heading>
+              <Button onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></Button>
+
+            </FlexRowEnd>
+         
 
             <EnviromentHolder
             >

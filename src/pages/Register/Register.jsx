@@ -1,6 +1,6 @@
 import React,{useState,useContext, useEffect} from 'react'
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Logo from "../../assets/images/leaf.png";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
@@ -8,6 +8,8 @@ import axios from "axios"
 import { Helmet } from "react-helmet";
 import {BASE_URL_PROD} from '../../lib/Constants'
 import { useSnackbar} from 'notistack';
+import {Button} from '../../utils/global_styles'
+
 const Root = styled.div`
 background:  ${props => props.theme.secondary};
 
@@ -47,6 +49,7 @@ padding-top: 0px;
 color:  ${props => props.theme.text};
 display: flex;
 flex-direction: column;
+margin-bottom: 15px;
 `;
 const InputGrp = styled.div`
 min-width: calc(100% /2 - 20px);
@@ -91,18 +94,6 @@ color:  ${props => props.theme.warn};
 `;
 
 
-const Button = styled.button`
-padding: 8px 25px;
-width: fit-content;
-border:none;
-background:  ${props => props.theme.primary};
-color:  ${props => props.theme.text};
-
-border-radius:5px;
-cursor:pointer;
-border: 1px ${props => props.theme.accent} solid;
-margin-top: 15px;
-`;
 const Heading = styled.h1`
 margin: 0px;
 font-size: 30px;
@@ -136,6 +127,20 @@ text-align:center;
 font-size: 14px;
 `;
 
+const HaveAccount = styled.p`
+margin: 0px;
+padding-bottom: 10px;
+color:  ${props => props.theme.text};
+text-align:center;
+
+`;
+const HaveAccountLink = styled(Link)`
+margin: 0px;
+padding-bottom: 10px;
+color:  ${props => props.theme.accent};
+text-align:center;
+
+`;
 
 function Register() {
   const { enqueueSnackbar } = useSnackbar()
@@ -205,6 +210,8 @@ function Register() {
 
      <RootInner>
      <Heading>  <HeadingAccent><HeadingImg src={Logo} width="40px" />CANNA</HeadingAccent>LOG   </Heading>
+
+     <HaveAccount>Already have an account? <HaveAccountLink to='/sign-in'>Sign in</HaveAccountLink></HaveAccount>
 {errorM !== "" && <ErrM>{errorM}</ErrM>}
     <Formik
       initialValues={{

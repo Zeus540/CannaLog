@@ -12,6 +12,7 @@ import { useSnackbar } from 'notistack';
 import { auth } from '../../features';
 import { useDispatch } from 'react-redux';
 import { getCookieValue } from '../../helpers/getCookieValue';
+import {Button} from '../../utils/global_styles'
 
 const Root = styled.div`
 padding-top: 0px;
@@ -76,18 +77,7 @@ color: #f44336;
     font-size: 12px;
 `;
 
-const Button = styled.button`
-padding: 8px 25px;
-width: fit-content;
 
-border:none;
-background:  ${props => props.theme.primary};
-color:  ${props => props.theme.text};
-
-border-radius:5px;
-cursor:pointer;
-border: 1px #66b394 solid;
-`;
 
 const Heading = styled.h1`
 margin: 0px;

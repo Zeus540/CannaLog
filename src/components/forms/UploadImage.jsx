@@ -11,6 +11,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { useSnackbar } from 'notistack';
+import FormLoader from '../loader/FormLoader'
 
 export const ActionHolder = styled.div`
 
@@ -57,14 +58,15 @@ function UploadImage({ modalType, openModal, data, plant }) {
       .then((response) => {
         if (response.status == 200) {
           openModal(modalType)
-          setLoading(false)
           enqueueSnackbar(`Image Uploaded`, { variant: 'success' })
         }
       })
       .catch((err) => {
-        setLoading(false)
+     
         enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
-        console.log(err)
+      })
+      .finally((err) => {
+        setLoading(false)
       })
 
   }
@@ -92,7 +94,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
 
   return (
     <form  onSubmit={(e) => { handleSubmit(e) }}>
- 
+  {!loading && <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StyledDateTimePicker
           name="creation_date"
@@ -111,17 +113,12 @@ function UploadImage({ modalType, openModal, data, plant }) {
         />
       )}
       <Input type='file' name="file" onChange={(e) => { handleChange(e, "file") }} />
+      </> 
+}
       <ActionHolder>
-        {!loading ? <Button >Submit</Button> : <ThreeDots
-          height="40"
-          width="40"
-          radius="9"
-          color="#66b394"
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClassName=""
-          visible={true}
-        />}
+        {!loading ? 
+        <Button >Submit</Button> : 
+        <FormLoader/>}
       </ActionHolder>
     </form>
   )

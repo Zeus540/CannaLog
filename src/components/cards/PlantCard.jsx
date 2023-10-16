@@ -63,9 +63,9 @@ function cleanName(name) {
     >
       <PlantCardImageHolder >
         <PlantCardTextHolderTop>
-          <PlantCardTextTop onClick={() => handleRedirect()}>
+          <PlantCardTextTop >
 
-           <PlantCardTextTopInner >
+           <PlantCardTextTopInner onClick={() => handleRedirect()}>
 
             <PlantCardTextLogoTop>
              <div> Day</div>

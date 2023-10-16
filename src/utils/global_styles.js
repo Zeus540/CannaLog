@@ -53,7 +53,8 @@ font-family: baloonB !important;
 export const FlexRowEnd = styled(m.div)`
 display: flex;
 flex-direction: row;
-justify-content: flex-end;
+justify-content: space-between;
+align-items: end;
 `
 
 export const Button = styled(m.button)`

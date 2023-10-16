@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { selectStages, fetchStages,takeAction } from '../../features';
+import { useSnackbar } from 'notistack';
+import FormLoader from '../loader/FormLoader';
 
 const ChangeStage = ({ plant,modalType,openModal,data }) => {
     const [indexHover, setIndexHover] = useState('')
@@ -18,7 +20,8 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [dragStartX, setDragStartX] = useState(0);
     const [scrollLeftStart, setScrollLeftStart] = useState(0);
-  
+    const { enqueueSnackbar } = useSnackbar()
+
     const handleMouseDown = (e) => {
       setIsDragging(true);
       setDragStartX(e.pageX || e.touches[0].pageX);
@@ -84,16 +87,26 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
 
     }
 
-    const handleAction = async(values, setSubmitting) => {
+    const handleAction = (values, setSubmitting) => {
     
         setSubmitting(true)
-
-        let res = await  dispatch(takeAction(values))
-        if (res.payload.affectedRows > 0) {
-            openModal(modalType)
+    
+        dispatch(takeAction(values))
+        .then((response)=>{
+            if (response.payload.affectedRows > 0) {
+                enqueueSnackbar('Plant Stage Updated',{variant:'success'})
+                openModal(modalType)
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+          
+        })
+        .finnaly(()=>{
             setSubmitting(false)
-        }
-       
+        })
+
+        
     }
 
     return (
@@ -109,6 +122,7 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
             >
                 {({ isSubmitting, handleBlur, handleChange, values }) => (
                     <FormHolder>
+                     {!isSubmitting && <>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <StyledDateTimePicker
                                 name="creation_date"
@@ -138,11 +152,18 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
                             })}
                         </ItemHodler>
 
+                        </>
+}
                         <ButtonHolder>
-                            <Button type="submit" >
-                                Submit
-                            </Button>
-                        </ButtonHolder>
+                        {!isSubmitting ? 
+                          <Button type="submit" >
+                          Submit
+                      </Button>
+                      : 
+          <FormLoader msg="Adding Plant"/>
+        }
+                      
+                    </ButtonHolder>
 
                     </FormHolder>
                 )}

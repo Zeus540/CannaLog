@@ -195,7 +195,7 @@ function MyPlantsDetailed() {
         .then((response)=>{
             if(response.status == 200){
                 setCoverImage(image)
-                enqueueSnackbar(`Cover updated`, { variant: 'Success' })
+                enqueueSnackbar(`Cover updated`, { variant: 'success' })
             }
         })
         .catch((err)=>{
