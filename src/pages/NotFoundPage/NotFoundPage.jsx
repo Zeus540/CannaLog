@@ -3,14 +3,26 @@ import styled from "styled-components";
 import Back2 from '../../assets/images/unsplash.jpg'
 import { NavLink } from "react-router-dom";
 import {motion as m} from 'framer-motion'
-import {Button,Root } from '../../utils/global_styles'
+import {Button } from '../../utils/global_styles'
 
 
+const Root = styled.div`
+display: flex;
+background:  ${props => props.theme.secondary};
+justify-content: center;
+position: relative;
+min-height: calc(100vh - 180px);
 
+@media(min-width:0px) and (max-width:768px){
+  min-height: calc(100vh - 230px);
+}
+
+
+`;
 
 const Inner = styled.div`
 
-background-image: url(${Back2});
+background-image: ${(props)=>`url(${props.theme.banner.image})`};
 
 background-size: cover;
 min-height: calc(100vh - 280px);
@@ -20,7 +32,7 @@ margin: 0 auto;
 display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #151e1e;
+    background-color: #5f5f5f;
     background-blend-mode: overlay;
 
 `;
@@ -36,6 +48,7 @@ text-align: center;
 color:  ${props => props.theme.accent};
 margin: 20px 0px;
 line-height: 0.8em;
+font-family: Archivo !important;
 @media (max-width: 425px) {
   font-size: 8em;
 }

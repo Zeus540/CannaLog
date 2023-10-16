@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import AnimatedRoutes from './lib/AnimatedRoutes'
 import { ThemeProvider } from 'styled-components'
@@ -107,14 +107,21 @@ function App() {
   const [themeType, setThemeType] = useState("dark")
 
 
-  useEffect(() => {
-     if(cookies?.theme?.theme == "dark"){
+  useLayoutEffect(() => {
+    console.log("cookies?.theme?.theme",cookies?.theme?.theme == undefined)
+    if(cookies?.theme?.theme == undefined){
       setTheme(dark_theme)
       setThemeType("dark")
     }else{
-      setTheme(light_theme)
-      setThemeType("light")
+      if(cookies?.theme?.theme == "dark"){
+        setTheme(dark_theme)
+        setThemeType("dark")
+      }else{
+        setTheme(light_theme)
+        setThemeType("light")
+      }
     }
+
   }, [])
   
   const toggleTheme = ()=>{

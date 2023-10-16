@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useLayoutEffect} from 'react'
 import styled from 'styled-components';
 
 const Root =  styled.div`
@@ -15,7 +15,7 @@ background:${(props)=> props.theme.accent}
 const ProgressBar = () => {
     const [scrollDistance, setScrollDistance] = useState(0);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       
         const getScrollProgress = () => {
             const totalHeight = document.documentElement.scrollHeight - window.innerHeight;

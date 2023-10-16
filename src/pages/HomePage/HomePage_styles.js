@@ -297,7 +297,7 @@ export const DiaryImageHolder = styled.div`
   cursor: pointer;
   line-height: 0px;
   border-radius: 5px;
-  min-height: 190px;
+  min-height: 250px;
   background-position: center!important;
   background-size: cover!important;
   @media (max-width: 425px) {
@@ -310,8 +310,24 @@ padding: 5px 10px;
 overflow: auto;
 background: ${props => props.theme.primary};
 border-radius: 0x 0px 5px 5px;
+justify-content: end;
+border-radius: 0px 0px 10px 10px ;
+    display: flex;
+    width: fit-content;
+    padding: 5px 20px;
+    float: right;
 `;
-
+export const DiaryTextHolderTop = styled.div`
+padding: 5px 10px;
+overflow: auto;
+background: ${props => props.theme.primary};
+border-radius: 0x 0px 5px 5px;
+justify-content: end;
+border-radius: 10px 10px 0px 0px;
+    display: flex;
+    width: fit-content;
+    padding: 5px 20px;
+`;
 export const Tag = styled.sup`
 
 text-align: left;

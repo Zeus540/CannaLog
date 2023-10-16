@@ -33,6 +33,7 @@ import {
   Diary,
   DiaryImageHolder,
   DiaryTextHolder,
+  DiaryTextHolderTop,
   DiaryText
 } from './HomePage_styles'
 import { Button, ButtonText } from '../../utils/global_styles';
@@ -108,6 +109,9 @@ const HomePage = () => {
                       <Diary
                         to={`/public-plant/${cleanName(d.plant_name)}/${d.environment_id}/${d.plant_id}`} key={index}
                       >
+                        <DiaryTextHolderTop>
+                        <DiaryText>{d?.user_name}</DiaryText>
+                        </DiaryTextHolderTop>
                         <DiaryImageHolder style={{ background: `url(${d?.cover_thumbnail == "" ? PlaceHolder : d?.cover_img})` }}>
 
 
@@ -115,10 +119,10 @@ const HomePage = () => {
 
                         <DiaryTextHolder>
                         
-                        <DiaryText>{d?.plant_name} </DiaryText>
+                   
                      
-                          <DiaryText>{d?.strain_name} </DiaryText>
-                          <DiaryText> {d?.user_name}</DiaryText>
+                        
+                          <DiaryText> {d?.strain_name} </DiaryText>
                         </DiaryTextHolder>
 
                       </Diary>
