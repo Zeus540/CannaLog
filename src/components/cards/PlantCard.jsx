@@ -88,7 +88,32 @@ function cleanName(name) {
         </PlantCardTextHolderTop>
 
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
-
+        <PlantCardTextHolder onClick={() => handleRedirect()}>
+          <PlantCardText>
+            <PlantCardTextLogo>
+              <PiDnaLight />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.strain_name}
+            </PlantCardTextInner>
+          </PlantCardText>
+          <PlantCardText>
+            <PlantCardTextLogo>
+              <IoWaterOutline />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.irrigation_type}
+            </PlantCardTextInner>
+          </PlantCardText>
+          <PlantCardText>
+            <PlantCardTextLogo>
+              <GiGreenhouse />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.environment_name}
+            </PlantCardTextInner>
+          </PlantCardText> 
+        </PlantCardTextHolder> 
       </PlantCardImageHolder>
 
     </Root>

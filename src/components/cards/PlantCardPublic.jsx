@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import {
-  Holder,
-  Heading,
-  FlexRowEnd,
-  TextButton,
-  Button,
-  ButtonText,
   ButtonSvg
 } from '../../utils/global_styles'
 import {
@@ -19,7 +13,8 @@ import {
   PlantCardTextTop,
   PlantCardTextLogoTop,
   PlantCardTextInner,
-  PlantCardTextTopInner
+  PlantCardTextTopInner,
+  PlantCardTextHeading 
 } from './PlantCard_styles'
 import { PiDnaLight } from 'react-icons/pi';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -27,7 +22,7 @@ import { BsCalendar2Date } from 'react-icons/bs';
 import { GiGreenhouse } from 'react-icons/gi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
-import { getLocalizeTime } from '../../helpers/getLocalizeTime';
+import { getElapsedDays } from '../../helpers/getElapsedDays';
 
 const PlantCardPublic = ({ cover_thumbnail, name, light_exposure, creation_date, last_updated, environment_type_name, openModal, data, index, length }) => {
 
@@ -50,6 +45,7 @@ function cleanName(name) {
   
   return (
 
+ 
     <Root
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -60,23 +56,24 @@ function cleanName(name) {
     >
       <PlantCardImageHolder >
         <PlantCardTextHolderTop>
-          <PlantCardTextTop>
-           <PlantCardTextTopInner onClick={() => handleRedirect()}>
+          <PlantCardTextTop onClick={() => handleRedirect()}>
+
+           <PlantCardTextTopInner >
+
             <PlantCardTextLogoTop>
-            
+             <div> Day</div>
+            {getElapsedDays(data?.creation_date)}
             </PlantCardTextLogoTop>
-            <div>
+
+            <PlantCardTextHeading>
               <div>
                 {data.plant_name}
               </div>
-              <div>
-                {getLocalizeTime(data.creation_date)}
-            
-              </div>
-            </div>
+           
+            </PlantCardTextHeading>
            </PlantCardTextTopInner>
 
-
+ 
           </PlantCardTextTop>
 
     
@@ -84,6 +81,7 @@ function cleanName(name) {
         </PlantCardTextHolderTop>
 
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
+
         <PlantCardTextHolder onClick={() => handleRedirect()}>
           <PlantCardText>
             <PlantCardTextLogo>
@@ -108,11 +106,13 @@ function cleanName(name) {
             <PlantCardTextInner>
               {data.environment_name}
             </PlantCardTextInner>
-          </PlantCardText>
+          </PlantCardText> 
         </PlantCardTextHolder>
+ 
       </PlantCardImageHolder>
 
     </Root>
+
 
   )
 }
