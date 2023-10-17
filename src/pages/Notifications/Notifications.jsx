@@ -1,10 +1,10 @@
 import React,{useEffect} from 'react'
-import { useSelector } from 'react-redux'
-import { selectNotifications } from '../../features/notifications/notificationSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectNotifications,readNotifications,readNotification  } from '../../features/index'
 import { Root,Heading } from '../../utils/global_styles'
 import styled from 'styled-components'
 import { getElapsedDaysNotificationsFull,getElapsedDaysNotifications } from '../../helpers/getElapsedDays'
-
+import { useSnackbar } from 'notistack'
 
 
 export const Holder = styled.div`
@@ -118,21 +118,40 @@ height: fit-content;
 const Notifications = () => {
 
     const notifications = useSelector(selectNotifications)
+    const dispatch = useDispatch()
+   const { enqueueSnackbar } = useSnackbar()
 
     console.log("notifications",notifications.length)
 
+    const handleReadAll = () =>{
+        dispatch(readNotifications(notifications.map((n)=> n.user_notification_id)))
+        console.log("notificationssssssss",notifications.map((n)=> n.user_notification_id))
+    }
+
+    const handleRead = (id) =>{
+        dispatch(readNotification(id))
+        .then((response)=>{
+            if(response.payload.message){
+                console.log("response",response.payload.message)
+                enqueueSnackbar(`${response.payload.message}`, { variant: 'success' })
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.payload.message}`, { variant: 'error' })
+        })
+    }
     
   return (
     <Root>
         <Holder>
             <NotificationHeadingHolder>
-            <NotificationHeadingHolderInner><Heading>Notifications </Heading ><NotificationAmount>{notifications.length}</NotificationAmount></NotificationHeadingHolderInner> <p>Mark all as read</p>
+            <NotificationHeadingHolderInner><Heading>Notifications </Heading ><NotificationAmount>{notifications.length}</NotificationAmount></NotificationHeadingHolderInner> <p onClick={()=>handleReadAll()}>Mark all as read</p>
             </NotificationHeadingHolder>
             <NotificationHolder>
         {notifications?.map((n)=>{
             if(n.notification_read == 0){
                 return(
-                    <NotificationCardActive>
+                    <NotificationCardActive onClick={()=>handleRead(n.user_notification_id)}>
                     
                     <NotificationCardAvatar>
                     {n?.actor_user_name?.charAt(0)}

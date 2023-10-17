@@ -26,8 +26,8 @@ import {fetchStages} from './stages/stagesThunk.js'
 import { plantActionTypesSlice,selectPlantActionTypes } from "./plantActionTypes/plantActionTypesSlice.js"
 import { fetchPlantActionTypes } from "./plantActionTypes/plantActionTypesThunk.js" 
 
-import { notificationSlice,incomingNotification } from "./notifications/notificationSlice.js"
-import { fetchNotifications } from "./notifications/notificationThunk.js"
+import { notificationSlice,incomingNotification,selectNotifications } from "./notifications/notificationSlice.js"
+import { fetchNotifications,readNotifications,readNotification } from "./notifications/notificationThunk.js"
 
 export {
     authSlice,
@@ -76,5 +76,8 @@ export {
     selectPlantActionTypes,
     notificationSlice,
     incomingNotification,
-    fetchNotifications
+    selectNotifications,
+    fetchNotifications,
+    readNotifications,
+    readNotification
 } 

@@ -1,8 +1,7 @@
 import React,{createContext, useContext,useEffect,useState} from 'react'
-import { BASE_URL_PROD } from "../lib/Constants";
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchNotifications, selectUser} from '../features/index'
-import axios from '../lib/axios';
+import { useSnackbar } from 'notistack';
 
 const NotificationContext = createContext()
 
@@ -12,7 +11,7 @@ export const NotificationProvider = ({children}) =>{
   
   const user = useSelector(selectUser)
   const [newNotification,setNewNotification] = useState(false)
-
+  const { enqueueSnackbar } = useSnackbar()
   const dispatch = useDispatch()
 
 
@@ -28,6 +27,10 @@ export const NotificationProvider = ({children}) =>{
        }else{
         setNewNotification(false)
        }
+      })
+      .catch((err)=>{
+        console.log("asdasdasd",err.payload.error)
+        enqueueSnackbar(`${err.payload.error}`, { variant: 'error' })
       })
      
       }
