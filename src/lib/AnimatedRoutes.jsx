@@ -65,7 +65,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
         <AnimatePresence >
                  <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
-            <Root>
+            <Root onClick={()=>{console.log("Cannalog")}} onTouchStart={()=>{console.log("Cannalog")}}>
             <NotificationProvider>
                 <SocketProvider>
                 
