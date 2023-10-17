@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { motion as m } from "framer-motion";
 
 
-
 export const Tag = styled(m.div)`
 background:${(props) => `${props.bg}`};
 width: fit-content;
-    padding: 0px 10px;
+    padding: 5px 10px;
     border-radius: 50px;
     margin: 10px 0px;
+    font-size: 14px;
+    margin-top: 0px;
     color: ${props => props.theme.textW}!important;
 `
 
@@ -121,12 +122,28 @@ p{
     font-family: baloonB !important;
 }
 `
+
+
+export const ImgHolderTopInfoInnerLeft = styled.div`
+max-width: calc(100% - 220px);
+width:100%;
+@media (max-width: 768px) {
+  max-width: unset;
+   }
+svg{
+  color:${(props) => `${props.theme.text}`};
+  font-size:20px
+}
+
+`
 export const ImgHolderTopInfoInnerRight = styled.div`
 display: flex;
 margin: 0px -10px;
 position: relative;
+max-width: 220px;
 @media (max-width: 768px) {
  margin-top:0px;
+ max-width: unset;
  justify-content: right;
   }
 p{
@@ -139,11 +156,11 @@ p{
 }
 `
 export const Section = styled.div`
-background:${(props) => `${props.theme.secondary}`};
+
 color:${(props) => `${props.theme.text}`};
-max-width: 1920px;
+
 margin: 0px auto;
-padding: 20px;
+padding: 10px 0px;
 @media (max-width: 768px) {
     width: unset;
    
@@ -164,11 +181,7 @@ padding-top: 0px;
     width: unset;
    
   }
-  svg{
-font-size:25px;
-margin-right: 5px;
-color:${(props) => `${props.theme.accent}`};
-  }
+
 `
 
 export const DayHolderOutter = styled.div`
@@ -211,4 +224,20 @@ svg{
     color:${(props) => `${props.theme.accent}`};
     font-size: 30px;
 }
+`
+
+
+    export const TagHolder = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+`
+export const UserHolder = styled.div`
+display: flex;
+align-items: end;
+svg{
+  font-size:20px;
+  margin-right: 10px;
+  color:${(props) => `${props.theme.text}`};
+    }
 `

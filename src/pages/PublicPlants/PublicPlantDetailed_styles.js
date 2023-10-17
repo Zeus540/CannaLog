@@ -117,10 +117,18 @@ p{
     font-size: 18px;
 }
 `
+
+export const ImgHolderTopInfoInnerLeft = styled.div`
+max-width: calc(100% - 220px);
+width:100%;
+
+
+`
 export const ImgHolderTopInfoInnerRight = styled.div`
 display: flex;
 margin: 0px -10px;
 position: relative;
+max-width: 220px;
 @media (max-width: 768px) {
  margin-top:0px;
  justify-content: right;
@@ -135,17 +143,16 @@ p{
 }
 `
 export const Section = styled.div`
-background:${(props) => `${props.theme.secondary}`};
+
 color:${(props) => `${props.theme.text}`};
-max-width: 1920px;
+
 margin: 0px auto;
-padding: 20px;
+padding: 10px 0px;
 @media (max-width: 768px) {
     width: unset;
    
   }
 `
-
 
 export const DayHolderOutterInner = styled.div`
 display: flex;
@@ -206,5 +213,19 @@ justify-content: center;
 svg{
     color:${(props) => `${props.theme.accent}`};
     font-size: 30px;
+}
+`
+export const TagHolder = styled.div`
+display: flex;
+justify-content: space-between;
+
+`
+export const UserHolder = styled.div`
+display: flex;
+align-items: end;
+svg{
+font-size:20px;
+margin-right: 10px;
+color:${(props) => `${props.theme.text}`};
 }
 `

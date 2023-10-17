@@ -110,7 +110,7 @@ z-index: 2;
 justify-content: space-between;
 `
 export const Tag = styled(m.div)`
-background: #66b394;
+background:${props => props.theme.accent};
 padding: 0px 15px;
 width: fit-content;
 border-radius: 50px;

@@ -25,6 +25,7 @@ import { TbArrowsExchange } from 'react-icons/tb'
 import { TbExchange } from 'react-icons/tb'
 import { PiPottedPlantLight } from 'react-icons/pi'
 import { FiEdit } from 'react-icons/fi'
+import { BsPersonCircle } from "react-icons/bs";
 
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
@@ -40,6 +41,8 @@ import {
     ImgHolderTopInfo,
     ImgHolderTopInfoInner,
     ImgHolderTopInfoInnerRight,
+    ImgHolderTopInfoInnerLeft,
+    TagHolder,
     DayHolderOutter,
     DayHolderOutterInner,
     DayHolder,
@@ -54,7 +57,8 @@ import {
     ExposureItemGroup,
     ExposureItem,
     EditPlant,
-    EditPlantInner
+    EditPlantInner,
+    UserHolder
 } from './MyPlantsDetailed_styles'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizeTime } from '../../helpers/getLocalizeTime'
@@ -224,17 +228,50 @@ function MyPlantsDetailed() {
 
                     <ImgHolderTopInfoInner>
 
-                        <div>
+                        <ImgHolderTopInfoInnerLeft>
                             <h1>{plant?.plant_name}</h1>
                             <Tag bg={currentStage?.stage_color}>
                             {currentStage?.stage_name}
                          
                             </Tag>
-                            {plant?.user_name}
-                         
-                    
+                            <UserHolder>
+                                <BsPersonCircle />{plant?.user_name}
+                            </UserHolder>
+                           
 
-                        </div>
+                            <Section>
+
+        <TagHolder>
+<div>
+        {plantEnvironment?.environment_type_name}
+    </div>
+    <div>
+        {plantEnvironment?.environment_name}
+    </div>
+    </TagHolder> 
+    <ExposureItemHolderOutter>
+        <div>Light Exposure</div>
+        <ExposureItemHolder>
+            {plantEnvironment?.environment_light_exposure !== 0 &&
+                <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
+
+                    <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
+                    <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
+                </ExposureItemGroup>
+            }
+            {24 - plantEnvironment?.environment_light_exposure !== 0 &&
+                <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
+
+                    <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
+                    <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
+                </ExposureItemGroup>
+            } 
+        </ExposureItemHolder>
+    </ExposureItemHolderOutter>
+
+</Section>
+                        </ImgHolderTopInfoInnerLeft>
+                        
                         <ImgHolderTopInfoInnerRight>
                             <div>
                                 <p><AiOutlineEye /> {plant?.views}</p>
@@ -247,6 +284,7 @@ function MyPlantsDetailed() {
                             </div>
                         </ImgHolderTopInfoInnerRight>
                     </ImgHolderTopInfoInner>
+                    
                     <DayHolderOutter>
                 <DayHolderOutterInner>
                     {fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
@@ -258,37 +296,7 @@ function MyPlantsDetailed() {
 
          
 
-            <Section>
-
-         
-            <div>
-                    {plantEnvironment?.environment_type_name}
-                </div>
-                <div>
-                    {plantEnvironment?.environment_name}
-                </div>
-             
-                <ExposureItemHolderOutter>
-                    <div>Light Exposure</div>
-                    <ExposureItemHolder>
-                        {plantEnvironment?.environment_light_exposure !== 0 &&
-                            <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
-
-                                <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
-                                <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
-                            </ExposureItemGroup>
-                        }
-                        {24 - plantEnvironment?.environment_light_exposure !== 0 &&
-                            <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
-
-                                <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
-                                <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
-                            </ExposureItemGroup>
-                        } 
-                    </ExposureItemHolder>
-                </ExposureItemHolderOutter>
-
-            </Section>
+           
            
          
             

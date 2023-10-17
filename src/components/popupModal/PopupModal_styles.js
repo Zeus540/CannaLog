@@ -69,10 +69,12 @@ export const ModalClose = styled(m.p)`
 display: flex;
 justify-content: end;
 margin-bottom: 20px;
+
 svg{
     color:  ${props => props.theme.accent};
     width: 20px;
     height: 20px;
+    cursor: pointer;
 }
 `
 

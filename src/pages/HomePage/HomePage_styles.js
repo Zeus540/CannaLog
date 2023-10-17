@@ -89,7 +89,7 @@ margin: 20px 0px;
 export const HeroTextBigSpan = styled.span`
 
 
-color:#66b394;
+color:${props => props.theme.accent};
 text-align: center;
     font-size: 20px;
     font-family: baloonB!important;
@@ -98,7 +98,7 @@ text-align: center;
 export const HeroTextBigSup = styled.sup`
 
 
-color:#66b394;
+color:${props => props.theme.accent};
 text-align: center;
     font-size: 40px;
     font-family: baloonB!important;
@@ -221,10 +221,10 @@ padding: 8px 25px;
 width: fit-content;
 border: none;
 background: #fff0;
-color: #66b394 ;
+color: ${props => props.theme.accent} ;
 border-radius: 5px;
 cursor: pointer;
-border: 1px #66b394 solid;
+border: 1px ${props => props.theme.accent} solid;
 
 `;
 

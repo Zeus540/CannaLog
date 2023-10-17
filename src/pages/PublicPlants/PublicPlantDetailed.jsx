@@ -7,26 +7,31 @@ import {
     selectIsLoggedIn
 } from '../../features'
 import { useParams } from 'react-router-dom'
-import { AiOutlineEye } from 'react-icons/ai'
-import { BiLike } from 'react-icons/bi'
+import { format } from 'date-fns';
 import { Heading, Button } from '../../utils/global_styles'
 import axios from '../../lib/axios'
+
+import { AiOutlineEye } from 'react-icons/ai'
+import { BiLike } from 'react-icons/bi'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { GiBackwardTime } from 'react-icons/gi'
+import { BsPersonCircle } from "react-icons/bs";
+
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
+
+import Weeks from '../../components/weeks/Weeks'
+import PopupModal from '../../components/popupModal/PopupModal'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
-import { format } from 'date-fns';
-import Weeks from '../../components/weeks/Weeks'
-import PopupModal from '../../components/popupModal/PopupModal'
 
 import {
     ImgHolderTop,
     ImgHolderTopInfo,
     ImgHolderTopInfoInner,
     ImgHolderTopInfoInnerRight,
+    ImgHolderTopInfoInnerLeft,
     DayHolderOutter,
     DayHolderOutterInner,
     DayHolder,
@@ -37,8 +42,8 @@ import {
     ExposureItemHolderOutter,
     ExposureItemGroup,
     ExposureItem,
-    EditPlant,
-    EditPlantInner
+    UserHolder,
+    TagHolder 
 } from './PublicPlantDetailed_styles'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizeTime } from '../../helpers/getLocalizeTime'
@@ -197,17 +202,51 @@ function PublicPlantDetailed() {
 
                     <ImgHolderTopInfoInner>
 
-                        <div>
+                        <ImgHolderTopInfoInnerLeft>
                             <h1>{plant?.plant_name}</h1>
                             <Tag bg={currentStage?.stage_color}>
                             {currentStage?.stage_name}
                          
                             </Tag>
-                            {plant?.user_name}
+                            <UserHolder>
+                                <BsPersonCircle />{plant?.user_name}
+                            </UserHolder>
                          
-                    
+                            <Section>
 
-                        </div>
+    <TagHolder>
+<div>
+        {plantEnvironment?.environment_type_name}
+    </div>
+    <div>
+        {plantEnvironment?.environment_name}
+    </div>
+    </TagHolder>
+
+<ExposureItemHolderOutter>
+    <div>Light Exposure</div>
+    <ExposureItemHolder>
+        {plantEnvironment?.environment_light_exposure !== 0 &&
+            <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
+
+                <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
+                <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
+            </ExposureItemGroup>
+        }
+        {24 - plantEnvironment?.environment_light_exposure !== 0 &&
+            <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
+
+                <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
+                <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
+            </ExposureItemGroup>
+        } 
+    </ExposureItemHolder>
+</ExposureItemHolderOutter>
+
+</Section>
+
+                        </ImgHolderTopInfoInnerLeft>
+
                         <ImgHolderTopInfoInnerRight>
                             <div>
                                 <p><AiOutlineEye /> {plant?.views}</p>
@@ -231,37 +270,7 @@ function PublicPlantDetailed() {
 
          
 
-            <Section>
-
-                <Heading>
-                    Environment
-                </Heading>
-
-                <div>
-                    {plantEnvironment?.environment_name}   {plantEnvironment?.environment_type_name}
-                </div>
-
-                <ExposureItemHolderOutter>
-                    <div>Light Exposure</div>
-                    <ExposureItemHolder>
-                        {plantEnvironment?.environment_light_exposure !== 0 &&
-                            <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
-
-                                <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
-                                <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
-                            </ExposureItemGroup>
-                        }
-                        {24 - plantEnvironment?.environment_light_exposure !== 0 &&
-                            <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
-
-                                <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
-                                <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
-                            </ExposureItemGroup>
-                        } 
-                    </ExposureItemHolder>
-                </ExposureItemHolderOutter>
-
-            </Section>
+        
            
        
 

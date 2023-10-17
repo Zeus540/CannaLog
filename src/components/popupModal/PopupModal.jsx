@@ -1,6 +1,6 @@
 import React from 'react'
 import { Root, Modal, ModalClose, ModalCloseHolder, ModalContent, Warn, ModalContentText } from './PopupModal_styles'
-import { CgCloseR } from "react-icons/cg";
+import { VscChromeClose } from "react-icons/vsc";
 import { ButtonModalOutlined } from '../../utils/global_styles';
 import axios from '../../lib/axios';
 import { BASE_URL_PROD } from '../../lib/Constants';
@@ -39,7 +39,7 @@ const PopupModal = ({ openModal, data, modalType, plant }) => {
   return (
     <Root >
       <Modal>
-        <ModalClose ><CgCloseR onClick={() => openModal(modalType)} /></ModalClose>
+        <ModalClose ><VscChromeClose onClick={() => openModal(modalType)} /></ModalClose>
         <ModalContent>
           {modalType == "deleteEnvironment" &&
             <>

@@ -11,7 +11,7 @@ let light_theme = {
   primary: '#ffffff',
   primary_light: 'aliceblue',
   secondary: ' aliceblue',
-  accent: '#66b394',
+  accent: 'mediumseagreen',
   text: '#0e1e3f',
   textW: '#ffffff',
   warn: "#f44336",
@@ -33,7 +33,7 @@ let light_theme = {
     hover: '#8bab50bd'
   },
   divider: {
-    primary: '#66b394',
+    primary: 'mediumseagreen',
   },
   modal: {
     primary: '#ffffff',
@@ -57,7 +57,7 @@ let dark_theme = {
   primary: '#0a0a0a',
   primary_light: '#121212',
   secondary: '#121212',
-  accent: '#66b394',
+  accent: 'mediumseagreen',
   text: 'white',
   textW: '#0a0a0a',
   warn: "#f44336",
@@ -77,7 +77,7 @@ let dark_theme = {
     hover: '#8bab50bd'
   },
   divider: {
-    primary: '#66b394',
+    primary: 'mediumseagreen',
   },
   modal: {
     primary: '#0a0a0a',

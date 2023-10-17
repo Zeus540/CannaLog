@@ -126,7 +126,7 @@ const MenuLink = styled(NavLink)`
   color:  ${props => props.theme.accent};
   text-decoration: none;
   &:hover {
-    border-bottom: 4px solid #66b394;
+    border-bottom: 4px solid ${props => props.theme.accent};
   
   }
 

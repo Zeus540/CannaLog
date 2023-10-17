@@ -219,7 +219,7 @@ const MenuLinkMobile = styled(NavLink)`
 
 
   &:hover {
-    border-bottom: 4px solid #66b394;
+    border-bottom: 4px solid ${props => props.theme.accent};
   }
 
 `;
