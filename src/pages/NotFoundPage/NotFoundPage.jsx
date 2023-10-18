@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
 import styled from "styled-components";
-import Back2 from '../../assets/images/unsplash.jpg'
 import { NavLink } from "react-router-dom";
 import {motion as m} from 'framer-motion'
 import {Button } from '../../utils/global_styles'
