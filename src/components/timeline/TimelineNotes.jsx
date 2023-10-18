@@ -148,7 +148,7 @@ svg{
 
 `
 
-const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCoverImage, publicPage }) => {
+const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
   const [notes, setNotes] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
@@ -267,8 +267,6 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
               {notes?.filter((a) => a.week == activeWeek)?.map((a) => {
                 return (
                   <SwiperSlide>
-
-                    {actionTypeData == 13 &&
                       <Item >
                          <ItemInnerUpper>
                             <Tag>{getWeekandDay(a.creation_date).day}</Tag>
@@ -294,8 +292,6 @@ const TimelineNotes = ({ plant, activeWeek, title, actionTypeData, handleSetCove
 
                         </ItemInner>
                       </Item>
-                    }
-
                   </SwiperSlide>
 
                 )

@@ -112,7 +112,7 @@ const HomePage = () => {
                         <DiaryTextHolderTop>
                         <DiaryText>{d?.user_name}</DiaryText>
                         </DiaryTextHolderTop>
-                        <DiaryImageHolder style={{ background: `url(${d?.cover_thumbnail == "" ? PlaceHolder : d?.cover_img})` }}>
+                        <DiaryImageHolder style={{ background: `url(${d?.cover_thumbnail == "" ? PlaceHolder : d?.cover_thumbnail})` }}>
 
 
                         </DiaryImageHolder>

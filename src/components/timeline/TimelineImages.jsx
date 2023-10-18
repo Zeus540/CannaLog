@@ -337,7 +337,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
                           <ImageItemInnerActionHolder>
 
 
-                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img, a.mid_img)}><FiEdit /></TextButtonSvg>
+                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img, a.thumbnail_img)}><FiEdit /></TextButtonSvg>
                             <TextButtonSvgDelete onClick={() => openModal('deleteImage', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                           </ImageItemInnerActionHolder>
                         }

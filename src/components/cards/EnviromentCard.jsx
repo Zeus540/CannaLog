@@ -81,7 +81,7 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
      
      <EnviromentCardTextHiddenHolderInner readMore={readMore}>
         <Divider></Divider>
-          <EnviromentHolderHeading>{myPlants?.length > 1 ? `${myPlants?.length} Plants` : `${myPlants?.length} Plant`} </EnviromentHolderHeading>
+          <EnviromentHolderHeading>{JSON?.parse(data.plants)?.length > 1 ? `${JSON?.parse(data.plants)?.length} Plants` : `${JSON?.parse(data.plants)?.length} Plant`} </EnviromentHolderHeading>
           <PlantHolderOutter>
             {JSON?.parse(data.plants)?.map((p,index) => {
               return (

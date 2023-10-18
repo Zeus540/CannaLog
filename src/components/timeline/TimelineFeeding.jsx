@@ -304,7 +304,7 @@ padding: 15px 0px;
 padding-bottom: 0px;
 `
 
-const TimelineFeeding = ({ plant, activeWeek, title, actionTypeData, handleSetCoverImage, publicPage }) => {
+const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
   const [feedingData, setFeedingData] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)

@@ -120,7 +120,7 @@ function MyPlantsDetailed() {
     }, [])
     
     const getPlantInfo = (plant_id)=>{
-
+     
         axios.post(`${BASE_URL_PROD}/plants/${plant_id}`)
         .then((response)=>{
            if(response.status == 200){
@@ -132,6 +132,7 @@ function MyPlantsDetailed() {
         .catch((err)=>{
             enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
         })
+      
     }
 
     const getEnvironment = (environment_id)=>{
@@ -327,9 +328,9 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  actionTypeData={13} handleSetCoverImage={handleSetCoverImage} />
-            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" actionTypeData={1} handleSetCoverImage={handleSetCoverImage}/>
-            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" actionTypeData={4} handleSetCoverImage={handleSetCoverImage}/>
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  />
+            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering"  />
+            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery"  handleSetCoverImage={handleSetCoverImage}/>
 
         
         </Root>
