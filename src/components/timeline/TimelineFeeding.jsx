@@ -461,7 +461,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
                       <ItemInnerLeft>
              
-                        <PieChart data={feedingData[i]?.filter((a) => a.week == activeWeek).map((a) => a.nutrient_amount)} labels={feedingData[i]?.filter((a) => a.week == activeWeek).map((a) => a.nutrient_name)} />
+                        <PieChart data={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).map((a) => a.nutrient_amount)} labels={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).map((a) => a.nutrient_name)} />
                       </ItemInnerLeft >
 
                       <ItemInnerRightOutter >
@@ -478,13 +478,14 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                         <ItemInnerRightItemEnd>Ec Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>
 
                     
-                        <ShowMore onClick={()=>{setShowMore((showMore) => !showMore)}}>Show More</ShowMore>
+                        <ShowMore onClick={()=>{setShowMore((showMore) => !showMore)}}>Show Nutrients</ShowMore>
                       
                       </ItemInnerRight >
 
                       <ItemInnerRightHidden showMore={showMore}>
                         <ItemInnerRightItemTextHolder >
                         {feedingData[i]?.filter((a) => a.week == activeWeek).map((a) => {
+                          if(a.plant_feeding_id !== null){
                           return (
                             <ItemInnerRightItem>
                                
@@ -506,6 +507,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                               }
                             </ItemInnerRightItem>
                           )
+                        }
                         })}
                          </ItemInnerRightItemTextHolder>
                          </ItemInnerRightHidden>
