@@ -208,7 +208,8 @@ display: flex;
 
 export const ItemInnerRightOutter = styled(m.div)`
 overflow: hidden;
-width: 60%;
+width: ${props => props.full ? "60%" :"100%"};
+
 height: fit-content;
 margin:20px;
 position: relative;
@@ -271,7 +272,8 @@ export const ItemInnerRightItemTextHolder = styled(m.div)`
 export const ItemInnerRightHidden = styled(m.div)`
 transform: ${props => props.showMore ? "translateY(0%)": "translateY(-100%)"};
 position: ${props => props.showMore ? "unset": " absolute"};
-opacity: ${props => props.showMore ? "100%": " 0%"};
+opacity: ${props => props.showMore ? "100%": " 100%"};
+visibility:${props => props.showMore ? "visible": " hidden"};
 padding: 0px 20px;
 background: ${props => props.theme.primary};
 border-radius: 0px 0px 10px 10px;
@@ -286,14 +288,14 @@ export const ItemInnerRightItem = styled(m.div)`
 display: flex;
 justify-content: space-between;
 padding: 15px 0px;
-border-bottom: 2px solid ${props => props.theme.secondary};
+ border-bottom: 2px solid ${props => props.theme.accent};
 
 `
 export const ItemInnerRightItemEnd = styled(m.div)`
 display: flex;
 justify-content: space-between;
 padding: 15px 0px;
-border-bottom: 2px solid ${props => props.theme.secondary};
+border-bottom: 2px solid ${props => props.theme.accent};
 `
 
 export const ShowMore = styled(m.h2)`
@@ -364,7 +366,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
 
   const group_by = (data, setter, plant) => {
-   
+  
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
@@ -388,19 +390,19 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
       acc[day].push(item);
       return acc;
     }, {});
-   
+ 
     setter(result)
   
   }
 
 
   useEffect(() => {
-    if(Object.values(feedingData)[0]?.map((a)=> a.week ).includes(activeWeek)){
+    if(Object.values(feedingData)?.flat()?.map((a)=> a.week ).includes(activeWeek)){
       setFeedingDataFound(true)
     }else{
       setFeedingDataFound(false)
     }
- 
+
   }, [activeWeek,feedingData])
 
   const openModal = (type, data) => {
@@ -462,17 +464,19 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                     <ItemInner >
 
 
+{feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).length > 0 &&  
                       <ItemInnerLeft>
              
                         <PieChart data={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).map((a) => a.nutrient_amount)} labels={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).map((a) => a.nutrient_name)} />
                       </ItemInnerLeft >
-
-                      <ItemInnerRightOutter >
+                    }
+                      <ItemInnerRightOutter full={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).length > 0}>
                       {/* <Heading>{title}</Heading>   */}
                       <ItemInnerRightTop>
                         <Tag>{feedingData[i][0].day}</Tag>
                         </ItemInnerRightTop>
-                      <ItemInnerRight showMore={showMore}>
+                   
+                      <ItemInnerRight showMore={showMore} >
                         
                    
                       
@@ -480,12 +484,10 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                         {/* <ItemInnerRightItemEnd>Ph Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>
                         <ItemInnerRightItemEnd>Ec Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd> */}
 
-                    
+{feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).length > 0 && <>
                         <ShowMore onClick={()=>{setShowMore((showMore) => !showMore)}}>Show Nutrients</ShowMore>
-                      
-                      </ItemInnerRight >
-
-                      <ItemInnerRightHidden showMore={showMore}>
+                        
+                        <ItemInnerRightHidden showMore={showMore}>
                         <ItemInnerRightItemTextHolder >
                         {feedingData[i]?.filter((a) => a.week == activeWeek).map((a) => {
                           if(a.plant_feeding_id !== null){
@@ -514,6 +516,10 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                         })}
                          </ItemInnerRightItemTextHolder>
                          </ItemInnerRightHidden>
+                         </>}
+                      </ItemInnerRight >
+
+               
                          </ItemInnerRightOutter >
                     </ItemInner>
 
