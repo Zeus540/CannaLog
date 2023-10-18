@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from '../../lib/axios';
 import {  BASE_URL_PROD } from '../../lib/Constants'
-import {fetchPublicPlants} from './publicPlantsThunk'
+import {fetchPublicPlants,fetchPublicPlantsSingedIn} from './publicPlantsThunk'
 
 let initialState = {
     loading:true,
@@ -21,10 +21,23 @@ export const publicPlantsSlice = createSlice({
           state.error = null;
         })
         .addCase(fetchPublicPlants.fulfilled, (state, action) => {
+          console.log("action",action)
           state.loading = false;
           state.plants = action.payload;
         })
         .addCase(fetchPublicPlants.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message;
+        })
+        .addCase(fetchPublicPlantsSingedIn.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+        })
+        .addCase(fetchPublicPlantsSingedIn.fulfilled, (state, action) => {
+          state.loading = false;
+          state.plants = action.payload;
+        })
+        .addCase(fetchPublicPlantsSingedIn.rejected, (state, action) => {
           state.loading = false;
           state.error = action.error.message;
         });
