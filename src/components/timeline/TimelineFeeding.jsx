@@ -365,12 +365,9 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
   const group_by = (data, setter, plant) => {
    
-
-
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
-
 
     // Localize each date in the object and calculate the week number
     const localizedData = data.map((item) => {
@@ -381,9 +378,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
       return { ...item, creation_date: localizedDate, week, day };
     });
 
-
     let sorted = localizedData.sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date))
-
 
     const result = sorted.reduce((acc, item) => {
       const { day } = item;
@@ -396,13 +391,9 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
    
     setter(result)
   
-  
   }
 
-  useEffect(() => {
-    console.log("result", feedingData['Wed']?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) )
-  }, [feedingData])
-  
+
   useEffect(() => {
     if(Object.values(feedingData)[0]?.map((a)=> a.week ).includes(activeWeek)){
       setFeedingDataFound(true)
@@ -486,8 +477,8 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                    
                       
                         <ItemInnerRightItemEnd>{feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) } Litres of Water Used </ItemInnerRightItemEnd>
-                        <ItemInnerRightItemEnd>Ph Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>
-                        <ItemInnerRightItemEnd>Ec Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>
+                        {/* <ItemInnerRightItemEnd>Ph Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>
+                        <ItemInnerRightItemEnd>Ec Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd> */}
 
                     
                         <ShowMore onClick={()=>{setShowMore((showMore) => !showMore)}}>Show Nutrients</ShowMore>
