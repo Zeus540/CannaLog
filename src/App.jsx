@@ -125,14 +125,18 @@ function App() {
   }, [])
   
   const toggleTheme = ()=>{
+
+    const oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 5);
+
     if(themeType == "dark"){
       removeCookie("theme")
-      setCookie("theme",JSON.stringify({theme:"light"}))
+      setCookie("theme",JSON.stringify({theme:"light"}),{expires: oneYearFromNow})
       setTheme(light_theme)
       setThemeType("light")
     }else{
       removeCookie("theme")
-      setCookie("theme",JSON.stringify({theme:"dark"}))
+      setCookie("theme",JSON.stringify({theme:"dark"}),{expires: oneYearFromNow})
       setTheme(dark_theme)
       setThemeType("dark")
     }
