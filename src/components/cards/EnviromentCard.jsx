@@ -86,7 +86,8 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
             {JSON?.parse(data.plants)?.map((p,index) => {
               return (
                 <PlantHolder key={index} onClick={()=>{handleRedirect(p)}}>
-                  <PlantImageHolder src={p.cover_img} width="100%" />
+                  <PlantImageHolder src={p.cover_thumbnail} width="100%" />
+                  {console.log("p",p)}
                  <div>{p.plant_name}</div>
                 </PlantHolder>
 

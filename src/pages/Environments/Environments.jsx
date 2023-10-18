@@ -15,7 +15,8 @@ import {
   addEnvironmentLocally,
   editEnvironmentLocally,
   selectUser,
-  deleteEnvironmentLocally
+  deleteEnvironmentLocally,
+  fetchEnvironmentTypes
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
 import PopupModal from '../../components/popupModal/PopupModal'

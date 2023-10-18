@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import { Button } from '../../utils/global_styles';
 import { FormHolder, InputField, InputRangeField, TypeHolder, TypeButton, TypeButtonActive, Label, Error, ButtonHolder, InputFieldGroup,Input, InputFieldG, TypeHolderInner, InputFieldGFlex } from './Form_styles'
-import { selectEnvironmentsTypes } from '../../features';
+import { fetchEnvironmentTypes, selectEnvironmentsTypes } from '../../features';
 import { useSelector } from 'react-redux';
 import { addEnvironment, editEnvironment } from '../../features';
 import { useDispatch } from 'react-redux';
@@ -35,8 +35,9 @@ const AddEvironment = ({ openModal, modalType, data }) => {
     const dispatch = useDispatch()
     const environmentTypes = useSelector(selectEnvironmentsTypes)
     const [type, setType] = useState("")
-    const [dataModified, setDataModified] = useState(null)
 
+
+    
     let intialValues = {
         environment_name: '',
         environment_type_id: type,
@@ -49,14 +50,8 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
 
     useEffect(() => {
-
-        if (data?.environment_id !== undefined ) {
-            setDataModified(data)
-            setType(data?.environment_type_id)
-        } else {
-            setDataModified(null)
-            setType(data?.environment_type_id)
-        }
+        dispatch(fetchEnvironmentTypes())
+        setType(data?.environment_type_id)
 
     }, [])
 

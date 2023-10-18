@@ -34,7 +34,7 @@ export const environmentsSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(fetchEnvironments.pending, (state) => {
-          state.loading = false;
+          state.loading = true;
           state.error = null;
         })
         .addCase(fetchEnvironments.fulfilled, (state, action) => {

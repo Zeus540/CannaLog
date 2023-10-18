@@ -9,9 +9,7 @@ export const fetchEnvironments = createAsyncThunk('environments/fetch',(data)=>{
   let sortBy = "DESC"
       return axios.post(`${BASE_URL_PROD}/environments/?limit=${limit}&sort=${sortBy}&key_sort=${data}`)
       .then((response) => {
-    
         return response.data;
-
       })
       .catch((error) => {
         throw new Error('Failed to fetch environments');

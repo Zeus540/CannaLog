@@ -121,7 +121,7 @@ function MyPlantsDetailed() {
     
     const getPlantInfo = (plant_id)=>{
 
-        axios.post(`${BASE_URL_PROD}/plants/plant_id`,{plant_id:plant_id})
+        axios.post(`${BASE_URL_PROD}/plants/${plant_id}`)
         .then((response)=>{
            if(response.status == 200){
                setPlant(response.data)
@@ -168,7 +168,7 @@ function MyPlantsDetailed() {
             }
         })
         .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} Unable to fetch actions for this plant`, { variant: 'error' })
+            enqueueSnackbar(`${err.response.status} Unable to fetch current stage for this plant`, { variant: 'error' })
         })
 
     }

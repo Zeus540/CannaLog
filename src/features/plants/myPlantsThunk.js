@@ -4,7 +4,7 @@ import { BASE_URL_PROD } from "../../lib/Constants";
 import {deletePlantLocally} from './myPlantsSlice'
 
 export const fetchMyPlants = createAsyncThunk('myPlants/fetch',()=>{
-  return axios.get(`${BASE_URL_PROD}/plants`)
+  return axios.get(`${BASE_URL_PROD}/plants/my_plants`)
   .then((response) => {
     return response.data;
   })

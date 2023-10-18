@@ -70,9 +70,7 @@ function PublicPlantDetailed() {
     const params = useParams()
     const socket = useSocket()
 
-    useEffect(() => {
-        getActions()
-    }, [])
+
 
     useEffect(() => {
         if (socket) {
@@ -87,60 +85,82 @@ function PublicPlantDetailed() {
 
     },[socket])
 
-    
-    useEffect(() => {
-
-        let plant = plants.plants?.filter((p) => p.plant_id == parseInt(params.plant_id))[0]
-
-        if(LoggedIn){
-            updateView(plant)
-        }
-        
-        setPlant(plant)
-        setCoverImage(plant?.cover_img)
-      
-        axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : params.plant_id})
-        .then((response)=>{
-            setCurrentStage(response.data)
        
-        })
-        .catch((err)=>{
-            console.log("err",err)
-        })
+    useEffect(() => {
+        getPlantInfo(params.plant_id)
+        getEnvironment(params.environment_id)
+        getActions(params.plant_id)
+        getStage(params.plant_id)
+    
+    }, [])
+    
+    const getPlantInfo = (plant_id)=>{
 
-        axios.post(`${BASE_URL_PROD}/plants/current_environment`,{environment_id : params.environment_id})
+        axios.post(`${BASE_URL_PROD}/plants/public/${plant_id}`)
         .then((response)=>{
-            setPlantEnvironment(response.data)
+           if(response.status == 200){
+               setPlant(response.data)
+               setCoverImage(response.data.cover_img)
+               if(LoggedIn){
+                updateView(response.data.user_id,response.data.plant_id)
+                }
+           }
         })
         .catch((err)=>{
-            console.log("err",err)
+            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
         })
+    }
+
+    const getEnvironment = (environment_id)=>{
         
-    }, [plants])
+        axios.post(`${BASE_URL_PROD}/plants/current_environment`,{environment_id : environment_id})
+        .then((response)=>{
+            if(response.status == 200){
+                setPlantEnvironment(response.data)
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+        })
 
- 
+    }
 
-    const getActions = async () => {
-        axios.post(`${BASE_URL_PROD}/plants/actions`, { plant_id: parseInt(await params.plant_id) })
+    const getStage = (plant_id)=>{
+
+        axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : plant_id})
+        .then((response)=>{
+            if(response.status == 200 ){
+                setCurrentStage(response.data)
+            }
+        })
+        .catch((err)=>{
+            enqueueSnackbar(`${err.response.status} Unable to fetch current stage for this plant`, { variant: 'error' })
+        })
+
+    }
+
+    const getActions = (plant_id) => {
+        axios.post(`${BASE_URL_PROD}/plants/actions`, { plant_id: plant_id })
             .then((response) => {
-
-                setPlantActions(response.data)
+                if(response.status == 200){
+                    setPlantActions(response.data)
+                }
             }).catch((err) => {
-                console.log(err)
+                enqueueSnackbar(`${err.response.status} Unable to fetch actions for this plant`, { variant: 'error' })
             })
     }
 
-    const updateView = async (plant) => {
+    const updateView = (user_id,plant_id) => {
        
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
         let data = {
             creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
             timezone: userTimezone,
-            plant_user_id:plant?.user_id
+            plant_user_id:user_id
         }
 
-        axios.post(`${BASE_URL_PROD}/plants/viewed/${params.plant_id}`,data)
+        axios.post(`${BASE_URL_PROD}/plants/viewed/${plant_id}`,data)
         .then((response)=>{
             console.log(response)
         })
@@ -171,6 +191,7 @@ function PublicPlantDetailed() {
     const handleActiveWeeks = (week)=>{
         setActiveWeek(week)
     }
+    
     const handleSetCoverImage = (image)=>{
         console.log("handleSetCoverImage",image)
         axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`,{cover_img:image})
