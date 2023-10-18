@@ -40,8 +40,13 @@ const MyPlants = () => {
   
   useEffect(() => {
 
-    dispatch(fetchMyPlants())
+    const controller = new AbortController
+    const signal = controller.signal
+    dispatch(fetchMyPlants(signal))
  
+    return(()=>{
+      controller.abort()
+    })
   }, []);
 
 

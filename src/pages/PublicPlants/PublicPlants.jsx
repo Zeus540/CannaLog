@@ -32,15 +32,22 @@ const PublicPlants = () => {
   const publicPlants = useSelector(selectPublicJournal)
 
 
+
   useEffect(() => {
 
-    if(isLoggedIn){
-         dispatch(fetchPublicPlantsSingedIn())
-    }else{
-         dispatch(fetchPublicPlants())
-    }
-  }, [isLoggedIn])
+    const controller = new AbortController
+    const signal = controller.signal
 
+    if(isLoggedIn){
+      dispatch(fetchPublicPlantsSingedIn(signal))
+    }else{
+          dispatch(fetchPublicPlants(signal))
+    }
+ 
+    return(()=>{
+      controller.abort()
+    })
+  }, [isLoggedIn]);
 
   return (
 

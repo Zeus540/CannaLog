@@ -3,8 +3,8 @@ import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 
 
-export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',()=>{
-      return axios.get(`${BASE_URL_PROD}/plants/public`)
+export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',(signal)=>{
+      return axios.get(`${BASE_URL_PROD}/plants/public`,{signal})
       .then((response) => {
         return response.data;
       })
@@ -13,8 +13,8 @@ export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',()=>{
       });
 })
 
-export const fetchPublicPlantsSingedIn = createAsyncThunk('publicPlants/fetch',()=>{
-  return axios.get(`${BASE_URL_PROD}/plants/public_signed_in`)
+export const fetchPublicPlantsSingedIn = createAsyncThunk('publicPlants/fetch',(signal)=>{
+  return axios.get(`${BASE_URL_PROD}/plants/public_signed_in`,{signal})
   .then((response) => {
     return response.data;
   })
