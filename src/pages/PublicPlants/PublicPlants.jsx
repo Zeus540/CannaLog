@@ -41,12 +41,13 @@ const PublicPlants = () => {
     if(isLoggedIn){
       dispatch(fetchPublicPlantsSingedIn(signal))
     }else{
-          dispatch(fetchPublicPlants(signal))
+      dispatch(fetchPublicPlants(signal))
     }
  
     return(()=>{
       controller.abort()
     })
+
   }, [isLoggedIn]);
 
   return (

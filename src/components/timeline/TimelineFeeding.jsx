@@ -337,7 +337,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
     if (plant) {
 
 
-      axios.post(`${BASE_URL_PROD}/plants/actions/1`, plant)
+      axios.post(`${BASE_URL_PROD}/plants/actions/1/${plant.plant_id}`)
         .then((response) => {
           if (response.data.length > 0) {
             group_by(response.data, setFeedingData, plant)

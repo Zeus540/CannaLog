@@ -205,7 +205,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
     if (plant) {
 
 
-      axios.post(`${BASE_URL_PROD}/plants/actions/4`, plant)
+      axios.post(`${BASE_URL_PROD}/plants/actions/4/${plant.plant_id}`)
         .then((response) => {
           if (response.data.length > 0) {
             group_by(response.data, setImages, plant)

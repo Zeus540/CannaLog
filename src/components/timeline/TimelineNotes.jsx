@@ -178,7 +178,7 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
   useEffect(() => {
 
     if (plant) {
-      axios.post(`${BASE_URL_PROD}/plants/actions/13`, plant)
+      axios.post(`${BASE_URL_PROD}/plants/actions/13/${plant.plant_id}`)
         .then((response) => {
           if (response.data.length > 0) {
             group_by(response.data, setNotes, plant)
