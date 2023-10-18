@@ -16,7 +16,7 @@ axios.interceptors.response.use(
 axios.interceptors.request.use(
   function (config) {
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log("interceptors",config.data)
+    // console.log("interceptors",config.data)
     
     config.data = {
       ...config.data,

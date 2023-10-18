@@ -225,7 +225,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
 
 
   const group_by = (data, setter, plant) => {
-    console.log("plant", plant)
+
     console.log("data", data)
 
     // Assuming you have the necessary data and variables

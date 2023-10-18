@@ -11,7 +11,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { ItemHodler } from '../forms/Form_styles'
 import PopupModal from '../popupModal/PopupModal'
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
 import { useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -313,24 +313,32 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
   
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
+  const socket = useSocket()
   const params = useParams()
 
   useEffect(() => {
-    if (plant) {
 
-      // socket.on(`image_added${params.plant_id}`, (data) => {
-      //   let arr = [...feedingData, data];
-      //   console.log('image_added')
-      //   group_by(arr, setFeedingData, plant);
-      // });
+    if (plant && socket) {
 
+       socket.on(`watering_added${params.plant_id}`, (data) => {
+         let arr = [...feedingData, ...data];
+         console.log('watering_added',arr)
+         group_by(arr, setFeedingData, plant);
+       });
+
+       socket.on(`feeding_added${params.plant_id}`, (data) => {
+        let arr = [...feedingData, ...data];
+        console.log('feeding_added',arr)
+        group_by(arr, setFeedingData, plant);
+      });
+       
       // socket.on(`action_deleted${params.plant_id}`, (data) => {
       //   console.log('action_deleted', data)
       //   setFeedingData(feedingData.filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)))
       // });
 
     }
-  }, [plant, feedingData]);
+  }, [plant, feedingData,socket]);
 
 
   useEffect(() => {
@@ -356,8 +364,8 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
 
   const group_by = (data, setter, plant) => {
-    console.log("plant", plant)
-    console.log("data", data)
+   
+
 
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -385,12 +393,16 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
       acc[day].push(item);
       return acc;
     }, {});
-
+   
     setter(result)
   
   
   }
 
+  useEffect(() => {
+    console.log("result", feedingData['Wed']?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) )
+  }, [feedingData])
+  
   useEffect(() => {
     if(Object.values(feedingData)[0]?.map((a)=> a.week ).includes(activeWeek)){
       setFeedingDataFound(true)
