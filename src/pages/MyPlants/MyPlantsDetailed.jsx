@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
-    selectMyPlants,
-    selectEnvironments,
     selectPlantActionTypes,
-    fetchPlantActionTypes
 } from '../../features'
 import { useParams } from 'react-router-dom'
-
 import { AiOutlineEye } from 'react-icons/ai'
 import { BiLike } from 'react-icons/bi'
-import { Heading, Button } from '../../utils/global_styles'
 import { MdOutlineWaterDrop } from 'react-icons/md'
 import { LiaCutSolid } from 'react-icons/lia'
 import axios from '../../lib/axios'
-import { GiChemicalDrop } from 'react-icons/gi'
 import { AiOutlineCamera } from 'react-icons/ai'
 import { RiScales2Line } from 'react-icons/ri'
 import { TfiPaintBucket } from 'react-icons/tfi'
@@ -26,16 +20,13 @@ import { TbExchange } from 'react-icons/tb'
 import { PiPottedPlantLight } from 'react-icons/pi'
 import { FiEdit } from 'react-icons/fi'
 import { BsPersonCircle } from "react-icons/bs";
-
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
-
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
-
 import {
     ImgHolderTop,
     ImgHolderTopInfo,
@@ -77,7 +68,6 @@ function MyPlantsDetailed() {
     const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate)
     const params = useParams()
     const socket = useSocket()
-    const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar()
 
     let plant_action_types = useSelector(selectPlantActionTypes)

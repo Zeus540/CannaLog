@@ -5,25 +5,20 @@ import {
 } from '../../features'
 import { useParams } from 'react-router-dom'
 import { format } from 'date-fns';
-import { Heading, Button } from '../../utils/global_styles'
 import axios from '../../lib/axios'
-
 import { AiOutlineEye } from 'react-icons/ai'
 import { BiLike } from 'react-icons/bi'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { GiBackwardTime } from 'react-icons/gi'
 import { BsPersonCircle } from "react-icons/bs";
-
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
-
 import Weeks from '../../components/weeks/Weeks'
 import PopupModal from '../../components/popupModal/PopupModal'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
 import { useSnackbar } from 'notistack';
-
 import {
     ImgHolderTop,
     ImgHolderTopInfo,
@@ -44,8 +39,6 @@ import {
     TagHolder
 } from './PublicPlantDetailed_styles'
 import { BASE_URL_PROD } from '../../lib/Constants'
-import { getLocalizeTime } from '../../helpers/getLocalizeTime'
-import { getWeeksElapsed } from '../../helpers/getWeeksElapsed'
 import { useSocket } from '../../context/SocketContext'
 
 function PublicPlantDetailed() {
