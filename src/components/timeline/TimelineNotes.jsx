@@ -254,7 +254,11 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
           {/* <Heading>{title}</Heading> */}
           <RootInner>
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
-
+            <ItemInnerUpper>
+                         <ItemInnerUpperDiv></ItemInnerUpperDiv>
+                         <ItemInnerUpperHeading>YOUR COMMMENTS</ItemInnerUpperHeading>
+                         <ItemInnerUpperDiv></ItemInnerUpperDiv>
+                          </ItemInnerUpper>
             <Swiper
               pagination={{
                 dynamicBullets: true,
@@ -287,11 +291,7 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
                 return (
                   <SwiperSlide>
                       <Item >
-                         <ItemInnerUpper>
-                         <ItemInnerUpperDiv></ItemInnerUpperDiv>
-                         <ItemInnerUpperHeading>YOUR COMMMENTS</ItemInnerUpperHeading>
-                         <ItemInnerUpperDiv></ItemInnerUpperDiv>
-                          </ItemInnerUpper>
+                         
 
                         <ItemInner >
                         <ItemInnerContentFlex>

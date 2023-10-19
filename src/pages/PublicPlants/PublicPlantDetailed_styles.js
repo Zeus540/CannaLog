@@ -121,7 +121,13 @@ p{
 export const ImgHolderTopInfoInnerLeft = styled.div`
 max-width: calc(100% - 220px);
 width:100%;
-
+@media (max-width: 768px) {
+  max-width: unset;
+   }
+svg{
+  color:${(props) => `${props.theme.text}`};
+  font-size:20px
+}
 
 `
 export const ImgHolderTopInfoInnerRight = styled.div`
