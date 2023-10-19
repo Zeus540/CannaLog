@@ -175,7 +175,6 @@ text-align: center;
 width: calc(100% / 3 - 160px);
 margin: 40px;
 
-background: ${props => props.theme.primary};
 border-radius: 5px;
   @media (min-width: 0px) and (max-width: 768px) {
     width: calc(100% / 1 );
@@ -205,10 +204,10 @@ align-items: center;
 text-align: center;
 width: calc(100% / 3 );
 margin:20px;
-background: ${props => props.theme.primary};
+
 color: ${props => props.theme.text};
 border-radius: 5px;
-padding: 40px 20px;
+padding: 40px 15px;
   @media (min-width: 0px) and (max-width: 768px) {
     width: calc(100% / 1 );
     margin:20px 0px;
@@ -278,6 +277,7 @@ export const DiaryHolder = styled.div`
   padding:0px ;
   margin: 40px 0px;
   margin-top: 0px;
+  margin: 0px -10px;
   @media (max-width: 425px) {
     padding:0px ;
     overflow: auto;
@@ -351,8 +351,8 @@ text-align: left;
 `;
 
 export const PricingSection = styled.div`
-background: ${props => props.theme.secondary};
-padding: 40px 20px;
+
+padding: 40px 15px;
 `;
 
 export const IntroTextHeading = styled.h1`

@@ -43,6 +43,7 @@ import { useDispatch } from 'react-redux';
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
 import WaveHeading from '../../components/Headings/WaveHeading';
 import { useNavigate } from 'react-router-dom';
+import PlantCardPublic from '../../components/cards/PlantCardPublic';
 const HomePage = () => {
 
   const dispatch = useDispatch()
@@ -50,9 +51,11 @@ const HomePage = () => {
 
   const publicPlants = useSelector(selectPublicJournal)
 
-  console.log("publicPlants", publicPlants.plants)
+ 
   useEffect(() => {
-    dispatch(fetchPublicPlants())
+    dispatch(fetchPublicPlants()).then((res)=>{
+console.log("errerrerrerrerr",res)
+    })
   }, [])
 
 
@@ -77,8 +80,10 @@ const HomePage = () => {
               <Divider></Divider>
               <HeroText>
                 <p>Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. <HeroTextExtra>Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</HeroTextExtra></p>
+               
+                <Link to="/sign-up">
                 <Button><ButtonText>Sign Up Now</ButtonText></Button>
-
+              </Link>
               </HeroText>
 
 
@@ -99,33 +104,26 @@ const HomePage = () => {
 
         <SectionInnerTop >
 
-
+{/* {console.log("publicPlants",publicPlants)} */}
           {!publicPlants.loading &&
             <>
               <DiaryHolder>
-                {publicPlants.plants?.map((d, index) => {
+                {publicPlants.plants?.map((p, index) => {
                   if (index < 6) {
                     return (
-                      <Diary
-                        to={`/public-plant/${cleanName(d.plant_name)}/${d.environment_id}/${d.plant_id}`} key={index}
-                      >
-                        <DiaryTextHolderTop>
-                        <DiaryText>{d?.user_name}</DiaryText>
-                        </DiaryTextHolderTop>
-                        <DiaryImageHolder style={{ background: `url(${d?.cover_thumbnail == "" ? PlaceHolder : d?.cover_thumbnail})` }}>
-
-
-                        </DiaryImageHolder>
-
-                        <DiaryTextHolder>
-                        
-                   
-                     
-                        
-                          <DiaryText> {d?.strain_name} </DiaryText>
-                        </DiaryTextHolder>
-
-                      </Diary>
+                      <PlantCardPublic
+                      key={index}
+                      length={publicPlants.plants.length}
+                      index={index}
+                      data={p}
+                      homePage={true}
+                      cover_thumbnail={p?.cover_thumbnail}
+                      name={p.name}
+                      environment_type_name={p.environment_type_name}
+                      light_exposure={p.light_exposure}
+                      creation_date={p.creation_date}
+                      last_updated={p.last_updated}
+                 />
                     );
                   }
 

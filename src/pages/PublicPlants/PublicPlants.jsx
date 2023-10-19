@@ -35,10 +35,11 @@ const PublicPlants = () => {
 
     const controller = new AbortController
     const signal = controller.signal
-
+  
     if(isLoggedIn){
       dispatch(fetchPublicPlantsSingedIn(signal))
     }else{
+    
       dispatch(fetchPublicPlants(signal))
     }
  

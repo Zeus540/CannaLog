@@ -41,7 +41,7 @@ let light_theme = {
     text: 'black',
   },
   nav: {
-    primary: '#ffffff',
+    primary: 'aliceblue',
     secondary: '#f3f4f6',
   },
   notification_card:{

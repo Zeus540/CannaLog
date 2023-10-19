@@ -33,16 +33,14 @@ padding-top: 60px;
 
 export const Holder = styled(m.div)`
 max-width: 1920px;
-margin: 40px;
+margin: 40px 15px;
 width:100%;
 
 
 
 overflow:hidden;
 transition: all 1s ease;
- @media (max-width: 425px) {
-   margin: 40px 20px;
- }
+
 `
 
 export const Heading = styled(m.h1)`

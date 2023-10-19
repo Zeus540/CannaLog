@@ -25,7 +25,7 @@ import {
 } from './PlantCard_styles'
 import { PiDnaLight } from 'react-icons/pi';
 import { IoWaterOutline } from 'react-icons/io5';
-import { BsCalendar2Date } from 'react-icons/bs';
+import { BsPersonCircle } from "react-icons/bs";
 import { GiGreenhouse } from 'react-icons/gi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
@@ -66,23 +66,18 @@ function cleanName(name) {
         <PlantCardTextHolderTop>
           <PlantCardTextTop >
 
-           <PlantCardTextTopInner onClick={() => handleRedirect()}>
-
-
-            <PlantCardTextHeading>
-              <p>
-                {data.plant_name}
-              </p>
-           
-            </PlantCardTextHeading>
-           </PlantCardTextTopInner>
-
-            {/* <ButtonSvg onClick={()=>{openModal("deletePlant",data)}}><RiDeleteBin5Line/></ButtonSvg> */}
+          
+        
+  <PlantCardTextLogo>
+              <GiGreenhouse />
+            </PlantCardTextLogo> {data.environment_name}
+            
+            {/* <ButtonSvg onClick={()=>{openModal("deletePlant",data)}}><RiDeleteBin5Line/></ButtonSvg>  */}
           </PlantCardTextTop>
 
     
 
-        </PlantCardTextHolderTop>
+        </PlantCardTextHolderTop> 
 
 
 <EnviromentCardImageHolder>
@@ -92,6 +87,22 @@ function cleanName(name) {
             </PlantCardTextLogoTop>
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
         </EnviromentCardImageHolder>
+
+        <PlantCardTextTopInner onClick={() => handleRedirect()}>
+
+
+<PlantCardTextHeading>
+  <p>
+    {data.plant_name}
+  </p>
+
+  <p>
+    <BsPersonCircle />{data.user_name}
+  </p>
+
+</PlantCardTextHeading>
+</PlantCardTextTopInner>
+
         <PlantCardTextHolder onClick={() => handleRedirect()}>
           <PlantCardText>
             <PlantCardTextLogo>
@@ -109,14 +120,7 @@ function cleanName(name) {
               {data.irrigation_type}
             </PlantCardTextInner>
           </PlantCardText>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <GiGreenhouse />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.environment_name}
-            </PlantCardTextInner>
-          </PlantCardText> 
+  
         </PlantCardTextHolder> 
       </PlantCardImageHolder>
 
