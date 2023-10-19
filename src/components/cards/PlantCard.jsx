@@ -118,10 +118,10 @@ function cleanName(name) {
   <p>
     {data.plant_name}
   </p>
-
+{/* 
   <p>
     <BsPersonCircle />{data.user_name}
-  </p>
+  </p> */}
 
 </PlantCardTextHeading>
 </PlantCardTextTopInner>

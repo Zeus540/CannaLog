@@ -100,7 +100,7 @@ function PublicPlantDetailed() {
                     setPlant(response.data)
                     setCoverImage(response.data.cover_img)
                     if (LoggedIn) {
-                       // updateView(response.data.user_id, response.data.plant_id)
+                        updateView(response.data.user_id, response.data.plant_id)
                     }
                 }
             })
@@ -111,7 +111,7 @@ function PublicPlantDetailed() {
 
     const getEnvironment = (environment_id) => {
 
-        axios.post(`${BASE_URL_PROD}/plants/current_environment`, { environment_id: environment_id })
+        axios.post(`${BASE_URL_PROD}/plants/current_environment/public`, { environment_id: environment_id })
             .then((response) => {
                 if (response.status == 200) {
                     setPlantEnvironment(response.data)
@@ -125,7 +125,7 @@ function PublicPlantDetailed() {
 
     const getStage = (plant_id) => {
 
-        axios.post(`${BASE_URL_PROD}/plants/current_stage`, { plant_id: plant_id })
+        axios.post(`${BASE_URL_PROD}/plants/current_stage/public`, { plant_id: plant_id })
             .then((response) => {
                 if (response.status == 200) {
                     setCurrentStage(response.data)
@@ -138,7 +138,7 @@ function PublicPlantDetailed() {
     }
 
     const getActions = (plant_id) => {
-        axios.post(`${BASE_URL_PROD}/plants/actions`, { plant_id: plant_id })
+        axios.post(`${BASE_URL_PROD}/plants/actions/public`, { plant_id: plant_id })
             .then((response) => {
                 if (response.status == 200) {
                     setPlantActions(response.data)

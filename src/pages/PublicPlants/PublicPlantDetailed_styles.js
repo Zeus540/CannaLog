@@ -100,22 +100,23 @@ export const ImgHolderTopInfoInner = styled.div`
 max-width: 1920px;
 width: 100%;
 padding: 15px;
-
+text-wrap: balance;
 display: flex;
 justify-content: space-between;
 align-items: end;
 color:${(props) => `${props.theme.text}`};
 @media (max-width: 768px) {
     flex-direction: column;
-
+    padding: 15px;
     align-items: unset;
   }
 h1{
     font-size: 30px;
-    text-wrap: balance;
+    font-family: baloonB !important;
 }
 p{
     font-size: 18px;
+    font-family: baloonB !important;
 }
 `
 
