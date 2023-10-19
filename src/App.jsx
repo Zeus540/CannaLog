@@ -37,7 +37,7 @@ let light_theme = {
   },
   modal: {
     primary: '#ffffff',
-    secondary: '#c7c7c79c',
+    secondary: '#d9e4eda3',
     text: 'black',
   },
   nav: {

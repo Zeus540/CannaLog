@@ -117,7 +117,7 @@ margin: 0px 20px;
 `
 
  const ItemInnerContent = styled(m.div)`
-padding: 20px;
+ padding: 15px;
 text-align: center;
 
 color:${props => props.theme.text};

@@ -21,7 +21,7 @@ import 'swiper/css/pagination';
 export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 15px 20px;
+padding: 15px;
 padding-bottom: 20px;
 `
 export const TimeLineHolder = styled(m.div)`

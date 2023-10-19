@@ -99,7 +99,7 @@ color:${(props) => `${props.theme.text}`};
 export const ImgHolderTopInfoInner = styled.div`
 max-width: 1920px;
 width: 100%;
-padding: 20px;
+padding: 15px;
 
 display: flex;
 justify-content: space-between;
@@ -107,7 +107,7 @@ align-items: end;
 color:${(props) => `${props.theme.text}`};
 @media (max-width: 768px) {
     flex-direction: column;
-    padding: 20px;
+
     align-items: unset;
   }
 h1{
@@ -133,19 +133,22 @@ svg{
 `
 export const ImgHolderTopInfoInnerRight = styled.div`
 display: flex;
-margin: 0px -10px;
+
 position: relative;
 max-width: 220px;
 @media (max-width: 768px) {
- margin-top:0px;
- justify-content: right;
+  margin-top: 0px;
+  max-width: unset;
+  width: 100%;
+  justify-content: end;
+
   }
 p{
-    margin: 0px 10px;
+
     display: flex;
     svg{
         font-size: 25px;
-        margin-right:10px;
+        margin: 0px 10px;
     }
 }
 `
@@ -168,7 +171,7 @@ justify-content: space-between;
 color:${(props) => `${props.theme.accent}`};
 max-width: 1920px;
 margin: 0px auto;
-padding: 15px 20px;
+padding: 15px;
 padding-top: 0px;
 @media (max-width: 768px) {
     width: unset;

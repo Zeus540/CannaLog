@@ -28,7 +28,7 @@ export const QuickActionHolder = styled.div`
 
 margin: 0px auto;
 max-width: 1920px;
-padding: 20px;
+padding: 15px;
 `
 
 export const EditPlant = styled(m.div)`
@@ -43,7 +43,7 @@ svg{
 export const EditPlantInner = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 20px 20px;
+padding: 15px;
 justify-content: end;
 display: flex;
 svg{
@@ -93,7 +93,7 @@ background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transpa
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 75vh;
+min-height: 80vh;
 background-repeat: no-repeat;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
@@ -102,7 +102,7 @@ color:${(props) => `${props.theme.text}`};
 export const ImgHolderTopInfoInner = styled.div`
 max-width: 1920px;
 width: 100%;
-padding: 20px;
+padding: 15px;
 text-wrap: balance;
 display: flex;
 justify-content: space-between;
@@ -110,7 +110,7 @@ align-items: end;
 color:${(props) => `${props.theme.text}`};
 @media (max-width: 768px) {
     flex-direction: column;
-    padding: 20px;
+    padding: 15px;
     align-items: unset;
   }
 h1{
@@ -138,20 +138,22 @@ svg{
 `
 export const ImgHolderTopInfoInnerRight = styled.div`
 display: flex;
-margin: 0px -10px;
+
 position: relative;
 max-width: 220px;
 @media (max-width: 768px) {
- margin-top:0px;
- max-width: unset;
- justify-content: right;
+  margin-top: 0px;
+  max-width: unset;
+  width: 100%;
+  justify-content: end;
+
   }
 p{
-    margin: 0px 10px;
+
     display: flex;
     svg{
         font-size: 25px;
-        margin-right:10px;
+        margin: 0px 10px;
     }
 }
 `

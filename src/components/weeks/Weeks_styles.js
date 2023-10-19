@@ -4,7 +4,7 @@ import { motion as m } from 'framer-motion'
 export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 20px;
+padding: 15px;
 text-align: center;
 `
 
