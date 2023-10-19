@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
-    selectPublicJournal,
-    selectEnvironments,
-    selectPlantActionTypes,
     selectIsLoggedIn
 } from '../../features'
 import { useParams } from 'react-router-dom'
@@ -25,6 +22,7 @@ import PopupModal from '../../components/popupModal/PopupModal'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
+import { useSnackbar } from 'notistack';
 
 import {
     ImgHolderTop,
@@ -61,11 +59,9 @@ function PublicPlantDetailed() {
     const [activeWeek, setActiveWeek] = useState(undefined)
     const [coverImage, setCoverImage] = useState('')
 
-    let plants = useSelector(selectPublicJournal)
-    let LoggedIn = useSelector(selectIsLoggedIn)
+    const { enqueueSnackbar } = useSnackbar()
 
-    let environments = useSelector(selectEnvironments)
-    let plant_action_types = useSelector(selectPlantActionTypes)
+    let LoggedIn = useSelector(selectIsLoggedIn)
 
     const params = useParams()
     const socket = useSocket()
@@ -85,20 +81,20 @@ function PublicPlantDetailed() {
 
 
     useEffect(() => {
-        getPlantInfo(params.plant_id)
-        getEnvironment(params.environment_id)
-        getActions(params.plant_id)
-        getStage(params.plant_id)
-
+        getPlantInfo(params.plant_id,params.environment_id)
+   
     }, [])
 
-    const getPlantInfo = (plant_id) => {
+    const getPlantInfo = (plant_id,environment_id) => {
 
         axios.post(`${BASE_URL_PROD}/plants/public/${plant_id}`)
             .then((response) => {
                 if (response.status == 200) {
                     setPlant(response.data)
                     setCoverImage(response.data.cover_img)
+                    getEnvironment(environment_id)
+                    getActions(plant_id)
+                    getStage(plant_id)
                     if (LoggedIn) {
                         updateView(response.data.user_id, response.data.plant_id)
                     }
