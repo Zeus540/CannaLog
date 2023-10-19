@@ -6,7 +6,7 @@ import { selectIsLoggedIn,selectUser } from "../../features";
 
 
 const Root = styled.div`
-box-shadow:  0px 0px 20px ${props => props.theme.shadow};
+// box-shadow:  0px 0px 20px ${props => props.theme.shadow};
 position: relative;
 margin: 0px;
 background:  ${props => props.theme.footer.primary};
