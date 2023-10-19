@@ -100,7 +100,7 @@ function PublicPlantDetailed() {
                     setPlant(response.data)
                     setCoverImage(response.data.cover_img)
                     if (LoggedIn) {
-                        updateView(response.data.user_id, response.data.plant_id)
+                       // updateView(response.data.user_id, response.data.plant_id)
                     }
                 }
             })

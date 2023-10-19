@@ -32,12 +32,10 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
 
   useEffect(() => {
-
     group_by(startDate, actions, activeWeek)
-  }, [startDate, actions,]);
+  }, [startDate,actions,activeWeek]);
 
   const group_by = (startDate, actions, activeWeek) => {
-
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(startDate)
 
@@ -48,20 +46,17 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
       return { ...item, creation_date: localizedDate, week };
     });
 
-    const uniqueLocalizedData = removeDuplicateWeeks(localizedData);
+    const uniqueLocalizedData =  removeDuplicateWeeks(localizedData);
 
-    setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
-    console.log("activeWeek",activeWeek)
+     setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
+
     if (activeWeek == undefined) {
-      handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
+       handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
     }
 
-
   }
 
-  const handleActiveWeekSelect = (w) => {
-    handleActiveWeeks(w)
-  }
+ 
 
   return (
     <Root>
@@ -113,12 +108,12 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
             return (
               <SwiperSlide >
                 {activeWeek == w.week ?
-                  <WeekActive onClick={() => handleActiveWeekSelect(w.week)}  >
+                  <WeekActive onClick={() => handleActiveWeeks(w.week)}  >
                     <WeekTextTop>Week</WeekTextTop>
                     <WeekTextBottom>{w.week}</WeekTextBottom>
                   </WeekActive>
                   :
-                  <Week onClick={() => handleActiveWeekSelect(w.week)}>
+                  <Week onClick={() => handleActiveWeeks(w.week)}>
                     <WeekTextTop>Week</WeekTextTop>
                     <WeekTextBottom>{w.week}</WeekTextBottom>
                   </Week>

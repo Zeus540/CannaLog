@@ -348,7 +348,7 @@ transition: opacity 0.2s ease;
 `;
 
 const NavBar = ({toggleTheme,themeType,OffClick,setMobileMenu,mobileMenu}) => {
-const [menuOpen, setMenuOpen] = useState(-40)
+const [menuOpen, setMenuOpen] = useState(-100)
 const isLoggedIn = useSelector(selectIsLoggedIn)
 const user = useSelector(selectUser)
 const dispatch = useDispatch()
@@ -390,16 +390,16 @@ const logOut = () => {
 
 
 const handleMenuOpen = ()=>{
-  if(menuOpen == -40){
+  if(menuOpen == -100){
     setMenuOpen(0)
   }else{
-    setMenuOpen(-40)
+    setMenuOpen(-100)
   }
 
 }
 
 const handleMenuClose= ()=>{
-  setMenuOpen(-40)
+  setMenuOpen(-100)
   setMobileMenu(false)
 }
   return (

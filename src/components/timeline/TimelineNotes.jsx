@@ -133,21 +133,23 @@ display: flex;
 
  const ItemInnerActionHolder = styled(m.div)`
 display: flex;
-justify-content: end;
+justify-content: center;
 padding-top: 15px;
 `
 
  const TextButtonSvg = styled(m.div)`
+ padding: 5px;
 svg{
     color:  ${props => props.theme.accent};
     font-size: 20px;
-    margin-right: 10px;
+
     path{
       stroke:  ${props => props.theme.accent};
     }
   }
 `
  const TextButtonSvgDelete = styled(m.div)`
+ padding: 5px;
 color:  ${props => props.theme.warn};;
 font-size: 20px;
 

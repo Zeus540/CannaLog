@@ -4,11 +4,13 @@ import { motion as m } from "framer-motion";
 
 
 export const Tag = styled(m.div)`
-background:${(props) => `${props.bg}`};
+background:${(props) => props.bg};
 width: fit-content;
-    padding: 0px 10px;
+    padding: 5px 10px;
     border-radius: 50px;
     margin: 10px 0px;
+    font-size: 14px;
+    margin-top: 0px;
     color: ${props => props.theme.textW}!important;
 `
 
@@ -89,8 +91,7 @@ background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transpa
 height: 100%;
 display: flex;
 flex-direction: column;
-min-height: 70vh;
-
+min-height: 91.8vh;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
     align-items: center;
