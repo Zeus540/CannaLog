@@ -307,7 +307,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
                   spaceBetween: 50,
                 },
               }}
-             loop={true}
+             //loop={true}
             >
 
               {images?.filter((a) => a.week == activeWeek)?.map((a) => {

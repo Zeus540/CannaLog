@@ -194,6 +194,7 @@ type='number'
                                             width="50"
                                             margin='0px 10px'
                                             label="Amount"
+                                            required
                                             variant="outlined"
                                             onChange={(e) => { handleAmountChange(e, n) }}
 
@@ -202,6 +203,7 @@ type='number'
                                             width="50"
                                             margin='0px 10px'
                                             label="Units"
+                                            required
                                             variant="outlined"
                                             onChange={(e) => { handleUnitChange(e, n) }}
                                             select

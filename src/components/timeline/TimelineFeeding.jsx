@@ -340,7 +340,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
       // });
 
     }
-  }, [plant, feedingData,socket]);
+  }, [plant,socket]);
 
 
   useEffect(() => {
@@ -380,14 +380,18 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
       return { ...item, creation_date: localizedDate, week, day };
     });
 
-    let sorted = localizedData.sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date))
+    let sorted = localizedData
 
     const result = sorted.reduce((acc, item) => {
+    
       const { day } = item;
       if (!acc[day]) {
         acc[day] = [];
       }
       acc[day].push(item);
+      acc[day] = acc[day].sort(
+        (a, b) => new Date(a.creation_date) - new Date(b.creation_date)
+      );
       return acc;
     }, {});
  

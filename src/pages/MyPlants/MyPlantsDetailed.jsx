@@ -75,7 +75,7 @@ function MyPlantsDetailed() {
     const [modalData, setModalData] = useState([])
     const [modalType, setModalType] = useState('')
     const [currentStage, setCurrentStage] = useState()
-    const [activeWeek, setActiveWeek] = useState('') 
+    const [activeWeek, setActiveWeek] = useState(undefined) 
     const [coverImage, setCoverImage] = useState('') 
     const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate)
     const params = useParams()

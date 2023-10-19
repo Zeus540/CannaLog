@@ -89,8 +89,9 @@ justify-content: space-between;
 `
  const Tag = styled(m.div)`
 background: ${props => props.theme.accent};
-padding: 0px 15px;
+padding: 5px 15px;
 width: fit-content;
+font-size:14px;
 border-radius: 50px;
 color: ${props => props.theme.textW}!important;
 `
@@ -99,17 +100,35 @@ color: ${props => props.theme.textW}!important;
 display: flex;
 justify-content: space-between;
 padding: 15px 0px;
+padding-top: 0px;
+align-items: center;
 color: ${props => props.theme.text}!important;
+`
+
+const ItemInnerUpperDiv = styled(m.div)`
+width: 100%;
+height: 2px;
+background: ${props => props.theme.accent}!important;
+`
+
+const ItemInnerUpperHeading = styled(m.h1)`
+white-space: nowrap;
+margin: 0px 20px;
 `
 
  const ItemInnerContent = styled(m.div)`
 padding: 20px;
+text-align: center;
 
-
-color:black;
+color:${props => props.theme.text};
 margin: 0px 0px;
 border-radius: 5px;
-background: ${props => props.theme.input};
+
+`
+
+const ItemInnerContentFlex = styled(m.div)`
+display: flex;
+    justify-content: space-between;
 `
 
  const ItemInnerActionHolder = styled(m.div)`
@@ -242,7 +261,7 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
               }}
               modules={[Pagination]}
               spaceBetween={50}
-              slidesPerView={4}
+              slidesPerView={1}
               breakpoints={{
                 0: {
                   slidesPerView: 1,
@@ -257,11 +276,11 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
                   spaceBetween: 40,
                 },
                 1024: {
-                  slidesPerView: 4,
+                  slidesPerView: 1,
                   spaceBetween: 50,
                 },
               }}
-             loop={true}
+             //loop={true}
             >
 
               {notes?.filter((a) => a.week == activeWeek)?.map((a) => {
@@ -269,16 +288,21 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
                   <SwiperSlide>
                       <Item >
                          <ItemInnerUpper>
-                            <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                            <h2>{getLocalizedDate(a.creation_date)}</h2>
-
-
+                         <ItemInnerUpperDiv></ItemInnerUpperDiv>
+                         <ItemInnerUpperHeading>YOUR COMMMENTS</ItemInnerUpperHeading>
+                         <ItemInnerUpperDiv></ItemInnerUpperDiv>
                           </ItemInnerUpper>
 
                         <ItemInner >
-
+                        <ItemInnerContentFlex>
+                        <Tag>{getWeekandDay(a.creation_date).day}</Tag>
+                        <Tag>{getLocalizedDate(a.creation_date)}</Tag> 
+                    
+                       
+                            </ItemInnerContentFlex>
                          
                           <ItemInnerContent>
+                      
                             <p>{a.plant_note}</p>
                           </ItemInnerContent>
                           {!publicPage &&

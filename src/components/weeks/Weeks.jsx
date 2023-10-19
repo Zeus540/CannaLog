@@ -31,7 +31,22 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     });
   }
 
+
+
+
   useEffect(() => {
+    if(activeWeek == undefined){
+    handleActiveWeeks(weeks[weeks.length - 1]?.week);
+    }
+  }, [weeks,actions]);
+
+  useEffect(() => {
+
+    group_by(startDate, actions)
+    
+  }, [startDate, actions]);
+
+  const group_by =(startDate,actions)=>{
 
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(startDate)
@@ -46,9 +61,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     const uniqueLocalizedData = removeDuplicateWeeks(localizedData);
 
     setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
-    handleActiveWeeks(uniqueLocalizedData[uniqueLocalizedData.length - 1]?.week);
-
-  }, [startDate, actions]);
+  }
 
   const handleActiveWeekSelect = (w) => {
     handleActiveWeeks(w)
