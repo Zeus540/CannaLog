@@ -58,17 +58,17 @@ line-height: 20px;
 `
 
 export const Button = styled(m.button)`
-color:  ${props => props.theme.btn.text};
+color:  ${props => props.theme.text};
 background:  ${props => props.theme.accent};
 font-size: 16px;
 padding: 8px 20px;
 border-radius: 0px;
-
+font-weight: bold;
 cursor:pointer;
 `
 
 export const TextButton = styled(Link)`
-color:  ${props => props.theme.btn.text};
+color:  ${props => props.theme.text};
 font-size: 16px;
 padding:5px 10px;
 font-weight: bold;
@@ -78,7 +78,7 @@ align-items: center;
 `
 
 export const TextButtonSvg = styled(Link)`
-color:  ${props => props.theme.btn.text};
+color:  ${props => props.theme.text};
 font-size: 16px;
 padding:5px 10px;
 font-weight: bold;

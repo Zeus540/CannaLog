@@ -21,7 +21,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
   function removeDuplicateWeeks(data) {
     const uniqueWeeks = new Set();
-    return data.filter((item) => {
+    return  data.filter((item) => {
       if (uniqueWeeks.has(item.week)) {
         return false;
       }
@@ -35,7 +35,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     group_by(startDate, actions, activeWeek)
   }, [startDate,actions,activeWeek]);
 
-  const group_by = (startDate, actions, activeWeek) => {
+  const group_by = async(startDate, actions, activeWeek) => {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(startDate)
 
@@ -46,7 +46,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
       return { ...item, creation_date: localizedDate, week };
     });
 
-    const uniqueLocalizedData =  removeDuplicateWeeks(localizedData);
+    const uniqueLocalizedData = await removeDuplicateWeeks(localizedData);
 
      setWeeks(uniqueLocalizedData.sort((a, b) => a.week - b.week));
 

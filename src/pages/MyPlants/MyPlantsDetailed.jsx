@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
+    fetchPlantActionTypes,
     selectPlantActionTypes,
 } from '../../features'
 import { useParams } from 'react-router-dom'
@@ -63,25 +64,26 @@ function MyPlantsDetailed() {
     const [modalData, setModalData] = useState([])
     const [modalType, setModalType] = useState('')
     const [currentStage, setCurrentStage] = useState()
-    const [activeWeek, setActiveWeek] = useState(undefined) 
-    const [coverImage, setCoverImage] = useState('') 
+    const [activeWeek, setActiveWeek] = useState(undefined)
+    const [coverImage, setCoverImage] = useState('')
     const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate)
     const params = useParams()
     const socket = useSocket()
     const { enqueueSnackbar } = useSnackbar()
+    const dispatch = useDispatch()
 
     let plant_action_types = useSelector(selectPlantActionTypes)
 
     useEffect(() => {
 
         const intervalId = setInterval(() => {
-            setFullDate(getCurrentDayMonthYear().fullDate) 
+            setFullDate(getCurrentDayMonthYear().fullDate)
         }, 30000); // Update every minute
-    
+
         return () => {
-          clearInterval(intervalId);
+            clearInterval(intervalId);
         };
-      }, []);
+    }, []);
 
 
     useEffect(() => {
@@ -95,9 +97,9 @@ function MyPlantsDetailed() {
             });
         }
 
-    },[socket])
-  
- 
+    }, [socket])
+
+
     useEffect(() => {
         getPlantInfo(params.plant_id, params.environment_id)
 
@@ -110,6 +112,7 @@ function MyPlantsDetailed() {
                 await setPlant(response.data)
                 await setCoverImage(response.data.cover_img)
                 await getEnvironment(environment_id)
+                await dispatch(fetchPlantActionTypes())
                 await getActions(plant_id)
                 await getStage(plant_id)
                 if (LoggedIn) {
@@ -122,24 +125,24 @@ function MyPlantsDetailed() {
 
     }
 
-    const getEnvironment = (environment_id)=>{
-        
-        axios.post(`${BASE_URL_PROD}/plants/current_environment`,{environment_id : environment_id})
-        .then((response)=>{
-            if(response.status == 200){
-                setPlantEnvironment(response.data)
-            }
-        })
-        .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
-        })
+    const getEnvironment = (environment_id) => {
+
+        axios.post(`${BASE_URL_PROD}/plants/current_environment`, { environment_id: environment_id })
+            .then((response) => {
+                if (response.status == 200) {
+                    setPlantEnvironment(response.data)
+                }
+            })
+            .catch((err) => {
+                enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+            })
 
     }
 
     const getActions = (plant_id) => {
         axios.post(`${BASE_URL_PROD}/plants/actions`, { plant_id: plant_id })
             .then((response) => {
-                if(response.status == 200){
+                if (response.status == 200) {
                     setPlantActions(response.data)
                 }
             }).catch((err) => {
@@ -147,17 +150,17 @@ function MyPlantsDetailed() {
             })
     }
 
-    const getStage = (plant_id)=>{
+    const getStage = (plant_id) => {
 
-        axios.post(`${BASE_URL_PROD}/plants/current_stage`,{plant_id : plant_id})
-        .then((response)=>{
-            if(response.status == 200 ){
-                setCurrentStage(response.data)
-            }
-        })
-        .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} Unable to fetch current stage for this plant`, { variant: 'error' })
-        })
+        axios.post(`${BASE_URL_PROD}/plants/current_stage`, { plant_id: plant_id })
+            .then((response) => {
+                if (response.status == 200) {
+                    setCurrentStage(response.data)
+                }
+            })
+            .catch((err) => {
+                enqueueSnackbar(`${err.response.status} Unable to fetch current stage for this plant`, { variant: 'error' })
+            })
 
     }
 
@@ -168,34 +171,34 @@ function MyPlantsDetailed() {
                 setModalData(action)
                 setModalOpen(!modalOpen)
                 break;
-                case "deleteNote":
-                    setModalType("deleteNote")
-                    setModalData(action)
-                    setModalOpen(!modalOpen)
-                    break;
-                
+            case "deleteNote":
+                setModalType("deleteNote")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+                break;
+
         }
     }
 
-    const handleActiveWeeks = (week)=>{
+    const handleActiveWeeks = (week) => {
         setActiveWeek(week)
     }
 
-    const handleSetCoverImage = (image,thumbnail)=>{
+    const handleSetCoverImage = (image, thumbnail) => {
 
-        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`,{cover_img:image,cover_thumbnail:thumbnail})
-        .then((response)=>{
-            if(response.status == 200){
-                setCoverImage(image)
-                enqueueSnackbar(`Cover updated`, { variant: 'success' })
-            }
-        })
-        .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} Cant update Cover`, { variant: 'error' })
-        })
-      
+        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`, { cover_img: image, cover_thumbnail: thumbnail })
+            .then((response) => {
+                if (response.status == 200) {
+                    setCoverImage(image)
+                    enqueueSnackbar(`Cover updated`, { variant: 'success' })
+                }
+            })
+            .catch((err) => {
+                enqueueSnackbar(`${err.response.status} Cant update Cover`, { variant: 'error' })
+            })
+
     }
-    
+
     return (
         <Root
             initial={{ opacity: 0 }}
@@ -219,47 +222,47 @@ function MyPlantsDetailed() {
                         <ImgHolderTopInfoInnerLeft>
                             <h1>{plant?.plant_name}</h1>
                             <Tag bg={currentStage?.stage_color}>
-                            {currentStage?.stage_name}
-                         
+                                {currentStage?.stage_name}
+
                             </Tag>
                             <UserHolder>
                                 <BsPersonCircle />{plant?.user_name}
                             </UserHolder>
-                           
+
 
                             <Section>
 
-        <TagHolder>
-<div>
-        {plantEnvironment?.environment_type_name}
-    </div>
-    <div>
-        {plantEnvironment?.environment_name}
-    </div>
-    </TagHolder> 
-    <ExposureItemHolderOutter>
-        <div>Light Exposure</div>
-        <ExposureItemHolder>
-            {plantEnvironment?.environment_light_exposure !== 0 &&
-                <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
+                                <TagHolder>
+                                    <div>
+                                        {plantEnvironment?.environment_type_name}
+                                    </div>
+                                    <div>
+                                        {plantEnvironment?.environment_name}
+                                    </div>
+                                </TagHolder>
+                                <ExposureItemHolderOutter>
+                                    <div>Light Exposure</div>
+                                    <ExposureItemHolder>
+                                        {plantEnvironment?.environment_light_exposure !== 0 &&
+                                            <ExposureItemGroup width={(plantEnvironment?.environment_light_exposure / 24) * 100}>
 
-                    <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
-                    <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
-                </ExposureItemGroup>
-            }
-            {24 - plantEnvironment?.environment_light_exposure !== 0 &&
-                <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
+                                                <ExposureItem radius="5px 0px 0px 5px" bg1="#ff9800" bg2="#ffeb3b" ></ExposureItem>
+                                                <p>{plantEnvironment?.environment_light_exposure} hrs On</p>
+                                            </ExposureItemGroup>
+                                        }
+                                        {24 - plantEnvironment?.environment_light_exposure !== 0 &&
+                                            <ExposureItemGroup width={((24 - plantEnvironment?.environment_light_exposure) / 24) * 100}>
 
-                    <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
-                    <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
-                </ExposureItemGroup>
-            } 
-        </ExposureItemHolder>
-    </ExposureItemHolderOutter>
+                                                <ExposureItem radius="0px 5px 5px 0px" bg1="#005bad" bg2="#006bcb"></ExposureItem>
+                                                <p> {24 - plantEnvironment?.environment_light_exposure} hrs Off</p>
+                                            </ExposureItemGroup>
+                                        }
+                                    </ExposureItemHolder>
+                                </ExposureItemHolderOutter>
 
-</Section>
+                            </Section>
                         </ImgHolderTopInfoInnerLeft>
-                        
+
                         <ImgHolderTopInfoInnerRight>
                             <div>
                                 <p><AiOutlineEye /> {plant?.views}</p>
@@ -272,22 +275,22 @@ function MyPlantsDetailed() {
                             </div>
                         </ImgHolderTopInfoInnerRight>
                     </ImgHolderTopInfoInner>
-                    
+
                     <DayHolderOutter>
-                <DayHolderOutterInner>
-                    {fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
-                </DayHolderOutterInner>
-            </DayHolderOutter>
+                        <DayHolderOutterInner>
+                            {fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
+                        </DayHolderOutterInner>
+                    </DayHolderOutter>
                 </ImgHolderTopInfo>
-           
+
             </ImgHolderTop>
 
-         
 
-           
-           
-         
-            
+
+
+
+
+
             <QuickActionHolder>
 
                 {/* <Heading>
@@ -314,12 +317,12 @@ function MyPlantsDetailed() {
                 </QuickActionHolderInner>
             </QuickActionHolder>
 
-            <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek}/>
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes"  />
-            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering"  />
-            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery"  handleSetCoverImage={handleSetCoverImage}/>
+            <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek} />
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" />
+            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" />
+            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} />
 
-        
+
         </Root>
 
     )
