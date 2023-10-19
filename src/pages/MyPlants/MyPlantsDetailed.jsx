@@ -108,18 +108,18 @@ function MyPlantsDetailed() {
     const getPlantInfo = async (plant_id, environment_id) => {
         try {
             let response = await axios.post(`${BASE_URL_PROD}/plants/${plant_id}`)
+
             if (response.status == 200) {
                 await setPlant(response.data)
                 await setCoverImage(response.data.cover_img)
                 await getEnvironment(environment_id)
+                await getStage(plant_id)
                 await dispatch(fetchPlantActionTypes())
                 await getActions(plant_id)
-                await getStage(plant_id)
-                if (LoggedIn) {
-                    updateView(response.data.user_id, response.data.plant_id)
-                }
             }
+            
         } catch (error) {
+ 
             enqueueSnackbar(`${error.response.status} ${error.response.data}`, { variant: 'error' })
         }
 
