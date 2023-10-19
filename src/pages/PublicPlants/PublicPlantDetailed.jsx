@@ -81,28 +81,27 @@ function PublicPlantDetailed() {
 
 
     useEffect(() => {
-        getPlantInfo(params.plant_id,params.environment_id)
-   
+        getPlantInfo(params.plant_id, params.environment_id)
+
     }, [])
 
-    const getPlantInfo = (plant_id,environment_id) => {
-
-        axios.post(`${BASE_URL_PROD}/plants/public/${plant_id}`)
-            .then((response) => {
-                if (response.status == 200) {
-                    setPlant(response.data)
-                    setCoverImage(response.data.cover_img)
-                    getEnvironment(environment_id)
-                    getActions(plant_id)
-                    getStage(plant_id)
-                    if (LoggedIn) {
-                        updateView(response.data.user_id, response.data.plant_id)
-                    }
+    const getPlantInfo = async (plant_id, environment_id) => {
+        try {
+            let response = await axios.post(`${BASE_URL_PROD}/plants/public/${plant_id}`)
+            if (response.status == 200) {
+                await setPlant(response.data)
+                await setCoverImage(response.data.cover_img)
+                await getEnvironment(environment_id)
+                await getActions(plant_id)
+                await getStage(plant_id)
+                if (LoggedIn) {
+                    updateView(response.data.user_id, response.data.plant_id)
                 }
-            })
-            .catch((err) => {
-                enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
-            })
+            }
+        } catch (error) {
+            enqueueSnackbar(`${error.response.status} ${error.response.data}`, { variant: 'error' })
+        }
+
     }
 
     const getEnvironment = (environment_id) => {

@@ -61,10 +61,7 @@ import {
     UserHolder
 } from './MyPlantsDetailed_styles'
 import { BASE_URL_PROD } from '../../lib/Constants'
-import { getLocalizeTime } from '../../helpers/getLocalizeTime'
-import { getWeeksElapsed } from '../../helpers/getWeeksElapsed'
 import { useSocket } from '../../context/SocketContext'
-// import { useGetStage } from '../../hooks/useGetStage'
 import { useSnackbar } from 'notistack';
 
 function MyPlantsDetailed() {
@@ -105,34 +102,34 @@ function MyPlantsDetailed() {
 
             socket.on(`stage_changed${params.plant_id}`, (data) => {
                 setCurrentStage(data)
-              });
+            });
         }
 
     },[socket])
   
  
     useEffect(() => {
-        getPlantInfo(params.plant_id)
-        getEnvironment(params.environment_id)
-        getActions(params.plant_id)
-        getStage(params.plant_id)
-        dispatch(fetchPlantActionTypes())
+        getPlantInfo(params.plant_id, params.environment_id)
+
     }, [])
-    
-    const getPlantInfo = (plant_id)=>{
-     
-        axios.post(`${BASE_URL_PROD}/plants/${plant_id}`)
-        .then((response)=>{
-           if(response.status == 200){
-               setPlant(response.data)
-               setCoverImage(response.data.cover_img)
-           
-           }
-        })
-        .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
-        })
-      
+
+    const getPlantInfo = async (plant_id, environment_id) => {
+        try {
+            let response = await axios.post(`${BASE_URL_PROD}/plants/${plant_id}`)
+            if (response.status == 200) {
+                await setPlant(response.data)
+                await setCoverImage(response.data.cover_img)
+                await getEnvironment(environment_id)
+                await getActions(plant_id)
+                await getStage(plant_id)
+                if (LoggedIn) {
+                    updateView(response.data.user_id, response.data.plant_id)
+                }
+            }
+        } catch (error) {
+            enqueueSnackbar(`${error.response.status} ${error.response.data}`, { variant: 'error' })
+        }
+
     }
 
     const getEnvironment = (environment_id)=>{
