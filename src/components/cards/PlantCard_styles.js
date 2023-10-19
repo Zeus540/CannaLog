@@ -2,13 +2,18 @@ import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 
 export const Root = styled(m.div)`
-width: calc(100% / 6 - 20px);
+width: calc(100% / 7 - 20px);
 
 margin: 20px 10px;
 position: relative;
 
-@media (max-width: 600px) {
-    width: calc(100% - 20px);
+@media (min-width: 0px) and (max-width: 375px) {
+    width: calc(100%  - 20px);
+    margin: 10px;
+}
+
+@media (min-width: 376px) and (max-width: 600px) {
+    width: calc(100% / 2 - 20px);
     margin: 10px;
 }
 @media (min-width: 601px) and (max-width: 768px) {
@@ -21,7 +26,7 @@ position: relative;
 }
 `
 export const PlantCardTextInner = styled(m.div)`
-white-space: nowrap;
+// white-space: nowrap;
 overflow: hidden;
 `
 
@@ -33,7 +38,7 @@ overflow: hidden;
 position: relative;
 z-index: ;
 &::before {
-    content: '';
+ 
     position: absolute;
     top: 80%;
     bottom: 0;
@@ -47,7 +52,7 @@ z-index: ;
     }
   }
 &::after {
-    content: '';
+  
     position: absolute;
     top: 0;
     bottom: 80%;
@@ -62,6 +67,10 @@ z-index: ;
 }
 `
 
+export const EnviromentCardImageHolder = styled(m.div)`
+position: relative;
+line-height: 0;
+`
 
 export const EnviromentCardImage = styled(m.img)`
 object-fit: cover;
@@ -73,7 +82,7 @@ cursor: pointer;
 }
 `
 export const PlantCardTextHolder = styled(m.div)`
-position: absolute;
+
 z-index: 2;
 width: 100%;
 
@@ -81,10 +90,10 @@ border-radius: 5px;
 bottom: 0;
 display: flex;
 align-items: end;
-
+display:none;
 `
 export const PlantCardTextHolderTop = styled(m.div)`
-position: absolute;
+
 z-index: 2;
 width: 100%;
 
@@ -98,7 +107,7 @@ align-items: start;
 export const PlantCardText = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
 width: calc(33.3333%);
-margin: 10px 5px;
+margin: 10px 0px;
 font-size: 10px;
 text-align: center;
 display: flex;
@@ -110,11 +119,11 @@ overflow: hidden;
 `
 export const PlantCardTextTop = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
-margin: 10px;
+
 font-size: 12px;
 justify-content: space-between;
 display: flex;
-
+margin-bottom: 10px;
 align-items: center;
 width: 100%;
 `
@@ -148,22 +157,37 @@ background: ${(props) => `${props.theme.accent}`};;
 display: flex;
 justify-content: center;
 align-items: center;
-border-radius: 50px 50px 50px 50px;
-padding:10px 14px;
+border-radius: 5px 0px;
+padding:5px 14px;
 position: relative;
 z-index: 4;
 display: flex;
-flex-direction: column;
+font-size: 14px;
+position: absolute;
+bottom: 0;
+right: 0;
 
+line-height: 16px;
+div{
+    margin-right: 5px;
+}
 `
 
 export const PlantCardTextHeading = styled(m.div)`
 padding: 10px;
-background: ${(props) => `${props.theme.secondary}`};;
-padding-right: 20px;
-padding-left: 50px;
+background: ${(props) => `${props.theme.primary}`};;
+
+overflow: hidden;
+
 border-radius: 50px;
-margin-left: -40px;
+
 position: relative;
 z-index: 3;
+p{
+    font-size: 12px;
+    line-height: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 `

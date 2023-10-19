@@ -55,6 +55,8 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: end;
+margin-bottom: 15px;
+line-height: 20px;
 `
 
 export const Button = styled(m.button)`

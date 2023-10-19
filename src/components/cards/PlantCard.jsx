@@ -12,6 +12,7 @@ import {
   Root,
   PlantCardImageHolder,
   EnviromentCardImage,
+  EnviromentCardImageHolder,
   PlantCardTextHolder,
   PlantCardText,
   PlantCardTextLogo,
@@ -67,27 +68,30 @@ function cleanName(name) {
 
            <PlantCardTextTopInner onClick={() => handleRedirect()}>
 
-            <PlantCardTextLogoTop>
-             <div> Day</div>
-            {getElapsedDays(data?.creation_date)}
-            </PlantCardTextLogoTop>
 
             <PlantCardTextHeading>
-              <div>
+              <p>
                 {data.plant_name}
-              </div>
+              </p>
            
             </PlantCardTextHeading>
            </PlantCardTextTopInner>
 
-            <ButtonSvg onClick={()=>{openModal("deletePlant",data)}}><RiDeleteBin5Line/></ButtonSvg>
+            {/* <ButtonSvg onClick={()=>{openModal("deletePlant",data)}}><RiDeleteBin5Line/></ButtonSvg> */}
           </PlantCardTextTop>
 
     
 
         </PlantCardTextHolderTop>
 
+
+<EnviromentCardImageHolder>
+        <PlantCardTextLogoTop>
+             <div> Day</div>
+            {getElapsedDays(data?.creation_date)}
+            </PlantCardTextLogoTop>
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
+        </EnviromentCardImageHolder>
         <PlantCardTextHolder onClick={() => handleRedirect()}>
           <PlantCardText>
             <PlantCardTextLogo>

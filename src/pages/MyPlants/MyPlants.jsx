@@ -20,9 +20,7 @@ margin-top:20px;
 display:flex;
 margin: 0px -10px;
 flex-wrap: wrap;
-@media (max-width: 425px) {
-  flex-direction: column;
-}
+
 `
 
 const MyPlants = () => {
