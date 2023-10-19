@@ -44,6 +44,11 @@ let light_theme = {
     primary: 'aliceblue',
     secondary: '#f3f4f6',
   },
+  footer: {
+    primary: 'white',
+    secondary: '#f3f4f6',
+    accent: 'mediumseagreen',
+  },
   notification_card:{
     active:'#ffffff',
     inactive:'#ebebeb',
@@ -87,6 +92,11 @@ let dark_theme = {
   nav: {
     primary: ' #0a0a0a',
     secondary: '#151515',
+  },
+  footer: {
+    primary: '#000000',
+    secondary: '#f3f4f6',
+    accent: 'mediumseagreen',
   },
   notification_card:{
     active:'#0a0a0a',

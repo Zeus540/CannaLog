@@ -12,7 +12,6 @@ import {
 import PlantCard from '../../components/cards/PlantCard'
 import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
-import { AnimatePresence } from 'framer-motion'
 import { useSocket } from '../../context/SocketContext'
 
 const EnviromentHolder = styled(m.div)`
@@ -99,7 +98,7 @@ const MyPlants = () => {
             <EnviromentHolder
             >
 
-              <AnimatePresence >
+          
                 {myPlants?.map((p, index) => {
                   return (
                     <PlantCard
@@ -111,7 +110,7 @@ const MyPlants = () => {
                       openModal={openModal} />
                   )
                 })}
-              </AnimatePresence>
+          
 
             </EnviromentHolder>
 

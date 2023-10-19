@@ -54,13 +54,14 @@ function cleanName(name) {
   
   return (
 
+ 
     <Root
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
       exit={{ opacity: 0, transition: { duration: 0.1 } }}
       ref={elementRef}
-     
+
     >
       <PlantCardImageHolder >
         <PlantCardTextHolderTop>
@@ -88,7 +89,29 @@ function cleanName(name) {
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
         </EnviromentCardImageHolder>
 
+
+        <PlantCardTextHolder onClick={() => handleRedirect()}>
+          <PlantCardText>
+            <PlantCardTextLogo>
+              <PiDnaLight />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.strain_name}
+            </PlantCardTextInner>
+          </PlantCardText>
+          {/* <PlantCardText>
+            <PlantCardTextLogo>
+              <IoWaterOutline />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.irrigation_type}
+            </PlantCardTextInner>
+          </PlantCardText> */}
+       
+        </PlantCardTextHolder> 
+        
         <PlantCardTextTopInner onClick={() => handleRedirect()}>
+
 
 
 <PlantCardTextHeading>
@@ -103,25 +126,7 @@ function cleanName(name) {
 </PlantCardTextHeading>
 </PlantCardTextTopInner>
 
-        <PlantCardTextHolder onClick={() => handleRedirect()}>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <PiDnaLight />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.strain_name}
-            </PlantCardTextInner>
-          </PlantCardText>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <IoWaterOutline />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.irrigation_type}
-            </PlantCardTextInner>
-          </PlantCardText>
-  
-        </PlantCardTextHolder> 
+
       </PlantCardImageHolder>
 
     </Root>

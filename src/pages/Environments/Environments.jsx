@@ -6,26 +6,18 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
   fetchEnvironments,
-  fetchMyPlants,
   selectMyPlants,
   selectEnvironments,
   selectEnvironmentsIsLoading,
   selectEnvironmentsHasMore,
   selectNextCursor,
-  addEnvironmentLocally,
-  editEnvironmentLocally,
-  selectUser,
-  deleteEnvironmentLocally,
-  fetchEnvironmentTypes
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
 import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
-import { AnimatePresence } from 'framer-motion'
 import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
-import { useInView } from "framer-motion"
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;

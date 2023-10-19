@@ -25,7 +25,7 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { getElapsedDays } from '../../helpers/getElapsedDays';
 
-const PlantCardPublic = ({ cover_thumbnail, name, light_exposure, creation_date, last_updated, environment_type_name, openModal, data, index, length,homePage }) => {
+const PlantCardPublic = ({ cover_thumbnail,openModal, data,homePage }) => {
 
   const elementRef = useRef(null);
 
@@ -53,7 +53,7 @@ function cleanName(name) {
       transition={{ duration: 0.1 }}
       exit={{ opacity: 0, transition: { duration: 0.1 } }}
       ref={elementRef}
-     
+      homePage={homePage}
     >
       <PlantCardImageHolder >
         <PlantCardTextHolderTop>
@@ -81,7 +81,29 @@ function cleanName(name) {
         <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
         </EnviromentCardImageHolder>
 
+
+        <PlantCardTextHolder onClick={() => handleRedirect()}>
+          <PlantCardText>
+            <PlantCardTextLogo>
+              <PiDnaLight />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.strain_name}
+            </PlantCardTextInner>
+          </PlantCardText>
+          {/* <PlantCardText>
+            <PlantCardTextLogo>
+              <IoWaterOutline />
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+              {data.irrigation_type}
+            </PlantCardTextInner>
+          </PlantCardText> */}
+       
+        </PlantCardTextHolder> 
+        
         <PlantCardTextTopInner onClick={() => handleRedirect()}>
+
 
 
 <PlantCardTextHeading>
@@ -96,25 +118,7 @@ function cleanName(name) {
 </PlantCardTextHeading>
 </PlantCardTextTopInner>
 
-        <PlantCardTextHolder onClick={() => handleRedirect()}>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <PiDnaLight />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.strain_name}
-            </PlantCardTextInner>
-          </PlantCardText>
-          <PlantCardText>
-            <PlantCardTextLogo>
-              <IoWaterOutline />
-            </PlantCardTextLogo>
-            <PlantCardTextInner>
-              {data.irrigation_type}
-            </PlantCardTextInner>
-          </PlantCardText>
-       
-        </PlantCardTextHolder> 
+
       </PlantCardImageHolder>
 
     </Root>

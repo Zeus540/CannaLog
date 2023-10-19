@@ -2,18 +2,18 @@ import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 
 export const Root = styled(m.div)`
-width: calc(100% / 7 - 20px);
+width: ${props => props.homePage ? "calc(100% / 5 - 20px)" : "calc(100% / 7 - 20px)" };
 
 margin: 20px 10px;
 position: relative;
 
 @media (min-width: 0px) and (max-width: 375px) {
-    width: calc(100%  - 20px);
+    min-width: calc(100%  - 20px);
     margin: 10px;
 }
 
 @media (min-width: 376px) and (max-width: 600px) {
-    min-width: ${props => props.homePage ? "100%" : "calc(100% / 2 - 20px)" };
+    min-width: calc(100% / 2 - 20px);
     margin: 10px;
 }
 @media (min-width: 601px) and (max-width: 768px) {
@@ -29,10 +29,12 @@ position: relative;
     margin: 10px;
 }
 `
-export const PlantCardTextInner = styled(m.div)`
+export const PlantCardTextInner = styled(m.p)`
 // white-space: nowrap;
 overflow: hidden;
 text-align: left;
+font-size: 12px;
+    line-height: 16px;
 `
 
 export const PlantCardImageHolder = styled(m.div)`
@@ -87,7 +89,7 @@ cursor: pointer;
 }
 `
 export const PlantCardTextHolder = styled(m.div)`
-
+padding-top: 10px;
 z-index: 2;
 width: 100%;
 
@@ -113,9 +115,9 @@ align-items: start;
 
 export const PlantCardText = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
-width: calc(100% / 2);
+// width: calc(100% / 2);
 margin: 5px 0px;
-font-size: 10px;
+font-size: 12px;
 
 display: flex;
 
@@ -141,6 +143,8 @@ font-size: 12px;
 display: flex;
 align-items: center;
 width: 100%;
+
+padding: 0px 5px;
 `
 export const PlantCardTextLogo = styled(m.div)`
 border-radius: 50%;
@@ -179,7 +183,7 @@ div{
 `
 
 export const PlantCardTextHeading = styled(m.div)`
-padding: 10px 0px;
+
 // background: ${(props) => `${props.theme.primary}`};
 padding-bottom: 0px;
 overflow: hidden;
@@ -198,7 +202,7 @@ p{
     display: flex;
     align-items: center;
     svg{
-        font-size: 20px;
+        font-size: 18px;
         margin-right: 10px;
     }
 }

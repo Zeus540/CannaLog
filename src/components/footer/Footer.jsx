@@ -9,7 +9,7 @@ const Root = styled.div`
 box-shadow:  0px 0px 20px ${props => props.theme.shadow};
 position: relative;
 margin: 0px;
-background:  ${props => props.theme.nav.primary};
+background:  ${props => props.theme.footer.primary};
 color: ${props => props.theme.text};
     padding: 0px 0px;
 
@@ -25,7 +25,7 @@ const Inner = styled.div`
 
 border-radius: 5px;
 
-padding: 20px;
+padding: 20px 15px;
 max-width: 1920px;
 margin: 0 auto;
 
@@ -34,13 +34,15 @@ const LegalText = styled.p`
 margin: 5px 0px;
 text-align: end;
 margin-bottom: 0px;
+span{
+  color:  ${props => props.theme.text};
+  font-family: baloonB!important;
+  sub{
+    color:  ${props => props.theme.footer.accent};
+  }
+}
 `;
 
-const MenuLinkMobileHeading = styled.h3`
-margin: 5px 0px;
-
-width: fit-content;
-`;
 const MenuLinkMobile = styled(NavLink)`
 
   padding: 5px 0px;
@@ -58,7 +60,7 @@ const MenuLinkMobile = styled(NavLink)`
 const FlexLink = styled.p`
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  padding: 5px 0px;
 `;
 
 const SectionHolder = styled.div`
@@ -70,10 +72,10 @@ display: flex;
 
 const Section = styled.div`
 width: calc(100% /3);
-padding: 10px 0px;
+
 @media (max-width: 768px) {
   width: calc(100% /1);
-  padding: 10px 0px;
+
 }
 `;
 
@@ -165,7 +167,7 @@ const user = useSelector(selectUser)
       
   
       </SectionHolder>     
-        <LegalText>&copy; {new Date().getFullYear()} Copyright - CANNALOG 	&#174;</LegalText>
+        <LegalText>&copy; {new Date().getFullYear()} Copyright - <span><sub>CANNA</sub>LOG</span> 	&#174;</LegalText>
     </Inner>
     </Root>
   )

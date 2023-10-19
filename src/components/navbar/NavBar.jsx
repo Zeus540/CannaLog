@@ -40,7 +40,7 @@ transition: background 0.5s ease;
 
 const Inner = styled.div`
 
-padding:10px 20px;
+padding:15px;
 
 margin: 0px auto;
 max-width: 1920px;

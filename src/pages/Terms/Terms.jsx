@@ -12,7 +12,7 @@ padding-top: 80px;
 max-width: 1920px;
 background:${(props) => `${props.theme.secondary}`};
 color:${(props) => `${props.theme.text}`};
-padding: 20px 20px;
+
 
 h2{
   margin: 20px 0px;
@@ -20,7 +20,7 @@ h2{
 }
 
 @media (max-width: 425px) {
-    margin: 20px;
+    margin: 15px;
     padding-top: 0px;
   }
 
@@ -29,9 +29,9 @@ h2{
 
 const Heading = styled.h1`
 font-size: 25px;
-text-align: center;
+
 margin-top: 0px;
-padding-bottom: 40px;
+padding-top: 20px;
 `;
 const Terms = () => {
 

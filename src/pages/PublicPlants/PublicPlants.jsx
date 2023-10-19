@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
+import { Holder, Root, Heading, FlexRowEnd,} from '../../utils/global_styles'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectPublicJournal,
@@ -11,8 +11,6 @@ import {
 } from '../../features'
 import PlantCardPublic from '../../components/cards/PlantCardPublic'
 import Loader from '../../components/loader/Loader'
-import { AnimatePresence } from 'framer-motion'
-import { socket } from '../../lib/socket'
 
 
 const EnviromentHolder = styled(m.div)`
@@ -76,7 +74,7 @@ const PublicPlants = () => {
             <EnviromentHolder
             >
 
-              <AnimatePresence >
+            
                 {publicPlants.plants?.map((p, index) => {
                   return (
                     <>
@@ -95,7 +93,7 @@ const PublicPlants = () => {
                     </>
                   )
                 })}
-              </AnimatePresence>
+              
 
             </EnviromentHolder>
 

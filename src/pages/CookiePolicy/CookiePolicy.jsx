@@ -6,19 +6,21 @@ import {Root} from '../../utils/global_styles'
 const Inner = styled.div`
 
 
-padding: 80px 20px;
+padding: 80px 0px;
 margin: 0px auto;
+padding-top: 80px;
 max-width: 1920px;
 background:${(props) => `${props.theme.secondary}`};
 color:${(props) => `${props.theme.text}`};
-border-radius: 5px;
+
+
 h2{
   margin: 20px 0px;
   color:${(props) => `${props.theme.accent}`};
 }
 
 @media (max-width: 425px) {
-    margin: 20px;
+    margin: 15px;
     padding-top: 0px;
   }
 
@@ -26,11 +28,10 @@ h2{
 `;
 const Heading = styled.h1`
 font-size: 25px;
-text-align: center;
-margin-top: 0px;
-padding-bottom: 40px;
-`;
 
+margin-top: 0px;
+padding-top: 20px;
+`;
 const CookiePolicy = () => {
   return (
     <Root

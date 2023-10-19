@@ -30,11 +30,6 @@ import {
   Section,
   SectionInnerTop,
   DiaryHolder,
-  Diary,
-  DiaryImageHolder,
-  DiaryTextHolder,
-  DiaryTextHolderTop,
-  DiaryText
 } from './HomePage_styles'
 import { Button, ButtonText } from '../../utils/global_styles';
 import { useSelector } from 'react-redux';

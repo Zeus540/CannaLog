@@ -25,7 +25,7 @@ export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px 20px;
-margin-bottom: 20px;
+padding-bottom: 20px;
 width: 80%;
 @media (max-width: 600px) {
   width: unset;

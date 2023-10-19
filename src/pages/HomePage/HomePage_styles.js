@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { motion as m } from 'framer-motion'
 import { Link } from 'react-router-dom';
 
-
 export const Root = styled(m.div)`
 padding-top: 0px;
 background: ${props => props.theme.secondary};
@@ -190,7 +189,7 @@ padding-bottom: 20px;
 export const FeatureItemHeading = styled.h3`
 color: ${props => props.theme.text};
 font-size: 20px;
-font-family: Archivo!important;
+
 `;
 export const FeatureItemText = styled.p`
 color: ${props => props.theme.text};
@@ -243,32 +242,7 @@ export const HeroBannerTextHolder = styled.div`
 
 `;
 
-export const Diary = styled(Link)`
-cursor: pointer;
-width: calc(100% / 5 - 20px);
-min-width: calc(100% / 5 - 20px);
-margin: 10px;
-border-radius: 5px;
 
-text-decoration: none;
-
-@media (max-width: 425px) {
-  min-width: calc(100% / 1 - 20px);
-  width: 100%;
-  margin: 10px 10px;
-  border-radius: 0px;
-}
-@media (min-width: 426px) and (max-width: 699px) {
-  min-width: calc(100% / 2 - 20px);
-  margin: 10px;
-}
-  @media (min-width: 700px) and (max-width: 940px) {
-    min-width: calc(100% / 2 - 20px);
-  }
-  @media (min-width: 941px) and (max-width: 1330px) {
-    min-width: calc(100% / 4 - 20px);
-  }
-`;
 
 
 export const DiaryHolder = styled.div`
@@ -292,42 +266,9 @@ export const DiaryHolder = styled.div`
   }
 `;
 
-export const DiaryImageHolder = styled.div`
-  border-radius: 5px 5px 0px 0px;
-  cursor: pointer;
-  line-height: 0px;
-  border-radius: 5px;
-  min-height: 250px;
-  background-position: center!important;
-  background-size: cover!important;
-  @media (max-width: 425px) {
 
-    border-radius: 5px;
-  }
-`;
-export const DiaryTextHolder = styled.div`
-padding: 5px 10px;
-overflow: auto;
-background: ${props => props.theme.primary};
-border-radius: 0x 0px 5px 5px;
-justify-content: end;
-border-radius: 0px 0px 10px 10px ;
-    display: flex;
-    width: fit-content;
-    padding: 5px 20px;
-    float: right;
-`;
-export const DiaryTextHolderTop = styled.div`
-padding: 5px 10px;
-overflow: auto;
-background: ${props => props.theme.primary};
-border-radius: 0x 0px 5px 5px;
-justify-content: end;
-border-radius: 10px 10px 0px 0px;
-    display: flex;
-    width: fit-content;
-    padding: 5px 20px;
-`;
+
+
 export const Tag = styled.sup`
 
 text-align: left;
@@ -339,16 +280,6 @@ text-align: left;
 
 `;
 
-export const DiaryText = styled.p`
-font-size: 14px;
-
-white-space: nowrap;
-font-weight: bold;
-margin: 0px;
-color: ${props => props.theme.text};
-text-align: left;
-
-`;
 
 export const PricingSection = styled.div`
 
