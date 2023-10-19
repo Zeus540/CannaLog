@@ -153,6 +153,7 @@ margin-bottom: 10px;
 }
 `
 export const PlantCardTextLogoTop = styled(m.div)`
+color:${(props) => `${props.theme.text}`};
 background: ${(props) => `${props.theme.accent}`};;
 display: flex;
 justify-content: center;
