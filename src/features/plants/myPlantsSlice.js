@@ -20,7 +20,6 @@ export const myPlantsSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(fetchMyPlants.pending, (state) => {
-          state.plants = [];
           state.loading = true;
           state.error = null;
         })

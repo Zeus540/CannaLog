@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React,  from 'react'
 import {
   Root,
   Blank,
@@ -7,7 +7,7 @@ import {
 } from './PlantCardSkelton_styles'
 
 
-const PlantCardSkelton = ({  }) => {
+const PlantCardSkelton = () => {
 
   return (
 
