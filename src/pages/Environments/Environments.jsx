@@ -116,7 +116,7 @@ const next_cursor = useSelector(selectNextCursor)
     const scrollPosition = scrollY + windowHeight;
     
     // You can adjust the threshold as needed to trigger the event when the user is closer to the end
-    const threshold = 0;
+    const threshold = 50;
 
     // Check if the user is near the end of the page
     const isNearEnd = scrollPosition + threshold >= documentHeight;
