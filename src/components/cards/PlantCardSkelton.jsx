@@ -12,7 +12,10 @@ const PlantCardSkelton = () => {
   return (
 
     <Root
-     
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.25 }}
+    exit={{ opacity: 0 }}
     >
       <Flex
       justify='end'>
@@ -25,7 +28,7 @@ const PlantCardSkelton = () => {
       duration: 0.5
     }}
     width="50%"
-    height='25px'
+    height='30px'
     margin="10px 0px"
     />
     </Flex>

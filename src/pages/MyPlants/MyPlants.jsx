@@ -15,6 +15,7 @@ import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
 import { useSocket } from '../../context/SocketContext'
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
+import PlantCard from '../../components/cards/PlantCard';
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -34,7 +35,7 @@ const MyPlants = () => {
   const [modalType, setModalType] = useState('')
 
   const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
-  
+
   const dispatch = useDispatch()
 
   const isLoadingPlants = useSelector(isLoadingMyPlants)
@@ -42,12 +43,12 @@ const MyPlants = () => {
 
 
   useEffect(() => {
-  
+
     const controller = new AbortController
     const signal = controller.signal
     dispatch(fetchMyPlants(signal))
- 
-    return(()=>{
+
+    return (() => {
       controller.abort()
     })
   }, []);
@@ -75,48 +76,61 @@ const MyPlants = () => {
 
   return (
 
-        <Root
-          // initial={{ opacity: 0 }}
-          // animate={{ opacity: 1 }}
-          // transition={{ duration: 0.25 }}
-          // exit={{ opacity: 0 }}
+    <Root
+     initial={{ opacity: 0 }}
+     animate={{ opacity: 1 }}
+     transition={{ duration: 0.25 }}
+     exit={{ opacity: 0 }}
+    >
+      {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
+      <Holder>
+        <FlexRowEnd
         >
-          {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
-          <Holder>
-            <FlexRowEnd
-            >
-   <Heading
-            >
-              My Plants
-            </Heading>
-              <Button onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></Button>
+          <Heading
+          >
+            My Plants
+          </Heading>
+          <Button onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></Button>
 
-            </FlexRowEnd>
-         
+        </FlexRowEnd>
 
-            <EnviromentHolder
-            >
 
-          
-                {myPlants?.map((p, index) => {
+        <EnviromentHolder
+        >
+
+          {isLoadingPlants ?
+            <>
+              {
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]?.map((p, index) => {
                   return (
-                    <Suspense fallback={<PlantCardSkelton />} 
-                      key={index}>
-                      <LazyPlantCard
-                        key={index}
-                        data={p}
-                        openModal={openModal} />
-                    </Suspense>
-                    
+
+                    <PlantCardSkelton
+                    />
                   )
-                })}
-          
+                })
+              }
+            </>
+            :
+            <>
+              {myPlants?.map((p, index) => {
+                return (
 
-            </EnviromentHolder>
+                  <PlantCard
+                    key={index}
+                    data={p}
+                    openModal={openModal} />
+                )
+              })}
+            </>
+          }
 
 
-          </Holder>
-        </Root>
+
+        </EnviromentHolder>
+
+
+      </Holder>
+    </Root>
 
   )
 }
