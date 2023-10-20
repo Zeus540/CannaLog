@@ -32,7 +32,7 @@ import { useNavigate } from 'react-router-dom';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { getElapsedDays } from '../../helpers/getElapsedDays';
 
-const PlantCard = ({ openModal, data, }) => {
+const PlantCard = ({  data, }) => {
 
 
 
@@ -55,10 +55,10 @@ function cleanName(name) {
 
  
     <Root
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.1 }}
-      exit={{ opacity: 0, transition: { duration: 0.1 } }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // transition={{ duration: 0.1 }}
+      // exit={{ opacity: 0, transition: { duration: 0.1 } }}
 
     >
       <PlantCardImageHolder >

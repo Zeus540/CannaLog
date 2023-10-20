@@ -1,4 +1,5 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
+import { lazyWithPreload } from "react-lazy-with-preload";
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
@@ -28,8 +29,9 @@ const MyPlants = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
-  const LazyPlantCard = lazy(() => import('../../components/cards/PlantCard'));
+  const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
 
+  LazyPlantCard.preload();
   const dispatch = useDispatch()
 
   const isLoadingPlants = useSelector(isLoadingMyPlants)
@@ -71,10 +73,10 @@ const MyPlants = () => {
   return (
 
         <Root
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-          exit={{ opacity: 0 }}
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1 }}
+          // transition={{ duration: 0.25 }}
+          // exit={{ opacity: 0 }}
         >
           {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
           <Holder>
@@ -100,7 +102,6 @@ const MyPlants = () => {
                       <LazyPlantCard
                         key={index}
                         data={p}
-                        cover_thumbnail={p?.cover_thumbnail}
                         openModal={openModal} />
                     </Suspense>
                     
