@@ -2,6 +2,7 @@ import React, { } from 'react'
 import {
   Root,
   Blank,
+  BlankImage,
   Flex
 } from './PlantCardSkelton_styles'
 
@@ -28,7 +29,8 @@ const PlantCardSkelton = ({  }) => {
     margin="10px 0px"
     />
     </Flex>
-    <Blank
+    
+    <BlankImage
     initial={{ opacity: 0.7,  }}
     animate={{ opacity: 0.5,  }}
     transition={{
@@ -37,7 +39,9 @@ const PlantCardSkelton = ({  }) => {
       duration: 0.5
     }}
     width="100"
-    height='320px'
+    radius="5px"
+    height='150px'
+    aspect="16 / 14"
     />
       <Blank
     initial={{ opacity: 0.7,  }}

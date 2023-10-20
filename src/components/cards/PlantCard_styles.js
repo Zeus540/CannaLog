@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 
-export const Root = styled(m.div)`
+export const Root = styled.div`
 width: ${props => props.homePage ? "calc(100% / 5 - 20px)" : "calc(100% / 7 - 20px)" };
 
 margin: 20px 10px;

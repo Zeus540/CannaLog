@@ -34,9 +34,22 @@ position: relative;
 
 export const Blank = styled(m.div)`
 width:${props => props.width};
-height:${props => props.height};
+min-height:${props => props.height};
 background: ${props => props.theme.skelton};
 margin:${props => props.margin};
+border-radius: ${props => props.radius};
+`
+
+export const BlankImage = styled(m.div)`
+width:${props => props.width};
+min-height:${props => props.height};
+aspect-ratio: 16 / 20;
+background: ${props => props.theme.skelton};
+margin:${props => props.margin};
+border-radius: ${props => props.radius};
+@media (min-width: 0px) and (max-width: 768px) {
+    aspect-ratio: ${props => props.aspect};
+}
 `
 export const Flex = styled(m.div)`
 display:flex;

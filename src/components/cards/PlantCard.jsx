@@ -32,10 +32,9 @@ import { useNavigate } from 'react-router-dom';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { getElapsedDays } from '../../helpers/getElapsedDays';
 
-const PlantCard = ({ cover_thumbnail,openModal, data, }) => {
+const PlantCard = ({ openModal, data, }) => {
 
 
-  const elementRef = useRef(null);
 
 const navigate = useNavigate()
 
@@ -60,7 +59,6 @@ function cleanName(name) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
       exit={{ opacity: 0, transition: { duration: 0.1 } }}
-      ref={elementRef}
 
     >
       <PlantCardImageHolder >
@@ -86,7 +84,7 @@ function cleanName(name) {
              <div> Day</div>
             {getElapsedDays(data?.creation_date)}
             </PlantCardTextLogoTop>
-        <EnviromentCardImage src={cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
+        <EnviromentCardImage src={data.cover_thumbnail} width="100%"  onClick={() => handleRedirect()}/>
         </EnviromentCardImageHolder>
 
 
