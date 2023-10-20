@@ -24,22 +24,25 @@ flex-wrap: wrap;
 
 `
 
+const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
+
+
 const MyPlants = () => {
 
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
-  const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
 
-  LazyPlantCard.preload();
+
+  
   const dispatch = useDispatch()
 
   const isLoadingPlants = useSelector(isLoadingMyPlants)
   const myPlants = useSelector(selectMyPlants)
 
-  
-  useEffect(() => {
 
+  useEffect(() => {
+  
     const controller = new AbortController
     const signal = controller.signal
     dispatch(fetchMyPlants(signal))
