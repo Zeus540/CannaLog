@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
@@ -9,10 +9,11 @@ import {
   isLoadingMyPlants,
   fetchMyPlants
 } from '../../features'
-import PlantCard from '../../components/cards/PlantCard'
+
 import PopupModal from '../../components/popupModal/PopupModal'
 import Loader from '../../components/loader/Loader'
 import { useSocket } from '../../context/SocketContext'
+import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -27,9 +28,9 @@ const MyPlants = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
+  const LazyPlantCard = lazy(() => import('../../components/cards/PlantCard'));
 
   const dispatch = useDispatch()
-
 
   const isLoadingPlants = useSelector(isLoadingMyPlants)
   const myPlants = useSelector(selectMyPlants)
@@ -69,13 +70,6 @@ const MyPlants = () => {
 
   return (
 
-    <>
-      {isLoadingPlants ?
-        <>
-          <Loader />
-        </>
-
-        :
         <Root
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -101,13 +95,15 @@ const MyPlants = () => {
           
                 {myPlants?.map((p, index) => {
                   return (
-                    <PlantCard
-                      key={index}
-                 
-                      data={p}
-                      cover_thumbnail={p?.cover_thumbnail}
-
-                      openModal={openModal} />
+                    <Suspense fallback={<PlantCardSkelton />} 
+                      key={index}>
+                      <LazyPlantCard
+                        key={index}
+                        data={p}
+                        cover_thumbnail={p?.cover_thumbnail}
+                        openModal={openModal} />
+                    </Suspense>
+                    
                   )
                 })}
           
@@ -117,8 +113,7 @@ const MyPlants = () => {
 
           </Holder>
         </Root>
-      }
-    </>
+
   )
 }
 

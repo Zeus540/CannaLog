@@ -37,7 +37,12 @@ const PopupModal = ({ openModal, data, modalType, plant }) => {
   }
   
   return (
-    <Root >
+    <Root
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.25 }}
+    exit={{ opacity: 0 }}
+    >
       <Modal>
         <ModalClose ><VscChromeClose onClick={() => openModal(modalType)} /></ModalClose>
         <ModalContent>

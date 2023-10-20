@@ -2,17 +2,6 @@ import styled,{keyframes} from "styled-components";
 import {motion as m} from 'framer-motion'
 
 
-const fadeIn = keyframes`
-0% {
-  opacity: 0 ;
-}
-
-100% {
-    opacity: 1 ;
-}
-`;
-
-
 export const Root = styled(m.div)`
 background:  ${props => props.theme.modal.secondary};
 position: fixed;
@@ -26,7 +15,6 @@ display: flex;
 justify-content: center;
 padding: 80px;
 align-items: center;
-animation: ${fadeIn} 0.25s ease;
 @media (min-width: 0px) and (max-width: 425px)  {
     padding: 20px;
 }
@@ -36,7 +24,6 @@ animation: ${fadeIn} 0.25s ease;
 `
 
 export const Modal = styled(m.div)`
-animation: ${fadeIn} 0.25s ease;
 background:  ${props => props.theme.modal.primary};
 backdrop-filter: blur(5px);
 max-width: 40%;

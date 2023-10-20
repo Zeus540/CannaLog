@@ -17,6 +17,7 @@ let light_theme = {
   warn: "#f44336",
   input:"#ffffff",
   shadow:"#d5e5f3",
+  skelton:'#cfe1f1',
   banner:{
     image:White,
     primary:'aliceblue',
@@ -68,6 +69,7 @@ let dark_theme = {
   warn: "#f44336",
   input:"#ffffff",
   shadow:"#04040485",
+  skelton:'#333333',
   banner:{
     image:Black
   },
