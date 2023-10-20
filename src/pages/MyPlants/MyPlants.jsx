@@ -24,7 +24,7 @@ flex-wrap: wrap;
 
 `
 
-const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
+
 
 
 const MyPlants = () => {
@@ -33,7 +33,7 @@ const MyPlants = () => {
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
 
-
+  const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
   
   const dispatch = useDispatch()
 
