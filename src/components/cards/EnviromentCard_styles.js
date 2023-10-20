@@ -47,6 +47,7 @@ text-align: center;
 export const EnviromentCardImageHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
 max-height:200px;
+line-height: 0px;
 overflow: hidden;
 border-radius: 5px 5px 0px 0px;
 position: relative;

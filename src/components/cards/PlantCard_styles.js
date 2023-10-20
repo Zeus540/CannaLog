@@ -89,7 +89,7 @@ cursor: pointer;
 }
 `
 export const PlantCardTextHolder = styled(m.div)`
-padding-top: 10px;
+padding-top: 5px;
 z-index: 2;
 width: 100%;
 
@@ -152,9 +152,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 svg{
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
+    font-size: 22px;
+    margin-right: 5px;
     color: #03A9F4;
     fill:${(props) => `${props.theme.accent}`};
    

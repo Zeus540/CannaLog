@@ -18,6 +18,7 @@ import Loader from '../../components/loader/Loader'
 import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
+import EnviromentCardSkelton from '../../components/cards/EnviromentCardSkelton'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -47,6 +48,7 @@ const Environments = () => {
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const [pageBottom, setPageBottom] = useState(false)
+  const [amount, setAmount] = useState(10)
   
   const dispatch = useDispatch()
 
@@ -98,26 +100,29 @@ const next_cursor = useSelector(selectNextCursor)
   const lastCard = useRef(null);
   
   useEffect(() => {
-    if(environments?.length == 0){
+    if(environments.length < 1){
       dispatch(fetchEnvironments(""))
     }
+
   }, [])
 
  useEffect(() => {
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // Calculate how far the user has scrolled from the top
+    const scrollPosition = scrollY + windowHeight;
+    
+    // You can adjust the threshold as needed to trigger the event when the user is closer to the end
+    const threshold = 0;
 
-    const handleScroll = () => {
-      const lastCardRect = lastCard?.current?.getBoundingClientRect();
-      if(lastCard.current !== null){
- 
-  
-      const isElementInViewport = (
-        lastCardRect.top >= 0 &&
-        lastCardRect.bottom <= window.innerHeight
-      );
-
-      setPageBottom(isElementInViewport)
-    }
-    };
+    // Check if the user is near the end of the page
+    const isNearEnd = scrollPosition + threshold >= documentHeight;
+    
+    setPageBottom(isNearEnd);
+  };
 
   
 
@@ -132,6 +137,7 @@ useEffect(() => {
   if(pageBottom){
 
     if(hasMore){
+      setAmount((prev) => prev / 2 + 10)
       dispatch(fetchEnvironments(next_cursor))
     }
     
@@ -164,13 +170,7 @@ useEffect(() => {
 
   return (
 
-    <>
-      {environmentsIsLoading ?
-        <>
-          <Loader />
-        </>
-
-        :
+  
         <Root
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -195,7 +195,22 @@ useEffect(() => {
             >
 
               
-                {environments?.map((e, index) => {
+            
+             {environmentsIsLoading ?
+            <>
+              {
+                [...Array(amount)]?.map((index) => {
+                  return (
+
+                    <EnviromentCardSkelton key={index}
+                    />
+                  )
+                })
+              }
+            </>
+            :
+            <>
+                  {environments?.map((e, index) => {
                    return (
                     <EnviromentCard
                     refValue={lastCard}
@@ -213,20 +228,14 @@ useEffect(() => {
                       openModal={openModal} />
                   )
                 })}
-            
+            </>
+          }
 
             </EnviromentHolder>
 
-      {hasMore ? 
-      <LoadMoreHolder ref={lastCard} >
-        <button onClick={()=>{setPageBottom(true)}}>Load More</button>
-      </LoadMoreHolder> 
-      : 
-      null}
           </Holder>
         </Root>
-      }
-    </>
+   
   )
 }
 
