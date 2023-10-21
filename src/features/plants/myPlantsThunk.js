@@ -3,8 +3,17 @@ import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 import {deletePlantLocally} from './myPlantsSlice'
 
-export const fetchMyPlants = createAsyncThunk('myPlants/fetch',(signal)=>{
-  return axios.get(`${BASE_URL_PROD}/plants/my_plants`,{signal})
+
+export const fetchMyPlants = createAsyncThunk('myPlants/fetch',(key)=>{
+
+  let limit = 14;
+
+  if (window.innerWidth <= 768) {
+    limit = 6; 
+  }
+  
+  let sortBy = "DESC"
+  return axios.get(`${BASE_URL_PROD}/plants/my_plants/?limit=${limit}&sort=${sortBy}&key_sort=${key}`)
   .then((response) => {
     return response.data;
   })

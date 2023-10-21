@@ -33,7 +33,7 @@ import {
  import { FiEdit } from "react-icons/fi";
  import { RiDeleteBin5Line } from 'react-icons/ri';
 
-const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_updated, myPlants,environment_type_name,openModal,data,index,length,refValue }) => {
+const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
   const [height, setHeight] = useState(0);
   const [readMore, setReadMore] = useState(false);
 
@@ -41,8 +41,6 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
   
   useEffect(() => {
     setReadMore(false)
-
-
   }, [length]);
 
   function cleanName(name) {
@@ -69,12 +67,12 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
     ref={index == length - 1 ? refValue : null}
     >
       <EnviromentCardImageHolder onClick={() => { setReadMore(!readMore) }}>
-        <EnviromentCardImage src={cover_img} width="100%" />
+        <EnviromentCardImage src={data.environment_cover_img} width="100%" />
       </EnviromentCardImageHolder>
       <EnviromentCardTextHolder height={height} readMore={readMore} >
         <EnviromentCardTextMainHolder  onClick={() => { setReadMore(!readMore) }}>
-          <EnviromentHolderText>{name}</EnviromentHolderText>
-          <EnviromentHolderText>{environment_type_name} {light_exposure !== null && `- ${light_exposure} hrs of light`} </EnviromentHolderText>
+          <EnviromentHolderText>{data.environment_name}</EnviromentHolderText>
+          <EnviromentHolderText>{data.environment_type_name} {data.environment_light_exposure !== null && `- ${data.environment_light_exposure} hrs of light`} </EnviromentHolderText>
         </EnviromentCardTextMainHolder>
     
         <EnviromentCardTextHiddenHolder readMore={readMore}>
@@ -87,7 +85,6 @@ const EnviromentCard = ({ cover_img, name, light_exposure, creation_date, last_u
               return (
                 <PlantHolder key={index} onClick={()=>{handleRedirect(p)}}>
                   <PlantImageHolder src={p.cover_thumbnail} width="100%" />
-                  {console.log("p",p)}
                  <div>{p.plant_name}</div>
                 </PlantHolder>
 

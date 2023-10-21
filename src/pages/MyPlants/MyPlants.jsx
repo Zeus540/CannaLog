@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
   selectMyPlants,
-  isLoadingMyPlants,
   fetchMyPlants
 } from '../../features'
 
@@ -33,26 +32,56 @@ const MyPlants = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
-
-  const LazyPlantCard = lazyWithPreload(() => import('../../components/cards/PlantCard'));
-
+  const [pageBottom, setPageBottom] = useState(false)
+  const [amount, setAmount] = useState(14)
   const dispatch = useDispatch()
 
-  const isLoadingPlants = useSelector(isLoadingMyPlants)
   const myPlants = useSelector(selectMyPlants)
 
-
+  
   useEffect(() => {
 
     const controller = new AbortController
     const signal = controller.signal
-    dispatch(fetchMyPlants(signal))
 
+    if (!myPlants.hasIntialData) {
+      dispatch(fetchMyPlants())
+    }
     return (() => {
       controller.abort()
     })
   }, []);
 
+
+  useEffect(() => {
+    
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = scrollY + windowHeight;
+      const threshold = 300;
+      const isNearEnd = scrollPosition + threshold >= documentHeight;
+      setPageBottom(isNearEnd);
+    };
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [])
+
+
+  useEffect(() => {
+    if (pageBottom) {
+
+      if (myPlants.hasMore) {
+
+        dispatch(fetchMyPlants(myPlants.next_cursor))
+      }
+
+    }
+  }, [pageBottom])
 
 
   const openModal = (type, data) => {
@@ -77,10 +106,10 @@ const MyPlants = () => {
   return (
 
     <Root
-     initial={{ opacity: 0 }}
-     animate={{ opacity: 1 }}
-     transition={{ duration: 0.25 }}
-     exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      exit={{ opacity: 0 }}
     >
       {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
       <Holder>
@@ -98,33 +127,27 @@ const MyPlants = () => {
         <EnviromentHolder
         >
 
-          {isLoadingPlants ?
-            <>
-              {
-                [...Array(10)]?.map((index) => {
-                  return (
+          {myPlants?.plants?.map((p, index) => {
+            return (
 
-                    <PlantCardSkelton
-                    />
-                  )
-                })
-              }
-            </>
-            :
-            <>
-              {myPlants?.map((p, index) => {
-                return (
+              <PlantCard
+                key={index}
+                data={p}
+                openModal={openModal} />
+            )
+          })}
 
-                  <PlantCard
-                    key={index}
-                    data={p}
-                    openModal={openModal} />
-                )
-              })}
-            </>
+          {myPlants.loading &&
+
+            [...Array(amount)]?.map((index) => {
+              return (
+
+                <PlantCardSkelton key={index}
+                />
+              )
+            })
+
           }
-
-
 
         </EnviromentHolder>
 

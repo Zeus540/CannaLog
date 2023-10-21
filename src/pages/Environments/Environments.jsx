@@ -33,7 +33,7 @@ flex-wrap: wrap;
 
 const LoadMoreHolder = styled(m.div)`
 margin: 20px;
-color: ${(props)=>props.theme.accent};
+color: ${(props) => props.theme.accent};
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
@@ -50,7 +50,7 @@ const Environments = () => {
   const [modalType, setModalType] = useState('')
   const [pageBottom, setPageBottom] = useState(false)
   const [amount, setAmount] = useState(10)
-  
+
   const dispatch = useDispatch()
 
   const environments = useSelector(selectEnvironments)
@@ -60,16 +60,16 @@ const Environments = () => {
   const hasMore = useSelector(selectEnvironmentsHasMore)
 
 
-const next_cursor = useSelector(selectNextCursor)
-const hasIntialData = useSelector(selectHasIntialData)
+  const next_cursor = useSelector(selectNextCursor)
+  const hasIntialData = useSelector(selectHasIntialData)
 
   let environmentsLength = environments.length
 
 
- 
-  
+
+
   // useEffect(() => {
- 
+
   //   if(socket.connected){
 
   //      socket.on(`environment_added${user.user_id}`, (data) => {
@@ -77,12 +77,12 @@ const hasIntialData = useSelector(selectHasIntialData)
   //        enqueueSnackbar(`${data.environment_name} Added`, { variant: 'success' })
   //      });
 
-      
+
   //       socket.on(`environment_edited${user.user_id}`, (data) => {
   //         dispatch(editEnvironmentLocally(data));
   //         enqueueSnackbar(`${data.environment_name} Edited`, { variant: 'success' })
   //       });
-     
+
   //       socket.on(`environment_deleted${user.user_id}`, (data) => {
   //        dispatch(deleteEnvironmentLocally(parseInt(data)));
   //        enqueueSnackbar(`${data.environment_name} Deleted`, { variant: 'success' })
@@ -97,54 +97,45 @@ const hasIntialData = useSelector(selectHasIntialData)
   //       socket.off(`environment_deleted${user.user_id}`)
   //       }
   //     }
-    
+
   // },[socket]);
 
   const lastCard = useRef(null);
-  
+
   useEffect(() => {
-    if(!hasIntialData){
+    if (!hasIntialData) {
       dispatch(fetchEnvironments())
     }
   }, [])
 
- useEffect(() => {
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
+  useEffect(() => {
     
-    // Calculate how far the user has scrolled from the top
-    const scrollPosition = scrollY + windowHeight;
-    
-    // You can adjust the threshold as needed to trigger the event when the user is closer to the end
-    const threshold = 50;
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = scrollY + windowHeight;
+      const threshold = 100;
+      const isNearEnd = scrollPosition + threshold >= documentHeight;
+      setPageBottom(isNearEnd);
+    };
 
-    // Check if the user is near the end of the page
-    const isNearEnd = scrollPosition + threshold >= documentHeight;
-    
-    setPageBottom(isNearEnd);
-  };
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [])
 
-  
+  useEffect(() => {
+    if (pageBottom) {
 
+      if (hasMore) {
 
-  window.addEventListener('scroll',handleScroll)
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, [lastCard])
+        dispatch(fetchEnvironments(next_cursor))
+      }
 
-useEffect(() => {
-  if(pageBottom){
-
-    if(hasMore){
-
-      dispatch(fetchEnvironments(next_cursor))
     }
-    
-  }
-}, [pageBottom])
+  }, [pageBottom])
 
   const openModal = (type, data) => {
     switch (type) {
@@ -172,74 +163,64 @@ useEffect(() => {
 
   return (
 
-  
-        <Root
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-          exit={{ opacity: 0 }}
-          
+
+    <Root
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      exit={{ opacity: 0 }}
+
+    >
+      {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
+      <Holder>
+        <FlexRowEnd
         >
-          {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
-          <Holder>
-            <FlexRowEnd
-            >
-    <Heading
-            >
-              My Environments
-            </Heading>
-              <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd/>Environemt</ButtonText></Button>
+          <Heading
+          >
+            My Environments
+          </Heading>
+          <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd />Environemt</ButtonText></Button>
 
-            </FlexRowEnd>
-        
-
-            <EnviromentHolder
-            >
-
-              
-            
-   
-
-{hasIntialData &&  <>
-  {environments?.map((e, index) => {
-                   return (
-                    <EnviromentCard
-                    refValue={lastCard}
-                      key={index}
-                      length={environmentsLength}
-                      index={index}
-                      data={e}
-                      cover_img={e.environment_cover_img}
-                      name={e.environment_name}
-                      environment_type_name={e.environment_type_name}
-                      light_exposure={e.environment_light_exposure}
-                      creation_date={e.creation_date}
-                      last_updated={e.last_updated}
-                      myPlants={myPlants.filter((p) => p.environment_id == e.environment_id)}
-                      openModal={openModal} />
-                  )
-                })}
-</>
-  }
-
-{environmentsIsLoading && 
-           
-           [...Array(amount)]?.map((index) => {
-             return (
-
-               <EnviromentCardSkelton key={index}
-               />
-             )
-           })
-
-     }
+        </FlexRowEnd>
 
 
-            </EnviromentHolder>
+        <EnviromentHolder
+        >
 
-          </Holder>
-        </Root>
-   
+
+          {hasIntialData && <>
+            {environments?.map((e, index) => {
+              return (
+                <EnviromentCard
+                  refValue={lastCard}
+                  key={index}
+                  length={environmentsLength}
+                  index={index}
+                  data={e}
+                  openModal={openModal} />
+              )
+            })}
+          </>
+          }
+
+          {environmentsIsLoading &&
+
+            [...Array(amount)]?.map((index) => {
+              return (
+
+                <EnviromentCardSkelton key={index}
+                />
+              )
+            })
+
+          }
+
+
+        </EnviromentHolder>
+
+      </Holder>
+    </Root>
+
   )
 }
 

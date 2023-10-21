@@ -3,7 +3,7 @@ import {authSlice,auth,logout,selectIsLoggedIn,selectUser} from "./auth/authSlic
 import {publicPlantsSlice,selectPublicJournal} from "./plants/publicPlantsSlice.js"
 import {fetchPublicPlants,fetchPublicPlantsSingedIn} from "./plants/publicPlantsThunk.js"
 
-import {myPlantsSlice,selectMyPlants,isLoadingMyPlants} from "./plants/myPlantsSlice.js"
+import {myPlantsSlice,selectMyPlants} from "./plants/myPlantsSlice.js"
 import {fetchMyPlants,addPlants,deletePlant,takeAction,deleteAction} from "./plants/myPlantsThunk.js"
 import {environmentsSlice,selectEnvironments,deleteEnvironmentLocally,selectEnvironmentsIsLoading,selectEnvironmentsHasMore,addEnvironmentLocally,editEnvironmentLocally,selectNextCursor,selectHasIntialData} from "./enviroments/environmentsSlice.js"
 import {deleteEnvironment} from "./enviroments/deleteEnvironmentThunk.js"
@@ -57,7 +57,6 @@ export {
     addEnvironmentLocally,
     editEnvironmentLocally,
     editEnvironment,
-    isLoadingMyPlants,
     strainSlice,
     fetchStrains,
     selectStrains,
