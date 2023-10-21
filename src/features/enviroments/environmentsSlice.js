@@ -5,7 +5,8 @@ import { addEnvironment } from "./addEnvironmentThunk";
 import { editEnvironment } from "./editEnvironmentThunk";
 
 let initialState = {
-    loading:true,
+    loading:false,
+    hasIntialData:false,
     hasMore:false,
     total_count:"",
     next_cursor:"",
@@ -34,7 +35,8 @@ export const environmentsSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(fetchEnvironments.pending, (state) => {
-       
+          // state.environments = []
+    
           state.loading = true;
           state.error = null;
         })
@@ -44,6 +46,7 @@ export const environmentsSlice = createSlice({
           state.hasMore = action.payload.has_more
           state.total_count = action.payload.total_count
           state.next_cursor = action.payload.next_cursor
+          state.hasIntialData = state.environments.length > 0 ? true : false
         })
         .addCase(fetchEnvironments.rejected, (state, action) => {
           state.loading = false;
@@ -89,5 +92,6 @@ export const selectEnvironments = (state) => state.environments.environments;
 export const selectEnvironmentsIsLoading = (state) => state.environments.loading;
 export const selectEnvironmentsHasMore = (state) => state.environments.hasMore;
 export const selectNextCursor = (state) => state.environments.next_cursor;
+export const selectHasIntialData = (state) => state.environments.hasIntialData;
 
 

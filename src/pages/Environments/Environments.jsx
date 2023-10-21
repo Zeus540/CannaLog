@@ -11,6 +11,7 @@ import {
   selectEnvironmentsIsLoading,
   selectEnvironmentsHasMore,
   selectNextCursor,
+  selectHasIntialData,
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
 import PopupModal from '../../components/popupModal/PopupModal'
@@ -60,6 +61,8 @@ const Environments = () => {
 
 
 const next_cursor = useSelector(selectNextCursor)
+const hasIntialData = useSelector(selectHasIntialData)
+
   let environmentsLength = environments.length
 
 
@@ -100,10 +103,9 @@ const next_cursor = useSelector(selectNextCursor)
   const lastCard = useRef(null);
   
   useEffect(() => {
-    if(environments.length < 1){
-      dispatch(fetchEnvironments(""))
+    if(!hasIntialData){
+      dispatch(fetchEnvironments())
     }
-
   }, [])
 
  useEffect(() => {
@@ -137,7 +139,7 @@ useEffect(() => {
   if(pageBottom){
 
     if(hasMore){
-      setAmount((prev) => prev / 2 + 10)
+
       dispatch(fetchEnvironments(next_cursor))
     }
     
@@ -196,21 +198,10 @@ useEffect(() => {
 
               
             
-             {environmentsIsLoading ?
-            <>
-              {
-                [...Array(amount)]?.map((index) => {
-                  return (
+   
 
-                    <EnviromentCardSkelton key={index}
-                    />
-                  )
-                })
-              }
-            </>
-            :
-            <>
-                  {environments?.map((e, index) => {
+{hasIntialData &&  <>
+  {environments?.map((e, index) => {
                    return (
                     <EnviromentCard
                     refValue={lastCard}
@@ -228,8 +219,21 @@ useEffect(() => {
                       openModal={openModal} />
                   )
                 })}
-            </>
-          }
+</>
+  }
+
+{environmentsIsLoading && 
+           
+           [...Array(amount)]?.map((index) => {
+             return (
+
+               <EnviromentCardSkelton key={index}
+               />
+             )
+           })
+
+     }
+
 
             </EnviromentHolder>
 
