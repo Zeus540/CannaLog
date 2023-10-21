@@ -115,7 +115,7 @@ const Environments = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollPosition = scrollY + windowHeight;
-      const threshold = 0;
+      const threshold = 50;
       const isNearEnd = scrollPosition + threshold >= documentHeight;
       setPageBottom(isNearEnd);
     };
