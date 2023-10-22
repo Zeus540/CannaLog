@@ -41,20 +41,7 @@ const Text =  styled.div`
 
 color: ${props => props.theme.accent};
  
-    :nth-child(1){
-        color: transparent;
-        -webkit-text-stroke: 0px ${props => props.theme.accent};
-       
-    }
-    :nth-child(2){
-        color: ${props => props.theme.accent};
-        animation: ${Water} 4s linear infinite;
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        left: 0px;
-        bottom: 0px;
-    }
+
 `
 
 
@@ -64,9 +51,7 @@ const WaveHeading = ({heading}) => {
         <Text>
          {heading}
         </Text>
-        <Text>
-        {heading}
-        </Text>
+      
     </Root>
   )
 }

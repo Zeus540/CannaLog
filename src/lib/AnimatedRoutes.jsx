@@ -79,21 +79,24 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/notifications" element={<Notifications />} />
                             <Route path="/growers" element={<Growers />} />
                         </Route>
+                        {isLoggedIn &&  <Route path="/" element={<PublicPlants />} /> }
+                      
                        
-                        <Route path="/" element={<PublicPlants />} />
                         <Route path="/terms" element={<Terms />} />
                         <Route path="/cookie-policy" element={<CookiePolicy />} />
                         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                       {!isLoggedIn &&
-                       <>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/public-plants" element={<PublicPlants />} />
-                        <Route path="/sign-in" element={<Login />} />
-                        <Route path="/sign-up" element={<Register />} />
-                        <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
-                        <Route path="/verify/:token" element={<Verify />}/>
-                       </>
-                       }
+
+                        {!isLoggedIn &&
+                        <>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/public-plants" element={<PublicPlants />} />
+                            <Route path="/sign-in" element={<Login />} />
+                            <Route path="/sign-up" element={<Register />} />
+                            <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
+                            <Route path="/verify/:token" element={<Verify />}/>
+                        </>
+                        }
+                        
                         <Route path="*" element={<NotFoundPage />}/>
                     </Routes>
 
