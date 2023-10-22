@@ -13,6 +13,7 @@ import { auth } from '../../features';
 import { useDispatch } from 'react-redux';
 import { getCookieValue } from '../../helpers/getCookieValue';
 import {Button} from '../../utils/global_styles'
+import { useLocation } from 'react-router-dom';
 
 const Root = styled.div`
 padding-top: 0px;
@@ -138,8 +139,7 @@ function Login() {
   const navigate = useNavigate()
   const [errMsg, setErrMsg] = useState("")
   const { enqueueSnackbar } = useSnackbar()
-
-
+  const location = useLocation()
 
 
   const handleLogin = (values) => {
@@ -149,13 +149,16 @@ function Login() {
       .then(function (response) {
         console.log('response');
         if (response.status == 200) {
+          
           let obj = {
             user: getCookieValue('user'),
             isLoggedIn: true
           }
 
-          dispatch(auth(obj))
-          navigate('/my-environments')
+          dispatch(auth(obj)).then(()=>{
+            navigate(location.state ? location.state :'/my-environments')
+          })
+          
         }
 
       })

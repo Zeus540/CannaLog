@@ -65,7 +65,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
         <AnimatePresence >
                  <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
-            <Root onClick={()=>{console.log("Cannalog")}} onTouchStart={()=>{console.log("Cannalog")}}>
+            <Root >
             <NotificationProvider>
                 <SocketProvider>
                 
@@ -75,18 +75,17 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
-                            <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                             <Route path="/notifications" element={<Notifications />} />
                             <Route path="/growers" element={<Growers />} />
                         </Route>
-                        {isLoggedIn &&  <Route path="/" element={<PublicPlants />} /> }
                       
-                       
+                        <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                         <Route path="/terms" element={<Terms />} />
                         <Route path="/cookie-policy" element={<CookiePolicy />} />
                         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-                        {!isLoggedIn &&
+
+                        {!isLoggedIn ?
                         <>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/public-plants" element={<PublicPlants />} />
@@ -94,6 +93,10 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/sign-up" element={<Register />} />
                             <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
                             <Route path="/verify/:token" element={<Verify />}/>
+                        </>
+                        :
+                        <>
+                            <Route path="/" element={<PublicPlants />} />
                         </>
                         }
                         
