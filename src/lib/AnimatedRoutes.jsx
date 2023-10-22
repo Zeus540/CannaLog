@@ -57,8 +57,10 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location]);
+        window.onunload = function () {
+            window.scrollTo(0, 0);
+          }
+      }, [location]);
 
     
     return (

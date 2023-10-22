@@ -26,7 +26,7 @@ const PlantCardSkelton = () => {
     w="100%"
     radius="5px"
     h='150px'
-    aspect="16 / 20"
+    aspect="16/16"
     aspectMobile="16 / 14"
     />
       <Blank

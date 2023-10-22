@@ -127,12 +127,9 @@ const Environments = () => {
   }, [])
 
   useEffect(() => {
-    if (pageBottom) {
+    if (pageBottom && hasMore) {
 
-      if (hasMore) {
-
-        dispatch(fetchEnvironments(next_cursor))
-      }
+      dispatch(fetchEnvironments(next_cursor))
 
     }
   }, [pageBottom])

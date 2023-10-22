@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 
 export const Root = styled.div`
-width: ${props => props.homePage ? "calc(100% / 5 - 20px)" : "calc(100% / 7 - 20px)" };
+width: ${props => props.homePage ? "calc(100% / 5 - 20px)" : "calc(100% / 8 - 20px)" };
 
 margin: 20px 10px;
 position: relative;
@@ -81,7 +81,7 @@ line-height: 0;
 
 export const EnviromentCardImage = styled(m.img)`
 object-fit: cover;
-aspect-ratio: 16/20;
+aspect-ratio: 16/16;
 border-radius: 5px ;
 cursor: pointer;
 @media (max-width: 768px) {

@@ -5,7 +5,6 @@ import {
 
 export default function BlankImage(props) {
 
-  console.log("BlankImage",props)
   return (
     <BlankImageHolder
     initial={{ opacity: 0.7,  }}
