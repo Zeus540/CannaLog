@@ -87,7 +87,7 @@ background-position: center center;
 `
 
 export const ImgHolderTopInfo = styled.div`
-background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transparent)`};
+position: relative;
 height: 100%;
 display: flex;
 flex-direction: column;
@@ -95,6 +95,18 @@ min-height: 91.8vh;
 color:${(props) => `${props.theme.text}`};
     justify-content: flex-end;
     align-items: center;
+    &::before {
+      content: "";
+      position: absolute;
+      height: 50vh;
+      bottom: 0%;
+      left: 0;
+      width: 100%;
+       background:${(props) => `linear-gradient(0deg, ${props.theme.secondary}, transparent)`};
+   
+      z-index: 1;
+
+  }
 `
 export const ImgHolderTopInfoInner = styled.div`
 max-width: 1920px;
@@ -104,6 +116,8 @@ text-wrap: balance;
 display: flex;
 justify-content: space-between;
 align-items: end;
+position: relative;
+z-index: 3;
 color:${(props) => `${props.theme.text}`};
 @media (max-width: 768px) {
     flex-direction: column;
@@ -187,7 +201,8 @@ color:${(props) => `${props.theme.accent}`};
 
 export const DayHolderOutter = styled.div`
 
-
+position: relative;
+z-index: 3;
 width: 100%;
 
 `

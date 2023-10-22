@@ -149,16 +149,13 @@ function Login() {
       .then(function (response) {
         console.log('response');
         if (response.status == 200) {
-          
           let obj = {
             user: getCookieValue('user'),
             isLoggedIn: true
           }
 
-          dispatch(auth(obj)).then(()=>{
-            navigate(location.state ? location.state :'/my-environments')
-          })
-          
+          dispatch(auth(obj))
+          navigate(location.state ? location.state :'/my-environments')
         }
 
       })

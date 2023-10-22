@@ -78,7 +78,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/notifications" element={<Notifications />} />
                             <Route path="/growers" element={<Growers />} />
                         </Route>
-                      
+                     
+           
                         <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                         <Route path="/terms" element={<Terms />} />
                         <Route path="/cookie-policy" element={<CookiePolicy />} />
@@ -87,8 +88,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
                         {!isLoggedIn ?
                         <>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/public-plants" element={<PublicPlants />} />
+                           <Route path="/" element={<HomePage />} />
+                           <Route path="/public-plants" element={<PublicPlants />} />
                             <Route path="/sign-in" element={<Login />} />
                             <Route path="/sign-up" element={<Register />} />
                             <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
