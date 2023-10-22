@@ -15,16 +15,9 @@ import Notifications from '../pages/Notifications/Notifications';
 import PublicPlants from '../pages/PublicPlants/PublicPlants';
 import { SocketProvider } from '../context/SocketContext';
 import { NotificationProvider } from '../context/NotificationContext';
-
 import {
-    fetchEnvironments,
-    fetchEnvironmentTypes,
-    fetchMyPlants,
     selectIsLoggedIn,
-    selectPublicJournal,
-    fetchPlantActionTypes
   } from '../features'
-import { useDispatch, useSelector } from 'react-redux'
 import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
 import RegistrationComplete from '../pages/Register/RegistrationComplete'
@@ -37,7 +30,8 @@ import Footer from '../components/footer/Footer'
 import WebSocketListener from '../components/WebSocketListener';
 import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
 import ProtectedRoutes from '../utils/ProtectedRoutes';
-
+import { LogoutProvider } from '../context/LogoutContext';
+import { useSelector } from 'react-redux';
 
 const Root = styled.div`
 
@@ -57,6 +51,9 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
 
     useEffect(() => {
+
+        window.scrollTo(0, 0);
+        
         window.onunload = function () {
             window.scrollTo(0, 0);
           }
@@ -66,7 +63,9 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     return (
 
         <AnimatePresence >
-                 <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
+          
+            <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
+            <LogoutProvider>
             <Root >
             <NotificationProvider>
                 <SocketProvider>
@@ -111,7 +110,9 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 </SocketProvider>
                </NotificationProvider>
             </Root>
+            </LogoutProvider>
             </SnackbarProvider>
+            
         </AnimatePresence>
 
 

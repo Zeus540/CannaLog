@@ -63,7 +63,7 @@ const MyPlants = () => {
       const scrollPosition = scrollY + windowHeight;
       const threshold = 350;
       const isNearEnd = scrollPosition + threshold >= documentHeight;
-      console.log("isNearEnd",isNearEnd)
+      // console.log("isNearEnd",isNearEnd)
       setPageBottom(isNearEnd);
     };
 
