@@ -11,10 +11,11 @@ import {
 } from '../../features'
 
 import PopupModal from '../../components/popupModal/PopupModal'
-import Loader from '../../components/loader/Loader'
+import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 import PlantCard from '../../components/cards/PlantCard';
+import Blank from '../../components/skeleton/Blank';
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -38,7 +39,7 @@ const MyPlants = () => {
 
   const myPlants = useSelector(selectMyPlants)
 
-  
+
   useEffect(() => {
 
     const controller = new AbortController
@@ -54,13 +55,13 @@ const MyPlants = () => {
 
 
   useEffect(() => {
-    
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollPosition = scrollY + windowHeight;
-      const threshold = 400;
+      const threshold = 0;
       const isNearEnd = scrollPosition + threshold >= documentHeight;
       setPageBottom(isNearEnd);
     };
@@ -115,35 +116,44 @@ const MyPlants = () => {
       <Holder>
         <FlexRowEnd
         >
-          <Heading
-          >
-            My Plants
-          </Heading>
-          <Button onClick={() => { openModal("addPlant") }}><ButtonText>+ Plant</ButtonText></Button>
+          {myPlants.hasIntialData ?
+            <Heading>
+              My Plants
+            </Heading>
+            :
+            <Blank w="100px" h='30px'/>
+          }
+          {myPlants.hasIntialData ?
+            <Button onClick={() => { openModal("addPlant") }}><ButtonText><IoMdAdd />Plant</ButtonText></Button>
+            :
+            <Blank w="150px" h='40px'  />
+          }
+
 
         </FlexRowEnd>
 
 
         <EnviromentHolder
         >
+          {myPlants.hasIntialData && <>
+            {myPlants?.plants?.map((p, index) => {
+              return (
 
-          {myPlants?.plants?.map((p, index) => {
-            return (
-
-              <PlantCard
-                key={index}
-                data={p}
-                openModal={openModal} />
-            )
-          })}
-
+                <PlantCard
+                  key={index}
+                  data={p}
+                  openModal={openModal} />
+              )
+            })}
+          </>
+          }
           {myPlants.loading &&
 
             [...Array(amount).keys()]?.map((index) => {
 
               return (
 
-                <PlantCardSkelton key={index}/>
+                <PlantCardSkelton key={index} />
               )
             })
 

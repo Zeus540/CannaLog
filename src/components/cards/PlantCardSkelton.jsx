@@ -1,12 +1,8 @@
 import React from 'react'
-import {
-  Root,
-  Blank,
-  BlankImage,
-  Flex
-} from './PlantCardSkelton_styles'
-
-
+import Blank from '../skeleton/Blank'
+import BlankImage from '../skeleton/BlankImage'
+import {Root} from './PlantCard_styles'
+import { Flex } from '../skeleton/Blank_styles'
 const PlantCardSkelton = () => {
 
   return (
@@ -17,65 +13,33 @@ const PlantCardSkelton = () => {
     transition={{ duration: 0.25 }}
     exit={{ opacity: 0 }}
     >
-      <Flex
+    <Flex
       justify='end'>
     <Blank
-    initial={{ opacity: 0.7,  }}
-    animate={{ opacity: 0.5,  }}
-    transition={{
-      repeat: Infinity ,
-      repeatType: "reverse",
-      duration: 0.5
-    }}
-    width="50%"
-    height='30px'
+    w="50%"
+    h='30px'
     margin="10px 0px"
     />
     </Flex>
     
     <BlankImage
-    initial={{ opacity: 0.7,  }}
-    animate={{ opacity: 0.5,  }}
-    transition={{
-      repeat: Infinity ,
-      repeatType: "reverse",
-      duration: 0.5
-    }}
-    width="100"
+    w="100%"
     radius="5px"
-    height='150px'
-    aspect="16 / 14"
+    h='150px'
+    aspect="16 / 20"
+    aspectMobile="16 / 14"
     />
       <Blank
-    initial={{ opacity: 0.7,  }}
-    animate={{ opacity: 0.5,  }}
-    transition={{
-      repeat: Infinity ,
-      repeatType: "reverse",
-      duration: 0.5
-    }}
-    width="60%"
-    height='20px'
+    w="60%"
+    h='20px'
     margin="10px 0px"
     />
       <Blank
-    initial={{ opacity: 0.7,  }}
-    animate={{ opacity: 0.5,  }}
-    transition={{
-      repeat: Infinity ,
-      repeatType: "reverse",
-      duration: 0.5
-    }}
-    width="50%"
-    height='20px'
+    w="50%"
+    h='20px'
     margin="10px 0px"
     />
-      {/* <Blank
-    width="40%"
-    height='20px'
-    margin="10px 0px"
-    /> */}
-
+ 
    
 
     </Root>

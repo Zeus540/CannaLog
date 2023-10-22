@@ -15,11 +15,11 @@ import {
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
 import PopupModal from '../../components/popupModal/PopupModal'
-import Loader from '../../components/loader/Loader'
 import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
 import EnviromentCardSkelton from '../../components/cards/EnviromentCardSkelton'
+import Blank from '../../components/skeleton/Blank'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -163,7 +163,6 @@ const Environments = () => {
 
   return (
 
-
     <Root
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -173,20 +172,23 @@ const Environments = () => {
     >
       {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
       <Holder>
-        <FlexRowEnd
-        >
-          <Heading
-          >
-            My Environments
+        <FlexRowEnd>
+          {hasIntialData ?  
+          <Heading>
+           My Environments
           </Heading>
-          <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd />Environemt</ButtonText></Button>
+          : 
+          <Blank w="100px" h='30px' />
+          }
 
+          {hasIntialData ? 
+          <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd />Environemt</ButtonText></Button>
+          : 
+          <Blank w="150px" h='40px' />
+          }
         </FlexRowEnd>
 
-
-        <EnviromentHolder
-        >
-
+        <EnviromentHolder>
 
           {hasIntialData && <>
             {environments?.map((e, index) => {
