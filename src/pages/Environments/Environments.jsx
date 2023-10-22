@@ -205,7 +205,7 @@ const Environments = () => {
 
           {environmentsIsLoading &&
 
-            [...Array(amount)]?.map((index) => {
+            [...Array(amount).keys()]?.map((index) => {
               return (
 
                 <EnviromentCardSkelton key={index}

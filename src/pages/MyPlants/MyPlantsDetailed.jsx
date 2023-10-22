@@ -300,7 +300,7 @@ function MyPlantsDetailed() {
 
                     {plant_action_types?.map((action, index) => {
                         return (
-                            <QuickAction onClick={() => { openModal("takeAction", action) }}>
+                            <QuickAction key={index} onClick={() => { openModal("takeAction", action) }}>
                                 {action.plant_action_type_id == 1 && <MdOutlineWaterDrop />}
                                 {action.plant_action_type_id == 3 && <LiaCutSolid />}
                                 {action.plant_action_type_id == 4 && <AiOutlineCamera />}

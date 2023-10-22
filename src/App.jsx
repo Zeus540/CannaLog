@@ -120,7 +120,7 @@ function App() {
 
 
   useLayoutEffect(() => {
-    console.log("cookies?.theme?.theme",cookies?.theme?.theme == undefined)
+
     if(cookies?.theme?.theme == undefined){
       setTheme(dark_theme)
       setThemeType("dark")

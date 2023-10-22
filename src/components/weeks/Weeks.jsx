@@ -74,7 +74,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
           spaceBetween={weeks.length > 1 ? 20 : 0}
           slidesPerView={4}
-          activeIndex={activeWeek}
+          activeindex={activeWeek}
           breakpoints={{
 
             320: {
@@ -104,9 +104,9 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
           }}
 
         >
-          {weeks.map((w) => {
+          {weeks.map((w,index) => {
             return (
-              <SwiperSlide >
+              <SwiperSlide key={index}>
                 {activeWeek == w.week ?
                   <WeekActive onClick={() => handleActiveWeeks(w.week)}  >
                     <WeekTextTop>Week</WeekTextTop>

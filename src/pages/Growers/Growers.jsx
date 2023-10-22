@@ -3,7 +3,7 @@ import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import styled from 'styled-components'
 import {Root,Holder, Heading} from '../../utils/global_styles'
-import { socket } from '../../lib/socket'
+import { useSocket } from '../../context/SocketContext'
 
 const UserCardOutter = styled.div`
 margin-top: 15px;
@@ -36,6 +36,8 @@ border-radius: 50%;
 `
 const Growers = () => {
 const [growers, setGrowers] = useState([])
+
+const socket = useSocket()
 
   useEffect(() => {
     axios.get(`${BASE_URL_PROD}/growers`)

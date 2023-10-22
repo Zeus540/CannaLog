@@ -36,7 +36,7 @@ import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
 import Footer from '../components/footer/Footer'
 import WebSocketListener from '../components/WebSocketListener';
 import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
-
+import ProtectedRoutes from '../utils/ProtectedRoutes';
 
 
 const Root = styled.div`
@@ -70,40 +70,33 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 <SocketProvider>
                 
                 <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
-                <Routes location={location} key={location.pathname}>
-                    {isLoggedIn ?
-                        <>
-                           
-                           <Route path="/" element={<PublicPlants />} />
+                    <Routes location={location} key={location.pathname}>
+                        <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
                             <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
                             <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                             <Route path="/notifications" element={<Notifications />} />
                             <Route path="/growers" element={<Growers />} />
-                            <Route path="/terms" element={<Terms />} />
-                            <Route path="/cookie-policy" element={<CookiePolicy />} />
-                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                            <Route path="*" element={<NotFoundPage />} />
-                            
-                        </>
-                        :
-                        <>
-                          <Route path="/public-plants" element={<PublicPlants />} />
-                          <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/sign-in" element={<Login />} />
-                            <Route path="/sign-up" element={<Register />} />
-                            <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
-                            <Route path="/verify/:token" element={<Verify />} />
-                            <Route path="/terms" element={<Terms />} />
-                            <Route path="/cookie-policy" element={<CookiePolicy />} />
-                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                            <Route path="*" element={<NotFoundPage />} />
-                        </>
+                        </Route>
+                       
+                        <Route path="/" element={<PublicPlants />} />
+                        <Route path="/terms" element={<Terms />} />
+                        <Route path="/cookie-policy" element={<CookiePolicy />} />
+                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                       {!isLoggedIn &&
+                       <>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/public-plants" element={<PublicPlants />} />
+                        <Route path="/sign-in" element={<Login />} />
+                        <Route path="/sign-up" element={<Register />} />
+                        <Route path="/sign-up/:name/:email" element={<RegistrationComplete />} />
+                        <Route path="/verify/:token" element={<Verify />}/>
+                       </>
+                       }
+                        <Route path="*" element={<NotFoundPage />}/>
+                    </Routes>
 
-                    }
-                </Routes>
                 <Footer />
                 <WebSocketListener/> 
                 </SocketProvider>

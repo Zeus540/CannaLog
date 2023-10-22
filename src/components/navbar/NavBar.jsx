@@ -13,10 +13,10 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 import { useDispatch } from 'react-redux';
-import { socket } from "../../lib/socket";
 import { BiBell } from "react-icons/bi";
 import { useNotification } from "../../context/NotificationContext";
 import ProgressBar from "../progressBar/ProgressBar";
+import { useSocket } from "../../context/SocketContext";
 
 const Root = styled.div`
 background:${(props) => props.scrollDistance >= 60 ? `${props.theme.glass.background}`: ""};
@@ -354,7 +354,7 @@ const user = useSelector(selectUser)
 const dispatch = useDispatch()
 const theme = themeType
 const navigate = useNavigate()
-
+const socket = useSocket()
 
 const {newNotification} = useNotification()
 

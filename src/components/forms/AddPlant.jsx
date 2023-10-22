@@ -58,7 +58,6 @@ const AddPlant = ({ openModal, modalType, data }) => {
 
         dispatch(addPlants(values))
         .then((response)=>{
-            console.log('response',response)
             if (response.payload.length > 0) {
                 enqueueSnackbar('Plant Added',{variant:'success'})
                 openModal(modalType)

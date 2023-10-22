@@ -139,11 +139,11 @@ const MyPlants = () => {
 
           {myPlants.loading &&
 
-            [...Array(amount)]?.map((index) => {
+            [...Array(amount).keys()]?.map((index) => {
+
               return (
 
-                <PlantCardSkelton key={index}
-                />
+                <PlantCardSkelton key={index}/>
               )
             })
 
