@@ -53,7 +53,7 @@ background:  ${props => props.theme.secondary};
 function AnimatedRoutes({themeType,toggleTheme}) {
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const location = useLocation()
-    const [mobileMenu, setMobileMenu] = useState(false);
+    const [sideBar, setSideBar] = useState(false);
 
 
     
@@ -74,8 +74,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     //const Verify = lazy(()=>import('../pages/Register/Verify'))
 
     const OffClick = () => {
-        if (mobileMenu == true) {
-            setMobileMenu(false);
+        if (sideBar == true) {
+            setSideBar(false);
         }
     }
 
@@ -96,11 +96,11 @@ function AnimatedRoutes({themeType,toggleTheme}) {
           
             <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
             <LogoutProvider>
-            <Root >
+            <Root onClick={()=> {OffClick()}}>
             <NotificationProvider>
                 <SocketProvider>
                 
-                <NavBar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
+                <NavBar sideBar={sideBar} setSideBar={setSideBar} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />

@@ -85,7 +85,7 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
 
   <EnviromentCardTextHolder  readMore={readMore} >
 
-    <AnimatePresence>
+    <AnimatePresence mode='wait'>
       {readMore &&
       
         <EnviromentCardTextHiddenHolder

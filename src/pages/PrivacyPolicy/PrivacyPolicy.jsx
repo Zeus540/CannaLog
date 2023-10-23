@@ -19,10 +19,10 @@ h2{
   color:${(props) => `${props.theme.accent}`};
 }
 
-@media (max-width: 425px) {
-    margin: 15px;
-    padding-top: 0px;
-  }
+@media (max-width: 1920px) {
+  margin: 15px;
+  padding-top: 0px;
+}
 
 
 `;
