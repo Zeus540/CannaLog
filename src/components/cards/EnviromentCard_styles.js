@@ -24,6 +24,16 @@ cursor:pointer;
 
 export const EnviromentHolderText = styled(m.p)`
 color:  ${props => props.theme.text};
+font-size: 12px;
+text-align:${props => props.talign};
+display: flex;
+justify-content: end;
+align-items: center;
+svg{
+    font-size: 22px;
+    margin-right: 5px;
+    color:  ${props => props.theme.accent};
+}
 `
 
 export const EnviromentHolderHeading = styled(m.p)`
@@ -55,7 +65,7 @@ z-index: 2;
 `
 export const EnviromentCardImage = styled(m.img)`
 object-fit: cover;
-aspect-ratio: 16/16;
+aspect-ratio: 12/8;
 border-radius: 5px 5px 0px 0px;
 `
 
@@ -63,11 +73,29 @@ export const EnviromentCardTextHolder = styled(m.div)`
 overflow: hidden;
 `
 
+export const DropDown = styled(m.div)`
+background:  ${props => props.theme.primary};
+display: flex;
+align-items: center;
+font-size: 22px;
+
+
+`
+
+export const DropDownSvgHolder = styled(m.div)`
+background:  ${props => props.theme.accent};
+display: flex;
+align-items: center;
+font-size: 22px;
+padding: 10px 10px;
+svg{
+    color:  ${props => props.theme.primary};
+}
+`
 export const EnviromentCardTextMainHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
 padding:5px 10px;
-position: absolute;
-border-radius:${props => props.readMore ? "0px":"0px 0px 5px 5px"};
+
 bottom: 0px;
 display: flex;
 width: 100%;
@@ -77,7 +105,7 @@ justify-content: space-between;
 
 export const EnviromentCardTextHiddenHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
-padding:10px 10px;
+padding:15px 10px;
 width: 100%;
 // max-height: ${props => props.readMore ? "600px":"0px"};
 // transition: all 0.5s cubic-bezier(0, 0, .58, .58);

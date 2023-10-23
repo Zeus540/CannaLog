@@ -35,9 +35,6 @@ export const Holder = styled(m.div)`
 max-width: 1920px;
 margin: 40px 15px;
 width:100%;
-
-
-
 overflow:hidden;
 transition: all 1s ease;
 
@@ -164,4 +161,14 @@ font-weight: bold;
 cursor:pointer;
 display: flex;
 opacity:0.8
+`
+
+export const Div = styled(m.div)`
+margin: ${props => props.margin};
+display: ${props => props.display};
+justify-content: ${props => props.justify};
+align-items: ${props => props.align};
+width:${props => props.width ? props.width : "100%"};
+overflow:hidden;
+
 `

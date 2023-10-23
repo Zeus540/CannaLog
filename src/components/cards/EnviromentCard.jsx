@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { 
-  Holder,
+  Div,
   Heading,
   FlexRowEnd,
   TextButton,
@@ -14,6 +14,8 @@ import {
   EnviromentCardImageHolder,
   EnviromentCardImage,
   EnviromentCardTextHolder,
+  DropDown,
+  DropDownSvgHolder,
   EnviromentCardTextMainHolder,
   EnviromentHolderText,
   EnviromentHolderHeading,
@@ -33,9 +35,9 @@ import {
  import { RiDeleteBin5Line } from 'react-icons/ri';
 import { AnimatePresence } from 'framer-motion';
 import { GiGreenhouse } from 'react-icons/gi';
+import { FiArrowDown,FiArrowUp } from 'react-icons/fi';
 
 const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
-  const [height, setHeight] = useState(0);
   const [readMore, setReadMore] = useState(false);
 
   const navigate = useNavigate()
@@ -58,21 +60,34 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
     exit={{ opacity: 0, transition: { duration: 0.1 } }}
     ref={index == length - 1 ? refValue : null}
     >
-      <EnviromentHolderText><GiGreenhouse /> {data.environment_name}</EnviromentHolderText>
-      
+      <Div margin="0px 0px 10px 0px">
+      <EnviromentHolderText talign="right"><GiGreenhouse /> {data.environment_name}</EnviromentHolderText>
+      </Div>
       <EnviromentCardImageHolder onClick={() => { setReadMore(!readMore) }}>
         <EnviromentCardImage src={data.environment_cover_img} width="100%" />
+      </EnviromentCardImageHolder>
+      
+      <DropDown onClick={() => { setReadMore(!readMore) }}>
 
-        <EnviromentCardTextMainHolder  onClick={() => { setReadMore(!readMore) }}>
+      <EnviromentCardTextMainHolder  >
           <EnviromentHolderText>{data.environment_type_name} </EnviromentHolderText>
-          <EnviromentHolderText>{data.environment_light_exposure !== null && `${data.environment_light_exposure} hrs of light`} </EnviromentHolderText>
+          
+          <EnviromentHolderText>{data.environment_light_exposure !== null && `${data.environment_light_exposure} hrs of light`}   </EnviromentHolderText>
         </EnviromentCardTextMainHolder>
 
-      </EnviromentCardImageHolder>
+        <DropDownSvgHolder>
+        {!readMore ? <FiArrowDown />  : <FiArrowUp/> }
+        </DropDownSvgHolder>
 
-      <EnviromentCardTextHolder height={height} readMore={readMore} >
+      </DropDown>
+
+
+
+  <EnviromentCardTextHolder  readMore={readMore} >
+
     <AnimatePresence>
       {readMore &&
+      
         <EnviromentCardTextHiddenHolder
         initial={{ transform: "translateY(-100%)", visibility: "none", opacity:0 }}
         animate={{ transform: "translateY(0%)",visibility: "visible", opacity:1 }}
@@ -80,6 +95,7 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
         exit={{visibility: "none" , transform: "translateY(-100%)", opacity:0 , transition: { duration: 0.25 } }}
          readMore={readMore}
          >
+         
         <Divider></Divider>
           <EnviromentHolderHeading>{JSON?.parse(data.plants)?.length > 1 ? `${JSON?.parse(data.plants)?.length} Plants` : `${JSON?.parse(data.plants)?.length} Plant`} </EnviromentHolderHeading>
           <PlantHolderOutter>

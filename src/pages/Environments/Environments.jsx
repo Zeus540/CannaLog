@@ -49,7 +49,7 @@ const Environments = () => {
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const [pageBottom, setPageBottom] = useState(false)
-  const [amount, setAmount] = useState(10)
+  const [amount, setAmount] = useState(12)
 
   const dispatch = useDispatch()
 
@@ -108,7 +108,7 @@ const Environments = () => {
   useEffect(() => {
 
     let obj = {
-      limit: 10,
+      limit: 12,
       limit_mobile: 6,
       key: undefined,
       signal
@@ -144,7 +144,7 @@ const Environments = () => {
     if (pageBottom && hasMore) {
 
       let obj = {
-        limit: 10,
+        limit: 12,
         limit_mobile: 6,
         key: next_cursor,
         signal
