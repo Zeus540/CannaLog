@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { SnackbarProvider } from 'notistack'
 import { useSelector } from 'react-redux';
-
+import lazyWithPreload from 'react-lazy-with-preload';
 //Pages
 // import HomePage from '../pages/HomePage/HomePage'
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
@@ -56,21 +56,21 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
 
     
-    const HomePage = lazy(()=>import('../pages/HomePage/HomePage'))
-    const Notifications = lazy(()=>import('../pages/Notifications/Notifications'))
-    const Growers = lazy(()=>import('../pages/Growers/Growers'))
-    const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
-    const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
-    const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
-    const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
-    const Environments = lazy(()=>import('../pages/Environments/Environments'))
-    const Terms = lazy(()=>import('../pages/Terms/Terms'))
-    const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
-    const PrivacyPolicy = lazy(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
-    const Login = lazy(()=>import('../pages/Login/Login'))
-    const Register = lazy(()=>import('../pages/Register/Register'))
-    const RegistrationComplete = lazy(()=>import('../pages/Register/RegistrationComplete'))
-    const Verify = lazy(()=>import('../pages/Register/Verify'))
+    const HomePage = lazyWithPreload(()=>import('../pages/HomePage/HomePage'))
+    const Notifications = lazyWithPreload(()=>import('../pages/Notifications/Notifications'))
+    const Growers = lazyWithPreload(()=>import('../pages/Growers/Growers'))
+    const MyPlants = lazyWithPreload(()=>import('../pages/MyPlants/MyPlants'))
+    const MyPlantsDetailed = lazyWithPreload(()=>import('../pages/MyPlants/MyPlantsDetailed'))
+    const PublicPlants = lazyWithPreload(()=>import('../pages/PublicPlants/PublicPlants'))
+    const PublicPlantDetailed = lazyWithPreload(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
+    const Environments = lazyWithPreload(()=>import('../pages/Environments/Environments'))
+    const Terms = lazyWithPreload(()=>import('../pages/Terms/Terms'))
+    const CookiePolicy = lazyWithPreload(()=>import('../pages/CookiePolicy/CookiePolicy'))
+    const PrivacyPolicy = lazyWithPreload(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
+    const Login = lazyWithPreload(()=>import('../pages/Login/Login'))
+    const Register = lazyWithPreload(()=>import('../pages/Register/Register'))
+    const RegistrationComplete = lazyWithPreload(()=>import('../pages/Register/RegistrationComplete'))
+    const Verify = lazyWithPreload(()=>import('../pages/Register/Verify'))
 
     const OffClick = () => {
         if (mobileMenu == true) {
@@ -78,6 +78,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
         }
     }
 
+    Terms.prelaod
     useEffect(() => {
 
         window.scrollTo(0, 0);
@@ -114,6 +115,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                             <Route path="/terms" exact element={<Terms />} />
                             <Route path="/cookie-policy" element={<CookiePolicy />} />
                             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                       
+
                             {!isLoggedIn ?
                             <>
                         
