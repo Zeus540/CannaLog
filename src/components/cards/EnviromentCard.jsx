@@ -21,7 +21,6 @@ import {
   EnviromentInfoFlex,
   Divider,
   EnviromentCardTextHiddenHolder,
-  EnviromentCardTextHiddenHolderInner,
   PlantHolderOutter,
   PlantHolder,
   ActionHolder,
@@ -32,6 +31,8 @@ import {
  import { IoMdAdd } from "react-icons/io";
  import { FiEdit } from "react-icons/fi";
  import { RiDeleteBin5Line } from 'react-icons/ri';
+import { AnimatePresence } from 'framer-motion';
+import { GiGreenhouse } from 'react-icons/gi';
 
 const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
   const [height, setHeight] = useState(0);
@@ -39,21 +40,12 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
 
   const navigate = useNavigate()
   
-  useEffect(() => {
-    setReadMore(false)
-  }, [length]);
-
   function cleanName(name) {
     return name.toLowerCase().replaceAll(" ","-").replaceAll("#","")
   }
   
-  
-
   const handleRedirect = (p)=>{
-   
-
     navigate(`/my-plants/${cleanName(p.plant_name)}/${p.environment_id}/${p.plant_id}`)
-   
   }
   
   
@@ -66,18 +58,28 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
     exit={{ opacity: 0, transition: { duration: 0.1 } }}
     ref={index == length - 1 ? refValue : null}
     >
+      <EnviromentHolderText><GiGreenhouse /> {data.environment_name}</EnviromentHolderText>
+      
       <EnviromentCardImageHolder onClick={() => { setReadMore(!readMore) }}>
         <EnviromentCardImage src={data.environment_cover_img} width="100%" />
-      </EnviromentCardImageHolder>
-      <EnviromentCardTextHolder height={height} readMore={readMore} >
+
         <EnviromentCardTextMainHolder  onClick={() => { setReadMore(!readMore) }}>
-          <EnviromentHolderText>{data.environment_name}</EnviromentHolderText>
-          <EnviromentHolderText>{data.environment_type_name} {data.environment_light_exposure !== null && `- ${data.environment_light_exposure} hrs of light`} </EnviromentHolderText>
+          <EnviromentHolderText>{data.environment_type_name} </EnviromentHolderText>
+          <EnviromentHolderText>{data.environment_light_exposure !== null && `${data.environment_light_exposure} hrs of light`} </EnviromentHolderText>
         </EnviromentCardTextMainHolder>
-    
-        <EnviromentCardTextHiddenHolder readMore={readMore}>
-     
-     <EnviromentCardTextHiddenHolderInner readMore={readMore}>
+
+      </EnviromentCardImageHolder>
+
+      <EnviromentCardTextHolder height={height} readMore={readMore} >
+    <AnimatePresence>
+      {readMore &&
+        <EnviromentCardTextHiddenHolder
+        initial={{ transform: "translateY(-100%)", visibility: "none", opacity:0 }}
+        animate={{ transform: "translateY(0%)",visibility: "visible", opacity:1 }}
+        transition={{ duration: 0.25 }}
+        exit={{visibility: "none" , transform: "translateY(-100%)", opacity:0 , transition: { duration: 0.25 } }}
+         readMore={readMore}
+         >
         <Divider></Divider>
           <EnviromentHolderHeading>{JSON?.parse(data.plants)?.length > 1 ? `${JSON?.parse(data.plants)?.length} Plants` : `${JSON?.parse(data.plants)?.length} Plant`} </EnviromentHolderHeading>
           <PlantHolderOutter>
@@ -114,9 +116,11 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
 
           <TextButtonSvgDelete onClick={()=> openModal('deleteEnvironment',data)}><RiDeleteBin5Line/></TextButtonSvgDelete>
           </ActionHolder>
-          </EnviromentCardTextHiddenHolderInner>
+         
         </EnviromentCardTextHiddenHolder>
-  
+         }
+        </AnimatePresence>
+ 
       </EnviromentCardTextHolder>
     </Root>
 

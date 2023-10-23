@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 
 export const Root = styled(m.div)`
-width: calc(100% / 5 - 20px);
+width: calc(100% / 6 - 20px);
 border-radius: 5px;
 margin: 20px 10px;
 position: relative;
@@ -46,7 +46,7 @@ text-align: center;
 
 export const EnviromentCardImageHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
-max-height:200px;
+
 line-height: 0px;
 overflow: hidden;
 border-radius: 5px 5px 0px 0px;
@@ -55,41 +55,38 @@ z-index: 2;
 `
 export const EnviromentCardImage = styled(m.img)`
 object-fit: cover;
-aspect-ratio: 16/9;
+aspect-ratio: 16/16;
 border-radius: 5px 5px 0px 0px;
 `
 
 export const EnviromentCardTextHolder = styled(m.div)`
-// height:${props => props.readMore ? "auto":props.height + "px" };
-// overflow:${props => props.readMore ? "auto":"hidden"};
-// background:  ${props => props.theme.primary};
-transition: height 1s ease, overflow 1s ease;
+overflow: hidden;
 `
 
 export const EnviromentCardTextMainHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
-padding:10px 10px;
-position: relative;
-
-z-index: 2;
+padding:5px 10px;
+position: absolute;
 border-radius:${props => props.readMore ? "0px":"0px 0px 5px 5px"};
+bottom: 0px;
+display: flex;
+width: 100%;
+justify-content: space-between;
  ;
 `
 
 export const EnviromentCardTextHiddenHolder = styled(m.div)`
 background:  ${props => props.theme.primary};
-
+padding:10px 10px;
 width: 100%;
-max-height: ${props => props.readMore ? "600px":"0px"};
-transition: all 0.5s cubic-bezier(0, 0, .58, .58);
+// max-height: ${props => props.readMore ? "600px":"0px"};
+// transition: all 0.5s cubic-bezier(0, 0, .58, .58);
 overflow:hidden;
-visibility:${props => props.readMore ? "visible":"hidden"};
+// visibility:${props => props.readMore ? "visible":"hidden"};
 border-radius: 0px 0px 5px 5px;
 `
 
-export const EnviromentCardTextHiddenHolderInner = styled(m.div)`
-padding:10px 10px;
-`
+
 export const PlantHolderOutter = styled(m.div)`
 display: flex;
 flex-wrap: wrap;
