@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState  } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd,} from '../../utils/global_styles'
@@ -10,8 +10,8 @@ import {
   fetchPublicPlantsSingedIn
 } from '../../features'
 import PlantCardPublic from '../../components/cards/PlantCardPublic'
-import Loader from '../../components/loader/Loader'
-
+import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
+import Blank from '../../components/skeleton/Blank'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -22,40 +22,67 @@ flex-wrap: wrap;
 `
 
 const PublicPlants = () => {
-  const dispatch = useDispatch()
   const isLoggedIn = useSelector(selectIsLoggedIn)
-  const isLoadingPlants = useSelector(selectPublicJournal)
   const publicPlants = useSelector(selectPublicJournal)
-
+  const [pageBottom, setPageBottom] = useState(false)
+  const [amount, setAmount] = useState(14)
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
-
     const controller = new AbortController
     const signal = controller.signal
   
     if(isLoggedIn){
-      dispatch(fetchPublicPlantsSingedIn(signal))
+    if(!publicPlants.hasIntialData){
+      dispatch(fetchPublicPlantsSingedIn())
+    }
     }else{
-    
-      dispatch(fetchPublicPlants(signal))
+      if(!publicPlants.hasIntialData){
+        dispatch(fetchPublicPlants())
+      }
     }
  
     return(()=>{
       controller.abort()
     })
-
   }, [isLoggedIn]);
+
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = scrollY + windowHeight;
+      const threshold = 350;
+      const isNearEnd = scrollPosition + threshold >= documentHeight;
+      // console.log("isNearEnd",isNearEnd)
+      setPageBottom(isNearEnd);
+    };
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [])
+
+
+  useEffect(() => {
+    if (pageBottom) {
+
+      if (publicPlants.hasMore) {
+
+        dispatch(fetchPublicPlants(publicPlants.next_cursor))
+      }
+
+    }
+  }, [pageBottom])
 
   return (
 
-    <>
-      {isLoadingPlants.loading ?
-        <>
-          <Loader />
-        </>
-
-        :
+  
         <Root
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -64,18 +91,20 @@ const PublicPlants = () => {
         >
          
           <Holder>
-          <FlexRowEnd
-            >
-            <Heading
-            >
-              Public Plants
-            </Heading>
-            </FlexRowEnd>
-            <EnviromentHolder
-            >
-
+          <FlexRowEnd>
+               {publicPlants.hasIntialData ?
+              <Heading
+              >
+                Public Plants
+              </Heading>
+                  :
+                  <Blank w="100px" h='30px'/>
+              }
             
-                {publicPlants.plants?.map((p, index) => {
+          </FlexRowEnd>
+          <EnviromentHolder>
+          {publicPlants.hasIntialData && <>
+              {publicPlants.plants?.map((p, index) => {
                   return (
                     <>
                     <PlantCardPublic 
@@ -88,20 +117,28 @@ const PublicPlants = () => {
                       environment_type_name={p.environment_type_name}
                       light_exposure={p.light_exposure}
                       creation_date={p.creation_date}
-                      last_updated={p.last_updated}
-                 />
+                      last_updated={p.last_updated}/>
                     </>
                   )
-                })}
-              
+              })}
+              </>
+              }
+                  {publicPlants.loading &&
 
+                  [...Array(amount).keys()]?.map((index) => {
+
+                    return (
+
+                      <PlantCardSkelton key={index} />
+                    )
+                  })
+
+                  }
             </EnviromentHolder>
-
 
           </Holder>
         </Root>
-      }
-    </>
+    
   )
 }
 

@@ -132,14 +132,11 @@ const MyPlants = () => {
 
 
         </FlexRowEnd>
-
-
         <EnviromentHolder
         >
           {myPlants.hasIntialData && <>
             {myPlants?.plants?.map((p, index) => {
               return (
-
                 <PlantCard
                   key={index}
                   data={p}
@@ -151,9 +148,7 @@ const MyPlants = () => {
           {myPlants.loading &&
 
             [...Array(amount).keys()]?.map((index) => {
-
               return (
-
                 <PlantCardSkelton key={index} />
               )
             })
@@ -161,8 +156,6 @@ const MyPlants = () => {
           }
 
         </EnviromentHolder>
-
-
       </Holder>
     </Root>
 

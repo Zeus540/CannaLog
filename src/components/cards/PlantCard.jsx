@@ -1,13 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
-import {
-  Holder,
-  Heading,
-  FlexRowEnd,
-  TextButton,
-  Button,
-  ButtonText,
-  ButtonSvg
-} from '../../utils/global_styles'
+import React from 'react'
 import {
   Root,
   PlantCardImageHolder,
@@ -33,8 +24,6 @@ import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { getElapsedDays } from '../../helpers/getElapsedDays';
 
 const PlantCard = ({  data, }) => {
-
-
 
 const navigate = useNavigate()
 

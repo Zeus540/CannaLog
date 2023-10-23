@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom';
 import {
   Root,
@@ -39,18 +39,17 @@ import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
 import WaveHeading from '../../components/Headings/WaveHeading';
 import { useNavigate } from 'react-router-dom';
 import PlantCardPublic from '../../components/cards/PlantCardPublic';
+import PlantCardSkelton from '../../components/cards/PlantCardSkelton';
 const HomePage = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const [amount, setAmount] = useState(14)
   const publicPlants = useSelector(selectPublicJournal)
 
  
   useEffect(() => {
-    dispatch(fetchPublicPlants()).then((res)=>{
-console.log("errerrerrerrerr",res)
-    })
+    dispatch(fetchPublicPlants())
   }, [])
 
 
@@ -98,11 +97,11 @@ console.log("errerrerrerrerr",res)
       <Section >
 
         <SectionInnerTop >
-
-{/* {console.log("publicPlants",publicPlants)} */}
-          {!publicPlants.loading &&
+        <DiaryHolder>
+        
+          {publicPlants.hasIntialData &&
             <>
-              <DiaryHolder>
+             
                 {publicPlants.plants?.map((p, index) => {
                   if (index < 6) {
                     return (
@@ -123,9 +122,22 @@ console.log("errerrerrerrerr",res)
                   }
 
                 })}
-              </DiaryHolder>
-            </>}
+          
+            </>
+            }
 
+            {publicPlants.loading &&
+
+            [...Array(amount).keys()]?.map((index) => {
+
+              return (
+
+                <PlantCardSkelton key={index} />
+              )
+            })
+
+            }
+           </DiaryHolder>
 {/* 
           <HeroText>With CannaLog, our users have a powerful tool that enables them to track their progress, analyze their results, and share their knowledge with the community.</HeroText>
 

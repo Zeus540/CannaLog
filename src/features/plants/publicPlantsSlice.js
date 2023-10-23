@@ -4,9 +4,13 @@ import {  BASE_URL_PROD } from '../../lib/Constants'
 import {fetchPublicPlants,fetchPublicPlantsSingedIn} from './publicPlantsThunk'
 
 let initialState = {
-    loading:true,
-    plants:[],
-    error:'',
+  loading:false,
+  hasIntialData:false,
+  hasMore:false,
+  total_count:"",
+  next_cursor:"",
+  plants:[],
+  error:'',
 }
 
 export const publicPlantsSlice = createSlice({
@@ -21,9 +25,12 @@ export const publicPlantsSlice = createSlice({
           state.error = null;
         })
         .addCase(fetchPublicPlants.fulfilled, (state, action) => {
-          console.log("action",action)
           state.loading = false;
-          state.plants = action.payload;
+          state.plants = [...state.plants,...action.payload.data];
+          state.hasMore = action.payload.has_more
+          state.total_count = action.payload.total_count
+          state.next_cursor = action.payload.next_cursor
+          state.hasIntialData = state.plants.length > 0 ? true : false
         })
         .addCase(fetchPublicPlants.rejected, (state, action) => {
           state.loading = false;
@@ -35,7 +42,11 @@ export const publicPlantsSlice = createSlice({
         })
         .addCase(fetchPublicPlantsSingedIn.fulfilled, (state, action) => {
           state.loading = false;
-          state.plants = action.payload;
+          state.plants = [...state.plants,...action.payload.data];
+          state.hasMore = action.payload.has_more
+          state.total_count = action.payload.total_count
+          state.next_cursor = action.payload.next_cursor
+          state.hasIntialData = state.plants.length > 0 ? true : false
         })
         .addCase(fetchPublicPlantsSingedIn.rejected, (state, action) => {
           state.loading = false;
