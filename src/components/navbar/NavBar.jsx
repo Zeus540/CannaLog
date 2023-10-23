@@ -130,7 +130,7 @@ const LinkHolderMobile = styled(m.div)`
   @media (min-width: 0px) and (max-width: 820px) {
     min-width: 50%;
     top:unset;
-    min-height: calc(100vh - 72px);
+    min-height: calc(100svh - 72px);
   }
 
 `;
