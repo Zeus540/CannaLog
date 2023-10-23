@@ -123,14 +123,12 @@ const LinkHolderMobile = styled(m.div)`
   backdrop-filter: blur( 2px );
   min-height: 100vh ;
   flex-direction: column;
-
   justify-content: space-between;
   z-index: 50;
-
   @media (min-width: 0px) and (max-width: 820px) {
     min-width: 50%;
     top:unset;
-    min-height: calc(100svh - 72px);
+    min-height: 100svh;
   }
 
 `;
