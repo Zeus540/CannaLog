@@ -118,7 +118,7 @@ const LinkHolderMobile = styled(m.div)`
  
   background: ${props => props.theme.glass.background};
   right: 0;
-
+  top:0;
   min-width: 400px;
   backdrop-filter: blur( 2px );
   min-height: 100vh ;
@@ -127,6 +127,7 @@ const LinkHolderMobile = styled(m.div)`
   z-index: 50;
   @media (min-width: 0px) and (max-width: 820px) {
     min-width: 50%;
+    top:unset;
     min-height: 100svh;
   }
 
