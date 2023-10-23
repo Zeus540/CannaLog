@@ -18,6 +18,15 @@ export const environmentsSlice = createSlice({
     name:"environments",
     initialState,
     reducers:{
+      reset: (state)=> {
+        state.loading = false
+        state.hasIntialData = false
+        state.hasMore = false
+        state.total_count = ""
+        state.next_cursor = ""
+        state.environments = []
+        state.error = ''
+      },
       addEnvironmentLocally:(state,payload)=>{
         state.environments.unshift(payload.payload)
       },
@@ -86,7 +95,7 @@ export const environmentsSlice = createSlice({
     },
 })
 
-export const {deleteEnvironmentLocally,addEnvironmentLocally,editEnvironmentLocally} =  environmentsSlice.actions;
+export const enviromentActions =  environmentsSlice.actions;
 
 export const selectEnvironments = (state) => state.environments.environments;
 export const selectEnvironmentsIsLoading = (state) => state.environments.loading;

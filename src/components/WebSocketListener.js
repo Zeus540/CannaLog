@@ -1,9 +1,7 @@
 import React,{ useEffect } from "react";
 import {
-    addEnvironmentLocally,
-    editEnvironmentLocally,
+    enviromentActions,
     selectUser,
-    deleteEnvironmentLocally,
     incomingNotification
   } from '../features'
 import { useDispatch } from 'react-redux'
@@ -35,18 +33,18 @@ const WebSocketListener = () => {
         if(socket.connected){
     
            socket.on(`environment_added${user?.user_id}`, (data) => {
-             dispatch(addEnvironmentLocally(data));
+             dispatch(enviromentActions.addEnvironmentLocally(data));
              enqueueSnackbar(`${data.environment_name} Added`, { variant: 'success' })
            });
     
           
             socket.on(`environment_edited${user?.user_id}`, (data) => {
-              dispatch(editEnvironmentLocally(data));
+              dispatch(enviromentActions.editEnvironmentLocally(data));
               enqueueSnackbar(`${data.environment_name} Edited`, { variant: 'success' })
             });
          
             socket.on(`environment_deleted${user?.user_id}`, (data) => {
-             dispatch(deleteEnvironmentLocally(parseInt(data)));
+             dispatch(enviromentActions.deleteEnvironmentLocally(parseInt(data)));
              enqueueSnackbar(`${data.environment_name} Deleted`, { variant: 'success' })
            });
     

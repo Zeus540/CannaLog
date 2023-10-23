@@ -17,6 +17,15 @@ export const publicPlantsSlice = createSlice({
     name:"publicPlants",
     initialState,
     reducers:{
+      reset: (state)=> {
+        state.loading = false
+        state.hasIntialData = false
+        state.hasMore = false
+        state.total_count = ""
+        state.next_cursor = ""
+        state.plants = []
+        state.error = ''
+      },
     },
     extraReducers: (builder) => {
       builder
@@ -55,7 +64,7 @@ export const publicPlantsSlice = createSlice({
     },
 })
 
-export const {getPublicJournal} = publicPlantsSlice.actions
+export const publicPlantActions = publicPlantsSlice.actions
 
 export const selectPublicJournal = (state) => state.publicPlants;
 

@@ -1,11 +1,12 @@
 import { useState, useLayoutEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import AnimatedRoutes from './lib/AnimatedRoutes'
 import { ThemeProvider } from 'styled-components'
 import Black from './assets/images/black.jpg'
 import White from './assets/images/white.jpg'
 import { getCookieValue } from './helpers/getCookieValue'
 import { useCookies } from 'react-cookie'
+import { publicPlantActions, selectIsLoggedIn,enviromentActions} from './features/index'
 
 let light_theme = {
   primary: '#ffffff',
@@ -114,13 +115,20 @@ function App() {
 
   const dispatch = useDispatch()
   const [cookies, setCookie,removeCookie] = useCookies();
-
+  const IsLoggedIn = useSelector(selectIsLoggedIn)
+  
   const [theme, setTheme] = useState(dark_theme)
   const [themeType, setThemeType] = useState("dark")
 
+  useLayoutEffect(() => {
+    dispatch(publicPlantActions.reset())
+    dispatch(enviromentActions.reset())
+  }, [IsLoggedIn])
+  
 
   useLayoutEffect(() => {
 
+   
     if(cookies?.theme?.theme == undefined){
       setTheme(dark_theme)
       setThemeType("dark")

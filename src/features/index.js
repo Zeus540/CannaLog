@@ -1,11 +1,11 @@
 import {authSlice,auth,logout,selectIsLoggedIn,selectUser} from "./auth/authSlice.js"
 
-import {publicPlantsSlice,selectPublicJournal} from "./plants/publicPlantsSlice.js"
+import {publicPlantsSlice,selectPublicJournal,publicPlantActions} from "./plants/publicPlantsSlice.js"
 import {fetchPublicPlants,fetchPublicPlantsSingedIn} from "./plants/publicPlantsThunk.js"
 
 import {myPlantsSlice,selectMyPlants} from "./plants/myPlantsSlice.js"
 import {fetchMyPlants,addPlants,deletePlant,takeAction,deleteAction} from "./plants/myPlantsThunk.js"
-import {environmentsSlice,selectEnvironments,deleteEnvironmentLocally,selectEnvironmentsIsLoading,selectEnvironmentsHasMore,addEnvironmentLocally,editEnvironmentLocally,selectNextCursor,selectHasIntialData} from "./enviroments/environmentsSlice.js"
+import {environmentsSlice,enviromentActions,selectEnvironments,selectEnvironmentsIsLoading,selectEnvironmentsHasMore,selectNextCursor,selectHasIntialData} from "./enviroments/environmentsSlice.js"
 import {deleteEnvironment} from "./enviroments/deleteEnvironmentThunk.js"
 import {fetchEnvironments} from "./enviroments/environmentsThunk.js"
 
@@ -41,7 +41,7 @@ export {
     selectMyPlants,
     environmentsSlice,
     selectEnvironments,
-    deleteEnvironmentLocally,
+    enviromentActions,
     fetchEnvironments,
     deleteEnvironment,
     selectEnvironmentsIsLoading,
@@ -54,8 +54,6 @@ export {
     fetchPublicPlantsSingedIn,
     selectEnvironmentsTypes,
     addEnvironment,
-    addEnvironmentLocally,
-    editEnvironmentLocally,
     editEnvironment,
     strainSlice,
     fetchStrains,
@@ -79,5 +77,6 @@ export {
     fetchNotifications,
     readNotifications,
     readNotification,
-    selectHasIntialData
+    selectHasIntialData,
+    publicPlantActions
 } 
