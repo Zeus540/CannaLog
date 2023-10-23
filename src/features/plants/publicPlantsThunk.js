@@ -2,16 +2,18 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 
-export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',async(key)=>{
-  let limit = 14;
-
+export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',async(obj)=>{
+  console.log("here",obj)
+  
+  let limit = obj.limit;
+  let signal = obj.signal
   if (window.innerWidth <= 768) {
-    limit = 6; 
+    limit = obj.limit_mobile; 
   }
-
   let sortBy = "DESC"
+
   try {
-    let response = await axios.get(`${BASE_URL_PROD}/plants/public/?limit=${limit}&sort=${sortBy}&key_sort=${key}`)
+    let response = await axios.get(`${BASE_URL_PROD}/plants/public/?limit=${limit}&sort=${sortBy}&key_sort=${obj.key}`,{signal})
     if(response.status == 200){
       return response.data;
     }
@@ -21,16 +23,17 @@ export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',async(key
 
 })
 
-export const fetchPublicPlantsSingedIn = createAsyncThunk('publicPlantsSingedIn/fetch',async(key)=>{
-  let limit = 14;
-
-  if (window.innerWidth <= 768) {
-    limit = 6; 
-  }
+export const fetchPublicPlantsSingedIn = createAsyncThunk('publicPlantsSingedIn/fetch',async(obj)=>{
   
+  let limit = obj.limit;
+  let signal = obj.signal
+  if (window.innerWidth <= 768) {
+    limit = obj.limit_mobile; 
+  }
   let sortBy = "DESC"
+
   try {
-    let response = await axios.get(`${BASE_URL_PROD}/plants/public_signed_in/?limit=${limit}&sort=${sortBy}&key_sort=${key}`)
+    let response = await axios.get(`${BASE_URL_PROD}/plants/public_signed_in/?limit=${limit}&sort=${sortBy}&key_sort=${obj.key}`,{signal})
     if(response.status == 200){
       return response.data;
     }

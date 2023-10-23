@@ -102,10 +102,24 @@ const Environments = () => {
 
   const lastCard = useRef(null);
 
+  const controller = new AbortController
+  const signal = controller.signal
+
   useEffect(() => {
-    if (!hasIntialData) {
-      dispatch(fetchEnvironments())
+
+    let obj = {
+      limit: 10,
+      limit_mobile: 6,
+      key: undefined,
+      signal
     }
+    if (!hasIntialData) {
+      dispatch(fetchEnvironments(obj))
+    }
+
+    return (() => {
+      controller.abort()
+    })
   }, [])
 
   useEffect(() => {
@@ -129,7 +143,14 @@ const Environments = () => {
   useEffect(() => {
     if (pageBottom && hasMore) {
 
-      dispatch(fetchEnvironments(next_cursor))
+      let obj = {
+        limit: 10,
+        limit_mobile: 6,
+        key: next_cursor,
+        signal
+      }
+
+      dispatch(fetchEnvironments(obj))
 
     }
   }, [pageBottom])

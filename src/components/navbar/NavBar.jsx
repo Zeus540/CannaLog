@@ -40,7 +40,7 @@ transition: background 0.5s ease;
 
 const Inner = styled.div`
 
-padding:15px;
+padding:15px 0px;
 
 margin: 0px auto;
 max-width: 1920px;
@@ -49,8 +49,9 @@ max-width: 1920px;
   align-items: center;
   justify-content: space-between;
  
-  @media (max-width: 768px) {
+  @media (max-width: 1920px) {
    
+padding:15px;
   }
 `;
 
@@ -95,15 +96,14 @@ display: flex;
 align-items: center;
 transition: all 0.5s ease;
 :nth-child(1){
-  transform:${(props) => props.scrollDistance >= 60 ? "translateX(0px)": "translateX(-40px)"};
+
 
 }
 `;
 const DivMenu = styled.div`
 
 transition: all 0.5s ease;
-opacity:${(props) => props.scrollDistance >= 60 ? 100: 0};
-visibility:${(props) => props.scrollDistance >= 60 ? "visible": " collapse"};
+
 
 padding-right: 15px;
 @media (min-width: 1920px) {

@@ -47,15 +47,24 @@ const HomePage = () => {
   const [amount, setAmount] = useState(14)
   const publicPlants = useSelector(selectPublicJournal)
 
- 
+  const controller = new AbortController
+  const signal = controller.signal
+  
   useEffect(() => {
-    dispatch(fetchPublicPlants())
+
+    let obj = {
+      limit: 14,
+      limit_mobile: 6,
+      key: undefined,
+      signal
+    }
+
+    dispatch(fetchPublicPlants(obj))
+
+    return (() => {
+      controller.abort()
+    })
   }, [])
-
-
-  function cleanName(name) {
-    return name.toLowerCase().replaceAll(" ","-").replaceAll("#","")
-  }
 
 
 

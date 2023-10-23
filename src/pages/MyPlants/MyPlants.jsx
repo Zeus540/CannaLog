@@ -39,14 +39,20 @@ const MyPlants = () => {
 
   const myPlants = useSelector(selectMyPlants)
 
+  const controller = new AbortController
+  const signal = controller.signal
 
   useEffect(() => {
 
-    const controller = new AbortController
-    const signal = controller.signal
+    let obj = {
+      limit: 14,
+      limit_mobile: 6,
+      key: undefined,
+      signal
+    }
 
     if (!myPlants.hasIntialData) {
-      dispatch(fetchMyPlants())
+      dispatch(fetchMyPlants(obj))
     }
     return (() => {
       controller.abort()
@@ -75,12 +81,15 @@ const MyPlants = () => {
 
 
   useEffect(() => {
-    if (pageBottom) {
+    if (pageBottom && myPlants.hasMore) {
 
-      if (myPlants.hasMore) {
-
-        dispatch(fetchMyPlants(myPlants.next_cursor))
+      let obj = {
+        limit: 14,
+        limit_mobile: 6,
+        key: myPlants.next_cursor,
+        signal
       }
+      dispatch(fetchMyPlants(obj))
 
     }
   }, [pageBottom])

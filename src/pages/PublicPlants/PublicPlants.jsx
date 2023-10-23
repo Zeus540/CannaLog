@@ -1,7 +1,7 @@
-import React, { useEffect,useState  } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd,} from '../../utils/global_styles'
+import { Holder, Root, Heading, FlexRowEnd, } from '../../utils/global_styles'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectPublicJournal,
@@ -28,22 +28,31 @@ const PublicPlants = () => {
   const [amount, setAmount] = useState(14)
   const dispatch = useDispatch()
 
+  const controller = new AbortController
+  const signal = controller.signal
 
   useEffect(() => {
-    const controller = new AbortController
-    const signal = controller.signal
-  
-    if(isLoggedIn){
-    if(!publicPlants.hasIntialData){
-      dispatch(fetchPublicPlantsSingedIn())
+
+
+    let obj = {
+      limit: 14,
+      limit_mobile: 6,
+      key: undefined,
+      signal
     }
-    }else{
-      if(!publicPlants.hasIntialData){
-        dispatch(fetchPublicPlants())
+
+    if (isLoggedIn) {
+      if (!publicPlants.hasIntialData) {
+
+        dispatch(fetchPublicPlantsSingedIn(obj))
+      }
+    } else {
+      if (!publicPlants.hasIntialData) {
+        dispatch(fetchPublicPlants(obj))
       }
     }
- 
-    return(()=>{
+
+    return (() => {
       controller.abort()
     })
   }, [isLoggedIn]);
@@ -70,75 +79,79 @@ const PublicPlants = () => {
 
 
   useEffect(() => {
-    if (pageBottom) {
+    if (pageBottom && publicPlants.hasMore) {
 
-      if (publicPlants.hasMore) {
-
-        dispatch(fetchPublicPlants(publicPlants.next_cursor))
-      }
-
+        let obj = {
+          limit: 14,
+          limit_mobile: 6,
+          key: publicPlants.next_cursor,
+          signal
+        }
+        dispatch(fetchPublicPlants(obj))
+    
     }
+
   }, [pageBottom])
 
   return (
 
-  
-        <Root
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-          exit={{ opacity: 0 }}
-        >
-         
-          <Holder>
-          <FlexRowEnd>
-               {publicPlants.hasIntialData ?
-              <Heading
-              >
-                Public Plants
-              </Heading>
-                  :
-                  <Blank w="100px" h='30px'/>
-              }
-            
-          </FlexRowEnd>
-          <EnviromentHolder>
+
+    <Root
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      exit={{ opacity: 0 }}
+    >
+
+      <Holder>
+        <FlexRowEnd>
+          {publicPlants.hasIntialData ?
+            <Heading
+            >
+              Public Plants
+            </Heading>
+            :
+            <Blank w="100px" h='30px' />
+          }
+
+        </FlexRowEnd>
+        <EnviromentHolder>
           {publicPlants.hasIntialData && <>
-              {publicPlants.plants?.map((p, index) => {
-                  return (
-                    <>
-                    <PlantCardPublic 
-                      key={index}
-                      length={publicPlants.plants.length}
-                      index={index}
-                      data={p}
-                      cover_thumbnail={p?.cover_thumbnail}
-                      name={p.name}
-                      environment_type_name={p.environment_type_name}
-                      light_exposure={p.light_exposure}
-                      creation_date={p.creation_date}
-                      last_updated={p.last_updated}/>
-                    </>
-                  )
-              })}
-              </>
-              }
-                  {publicPlants.loading &&
+            {publicPlants.plants?.map((p, index) => {
+              return (
+                <>
+                  <PlantCardPublic
+                    key={index}
+                    length={publicPlants.plants.length}
+                    index={index}
+                    data={p}
+                    cover_thumbnail={p?.cover_thumbnail}
+                    name={p.name}
+                    environment_type_name={p.environment_type_name}
+                    light_exposure={p.light_exposure}
+                    creation_date={p.creation_date}
+                    last_updated={p.last_updated} />
+                </>
+              )
+            })}
+          </>
+          }
+          {publicPlants.loading &&
 
-                  [...Array(amount).keys()]?.map((index) => {
+            [...Array(amount).keys()]?.map((index) => {
 
-                    return (
+              return (
 
-                      <PlantCardSkelton key={index} />
-                    )
-                  })
+                <PlantCardSkelton key={index} />
+              )
+            })
 
-                  }
-            </EnviromentHolder>
+          }
+        </EnviromentHolder>
 
-          </Holder>
-        </Root>
-    
+      </Holder>
+    </Root>
+
   )
 }
 
