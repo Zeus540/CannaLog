@@ -10,7 +10,7 @@ width: 100%;
 `
 const RootInner =  styled(m.div)`
 height:5px;
-// transform-origin: left;
+transform-origin: left;
 background:${(props)=> props.theme.accent}
 `
 
