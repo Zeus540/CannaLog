@@ -15,7 +15,7 @@ const ProtectedRoutes = () => {
     let auth = cookies[0].user == undefined ? false : true
     
     return (
-        auth ?  <Root><Suspense fallback="...loading"><Outlet></Outlet></Suspense></Root> : <Navigate to="/sign-in" state={location.pathname}/>
+        auth ?  <Root><Outlet></Outlet></Root> : <Navigate to="/sign-in" state={location.pathname}/>
     )
 }
 
