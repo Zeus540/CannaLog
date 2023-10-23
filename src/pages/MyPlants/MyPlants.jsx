@@ -113,6 +113,7 @@ const MyPlants = () => {
       transition={{ duration: 0.25 }}
       exit={{ opacity: 0 }}
     >
+      <Suspense fallback="...Loading">
       {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
       <Holder>
         <FlexRowEnd
@@ -164,6 +165,7 @@ const MyPlants = () => {
 
 
       </Holder>
+      </Suspense>
     </Root>
 
   )
