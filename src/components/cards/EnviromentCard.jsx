@@ -6,7 +6,7 @@ import {
   TextButton,
   TextButtonSvg,
   TextButtonSvgDelete,
-  Button,
+  StyledButton,
   ButtonText
  } from '../../utils/global_styles'
 import { 

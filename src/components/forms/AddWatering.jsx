@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
-import { Button } from '../../utils/global_styles';
+import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, ButtonHolder, InputFull, Item, NutrientHolcer, Input, InputHolder } from './Form_styles'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -14,7 +14,7 @@ import { useSnackbar } from 'notistack';
 import axios from '../../lib/axios';
 
 
-const AddWatering = ({ plant, modalType, openModal, data }) => {
+const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmitting}) => {
     const [nutrientsTypes, setNutrientsTypes] = useState([]);
     const [measurementUnits, setMeasurementUnits] = useState([]);
 
@@ -75,16 +75,15 @@ const AddWatering = ({ plant, modalType, openModal, data }) => {
         values.creation_date = date
     }
 
-    const handleAction = async (values, setSubmitting) => {
-
+    const handleAction = async (values, isSubmitting) => {
+        setIsSubmitting(true)
         values.nutrient_list = nutrientsListData
-        console.log("handleAction", values)
-         setSubmitting(true)
-
+     
          let res = await  dispatch(takeAction(values))
          if (res.payload.affectedRows > 0) {
-             openModal(modalType)
-           setSubmitting(false)
+            setModalOpen(false)
+            setIsSubmitting(false)
+
          }
 
     }
@@ -114,13 +113,13 @@ const AddWatering = ({ plant, modalType, openModal, data }) => {
             <Formik
                 initialValues={intialValues}
                 validationSchema={AddWateringSchema}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={(values,isSubmitting ) => {
                     setTimeout(() => {
-                        handleAction(values, setSubmitting)
+                        handleAction(values, isSubmitting)
                     }, 400);
                 }}
             >
-                {({ isSubmitting, handleBlur, handleChange, values,setFieldValue }) => (
+                {({ handleBlur, handleChange, values,setFieldValue }) => (
                     <FormHolder>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <StyledDateTimePicker
@@ -223,9 +222,9 @@ type='number'
                         })}
 
                         <ButtonHolder>
-                            <Button type="submit" >
+                            <StyledButton type="submit" >
                                 Submit
-                            </Button>
+                            </StyledButton>
                         </ButtonHolder>
 
                     </FormHolder>

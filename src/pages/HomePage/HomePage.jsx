@@ -31,14 +31,14 @@ import {
   SectionInnerTop,
   DiaryHolder,
 } from './HomePage_styles'
-import { Button, ButtonText } from '../../utils/global_styles';
+import { StyledButton, ButtonText } from '../../utils/global_styles';
 import { useSelector } from 'react-redux';
 import { selectPublicJournal } from '../../features'
 import { useDispatch } from 'react-redux';
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
 import WaveHeading from '../../components/Headings/WaveHeading';
 import { useNavigate } from 'react-router-dom';
-import PlantCardPublic from '../../components/cards/PlantCardPublic';
+import PlantCard from '../../components/cards/PlantCard';
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton';
 const HomePage = () => {
 
@@ -85,7 +85,7 @@ const HomePage = () => {
                 <p>Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. <HeroTextExtra>Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</HeroTextExtra></p>
                
                 <Link to="/sign-up">
-                <Button><ButtonText>Sign Up Now</ButtonText></Button>
+                <StyledButton><ButtonText>Sign Up Now</ButtonText></StyledButton>
               </Link>
               </HeroText>
 
@@ -114,7 +114,7 @@ const HomePage = () => {
                 {publicPlants.plants?.map((p, index) => {
                   if (index < 6) {
                     return (
-                      <PlantCardPublic
+                      <PlantCard
                       key={index}
                       length={publicPlants.plants.length}
                       index={index}
@@ -199,11 +199,11 @@ const HomePage = () => {
               <Li>3 Grow Journals</Li>
               {/* <li>Limited Support</li> */}
             </Ul>
-            <Button>
+            <StyledButton>
               <Link to="/sign-up">
                 Get Started
               </Link>
-            </Button>
+            </StyledButton>
           </PricingItem>
           <PricingItem >
             <PricingItemHeading>Premium</PricingItemHeading>
@@ -212,11 +212,11 @@ const HomePage = () => {
               <Li>Unlimited Grow Journals</Li>
               {/* <li>Premium Support</li> */}
             </Ul>
-            <Button>
+            <StyledButton>
               <Link to="/">
                 Coming Soon
               </Link>
-            </Button>
+            </StyledButton>
           </PricingItem>
         </SectionInner>
       </PricingSection>

@@ -3,7 +3,7 @@ import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useParams } from 'react-router-dom'
 import { ThreeDots } from 'react-loader-spinner'
-import { Button } from '../../utils/global_styles'
+import { StyledButton } from '../../utils/global_styles'
 import { Input, StyledDateTimePicker } from './Form_styles'
 import styled from 'styled-components'
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -26,49 +26,51 @@ object-fit: contain;
 
 `
 
-function UploadImage({ modalType, openModal, data, plant }) {
+function UploadImage({ modalType, openModal, data, plant ,setModalOpen ,setIsSubmitting }) {
   const [loading, setLoading] = useState(false)
   const [uploadDate, setUploadDate] = useState(format(new Date(),'yyyy-MM-dd HH:mm:ss'))
   const [imagePreview, setImagePreview] = useState(null);
   const params = useParams()
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState(undefined)
   const { enqueueSnackbar } = useSnackbar()
 
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   
   const handleSubmit = (e) => {
-    setLoading(true)
-    e.preventDefault()
+if(image !== undefined){
+  setIsSubmitting(true)
+  e.preventDefault()
+
+  let formData = {
+    file:image,
+    plant_id:params.plant_id,
+    creation_date:uploadDate
+  }
 
 
-
-    let formData = {
-      file:image,
-      plant_id:params.plant_id,
-      creation_date:uploadDate
-    }
-
-
-    axios.post(`${BASE_URL_PROD}/plants/take_action/${4}`, formData,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data', // Important for sending form data
-      },
+  axios.post(`${BASE_URL_PROD}/plants/take_action/${4}`, formData,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data', // Important for sending form data
+    },
+  })
+    .then((response) => {
+      if (response.status == 200) {
+        setModalOpen(false)
+        setIsSubmitting(false)
+        enqueueSnackbar(`Image Uploaded`, { variant: 'success' })
+      }
     })
-      .then((response) => {
-        if (response.status == 200) {
-          openModal(modalType)
-          enqueueSnackbar(`Image Uploaded`, { variant: 'success' })
-        }
-      })
-      .catch((err) => {
-     
-        enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
-      })
-      .finally((err) => {
-        setLoading(false)
-      })
+    .catch((err) => {
+   
+      enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+    })
+    .finally((err) => {
+      setIsSubmitting(false)
 
+    })
+
+}
   }
 
   const handleChange = (e, type) => {
@@ -94,7 +96,7 @@ function UploadImage({ modalType, openModal, data, plant }) {
 
   return (
     <form  onSubmit={(e) => { handleSubmit(e) }}>
-  {!loading && <>
+
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StyledDateTimePicker
           name="creation_date"
@@ -112,13 +114,10 @@ function UploadImage({ modalType, openModal, data, plant }) {
 
         />
       )}
-      <Input type='file' name="file" onChange={(e) => { handleChange(e, "file") }} />
-      </> 
-}
+      <Input type='file' name="file" required onChange={(e) => { handleChange(e, "file") }} />
+
       <ActionHolder>
-        {!loading ? 
-        <Button >Submit</Button> : 
-        <FormLoader/>}
+        <StyledButton >Submit</StyledButton> 
       </ActionHolder>
     </form>
   )

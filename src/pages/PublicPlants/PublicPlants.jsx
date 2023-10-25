@@ -9,7 +9,7 @@ import {
   fetchPublicPlants,
   fetchPublicPlantsSingedIn
 } from '../../features'
-import PlantCardPublic from '../../components/cards/PlantCardPublic'
+import PlantCard from '../../components/cards/PlantCard'
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 import Blank from '../../components/skeleton/Blank'
 
@@ -120,17 +120,9 @@ const PublicPlants = () => {
             {publicPlants.plants?.map((p, index) => {
               return (
                 <>
-                  <PlantCardPublic
+                  <PlantCard
                     key={index}
-                    length={publicPlants.plants.length}
-                    index={index}
-                    data={p}
-                    cover_thumbnail={p?.cover_thumbnail}
-                    name={p.name}
-                    environment_type_name={p.environment_type_name}
-                    light_exposure={p.light_exposure}
-                    creation_date={p.creation_date}
-                    last_updated={p.last_updated} />
+                    data={p}/>
                 </>
               )
             })}

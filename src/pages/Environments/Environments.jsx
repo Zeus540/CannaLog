@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
+import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
@@ -200,7 +200,7 @@ const Environments = () => {
           }
 
           {hasIntialData ? 
-          <Button onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd />Environemt</ButtonText></Button>
+          <StyledButton onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd />Environemt</ButtonText></StyledButton>
           : 
           <Blank w="150px" h='40px' />
           }

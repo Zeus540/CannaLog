@@ -2,7 +2,7 @@ import React, { useEffect, useState,useRef } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
-import { Button } from '../../utils/global_styles';
+import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive } from './Form_styles'
 import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -156,9 +156,9 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
 }
                         <ButtonHolder>
                         {!isSubmitting ? 
-                          <Button type="submit" >
+                          <StyledButton type="submit" >
                           Submit
-                      </Button>
+                      </StyledButton>
                       : 
           <FormLoader msg="Adding Plant"/>
         }

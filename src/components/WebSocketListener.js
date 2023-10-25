@@ -21,9 +21,8 @@ const WebSocketListener = () => {
 
     function playAudio(url) {
       const audio = new Audio(url);
-      audio.preload = "auto"; // Preload the audio
+      audio.preload = "auto"; 
       audio.play().catch(error => {
-        // Handle playback error, e.g., due to autoplay restrictions
         console.error("Error playing audio:", error);
       });
     }

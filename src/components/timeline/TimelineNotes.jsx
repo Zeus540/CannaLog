@@ -169,11 +169,8 @@ svg{
 
 `
 
-const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
+const TimelineNotes = ({ plant, activeWeek,openModal, title,publicPage }) => {
   const [notes, setNotes] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalData, setModalData] = useState([])
-  const [modalType, setModalType] = useState('')
   const params = useParams()
   const socket = useSocket()
 
@@ -234,18 +231,7 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
     setter(localizedData.sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
   }
 
-  const openModal = (type, data) => {
-    console.log("openModal", type)
-    switch (type) {
 
-      case "deleteNote":
-        setModalType("deleteNote")
-        setModalData(data)
-        setModalOpen(!modalOpen)
-        break;
-
-    }
-  }
 
 
 
@@ -255,7 +241,7 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
         <Root>
           {/* <Heading>{title}</Heading> */}
           <RootInner>
-            {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
+           
             <ItemInnerUpper>
                          <ItemInnerUpperDiv></ItemInnerUpperDiv>
                          <ItemInnerUpperHeading>YOUR COMMMENTS</ItemInnerUpperHeading>
@@ -289,9 +275,9 @@ const TimelineNotes = ({ plant, activeWeek, title,publicPage }) => {
              //loop={true}
             >
 
-              {notes?.filter((a) => a.week == activeWeek)?.map((a) => {
+              {notes?.filter((a) => a.week == activeWeek)?.map((a,index) => {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                       <Item >
                          
 

@@ -30,7 +30,6 @@ position: relative;
 }
 `
 export const PlantCardTextInner = styled(m.p)`
-// white-space: nowrap;
 overflow: hidden;
 text-align: left;
 font-size: 12px;
@@ -92,49 +91,38 @@ export const PlantCardTextHolder = styled(m.div)`
 padding-top: 5px;
 z-index: 2;
 width: 100%;
-
 border-radius: 5px;
 bottom: 0;
 display: flex;
-// flex-direction: column;
+flex-direction: column;
 flex-wrap: wrap;
-// align-items: end;
-//display:none;
-`
-export const PlantCardTextHolderTop = styled(m.div)`
-
-z-index: 2;
-width: 100%;
-
-border-radius: 5px;
-top: 0;
-display: flex;
-align-items: start;
-
 `
 
 export const PlantCardText = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
-// width: calc(100% / 2);
 margin: 5px 0px;
 font-size: 12px;
-
 display: flex;
-
 align-items: center;
 flex-direction: row;
 overflow: hidden;
-
 `
+
 export const PlantCardTextTop = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
-
 font-size: 12px;
 justify-content: end;
 display: flex;
 margin-bottom: 10px;
 align-items: end;
 width: 100%;
+svg{
+    font-size: 22px;
+    margin-right: 5px;
+    color: #03A9F4;
+    fill:${(props) => `${props.theme.accent}`};
+   
+}
 `
 export const PlantCardTextTopInner = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
@@ -151,13 +139,8 @@ border-radius: 50%;
 display: flex;
 justify-content: center;
 align-items: center;
-svg{
-    font-size: 22px;
-    margin-right: 5px;
-    color: #03A9F4;
-    fill:${(props) => `${props.theme.accent}`};
-   
-}
+font-size: 20px;
+margin-right: 10px;
 `
 export const PlantCardTextLogoTop = styled(m.div)`
 color:${(props) => `${props.theme.text}`};
@@ -178,31 +161,5 @@ right: 0;
 line-height: 16px;
 div{
     margin-right: 5px;
-}
-`
-
-export const PlantCardTextHeading = styled(m.div)`
-
-// background: ${(props) => `${props.theme.primary}`};
-padding-bottom: 0px;
-overflow: hidden;
-
-
-
-position: relative;
-z-index: 3;
-p{
-    padding: 5px 0px;
-    font-size: 12px;
-    line-height: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    align-items: center;
-    svg{
-        font-size: 18px;
-        margin-right: 10px;
-    }
 }
 `

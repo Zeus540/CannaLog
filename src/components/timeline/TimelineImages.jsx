@@ -310,9 +310,9 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
              //loop={true}
             >
 
-              {images?.filter((a) => a.week == activeWeek)?.map((a) => {
+              {images?.filter((a) => a.week == activeWeek)?.map((a,index) => {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide  key={index}>
 
                     <Item >
                       <ImageItemInner >

@@ -2,8 +2,9 @@ import { Outlet, Navigate,useLocation } from "react-router"
 import { useCookies } from "react-cookie"
 import { Suspense } from "react"
 import styled from 'styled-components';
+import {motion as m } from 'framer-motion'
 
-const Root = styled.div`
+const Root = styled(m.div)`
 background:  ${props => props.theme.secondary};
 min-height:calc(100vh - 180px)
 `;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useRef } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
-import { Button } from '../../utils/global_styles';
+import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, ButtonHolder } from './Form_styles'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -76,9 +76,9 @@ const BaseForm = ({ plant,modalType,openModal,data }) => {
                         </LocalizationProvider>
 
                         <ButtonHolder>
-                            <Button type="submit" >
+                            <StyledButton type="submit" >
                                 Submit
-                            </Button>
+                            </StyledButton>
                         </ButtonHolder>
 
                     </FormHolder>

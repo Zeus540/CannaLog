@@ -8,7 +8,7 @@ import axios from "axios"
 import { Helmet } from "react-helmet";
 import {BASE_URL_PROD} from '../../lib/Constants'
 import { useSnackbar} from 'notistack';
-import {Button} from '../../utils/global_styles'
+import {StyledButton} from '../../utils/global_styles'
 
 const Root = styled.div`
 background:  ${props => props.theme.secondary};
@@ -280,7 +280,7 @@ function Register() {
       </InputHolder>
   
 
-      <Button type="submit">Sign Up</Button>
+      <StyledButton type="submit">Sign Up</StyledButton>
       </Form>
         )}
     </Formik>

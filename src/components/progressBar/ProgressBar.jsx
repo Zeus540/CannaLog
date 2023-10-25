@@ -7,6 +7,7 @@ const Root =  styled.div`
 height: 5px;
 position: fixed;
 width: 100%;
+z-index:51;
 `
 const RootInner =  styled(m.div)`
 height:5px;

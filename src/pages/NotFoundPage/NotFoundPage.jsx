@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import {motion as m} from 'framer-motion'
-import {Button } from '../../utils/global_styles'
+import {StyledButton } from '../../utils/global_styles'
 
 
 const Root = styled.div`
@@ -87,7 +87,7 @@ const NotFoundPage = () => {
         <Heading>404</Heading>
         <HeadingSmall>Oops! You seem lost</HeadingSmall>
 
-        <MenuLink to="/"><Button>GO HOME</Button></MenuLink>
+        <MenuLink to="/"><StyledButton>GO HOME</StyledButton></MenuLink>
         
         </TextHolder>
         </Inner>

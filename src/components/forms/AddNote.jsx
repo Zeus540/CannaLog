@@ -2,7 +2,7 @@ import React, { useEffect, useState,useRef } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
-import { Button } from '../../utils/global_styles';
+import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive,StyledTextareaAutosize } from './Form_styles'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -12,7 +12,7 @@ import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { fetchStages,takeAction } from '../../features';
 import { useSnackbar } from 'notistack';
 
-const AddNote = ({ plant,modalType,openModal,data }) => {
+const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
 
     const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar()
@@ -52,15 +52,16 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
     }
 
     const handleAction = async(values, setSubmitting) => {
-      
+        setIsSubmitting(true)
         setSubmitting(true)
 
         dispatch(takeAction(values))
         .then((response)=>{
             if (response.payload.affectedRows > 0) {
-                openModal(modalType)
+                setIsSubmitting(false)
+                setModalOpen(false)
                 setSubmitting(false)
-                enqueueSnackbar(`Noted Uploaded`, { variant: 'success' })
+                enqueueSnackbar(`Note Uploaded`, { variant: 'success' })
             }
         })
      
@@ -102,9 +103,9 @@ const AddNote = ({ plant,modalType,openModal,data }) => {
                             />
 
                         <ButtonHolder>
-                            <Button type="submit" >
+                            <StyledButton type="submit" >
                                 Submit
-                            </Button>
+                            </StyledButton>
                         </ButtonHolder>
 
                     </FormHolder>

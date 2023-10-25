@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Suspense } from 'react'
 import { lazyWithPreload } from "react-lazy-with-preload";
 import styled from 'styled-components'
-import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd, Button, ButtonText } from '../../utils/global_styles'
+import { AnimatePresence, motion as m } from 'framer-motion'
+import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import {
@@ -114,13 +114,15 @@ const MyPlants = () => {
     }
   }
 
+  
   return (
 
     <Root
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.25 }}
-      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25}}
+      exit={{ opacity: 0, }}
+      
     >
       {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
       <Holder>
@@ -134,7 +136,7 @@ const MyPlants = () => {
             <Blank w="100px" h='30px'/>
           }
           {myPlants.hasIntialData ?
-            <Button onClick={() => { openModal("addPlant") }}><ButtonText><IoMdAdd />Plant</ButtonText></Button>
+            <StyledButton onClick={() => { openModal("addPlant") }}><ButtonText><IoMdAdd />Plant</ButtonText></StyledButton>
             :
             <Blank w="150px" h='40px'  />
           }

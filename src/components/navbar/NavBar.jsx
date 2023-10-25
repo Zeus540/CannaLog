@@ -13,7 +13,6 @@ import { BASE_URL_PROD } from "../../lib/Constants";
 import { useDispatch } from 'react-redux';
 import { BiBell } from "react-icons/bi";
 import { useNotification } from "../../context/NotificationContext";
-import ProgressBar from "../progressBar/ProgressBar";
 import { useSocket } from "../../context/SocketContext";
 import { motion as m, AnimatePresence } from 'framer-motion'
 import { PiPlantLight,PiPlantFill } from "react-icons/pi";
@@ -359,7 +358,7 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
     scrollDistance={scrollDistance}
     sideBar={sideBar}
     >
-      <ProgressBar />
+  
       <Inner scrollDistance={scrollDistance}  >
 
         <Div scrollDistance={scrollDistance}>
@@ -413,7 +412,7 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
       </Inner>
 
       {/* //mobile */}
-      <AnimatePresence mode='wait'>
+      <AnimatePresence >
         {sideBar &&
 
 

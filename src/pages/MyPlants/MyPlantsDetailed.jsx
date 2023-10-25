@@ -55,6 +55,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
+import { AnimatePresence } from 'framer-motion'
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -64,6 +65,7 @@ function MyPlantsDetailed() {
     const [modalData, setModalData] = useState([])
     const [modalType, setModalType] = useState('')
     const [currentStage, setCurrentStage] = useState()
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [activeWeek, setActiveWeek] = useState(undefined)
     const [coverImage, setCoverImage] = useState('')
     const [fullDate, setFullDate] = useState(getCurrentDayMonthYear().fullDate)
@@ -168,6 +170,7 @@ function MyPlantsDetailed() {
         switch (type) {
             case "takeAction":
                 setModalType("takeAction")
+                setIsSubmitting(isSubmitting)
                 setModalData(action)
                 setModalOpen(!modalOpen)
                 break;
@@ -201,10 +204,10 @@ function MyPlantsDetailed() {
 
     return (
         <Root
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.25 }}
-            exit={{ opacity: 0 }}
+            initial={{ translateX: '-100%',opacity: 0 }}
+            animate={{ translateX: '0%',opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            exit={{ translateX: '-100%',opacity: 0 }}
         >
             <ImgHolderTop img={coverImage}>
                 <EditPlant>
@@ -214,9 +217,9 @@ function MyPlantsDetailed() {
                 </EditPlant>
 
                 <ImgHolderTopInfo>
-
-                    {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
-
+                    <AnimatePresence >
+                    {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>}
+                    </AnimatePresence>
                     <ImgHolderTopInfoInner>
 
                         <ImgHolderTopInfoInnerLeft>
@@ -318,7 +321,7 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek} />
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" />
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" openModal={openModal}/>
             <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" />
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} />
 

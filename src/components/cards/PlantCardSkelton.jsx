@@ -34,6 +34,11 @@ const PlantCardSkelton = () => {
     h='20px'
     margin="10px 0px"
     />
+        <Blank
+    w="60%"
+    h='20px'
+    margin="10px 0px"
+    />
       <Blank
     w="50%"
     h='20px'

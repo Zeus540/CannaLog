@@ -38,7 +38,7 @@ import {
 import NavBar from '../components/navbar/NavBar'
 import Footer from '../components/footer/Footer'
 import WebSocketListener from '../components/WebSocketListener';
-
+import ProgressBar from "../components/progressBar/ProgressBar";
 //Utils
 import ProtectedRoutes from '../utils/ProtectedRoutes';
 
@@ -92,15 +92,17 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     
     return (
 
-        <AnimatePresence >
-          
+
+          <Root>
             <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
             <LogoutProvider>
-            <Root onClick={()=> {OffClick()}}>
+        
             <NotificationProvider>
                 <SocketProvider>
-                
-                <NavBar sideBar={sideBar} setSideBar={setSideBar} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
+                <AnimatePresence   >
+                <ProgressBar key="ProgressBar"/>
+                <NavBar key="NavBar" sideBar={sideBar} setSideBar={setSideBar} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
+           
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
@@ -111,7 +113,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                         </Route>
                      
                       
-                            <Route path="/public-plant/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
+                            <Route path="/public-plants/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                             <Route path="/terms" exact element={<Terms />} />
                             <Route path="/cookie-policy" element={<CookiePolicy />} />
                             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -136,16 +138,16 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                       
                         <Route path="*" element={<NotFoundPage />}/>
                     </Routes>
-
-                <Footer />
+                <Footer key="Footer"/>
+                </AnimatePresence>
                 <WebSocketListener/> 
                 </SocketProvider>
                </NotificationProvider>
-            </Root>
+       
             </LogoutProvider>
             </SnackbarProvider>
             
-        </AnimatePresence>
+            </Root>
 
 
     )

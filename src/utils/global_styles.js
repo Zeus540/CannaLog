@@ -54,15 +54,7 @@ margin-bottom: 15px;
 line-height: 20px;
 `
 
-export const Button = styled(m.button)`
-color:  ${props => props.theme.text};
-background:  ${props => props.theme.accent};
-font-size: 16px;
-padding: 8px 20px;
-border-radius: 0px;
-font-weight: bold;
-cursor:pointer;
-`
+
 
 export const TextButton = styled(Link)`
 color:  ${props => props.theme.text};
@@ -126,42 +118,16 @@ border-radius: 5px;
 font-weight: bold;
 cursor:pointer;
 `
-export const ButtonModalOutlined = styled(m.button)`
+export const StyledButton = styled(m.button)`
 color:  ${props => props.theme.text};
-border:  1px solid ${props => props.theme.accent};
+background:  ${props => props.theme.accent};
 font-size: 16px;
-padding:5px 15px;
-border-radius: 5px;
+padding: 8px 20px;
+border-radius: 0px;
 font-weight: bold;
 cursor:pointer;
-margin:0px 10px;
-position: relative;
-&:hover{
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    animation: ${({ theme }) => btnAnimation(theme)} 1s ease-in infinite;
-   
-  }
-
-}
-
-
 `
 
-export const ButtonSvg = styled(m.button)`
-color:  ${props => props.theme.warn};
-font-size: 20px;
-border-radius: 5px;
-font-weight: bold;
-cursor:pointer;
-display: flex;
-opacity:0.8
-`
 
 export const Div = styled(m.div)`
 margin: ${props => props.margin};

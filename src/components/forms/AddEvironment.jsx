@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Formik, } from 'formik';
 import * as Yup from 'yup';
 
-import { Button } from '../../utils/global_styles';
+import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, InputField, InputRangeField, TypeHolder, TypeButton, TypeButtonActive, Label, Error, ButtonHolder, InputFieldGroup,Input, InputFieldG, TypeHolderInner, InputFieldGFlex } from './Form_styles'
 import { fetchEnvironmentTypes, selectEnvironmentsTypes } from '../../features';
 import { useSelector } from 'react-redux';
@@ -186,9 +186,9 @@ const AddEvironment = ({ openModal, modalType, data }) => {
 
 
                     <ButtonHolder>
-                        <Button type="submit" >
+                        <StyledButton type="submit" >
                             Submit
-                        </Button>
+                        </StyledButton>
                     </ButtonHolder>
                 </FormHolder>
             )}

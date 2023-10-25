@@ -12,7 +12,7 @@ import { useSnackbar } from 'notistack';
 import { auth } from '../../features';
 import { useDispatch } from 'react-redux';
 import { getCookieValue } from '../../helpers/getCookieValue';
-import {Button} from '../../utils/global_styles'
+import {StyledButton} from '../../utils/global_styles'
 import { useLocation } from 'react-router-dom';
 
 const Root = styled.div`
@@ -221,7 +221,7 @@ function Login() {
                 {errors.password && touched.password ? (<ErrorText>{errors.password}</ErrorText>) : null}
               </InputGrp>
 
-              <Button>Login</Button>
+              <StyledButton>Login</StyledButton>
 
               <Help>Need a account?     <MenuLink to="/sign-up">Sign Up Here</MenuLink> </Help>
             </Form>
