@@ -22,7 +22,7 @@ import Register from '../pages/Register/Register'
 import Environments from '../pages/Environments/Environments'
 import MyPlants from '../pages/MyPlants/MyPlants'
 import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
-import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
+//import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
 
 //Context
 import { SocketProvider } from '../context/SocketContext';
@@ -63,7 +63,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     //const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
     //const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
     const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
-    //const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
+    const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
     //const Environments = lazy(()=>import('../pages/Environments/Environments'))
     const Terms = lazy(()=>import('../pages/Terms/Terms'))
     //const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
