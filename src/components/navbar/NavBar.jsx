@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/leaf.png";
-import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser, logout } from "../../features";
@@ -16,7 +15,7 @@ import { useNotification } from "../../context/NotificationContext";
 import { useSocket } from "../../context/SocketContext";
 import { motion as m, AnimatePresence } from 'framer-motion'
 import { PiPlantLight, PiPlantFill } from "react-icons/pi";
-import { BsCircleFill, BsPeople } from "react-icons/bs";
+import { BsPeople } from "react-icons/bs";
 import { GiGreenhouse } from 'react-icons/gi';
 import { RiMenu2Fill } from 'react-icons/ri'
 
@@ -131,7 +130,7 @@ const LinkHolderMobile = styled(m.div)`
   }
 
 `;
-const MenuLink = styled(NavLink)`
+const StyledLink = styled(NavLink)`
   margin: 0px 0px;
   padding: 16px 10px;
   color: ${props => props.theme.text};
@@ -175,20 +174,7 @@ margin-right:10px;
 fill: ${props => props.theme.accent};
 `;
 
-const MenuLinkMobile = styled(NavLink)`
-  margin: 0px 0px;
-  padding: 15px 15px;
 
-display:block;
-  text-decoration: none;
-  background:transparent
-
-
-  &:hover {
-    border-bottom: 4px solid ${props => props.theme.accent};
-  }
-
-`;
 const MenuLinklogo = styled(NavLink)`
   margin: 0px 0px;
   text-decoration: none!important;
@@ -211,11 +197,7 @@ svg{
 }
 `;
 
-const FlexLink = styled.div`
-  display: flex;
-  align-items: center;
 
-`;
 const FlexLinkText = styled.p`
 display: flex;
 align-items: center;
@@ -268,9 +250,7 @@ cursor: pointer;
 }
 `;
 
-const StyledLink = styled(Link)`
-display: flex;
-`;
+
 
 const ThemeSvg = styled.div`
 display: flex;
@@ -424,9 +404,9 @@ const NavBar = ({ toggleTheme, themeType, }) => {
 
         {!isLoggedIn && (
           <MenuLinkLeft>
-            <MenuLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</MenuLink>
-            <MenuLink to="/sign-up">
-              <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</MenuLink>
+            <StyledLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</StyledLink>
+            <StyledLink to="/sign-up">
+              <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</StyledLink>
           </MenuLinkLeft>
         )}
       </Inner>
@@ -447,50 +427,50 @@ const NavBar = ({ toggleTheme, themeType, }) => {
 
 
             {!isLoggedIn && <>
-              <MenuLinkMobile to="/public-plants" onClick={() => { setSideBarOpen(false); }}>
-                <FlexLink>
+              <StyledLink to="/public-plants" onClick={() => { setSideBarOpen(false); }}>
 
-                  <FlexLinkText> <PiPlantLight />  Public Plants</FlexLinkText>
-                </FlexLink>
-              </MenuLinkMobile>
+
+                <FlexLinkText> <PiPlantLight />  Public Plants</FlexLinkText>
+
+              </StyledLink>
             </>}
             {isLoggedIn &&
               <>
                 <div>
 
-                  <MenuLinkMobile to="/" onClick={() => { setSideBarOpen(false); }}>
+                  <StyledLink to="/" onClick={() => { setSideBarOpen(false); }}>
 
 
                     <FlexLinkText>  <PiPlantLight /> Public Plants</FlexLinkText>
 
-                  </MenuLinkMobile>
+                  </StyledLink>
 
-                  <MenuLinkMobile to="/my-environments" onClick={() => { setSideBarOpen(false); }}>
-                    <FlexLink>
+                  <StyledLink to="/my-environments" onClick={() => { setSideBarOpen(false); }}>
 
-                      <FlexLinkText> <GiGreenhouse /> My Environments</FlexLinkText>
-                    </FlexLink>
-                  </MenuLinkMobile>
-                  <MenuLinkMobile to="/my-plants" onClick={() => { setSideBarOpen(false); }}>
-                    <FlexLink>
 
-                      <FlexLinkText><PiPlantFill /> My Plants</FlexLinkText>
-                    </FlexLink>
-                  </MenuLinkMobile>
+                    <FlexLinkText> <GiGreenhouse /> My Environments</FlexLinkText>
 
-                  <MenuLinkMobile to="/growers" onClick={() => { setSideBarOpen(false); }}>
-                    <FlexLink>
+                  </StyledLink>
+                  <StyledLink to="/my-plants" onClick={() => { setSideBarOpen(false); }}>
 
-                      <FlexLinkText><BsPeople /> Growers</FlexLinkText>
-                    </FlexLink>
-                  </MenuLinkMobile>
 
-                  <MenuLinkMobile to="/notifications" onClick={() => { setSideBarOpen(false); }}>
-                    <FlexLink>
+                    <FlexLinkText><PiPlantFill /> My Plants</FlexLinkText>
 
-                      <FlexLinkText><BiBell /> Notifications</FlexLinkText>
-                    </FlexLink>
-                  </MenuLinkMobile>
+                  </StyledLink>
+
+                  <StyledLink to="/growers" onClick={() => { setSideBarOpen(false); }}>
+
+
+                    <FlexLinkText><BsPeople /> Growers</FlexLinkText>
+
+                  </StyledLink>
+
+                  <StyledLink to="/notifications" onClick={() => { setSideBarOpen(false); }}>
+
+
+                    <FlexLinkText><BiBell /> Notifications</FlexLinkText>
+
+                  </StyledLink>
                 </div>
 
                 <div>
@@ -521,19 +501,19 @@ const NavBar = ({ toggleTheme, themeType, }) => {
                   {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><FaSun /> Light Mode</ThemeSvg>}
                 </ThemeToggleHolderBottom>
 
-                <MenuLinkMobile to="/sign-in" onClick={() => { setSideBarOpen(false); }}>
-                  <FlexLink>
-                    <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>
-                    <FlexLinkText>Sign In</FlexLinkText>
-                  </FlexLink>
-                </MenuLinkMobile>
+                <StyledLink to="/sign-in" onClick={() => { setSideBarOpen(false); }}>
 
-                <MenuLinkMobile to="/sign-up" onClick={() => { setSideBarOpen(false); }}>
-                  <FlexLink>
-                    <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>
-                    <FlexLinkText>Sign Up</FlexLinkText>
-                  </FlexLink>
-                </MenuLinkMobile>
+                  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>
+                  <FlexLinkText>Sign In</FlexLinkText>
+
+                </StyledLink>
+
+                <StyledLink to="/sign-up" onClick={() => { setSideBarOpen(false); }}>
+
+                  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>
+                  <FlexLinkText>Sign Up</FlexLinkText>
+
+                </StyledLink>
               </LinkHolderMLogin>
 
             }

@@ -18,10 +18,9 @@ import { IoWaterOutline } from 'react-icons/io5';
 import { BsPersonCircle } from "react-icons/bs";
 import { GiGreenhouse } from 'react-icons/gi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { getElapsedDays } from '../../helpers/getElapsedDays';
-import { useLocation } from 'react-router-dom';
 
 const PlantCard = ({ data, openModal,homePage }) => {
   const [path, setPath] = useState("")

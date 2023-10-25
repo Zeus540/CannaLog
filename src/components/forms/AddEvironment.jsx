@@ -5,9 +5,8 @@ import * as Yup from 'yup';
 import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, InputField, InputRangeField, TypeHolder, TypeButton, TypeButtonActive, Label, Error, ButtonHolder, InputFieldGroup,Input, InputFieldG, TypeHolderInner, InputFieldGFlex } from './Form_styles'
 import { fetchEnvironmentTypes, selectEnvironmentsTypes } from '../../features';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { addEnvironment, editEnvironment } from '../../features';
-import { useDispatch } from 'react-redux';
 
 const AddEnvironmentSchema = Yup.object().shape({
     environment_name: Yup.string()

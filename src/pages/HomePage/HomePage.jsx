@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import { useSelector,useDispatch } from 'react-redux';
 import {
   Root,
   HeroBanner,
@@ -32,12 +33,9 @@ import {
   DiaryHolder,
 } from './HomePage_styles'
 import { StyledButton, ButtonText } from '../../utils/global_styles';
-import { useSelector } from 'react-redux';
 import { selectPublicJournal } from '../../features'
-import { useDispatch } from 'react-redux';
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
 import WaveHeading from '../../components/Headings/WaveHeading';
-import { useNavigate } from 'react-router-dom';
 import PlantCard from '../../components/cards/PlantCard';
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton';
 
