@@ -14,6 +14,17 @@ export default defineConfig({
   })],
 
   build: {
-    sourcemap: true
-  }
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // Specify how to manually split chunks
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
+
 })
