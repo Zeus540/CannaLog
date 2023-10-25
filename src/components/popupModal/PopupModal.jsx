@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Root, Modal, ModalClose, ModalCloseHolder, ModalContent, Warn, ModalContentText } from './PopupModal_styles'
 import { VscChromeClose } from "react-icons/vsc";
 import { StyledButton } from '../../utils/global_styles';
@@ -13,7 +13,7 @@ import UploadImage from '../forms/UploadImage';
 import AddWatering from '../forms/AddWatering';
 import FormLoader from '../loader/FormLoader';
 import { AnimatePresence } from 'framer-motion';
-
+import { createPortal } from 'react-dom';
 const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmitting,isSubmitting }) => {
 
   const dispatch = useDispatch()
@@ -34,8 +34,15 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
     openModal(modalType)
   }
   
-  
-  return (
+ useEffect(() => {
+  document.body.style.overflow = 'hidden';
+ 
+   return () => {
+    document.body.style.overflow = 'unset';
+   }
+ }, [])
+ 
+  return createPortal(
 
     <Root
     initial={{ opacity: 0 }}
@@ -168,7 +175,7 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
 </AnimatePresence>
     </Root>
   
-  )
+  ,modal)
 }
 
 export default PopupModal

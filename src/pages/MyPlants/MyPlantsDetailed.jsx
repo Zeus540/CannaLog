@@ -112,8 +112,9 @@ function MyPlantsDetailed() {
             let response = await axios.post(`${BASE_URL_PROD}/plants/${plant_id}`)
 
             if (response.status == 200) {
-                await setPlant(response.data)
                 await setCoverImage(response.data.cover_img)
+                await setPlant(response.data)
+      
                 await getEnvironment(environment_id)
                 await getStage(plant_id)
                 await dispatch(fetchPlantActionTypes())
@@ -204,10 +205,10 @@ function MyPlantsDetailed() {
 
     return (
         <Root
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.25 }}
-        exit={{ opacity: 0 }}
+        initial={{ translateX: '-100%',opacity: 0 }}
+        animate={{ translateX: '0%',opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        exit={{ translateX: '-100%',opacity: 0 }}
         >
             <ImgHolderTop img={coverImage}>
                 <EditPlant>

@@ -195,10 +195,10 @@ function PublicPlantDetailed() {
 
     return (
         <Root
-        initial={{ translateX: '-100%', }}
-        animate={{ translateX: '0%', }}
+        initial={{ translateX: '-100%',opacity: 0 }}
+        animate={{ translateX: '0%',opacity: 1 }}
         transition={{ duration: 0.5 }}
-        exit={{ translateX: '-100%', }}
+        exit={{ translateX: '-100%',opacity: 0 }}
         >
             <ImgHolderTop img={coverImage}>
 

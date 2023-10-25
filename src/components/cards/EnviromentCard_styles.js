@@ -24,7 +24,7 @@ cursor:pointer;
 
 export const EnviromentHolderText = styled(m.p)`
 color:  ${props => props.theme.text};
-font-size: 12px;
+font-size: 16px;
 text-align:${props => props.talign};
 display: flex;
 justify-content: end;
@@ -86,8 +86,8 @@ export const DropDownSvgHolder = styled(m.div)`
 background:  ${props => props.theme.accent};
 display: flex;
 align-items: center;
-font-size: 22px;
-padding: 10px 10px;
+font-size: 20px;
+padding: 15px;
 svg{
     color:  ${props => props.theme.primary};
 }

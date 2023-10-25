@@ -71,35 +71,33 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
           modules={[Pagination]}
           initialSlide={4}
           updateOnWindowResize={true}
-
-          spaceBetween={weeks.length > 1 ? 20 : 0}
-          slidesPerView={4}
+          spaceBetween={20}
           activeindex={activeWeek}
           breakpoints={{
 
             320: {
               slidesPerView: 3,
-              spaceBetween: weeks.length > 1 ? 20 : 0,
+           
             },
             375: {
               slidesPerView: 3,
-              spaceBetween: weeks.length > 1 ? 20 : 0,
+         
             },
             425: {
-              slidesPerView: 4,
-              spaceBetween: weeks.length > 1 ? 20 : 0,
+              slidesPerView: 3,
+           
             },
             600: {
               slidesPerView: 5,
-              spaceBetween: weeks.length > 1 ? 20 : 0,
+            
             },
             768: {
               slidesPerView: 7,
-              spaceBetween: weeks.length > 1 ? 20 : 0,
+             
             },
             1024: {
               slidesPerView: 7,
-              spaceBetween: weeks.length > 1 ? 20 : 0,
+             
             },
           }}
 
