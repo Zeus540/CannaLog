@@ -16,7 +16,7 @@ import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import Growers from '../pages/Growers/Growers';
 import Notifications from '../pages/Notifications/Notifications';
-import PublicPlants from '../pages/PublicPlants/PublicPlants';
+//import PublicPlants from '../pages/PublicPlants/PublicPlants';
 import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
 import Environments from '../pages/Environments/Environments'
@@ -62,7 +62,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     //const Growers = lazy(()=>import('../pages/Growers/Growers'))
     //const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
     //const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
-    //const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
+    const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
     //const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
     //const Environments = lazy(()=>import('../pages/Environments/Environments'))
     const Terms = lazy(()=>import('../pages/Terms/Terms'))
