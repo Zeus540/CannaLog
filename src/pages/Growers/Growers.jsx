@@ -66,7 +66,7 @@ const socket = useSocket()
     <Root
     initial={{ opacity: 0}}
     animate={{ opacity: 1 }}
-    transition={{ duration: 0.25 }}
+    transition={{ duration: 0.10 }}
     exit={{ opacity: 0 }}
     >
 <Holder>

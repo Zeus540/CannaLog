@@ -47,7 +47,7 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
     <Root
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    transition={{ duration: 0.25 }}
+    transition={{ duration: 0.10 }}
     exit={{ opacity: 0 }}
     key="popupholder"
     >
@@ -57,7 +57,7 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
       <Modal
       initial={{ scale:0.4,opacity: 0 }}
       animate={{ scale:1,opacity: 1 }}
-      transition={{ duration: 0.15 }}
+      transition={{ duration: 0.10 }}
       exit={{ scale:0.4 }}
       key="popup"
       >

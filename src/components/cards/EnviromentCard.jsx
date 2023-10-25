@@ -91,8 +91,8 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
         <EnviromentCardTextHiddenHolder
         initial={{ transform: "translateY(-100%)", visibility: "none", opacity:0 }}
         animate={{ transform: "translateY(0%)",visibility: "visible", opacity:1 }}
-        transition={{ duration: 0.25 }}
-        exit={{visibility: "none" , transform: "translateY(-100%)", opacity:0 , transition: { duration: 0.25 } }}
+        transition={{ duration: 0.10 }}
+        exit={{visibility: "none" , transform: "translateY(-100%)", opacity:0 , transition: { duration: 0.10 } }}
          readMore={readMore}
          >
          

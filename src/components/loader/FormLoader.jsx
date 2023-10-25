@@ -23,7 +23,7 @@ const FormLoader = ({msg}) => {
         <LoaderHolder
         initial={{ opacity: 1 }}
         animate={{ scale:1, }}
-        transition={{ duration: 0.25 }}
+        transition={{ duration: 0.10 }}
         exit={{scale:0}}
         >
       <TailSpin

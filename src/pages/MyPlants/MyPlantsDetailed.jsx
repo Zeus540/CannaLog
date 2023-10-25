@@ -207,10 +207,10 @@ function MyPlantsDetailed() {
 
     return (
         <Root
-        initial={{ translateX: '-100%',opacity: 0 }}
+        initial={{ translateX: '-100%',opacity: 1 }}
         animate={{ translateX: '0%',opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        exit={{ translateX: '-100%',opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        exit={{ translateX: '-100%',opacity: 1 }}
         >
             <ImgHolderTop img={coverImage}>
                 <EditPlant>

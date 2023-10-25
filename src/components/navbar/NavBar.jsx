@@ -421,7 +421,7 @@ const NavBar = ({ toggleTheme, themeType, }) => {
             ref={sideBar}
             initial={{ transform: "translateX(100%)" }}
             animate={{ transform: "translateX(0%)" }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.10 }}
             exit={{ transform: "translateX(100%)" }}>
 
 
