@@ -167,7 +167,7 @@ const Footer = () => {
       
   
       </SectionHolder>     
-        <LegalText>&copy; {new Date().getFullYear()} Copyright - <span><sub>CANNA</sub>LOG</span> 	&#174;</LegalText>
+        <LegalText>&copy; 2023 Copyright - <span><sub>CANNA</sub>LOG</span> 	&#174;</LegalText>
     </Inner>
     </Root>
   )

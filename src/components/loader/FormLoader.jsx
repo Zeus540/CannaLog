@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { TailSpin } from 'react-loader-spinner'
 import {motion as m} from 'framer-motion'
-import { AnimatePresence } from 'framer-motion'
 
 const LoaderHolder = styled(m.div)`
 

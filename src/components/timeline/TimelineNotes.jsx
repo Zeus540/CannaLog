@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Heading } from '../../utils/global_styles'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizedDate, getWeekandDay } from '../../helpers/getLocalizeDate'
-import { format, startOfWeek, addWeeks, differenceInWeeks } from 'date-fns';
+import {startOfWeek, differenceInWeeks } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { ItemHodler } from '../forms/Form_styles'
-import PopupModal from '../popupModal/PopupModal'
 import { useSocket } from '../../context/SocketContext'
 import { useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide, } from 'swiper/react';

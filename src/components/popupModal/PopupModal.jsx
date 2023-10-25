@@ -2,7 +2,6 @@ import React,{useEffect} from 'react'
 import { Root, Modal, ModalClose, ModalCloseHolder, ModalContent, Warn, ModalContentText } from './PopupModal_styles'
 import { VscChromeClose } from "react-icons/vsc";
 import { StyledButton } from '../../utils/global_styles';
-import axios from '../../lib/axios';
 import { deleteEnvironment, deletePlant,deleteAction } from '../../features';
 import { useDispatch } from 'react-redux';
 import AddEvironment from '../forms/AddEvironment';

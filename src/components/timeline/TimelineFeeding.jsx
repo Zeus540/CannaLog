@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
-import { Heading } from '../../utils/global_styles'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizedDate, getWeekandDay } from '../../helpers/getLocalizeDate'
-import { format, startOfWeek, addWeeks, differenceInWeeks } from 'date-fns';
+import { startOfWeek, differenceInWeeks } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { ItemHodler } from '../forms/Form_styles'
-import PopupModal from '../popupModal/PopupModal'
 import { useSocket } from '../../context/SocketContext'
 import { useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide, } from 'swiper/react';
@@ -18,10 +15,9 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import PieChart from '../charts/PieChart'
-import { current } from '@reduxjs/toolkit'
 
 
-export const Root = styled(m.div)`
+ const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px;
@@ -40,15 +36,8 @@ width: 80%;
   width: 60%;
 }
 `
-export const TimeLineHolder = styled(m.div)`
-display: flex;
-margin-top: 10px;
-overflow: hidden;
-user-select: none;
-`
 
-
-export const Item = styled(m.div)`
+ const Item = styled(m.div)`
 position: relative;
 
 
@@ -75,7 +64,7 @@ margin: 10px auto;
 
 }
 `
-export const ItemInner = styled.div`
+ const ItemInner = styled.div`
 color: ${props => props.theme.text}!important;
 cursor: pointer;
 border-radius: 5px;
@@ -97,19 +86,8 @@ justify-content: space-between;
 }
 
 `
-export const ImageItemInner = styled.div`
-color: ${props => props.theme.text}!important;
-cursor: pointer;
-border-radius: 5px;
-background: ${props => props.theme.primary}!important;
-position: relative;
 
-
-transition: all 0.5s ease;
-z-index: 2;
-justify-content: space-between;
-`
-export const Tag = styled(m.div)`
+ const Tag = styled(m.div)`
 background:${props => props.theme.accent};
 padding: 0px 15px;
 width: fit-content;
@@ -117,41 +95,13 @@ border-radius: 50px;
 color: ${props => props.theme.textW}!important;
 `
 
-export const ItemInnerUpper = styled(m.div)`
-display: flex;
-justify-content: space-between;
-`
-export const ImageItemInnerUpper = styled(m.div)`
-display: flex;
-justify-content: space-between;
-padding:15px
-`
-export const ItemInnerContent = styled(m.div)`
-padding: 10px;
-background: white;
-color:black;
-margin: 15px 0px;
-border-radius: 5px;
-`
-export const ItemInnerContentImage = styled(m.div)`
 
-
-color:black;
-
-border-radius: 5px;
-`
-
-export const ItemInnerActionHolder = styled(m.div)`
-display: flex;
-justify-content: end;
-`
-export const ImageItemInnerActionHolder = styled(m.div)`
-padding: 15px;
+ const ItemInnerActionHolder = styled(m.div)`
 display: flex;
 justify-content: end;
 `
 
-export const TextButtonSvg = styled(m.div)`
+ const TextButtonSvg = styled(m.div)`
 svg{
     color:  ${props => props.theme.accent};
     font-size: 20px;
@@ -161,7 +111,7 @@ svg{
     }
   }
 `
-export const TextButtonSvgDelete = styled(m.div)`
+ const TextButtonSvgDelete = styled(m.div)`
 color:  ${props => props.theme.warn};;
 font-size: 20px;
 
@@ -175,17 +125,12 @@ svg{
   }
 }
 `
-export const Image = styled(m.img)`
 
-
-aspect-ratio: 16/12;
-
-`
-export const RootInner = styled(m.div)`
+ const RootInner = styled(m.div)`
 
 
 `
-export const ItemInnerLeft = styled(m.div)`
+ const ItemInnerLeft = styled(m.div)`
 width: 35%;
 padding:40px;
 padding-left: 0px;
@@ -206,7 +151,7 @@ display: flex;
 
 
 
-export const ItemInnerRightOutter = styled(m.div)`
+ const ItemInnerRightOutter = styled(m.div)`
 overflow: hidden;
 width: ${props => props.full ? "60%" :"100%"};
 
@@ -227,7 +172,7 @@ h1{
 }
 `
 
-export const ItemInnerRight = styled(m.div)`
+ const ItemInnerRight = styled(m.div)`
 background: ${props => props.theme.primary}!important;
 position: relative;
 z-index: 4;
@@ -244,7 +189,7 @@ padding:20px;
 `
 
 
-export const ItemInnerRightTop = styled(m.div)`
+ const ItemInnerRightTop = styled(m.div)`
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -252,7 +197,7 @@ margin-bottom: 20px;
 
 `
 
-export const ItemInnerRightItemText = styled(m.div)`
+ const ItemInnerRightItemText = styled(m.div)`
 display: flex;
 font-size: 18px;
 justify-content: space-between;
@@ -264,12 +209,7 @@ color: ${props => props.theme.accent}!important;
 }
 `
 
-export const ItemInnerRightItemTextHolder = styled(m.div)`
-
-
-`
-
-export const ItemInnerRightHidden = styled(m.div)`
+ const ItemInnerRightHidden = styled(m.div)`
 transform: ${props => props.showMore ? "translateY(0%)": "translateY(-100%)"};
 position: ${props => props.showMore ? "unset": " absolute"};
 opacity: ${props => props.showMore ? "100%": " 100%"};
@@ -284,21 +224,21 @@ left: 0px;
 
 `
 
-export const ItemInnerRightItem = styled(m.div)`
+ const ItemInnerRightItem = styled(m.div)`
 display: flex;
 justify-content: space-between;
 padding: 15px 0px;
  border-bottom: 2px solid ${props => props.theme.accent};
 
 `
-export const ItemInnerRightItemEnd = styled(m.div)`
+ const ItemInnerRightItemEnd = styled(m.div)`
 display: flex;
 justify-content: space-between;
 padding: 15px 0px;
 border-bottom: 2px solid ${props => props.theme.accent};
 `
 
-export const ShowMore = styled(m.h2)`
+ const ShowMore = styled(m.h2)`
 
 text-align: center;
 color: ${props => props.theme.accent};
@@ -492,7 +432,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                         <ShowMore onClick={()=>{setShowMore((showMore) => !showMore)}}>Show Nutrients</ShowMore>
                         
                         <ItemInnerRightHidden showMore={showMore}>
-                        <ItemInnerRightItemTextHolder >
+                        <div >
                         {feedingData[i]?.filter((a) => a.week == activeWeek).map((a) => {
                           if(a.plant_feeding_id !== null){
                           return (
@@ -518,7 +458,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
                           )
                         }
                         })}
-                         </ItemInnerRightItemTextHolder>
+                         </div>
                          </ItemInnerRightHidden>
                          </>}
                       </ItemInnerRight >
