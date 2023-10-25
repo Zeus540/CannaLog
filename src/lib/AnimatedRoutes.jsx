@@ -99,10 +99,10 @@ function AnimatedRoutes({themeType,toggleTheme}) {
         
             <NotificationProvider>
                 <SocketProvider>
-                <AnimatePresence   >
+          
                 <ProgressBar key="ProgressBar"/>
                 <NavBar key="NavBar" sideBar={sideBar} setSideBar={setSideBar} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
-           
+                <AnimatePresence   mode='wait'>
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
