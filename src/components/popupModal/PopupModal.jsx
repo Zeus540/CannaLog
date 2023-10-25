@@ -13,6 +13,7 @@ import AddWatering from '../forms/AddWatering';
 import FormLoader from '../loader/FormLoader';
 import { AnimatePresence } from 'framer-motion';
 import { createPortal } from 'react-dom';
+
 const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmitting,isSubmitting }) => {
 
   const dispatch = useDispatch()

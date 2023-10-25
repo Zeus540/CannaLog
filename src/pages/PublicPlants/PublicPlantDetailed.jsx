@@ -14,7 +14,6 @@ import { BsPersonCircle } from "react-icons/bs";
 import { getCurrentDayMonthYear } from '../../helpers/getCurrentDayMonthYear'
 import { getElapsedDays } from '../../helpers/getElapsedDays'
 import Weeks from '../../components/weeks/Weeks'
-import PopupModal from '../../components/popupModal/PopupModal'
 import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
@@ -204,7 +203,6 @@ function PublicPlantDetailed() {
 
                 <ImgHolderTopInfo>
 
-                    {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
 
                     <ImgHolderTopInfoInner>
 

@@ -1,7 +1,6 @@
-import React, { useEffect, useState, Suspense } from 'react'
-import { lazyWithPreload } from "react-lazy-with-preload";
+import React, { useEffect, useState, } from 'react'
 import styled from 'styled-components'
-import { AnimatePresence, motion as m } from 'framer-motion'
+import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -9,10 +8,7 @@ import {
   selectMyPlants,
   fetchMyPlants
 } from '../../features'
-
-import PopupModal from '../../components/popupModal/PopupModal'
 import { IoMdAdd } from "react-icons/io";
-import { useSocket } from '../../context/SocketContext'
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 import PlantCard from '../../components/cards/PlantCard';
 import Blank from '../../components/skeleton/Blank';
@@ -41,6 +37,8 @@ const MyPlants = () => {
 
   const controller = new AbortController
   const signal = controller.signal
+
+  const PopupModal = lazy(()=>import('../../components/popupModal/PopupModal'))
 
   useEffect(() => {
 

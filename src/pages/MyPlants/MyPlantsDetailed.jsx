@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,lazy, Suspense } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchPlantActionTypes,
@@ -27,7 +27,7 @@ import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
 import Weeks from '../../components/weeks/Weeks'
-import PopupModal from '../../components/popupModal/PopupModal'
+
 import {
     ImgHolderTop,
     ImgHolderTopInfo,
@@ -73,6 +73,8 @@ function MyPlantsDetailed() {
     const socket = useSocket()
     const { enqueueSnackbar } = useSnackbar()
     const dispatch = useDispatch()
+
+    const PopupModal = lazy(()=>import('../../components/popupModal/PopupModal'))
 
     let plant_action_types = useSelector(selectPlantActionTypes)
 
@@ -219,7 +221,9 @@ function MyPlantsDetailed() {
 
                 <ImgHolderTopInfo>
                     <AnimatePresence >
+                    <Suspense>
                     {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>}
+                    </Suspense>
                     </AnimatePresence>
                     <ImgHolderTopInfoInner>
 
