@@ -138,7 +138,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                     </Routes>
                     </Suspense>
                 </AnimatePresence>
-                <Footer key="Footer"/>
+                <Footer key="Footer" isLoggedIn={isLoggedIn}/>
                 <WebSocketListener/> 
                 </SocketProvider>
                </NotificationProvider>

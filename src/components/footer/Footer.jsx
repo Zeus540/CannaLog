@@ -1,12 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../features";
-
+import { Link } from "react-router-dom";
 
 const Root = styled.div`
-// box-shadow:  0px 0px 20px ${props => props.theme.shadow};
 position: relative;
 margin: 0px;
 background:  ${props => props.theme.footer.primary};
@@ -43,7 +39,7 @@ span{
 }
 `;
 
-const MenuLinkMobile = styled(NavLink)`
+const MenuLinkMobile = styled(Link)`
 
   padding: 5px 0px;
 
@@ -81,10 +77,9 @@ width: calc(100% /3);
 
 
 
-const Footer = () => {
+const Footer = ({isLoggedIn}) => {
 
 
-  const isLoggedIn = useSelector(selectIsLoggedIn)
 
 
   return (

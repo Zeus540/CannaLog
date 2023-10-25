@@ -1,4 +1,4 @@
-import React, { useState, useEffect,lazy, Suspense } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchPlantActionTypes,
@@ -55,7 +55,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
-import { AnimatePresence } from 'framer-motion'
+import PopupModal from '../../components/popupModal/PopupModal'
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -74,7 +74,7 @@ function MyPlantsDetailed() {
     const { enqueueSnackbar } = useSnackbar()
     const dispatch = useDispatch()
 
-    const PopupModal = lazy(()=>import('../../components/popupModal/PopupModal'))
+    
 
     let plant_action_types = useSelector(selectPlantActionTypes)
 
@@ -220,11 +220,13 @@ function MyPlantsDetailed() {
                 </EditPlant>
 
                 <ImgHolderTopInfo>
-                    <AnimatePresence >
-                    <Suspense>
+             
+                
+           
                     {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>}
-                    </Suspense>
-                    </AnimatePresence>
+                    
+                 
+                 
                     <ImgHolderTopInfoInner>
 
                         <ImgHolderTopInfoInnerLeft>

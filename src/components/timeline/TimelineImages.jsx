@@ -1,4 +1,4 @@
-import React, { useState, useEffect,lazy,Suspense} from 'react'
+import React, { useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import axios from '../../lib/axios'
@@ -8,13 +8,13 @@ import { startOfWeek, differenceInWeeks } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { ItemHodler } from '../forms/Form_styles'
 import { useSocket } from '../../context/SocketContext'
 import { useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import PopupModal from '../popupModal/PopupModal'
 
 export const Root = styled(m.div)`
 max-width: 1920px;
@@ -181,7 +181,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
   const params = useParams()
   const socket = useSocket()
 
-  const PopupModal = lazy(()=>import('../popupModal/PopupModal'))
+
 
   useEffect(() => {
     if (plant && socket) {
@@ -268,9 +268,9 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
         <Root>
           {/* <Heading>{title}</Heading> */}
           <RootInner>
-            <Suspense>
+          
             {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
-            </Suspense>
+         
             <Swiper
               pagination={{
                 dynamicBullets: true,
