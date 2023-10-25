@@ -87,14 +87,14 @@ textarea {
 }
 
 .swiper {
-  padding-bottom: 30px;
+  padding-bottom: 30px!important;
 }
 
 :root {
-  --swiper-theme-color: #66b394;
+  --swiper-theme-color: #66b394!important;;
 }
 .swiper-pagination-bullet-active-next,.swiper-pagination-bullet-active-prev{
-  background: #66b394;
+  background: #66b394!important;;
 }
 .swiper-slide {
   min-width: 90px

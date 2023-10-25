@@ -16,8 +16,7 @@ import { TfiPaintBucket } from 'react-icons/tfi'
 import { GoCommentDiscussion } from 'react-icons/go'
 import { GiBackwardTime } from 'react-icons/gi'
 import { TbNotes } from 'react-icons/tb'
-import { TbArrowsExchange } from 'react-icons/tb'
-import { TbExchange } from 'react-icons/tb'
+import { TbArrowsExchange,TbExchange } from 'react-icons/tb'
 import { PiPottedPlantLight } from 'react-icons/pi'
 import { FiEdit } from 'react-icons/fi'
 import { BsPersonCircle } from "react-icons/bs";
@@ -187,6 +186,7 @@ function MyPlantsDetailed() {
     }
 
     const handleActiveWeeks = (week) => {
+        console.log(week)
         setActiveWeek(week)
     }
 
