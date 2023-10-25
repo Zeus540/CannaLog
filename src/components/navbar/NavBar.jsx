@@ -137,7 +137,9 @@ const StyledLink = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   display: flex;
- 
+`;
+const StyledLinkTop = styled(StyledLink)`
+  padding: unset;
 
 `;
 const MenuLinkLeft = styled.div`
@@ -386,9 +388,9 @@ const NavBar = ({ toggleTheme, themeType, }) => {
           <Div>
             <NotificationHolder>
               <NotificationCount newNotification={newNotification} />
-              <StyledLink to="/notifications">
+              <StyledLinkTop to="/notifications">
                 <BiBell />
-              </StyledLink>
+              </StyledLinkTop>
             </NotificationHolder>
 
 
