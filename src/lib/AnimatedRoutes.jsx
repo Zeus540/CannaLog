@@ -98,9 +98,10 @@ function AnimatedRoutes({themeType,toggleTheme}) {
           
                 <ProgressBar key="ProgressBar"/>
                 <NavBar key="NavBar"  themeType={themeType} toggleTheme={toggleTheme}/>
+                <Suspense fallback={<Root  key="fallback"><Loader/></Root>}>
                 <AnimatePresence   mode="wait">
            
-                    <Suspense fallback={<Root  key="fallback"><Loader/></Root>}>
+                   
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
@@ -136,8 +137,9 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                       
                         <Route path="*" element={<NotFoundPage />}/>
                     </Routes>
-                    </Suspense>
+        
                 </AnimatePresence>
+                </Suspense>
                 <Footer key="Footer" isLoggedIn={isLoggedIn}/>
                 <WebSocketListener/> 
                 </SocketProvider>
