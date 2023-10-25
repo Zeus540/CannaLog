@@ -127,7 +127,7 @@ const LinkHolderMobile = styled(m.div)`
   @media (min-width: 0px) and (max-width: 820px) {
     min-width: 50%;
 
-    min-height: calc(100dvh );
+    min-height: -webkit-fill-available ;
   }
 
 `;
