@@ -23,7 +23,7 @@ import { getLocalizeTime } from '../../helpers/getLocalizeTime';
 import { getElapsedDays } from '../../helpers/getElapsedDays';
 import { useLocation } from 'react-router-dom';
 
-const PlantCard = ({ data, openModal }) => {
+const PlantCard = ({ data, openModal,homePage }) => {
   const [path, setPath] = useState("")
   const navigate = useNavigate()
   const location = useLocation()
@@ -52,7 +52,7 @@ const PlantCard = ({ data, openModal }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
       exit={{ opacity: 0, transition: { duration: 0.1 } }}
-
+      homePage={homePage}
     >
       <PlantCardImageHolder >
 
@@ -67,7 +67,11 @@ const PlantCard = ({ data, openModal }) => {
           </PlantCardTextLogoTop>
           {path == 'my-plants' && <StyledButton onClick={() => { openModal("deletePlant", data) }}><RiDeleteBin5Line /></StyledButton>}
 
-          <EnviromentCardImage src={data.cover_thumbnail} width="100%" onClick={() => handleRedirect()} />
+          <picture onClick={() => handleRedirect()}>
+            <source srcset={data.cover_thumbnail_next_gen} type="image/webp" alt="webp" />
+            <EnviromentCardImage src={data.cover_thumbnail} width="100%" />
+          </picture>
+
         </EnviromentCardImageHolder>
 
         <PlantCardTextHolder onClick={() => handleRedirect()}>

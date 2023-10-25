@@ -40,6 +40,7 @@ import WaveHeading from '../../components/Headings/WaveHeading';
 import { useNavigate } from 'react-router-dom';
 import PlantCard from '../../components/cards/PlantCard';
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton';
+
 const HomePage = () => {
 
   const dispatch = useDispatch()
@@ -126,6 +127,7 @@ const HomePage = () => {
                       light_exposure={p.light_exposure}
                       creation_date={p.creation_date}
                       last_updated={p.last_updated}
+
                  />
                     );
                   }

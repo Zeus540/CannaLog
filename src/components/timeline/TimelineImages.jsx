@@ -326,8 +326,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
 
                         <ItemInnerContentImage>
                           <picture>
-                            <source src={a.thumbnail_img_next_gen} type="image/webp" />
-
+                            <source srcset={a.thumbnail_img_next_gen} type="image/webp" alt="webp"/>
                             <Image src={a.thumbnail_img} width="100%" />
                           </picture>
                         </ItemInnerContentImage>
@@ -336,8 +335,8 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
                         {!publicPage &&
                           <ImageItemInnerActionHolder>
 
-
-                            <TextButtonSvg onClick={() => handleSetCoverImage(a.full_img, a.thumbnail_img)}><FiEdit /></TextButtonSvg>
+{console.log("a",a)}
+                            <TextButtonSvg onClick={() => handleSetCoverImage(a)}><FiEdit /></TextButtonSvg>
                             <TextButtonSvgDelete onClick={() => openModal('deleteImage', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                           </ImageItemInnerActionHolder>
                         }

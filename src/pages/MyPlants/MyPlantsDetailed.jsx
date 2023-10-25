@@ -188,12 +188,12 @@ function MyPlantsDetailed() {
         setActiveWeek(week)
     }
 
-    const handleSetCoverImage = (image, thumbnail) => {
+    const handleSetCoverImage = (image) => {
 
-        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`, { cover_img: image, cover_thumbnail: thumbnail })
+        axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`, { cover_img: image.full_img, cover_img_next_gen: image.full_img_next_gen, cover_thumbnail: image.thumbnail_img ,cover_thumbnail_next_gen: image.thumbnail_img_next_gen })
             .then((response) => {
                 if (response.status == 200) {
-                    setCoverImage(image)
+                    setCoverImage(image.full_img)
                     enqueueSnackbar(`Cover updated`, { variant: 'success' })
                 }
             })
