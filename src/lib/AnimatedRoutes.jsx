@@ -1,4 +1,4 @@
-import React, { useState, useEffect,lazy } from 'react'
+import React, { useState, useEffect,lazy, Suspense } from 'react'
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
@@ -11,7 +11,7 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
 import HomePage from '../pages/HomePage/HomePage'
 import RegistrationComplete from '../pages/Register/RegistrationComplete'
 import Verify from '../pages/Register/Verify'
-import Terms from '../pages/Terms/Terms';
+//import Terms from '../pages/Terms/Terms';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 import Growers from '../pages/Growers/Growers';
@@ -65,7 +65,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     //const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
     //const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
     //const Environments = lazy(()=>import('../pages/Environments/Environments'))
-    //const Terms = lazy(()=>import('../pages/Terms/Terms'))
+    const Terms = lazy(()=>import('../pages/Terms/Terms'))
     //const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
     //const PrivacyPolicy = lazy(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
     //const Login = lazy(()=>import('../pages/Login/Login'))
@@ -103,6 +103,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 <ProgressBar key="ProgressBar"/>
                 <NavBar key="NavBar" sideBar={sideBar} setSideBar={setSideBar} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
                 <AnimatePresence   mode='wait'>
+                    <Suspense>
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
@@ -138,6 +139,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                       
                         <Route path="*" element={<NotFoundPage />}/>
                     </Routes>
+                    </Suspense>
                 </AnimatePresence>
                 <Footer key="Footer"/>
                 <WebSocketListener/> 
