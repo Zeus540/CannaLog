@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react'
+import { useState, useLayoutEffect,useEffect } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import AnimatedRoutes from './lib/AnimatedRoutes'
 import { ThemeProvider } from 'styled-components'
@@ -120,7 +120,7 @@ function App() {
   const [theme, setTheme] = useState(dark_theme)
   const [themeType, setThemeType] = useState("dark")
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(publicPlantActions.reset())
     dispatch(enviromentActions.reset())
   }, [IsLoggedIn])

@@ -117,10 +117,10 @@ const LinkHolderMobile = styled(m.div)`
  
   background: ${props => props.theme.glass.background};
   right: 0;
-  top:0;
+ 
   min-width: 400px;
   backdrop-filter: blur( 2px );
-  min-height: 100vh ;
+  min-height: -webkit-fill-available ;
   flex-direction: column;
   justify-content: space-between;
   z-index: 50;
