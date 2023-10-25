@@ -138,8 +138,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                       
                         <Route path="*" element={<NotFoundPage />}/>
                     </Routes>
-                <Footer key="Footer"/>
                 </AnimatePresence>
+                <Footer key="Footer"/>
                 <WebSocketListener/> 
                 </SocketProvider>
                </NotificationProvider>
