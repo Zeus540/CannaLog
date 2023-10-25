@@ -326,7 +326,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
 
                         <ItemInnerContentImage>
                           <picture>
-                            <source srcset={a.thumbnail_img_next_gen} type="image/webp" alt="webp"/>
+                            <source srcSet={a.thumbnail_img_next_gen} type="image/webp" alt="webp"/>
                             <Image src={a.thumbnail_img} width="100%" />
                           </picture>
                         </ItemInnerContentImage>

@@ -5,21 +5,21 @@ import { useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { SnackbarProvider } from 'notistack'
 import { useSelector } from 'react-redux';
-
+import { Root } from '../utils/global_styles';
 //Pages
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
 //import HomePage from '../pages/HomePage/HomePage'
-import RegistrationComplete from '../pages/Register/RegistrationComplete'
-import Verify from '../pages/Register/Verify'
+//import RegistrationComplete from '../pages/Register/RegistrationComplete'
+//import Verify from '../pages/Register/Verify'
 //import Terms from '../pages/Terms/Terms';
-import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
-import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
+//import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
+//import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 //import Growers from '../pages/Growers/Growers';
 //import Notifications from '../pages/Notifications/Notifications';
 //import PublicPlants from '../pages/PublicPlants/PublicPlants';
-import Login from '../pages/Login/Login'
-import Register from '../pages/Register/Register'
-import Environments from '../pages/Environments/Environments'
+//import Login from '../pages/Login/Login'
+//import Register from '../pages/Register/Register'
+//import Environments from '../pages/Environments/Environments'
 //import MyPlants from '../pages/MyPlants/MyPlants'
 //import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
 //import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
@@ -41,19 +41,20 @@ import WebSocketListener from '../components/WebSocketListener';
 import ProgressBar from "../components/progressBar/ProgressBar";
 //Utils
 import ProtectedRoutes from '../utils/ProtectedRoutes';
+import Loader from '../components/loader/Loader';
 
 
 
 
 
-const Root = styled.div`
+const Main = styled.div`
 background:  ${props => props.theme.secondary};
 `;
 
 function AnimatedRoutes({themeType,toggleTheme}) {
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const location = useLocation()
-    const [sideBar, setSideBar] = useState(false);
+
 
 
     
@@ -64,20 +65,16 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
     const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
     const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
-    //const Environments = lazy(()=>import('../pages/Environments/Environments'))
+    const Environments = lazy(()=>import('../pages/Environments/Environments'))
     const Terms = lazy(()=>import('../pages/Terms/Terms'))
-    //const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
-    //const PrivacyPolicy = lazy(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
-    //const Login = lazy(()=>import('../pages/Login/Login'))
-    //const Register = lazy(()=>import('../pages/Register/Register'))
-    //const RegistrationComplete = lazy(()=>import('../pages/Register/RegistrationComplete'))
-    //const Verify = lazy(()=>import('../pages/Register/Verify'))
+    const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
+    const PrivacyPolicy = lazy(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
+    const Login = lazy(()=>import('../pages/Login/Login'))
+    const Register = lazy(()=>import('../pages/Register/Register'))
+    const RegistrationComplete = lazy(()=>import('../pages/Register/RegistrationComplete'))
+    const Verify = lazy(()=>import('../pages/Register/Verify'))
 
-    const OffClick = () => {
-        if (sideBar == true) {
-            setSideBar(false);
-        }
-    }
+ 
 
     useEffect(() => {
 
@@ -93,7 +90,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     return (
 
 
-          <Root>
+          <Main>
             <SnackbarProvider anchorOrigin={{horizontal: "center", vertical: "top"}}>
             <LogoutProvider>
         
@@ -101,9 +98,10 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 <SocketProvider>
           
                 <ProgressBar key="ProgressBar"/>
-                <NavBar key="NavBar" sideBar={sideBar} setSideBar={setSideBar} OffClick={OffClick} themeType={themeType} toggleTheme={toggleTheme}/>
-                <AnimatePresence   mode='wait'>
-                    <Suspense>
+                <NavBar key="NavBar"  themeType={themeType} toggleTheme={toggleTheme}/>
+                <AnimatePresence   mode="wait">
+           
+                    <Suspense fallback={<Root  key="fallback"><Loader/></Root>}>
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
@@ -149,7 +147,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
             </LogoutProvider>
             </SnackbarProvider>
             
-            </Root>
+            </Main>
 
 
     )

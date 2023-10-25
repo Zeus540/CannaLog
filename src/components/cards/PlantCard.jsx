@@ -68,8 +68,8 @@ const PlantCard = ({ data, openModal,homePage }) => {
           {path == 'my-plants' && <StyledButton onClick={() => { openModal("deletePlant", data) }}><RiDeleteBin5Line /></StyledButton>}
 
           <picture onClick={() => handleRedirect()}>
-            <source srcset={data.cover_thumbnail_next_gen} type="image/webp" alt="webp" />
-            <EnviromentCardImage src={data.cover_thumbnail} width="100%" />
+            <source srcSet={data.cover_thumbnail_next_gen} type="image/webp" alt="webp" loading='lazy'/>
+            <EnviromentCardImage src={data.cover_thumbnail} width="100%" loading='lazy'/>
           </picture>
 
         </EnviromentCardImageHolder>

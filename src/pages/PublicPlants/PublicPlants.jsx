@@ -119,11 +119,9 @@ const PublicPlants = () => {
           {publicPlants.hasIntialData && <>
             {publicPlants.plants?.map((p, index) => {
               return (
-                <>
                   <PlantCard
                     key={index}
                     data={p}/>
-                </>
               )
             })}
           </>

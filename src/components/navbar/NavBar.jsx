@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/leaf.png";
 import { Link } from "react-router-dom";
@@ -15,13 +15,13 @@ import { BiBell } from "react-icons/bi";
 import { useNotification } from "../../context/NotificationContext";
 import { useSocket } from "../../context/SocketContext";
 import { motion as m, AnimatePresence } from 'framer-motion'
-import { PiPlantLight,PiPlantFill } from "react-icons/pi";
-import { BsPeople } from "react-icons/bs";
+import { PiPlantLight, PiPlantFill } from "react-icons/pi";
+import { BsCircleFill, BsPeople } from "react-icons/bs";
 import { GiGreenhouse } from 'react-icons/gi';
 import { RiMenu2Fill } from 'react-icons/ri'
 
 const Root = styled.div`
-background:${(props) => props.scrollDistance >= 1 ? `${props.theme.glass.background}` : "" || props.sideBar ? `${props.theme.glass.background}` : ""};
+background:${(props) => props.scrollDistance >= 1 ? `${props.theme.glass.background}` : "" || props.sideBarOpen ? `${props.theme.glass.background}` : ""};
 
 
 
@@ -309,17 +309,19 @@ opacity:${(props) => props.newNotification ? '100%' : "0%"};
 transition: opacity 0.2s ease;
 `;
 
-const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
+const NavBar = ({ toggleTheme, themeType, }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn)
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const theme = themeType
   const navigate = useNavigate()
   const socket = useSocket()
-
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   const { newNotification } = useNotification()
 
   const [scrollDistance, setScrollDistance] = useState(0);
+
+  const sideBar = useRef(null)
 
   useEffect(() => {
 
@@ -350,24 +352,42 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
   }
 
 
+  useEffect(() => {
+
+
+    const handleCheck = (e) => {
+
+      if (sideBar.current && !sideBar.current.contains(e.target)) {
+        setSideBarOpen(false)
+      }
+    }
+
+
+    document.addEventListener("mousedown", handleCheck)
+
+
+    return () => {
+      document.removeEventListener("mousedown", handleCheck)
+    }
+  }, [sideBarOpen])
 
 
   return (
 
     <Root
-    scrollDistance={scrollDistance}
-    sideBar={sideBar}
+      scrollDistance={scrollDistance}
+      sideBarOpen={sideBarOpen}
     >
-  
+
       <Inner scrollDistance={scrollDistance}  >
 
         <Div scrollDistance={scrollDistance}>
           <DivMenu scrollDistance={scrollDistance}>
             <BurgerMenuHolder onClick={() => {
-              setSideBar(!sideBar);
+              setSideBarOpen(!sideBarOpen);
             }}>
               <BurgerMenu>
-               <RiMenu2Fill/>
+                <RiMenu2Fill />
               </BurgerMenu>
 
 
@@ -391,8 +411,8 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
                 <BiBell />
               </StyledLink>
             </NotificationHolder>
-          
-            
+
+
             <UserInfoTop onClick={() => { handleMenuOpen() }}>
               <UserAvatar>
                 {user?.user_name?.charAt(0)}
@@ -413,10 +433,11 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
 
       {/* //mobile */}
       <AnimatePresence >
-        {sideBar &&
+        {sideBarOpen &&
 
 
           <LinkHolderMobile
+            ref={sideBar}
             initial={{ transform: "translateX(100%)" }}
             animate={{ transform: "translateX(0%)" }}
             transition={{ duration: 0.25 }}
@@ -426,7 +447,7 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
 
 
             {!isLoggedIn && <>
-              <MenuLinkMobile to="/public-plants" onClick={() => { setSideBar(false); }}>
+              <MenuLinkMobile to="/public-plants" onClick={() => { setSideBarOpen(false); }}>
                 <FlexLink>
 
                   <FlexLinkText> <PiPlantLight />  Public Plants</FlexLinkText>
@@ -437,37 +458,37 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
               <>
                 <div>
 
-                  <MenuLinkMobile to="/" onClick={() => { setSideBar(false); }}>
-                   
+                  <MenuLinkMobile to="/" onClick={() => { setSideBarOpen(false); }}>
 
-                      <FlexLinkText>  <PiPlantLight /> Public Plants</FlexLinkText>
-                   
+
+                    <FlexLinkText>  <PiPlantLight /> Public Plants</FlexLinkText>
+
                   </MenuLinkMobile>
 
-                  <MenuLinkMobile to="/my-environments" onClick={() => { setSideBar(false); }}>
+                  <MenuLinkMobile to="/my-environments" onClick={() => { setSideBarOpen(false); }}>
                     <FlexLink>
 
-                      <FlexLinkText> <GiGreenhouse/> My Environments</FlexLinkText>
+                      <FlexLinkText> <GiGreenhouse /> My Environments</FlexLinkText>
                     </FlexLink>
                   </MenuLinkMobile>
-                  <MenuLinkMobile to="/my-plants" onClick={() => { setSideBar(false); }}>
+                  <MenuLinkMobile to="/my-plants" onClick={() => { setSideBarOpen(false); }}>
                     <FlexLink>
 
                       <FlexLinkText><PiPlantFill /> My Plants</FlexLinkText>
                     </FlexLink>
                   </MenuLinkMobile>
 
-                  <MenuLinkMobile to="/growers" onClick={() => { setSideBar(false); }}>
+                  <MenuLinkMobile to="/growers" onClick={() => { setSideBarOpen(false); }}>
                     <FlexLink>
 
-                      <FlexLinkText><BsPeople/> Growers</FlexLinkText>
+                      <FlexLinkText><BsPeople /> Growers</FlexLinkText>
                     </FlexLink>
                   </MenuLinkMobile>
 
-                  <MenuLinkMobile to="/notifications" onClick={() => { setSideBar(false); }}>
+                  <MenuLinkMobile to="/notifications" onClick={() => { setSideBarOpen(false); }}>
                     <FlexLink>
 
-                      <FlexLinkText><BiBell/> Notifications</FlexLinkText>
+                      <FlexLinkText><BiBell /> Notifications</FlexLinkText>
                     </FlexLink>
                   </MenuLinkMobile>
                 </div>
@@ -480,13 +501,13 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
                   </ThemeToggleHolderBottom>
 
                   <LinkHolderMenuInnerItem>
-                    <MenuDropItem  onClick={() => { logOut() }} >
-                    <RiLogoutCircleRLine fill="#f44336"/> Log Out 
+                    <MenuDropItem onClick={() => { logOut() }} >
+                      <RiLogoutCircleRLine fill="#f44336" /> Log Out
                     </MenuDropItem>
                   </LinkHolderMenuInnerItem>
                 </div>
 
-               
+
               </>
             }
 
@@ -500,14 +521,14 @@ const NavBar = ({ toggleTheme, themeType, OffClick, setSideBar, sideBar }) => {
                   {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><FaSun /> Light Mode</ThemeSvg>}
                 </ThemeToggleHolderBottom>
 
-                <MenuLinkMobile to="/sign-in" onClick={() => { setSideBar(false); }}>
+                <MenuLinkMobile to="/sign-in" onClick={() => { setSideBarOpen(false); }}>
                   <FlexLink>
                     <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>
                     <FlexLinkText>Sign In</FlexLinkText>
                   </FlexLink>
                 </MenuLinkMobile>
 
-                <MenuLinkMobile to="/sign-up" onClick={() => { setSideBar(false); }}>
+                <MenuLinkMobile to="/sign-up" onClick={() => { setSideBarOpen(false); }}>
                   <FlexLink>
                     <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>
                     <FlexLinkText>Sign Up</FlexLinkText>
