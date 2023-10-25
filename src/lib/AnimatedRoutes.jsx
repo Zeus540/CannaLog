@@ -8,20 +8,20 @@ import { useSelector } from 'react-redux';
 
 //Pages
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
-import HomePage from '../pages/HomePage/HomePage'
+//import HomePage from '../pages/HomePage/HomePage'
 import RegistrationComplete from '../pages/Register/RegistrationComplete'
 import Verify from '../pages/Register/Verify'
 //import Terms from '../pages/Terms/Terms';
 import CookiePolicy from '../pages/CookiePolicy/CookiePolicy';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
-import Growers from '../pages/Growers/Growers';
-import Notifications from '../pages/Notifications/Notifications';
+//import Growers from '../pages/Growers/Growers';
+//import Notifications from '../pages/Notifications/Notifications';
 //import PublicPlants from '../pages/PublicPlants/PublicPlants';
 import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
 import Environments from '../pages/Environments/Environments'
-import MyPlants from '../pages/MyPlants/MyPlants'
-import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
+//import MyPlants from '../pages/MyPlants/MyPlants'
+//import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
 //import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
 
 //Context
@@ -57,11 +57,11 @@ function AnimatedRoutes({themeType,toggleTheme}) {
 
 
     
-    //const HomePage = lazy(()=>import('../pages/HomePage/HomePage'))
-    //const Notifications = lazy(()=>import('../pages/Notifications/Notifications'))
-    //const Growers = lazy(()=>import('../pages/Growers/Growers'))
-    //const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
-    //const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
+    const HomePage = lazy(()=>import('../pages/HomePage/HomePage'))
+    const Notifications = lazy(()=>import('../pages/Notifications/Notifications'))
+    const Growers = lazy(()=>import('../pages/Growers/Growers'))
+    const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
+    const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
     const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
     const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
     //const Environments = lazy(()=>import('../pages/Environments/Environments'))
