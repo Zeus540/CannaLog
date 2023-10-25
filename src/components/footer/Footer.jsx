@@ -1,8 +1,8 @@
-import React, { useContext, useState,useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn,selectUser } from "../../features";
+import { selectIsLoggedIn } from "../../features";
 
 
 const Root = styled.div`
@@ -85,7 +85,7 @@ const Footer = () => {
 
 
   const isLoggedIn = useSelector(selectIsLoggedIn)
-const user = useSelector(selectUser)
+
 
   return (
     <Root>
