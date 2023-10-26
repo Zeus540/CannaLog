@@ -15,13 +15,13 @@ import HomePage from '../pages/HomePage/HomePage'
 //import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 //import Growers from '../pages/Growers/Growers';
 //import Notifications from '../pages/Notifications/Notifications';
-import PublicPlants from '../pages/PublicPlants/PublicPlants';
-import Login from '../pages/Login/Login'
-import Register from '../pages/Register/Register'
+//import PublicPlants from '../pages/PublicPlants/PublicPlants';
+//import Login from '../pages/Login/Login'
+//import Register from '../pages/Register/Register'
 //import Environments from '../pages/Environments/Environments'
 //import MyPlants from '../pages/MyPlants/MyPlants'
 //import MyPlantsDetailed from '../pages/MyPlants/MyPlantsDetailed'
-import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
+//import PublicPlantDetailed from '../pages/PublicPlants/PublicPlantDetailed';
 
 //Context
 import { SocketProvider } from '../context/SocketContext';
@@ -55,14 +55,21 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     const location = useLocation()
 
 
+
+    
+    //const HomePage = lazy(()=>import('../pages/HomePage/HomePage'))
     const Notifications = lazy(()=>import('../pages/Notifications/Notifications'))
     const Growers = lazy(()=>import('../pages/Growers/Growers'))
     const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
     const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
+    const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
+    const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
     const Environments = lazy(()=>import('../pages/Environments/Environments'))
     const Terms = lazy(()=>import('../pages/Terms/Terms'))
     const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
     const PrivacyPolicy = lazy(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
+    const Login = lazy(()=>import('../pages/Login/Login'))
+    const Register = lazy(()=>import('../pages/Register/Register'))
     const RegistrationComplete = lazy(()=>import('../pages/Register/RegistrationComplete'))
     const Verify = lazy(()=>import('../pages/Register/Verify'))
 
@@ -94,6 +101,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 <Suspense fallback={<Root  key="fallback"><Loader/></Root>}>
                 <AnimatePresence   mode="wait">
            
+                   
                     <Routes location={location} key={location.pathname}>
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
