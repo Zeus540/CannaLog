@@ -58,12 +58,16 @@ const HomePage = () => {
       signal
     }
 
-    dispatch(fetchPublicPlants(obj))
+    if(!publicPlants.hasIntialData){
+      dispatch(fetchPublicPlants(obj))
+    }
+  
 
-    return (() => {
-      controller.abort()
-    })
+     return (() => {
+       controller.abort()
+     })
   }, [])
+
 
 
 
@@ -81,7 +85,7 @@ const HomePage = () => {
             <HeroTextHolder>
               <Divider></Divider>
               <HeroText>
-                <p>Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. <HeroTextExtra>Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</HeroTextExtra></p>
+                Explore the Journey of Growth through the art of cannabis cultivation. Immerse yourself in the experience of cultivating, nurturing, and witnessing the transformation of nature's gift. Our platform invites you to not only cultivate your plants but also your thoughts and reflections. <HeroTextExtra>Capture your unique insights, stories, and observations as you embark on this green journey. Join us to cultivate, write, and reflect – all in one space</HeroTextExtra>
                
                 <Link to="/sign-up">
                 <StyledButton><ButtonText>Sign Up Now</ButtonText></StyledButton>

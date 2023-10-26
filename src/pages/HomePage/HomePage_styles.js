@@ -53,7 +53,8 @@ button{
 }
 `;
 
-export const HeroTextExtra = styled.p`
+export const HeroTextExtra = styled.span`
+display:block;
 @media (max-width: 425px) {
  display:none
 

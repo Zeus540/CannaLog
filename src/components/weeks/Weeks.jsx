@@ -63,13 +63,15 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
       {/* <Heading>Weeks</Heading> */}
       <WeekHolder>
+        {activeWeek &&
+        
         <Swiper
           pagination={{
             dynamicBullets: true,
           }}
           normalizeSlideIndex={true}
           modules={[Pagination]}
-          initialSlide={4}
+          initialSlide={activeWeek}
           updateOnWindowResize={true}
           spaceBetween={20}
           activeindex={activeWeek}
@@ -119,7 +121,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
               </SwiperSlide>
             )
           })}
-        </Swiper>
+        </Swiper>}
 
       </WeekHolder>
 

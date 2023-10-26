@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/leaf.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import { selectIsLoggedIn, selectUser, logout } from "../../features";
 import { FaSun } from "react-icons/fa";
@@ -129,7 +129,7 @@ const LinkHolderMobile = styled(m.div)`
   }
 
 `;
-const StyledLink = styled(NavLink)`
+const StyledLink = styled(Link)`
   margin: 0px 0px;
   padding: 16px 10px;
   color: ${props => props.theme.text};
@@ -176,7 +176,7 @@ fill: ${props => props.theme.accent};
 `;
 
 
-const MenuLinklogo = styled(NavLink)`
+const MenuLinklogo = styled(Link)`
   margin: 0px 0px;
   text-decoration: none!important;
   display: flex;
