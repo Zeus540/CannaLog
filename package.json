@@ -10,8 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/styled": "^11.11.0",
-    "@mui/lab": "^5.0.0-alpha.135",
+
     "@mui/material": "^5.13.7",
     "@mui/x-date-pickers": "^6.9.1",
     "@reduxjs/toolkit": "^1.9.5",
@@ -22,7 +21,6 @@
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "dot-env": "^0.0.1",
-    "env": "^0.0.2",
     "formik": "^2.4.2",
     "framer-motion": "^10.12.16",
     "notistack": "^3.0.1",
@@ -32,7 +30,6 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.10.1",
-    "react-lazy-with-preload": "^2.2.1",
     "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.13.0",

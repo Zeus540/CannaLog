@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from 'react'
-import { Link,useNavigate } from 'react-router-dom';
+import { useEffect,useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import {
   Root,
@@ -35,15 +35,13 @@ import {
 import { StyledButton, ButtonText } from '../../utils/global_styles';
 import { selectPublicJournal } from '../../features'
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
-import WaveHeading from '../../components/Headings/WaveHeading';
 import PlantCard from '../../components/cards/PlantCard';
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton';
 
 const HomePage = () => {
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [amount, setAmount] = useState(14)
+  const [amount,] = useState(14)
   const publicPlants = useSelector(selectPublicJournal)
 
   const controller = new AbortController
@@ -81,7 +79,7 @@ const HomePage = () => {
       <HeroBanner >
         <HeroOverLay>
           <HeroBannerTextHolder>
-            <HeroTextBig>Explore the Journey <br />of <WaveHeading heading="Growth" /></HeroTextBig>
+            <HeroTextBig>Explore the Journey <br />of <Accent>Growth</Accent></HeroTextBig>
             <HeroTextHolder>
               <Divider></Divider>
               <HeroText>
@@ -100,7 +98,7 @@ const HomePage = () => {
       </HeroBanner>
 
       <Section >
-        <IntroTextHeading>From <WaveHeading heading="Seed" /> to <Accent>Cultivate</Accent><br /> Log and Illuminate</IntroTextHeading>
+        <IntroTextHeading>From <Accent>Seed</Accent> to <Accent>Cultivate</Accent><br /> Log and Illuminate</IntroTextHeading>
         <IntroText>
           Prepare to dive into a world that's all about growth – where you'll not only cultivate cannabis but also your own insights and revelations. With our unique logging platform, you'll be able to track the evolution of your plants while also documenting your personal journey. Watch as your efforts blossom into a tapestry of success, and let your logs become a testament to your dedication. Get ready to log, write, reflect, and celebrate the incredible path you're on. This is more than cultivation; it's a narrative of your own growth. The adventure awaits – are you ready to grow, write, and reflect like never before?
         </IntroText>

@@ -1,5 +1,4 @@
-import React from 'react'
-import styled from "styled-components";
+import styled from 'styled-components'
 import {Root} from '../../utils/global_styles'
 
 
@@ -44,7 +43,7 @@ const Terms = () => {
     > 
   
         <Inner>
-        <Heading onClick={()=>  methodDoesNotExist()}>Terms and Conditions</Heading>
+        <Heading >Terms and Conditions</Heading>
 
       <h2>Introduction</h2>
       <p>These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, CannaLog accessible at https://www.cannalog.co.za/.</p>
@@ -69,14 +68,14 @@ const Terms = () => {
       <p>Certain areas of this Website are restricted from being access by you and CannaLog may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.</p>
 
       <h2>Your Content</h2>
-      <p>In these Website Standard Terms and Conditions, "Your Content" shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant CannaLog a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media.</p>
+      <p>In these Website Standard Terms and Conditions, &quot; Your Content &quot; shall mean any audio, video text, images or other material you choose to display on this Website. By displaying Your Content, you grant CannaLog a non-exclusive, worldwide irrevocable, sub licensable license to use, reproduce, adapt, publish, translate and distribute it in any and all media.</p>
       <p>Your Content must be your own and must not be invading any third-party’s rights. CannaLog reserves the right to remove any of Your Content from this Website at any time without notice.</p>
 
       <h2>Your Privacy</h2>
       <p>Please read Privacy Policy.</p>
 
       <h2>No warranties</h2>
-      <p>This Website is provided "as is," with all faults, and CannaLog express no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.</p>
+      <p>This Website is provided &quot;as is,&quot; with all faults, and CannaLog express no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.</p>
 
       <h2>Limitation of liability</h2>
       <p>In no event shall CannaLog , nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.

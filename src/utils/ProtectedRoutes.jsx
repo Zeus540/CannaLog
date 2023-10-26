@@ -1,6 +1,5 @@
 import { Outlet, Navigate,useLocation } from "react-router"
 import { useCookies } from "react-cookie"
-import { Suspense } from "react"
 import styled from 'styled-components';
 import {motion as m } from 'framer-motion'
 

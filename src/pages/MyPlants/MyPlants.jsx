@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react'
+import  { useEffect, useState, } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
@@ -31,7 +31,7 @@ const MyPlants = () => {
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const [pageBottom, setPageBottom] = useState(false)
-  const [amount, setAmount] = useState(14)
+  const [amount] = useState(14)
   const dispatch = useDispatch()
 
   const myPlants = useSelector(selectMyPlants)

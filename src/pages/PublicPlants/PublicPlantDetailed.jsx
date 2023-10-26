@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
     selectIsLoggedIn
@@ -44,9 +44,6 @@ function PublicPlantDetailed() {
     const [plant, setPlant] = useState()
     const [plantActions, setPlantActions] = useState([])
     const [plantEnvironment, setPlantEnvironment] = useState()
-    const [modalOpen, setModalOpen] = useState(false)
-    const [modalData, setModalData] = useState([])
-    const [modalType, setModalType] = useState('')
     const [currentStage, setCurrentStage] = useState()
     const [activeWeek, setActiveWeek] = useState(undefined)
     const [coverImage, setCoverImage] = useState('')
@@ -156,21 +153,7 @@ function PublicPlantDetailed() {
 
     }
 
-    const openModal = (type, action) => {
-        switch (type) {
-            case "takeAction":
-                setModalType("takeAction")
-                setModalData(action)
-                setModalOpen(!modalOpen)
-                break;
-            case "deleteNote":
-                setModalType("deleteNote")
-                setModalData(action)
-                setModalOpen(!modalOpen)
-                break;
 
-        }
-    }
 
 
     const handleActiveWeeks = (week) => {

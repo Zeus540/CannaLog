@@ -1,7 +1,5 @@
-import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import {motion as m} from 'framer-motion'
 import {StyledButton } from '../../utils/global_styles'
 
 

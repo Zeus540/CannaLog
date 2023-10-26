@@ -1,6 +1,6 @@
 import React,{createContext, useContext,useEffect,useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {fetchNotifications, selectUser} from '../features/index'
+import {fetchNotifications, selectIsLoggedIn} from '../features/index'
 import { useSnackbar } from 'notistack';
 
 const NotificationContext = createContext()
@@ -9,15 +9,15 @@ export const useNotification = () => useContext(NotificationContext)
 
 export const NotificationProvider = ({children}) =>{
   
-  const user = useSelector(selectUser)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
   const [newNotification,setNewNotification] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
   const dispatch = useDispatch()
 
 
     useEffect(() => {
-    
-      if(user){
+    console.log("isLoggedIn",isLoggedIn)
+      if(isLoggedIn){
 
       dispatch(fetchNotifications())
       .then((res)=>{
@@ -35,7 +35,7 @@ export const NotificationProvider = ({children}) =>{
      
       }
 
-    }, [user])
+    }, [isLoggedIn])
 
     const incomingNotifacation = ()=>{
       setNewNotification(true)

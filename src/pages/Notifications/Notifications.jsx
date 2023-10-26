@@ -1,4 +1,3 @@
-import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectNotifications,readNotifications,readNotification  } from '../../features/index'
 import { Root,Heading } from '../../utils/global_styles'
@@ -148,10 +147,10 @@ const Notifications = () => {
             <NotificationHeadingHolderInner><Heading>Notifications </Heading ><NotificationAmount>{notifications.length}</NotificationAmount></NotificationHeadingHolderInner> <p onClick={()=>handleReadAll()}>Mark all as read</p>
             </NotificationHeadingHolder>
             <NotificationHolder>
-        {notifications?.map((n)=>{
+        {notifications?.map((n,index)=>{
             if(n.notification_read == 0){
                 return(
-                    <NotificationCardActive onClick={()=>handleRead(n.user_notification_id)}>
+                    <NotificationCardActive onClick={()=>handleRead(n.user_notification_id)} key={index}>
                     
                     <NotificationCardAvatar>
                     {n?.actor_user_name?.charAt(0)}
@@ -177,7 +176,7 @@ const Notifications = () => {
                 )
             }else{
                 return(
-                    <NotificationCard>
+                    <NotificationCard key={index}>
              
              <NotificationCardAvatar>
                     {n?.actor_user_name?.charAt(0)}

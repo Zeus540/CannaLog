@@ -1,22 +1,8 @@
-import styled,{keyframes} from "styled-components";
+import styled from "styled-components";
 import { motion as m } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../features";
 
 
-
-const btnAnimation = (theme) => keyframes`
-0%{
-  background:${theme.btn.hover};
-  width: 0%;
-}
-
-100%{
-  background:${theme.btn.hover};
-  width: 100%;
-}
-`
 
 export const Root = styled(m.div)`
 display: flex;

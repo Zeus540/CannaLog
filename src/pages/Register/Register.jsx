@@ -1,4 +1,4 @@
-import React,{useState,useContext, useEffect} from 'react'
+import {useState} from 'react'
 import styled from 'styled-components';
 import {Link, useNavigate} from 'react-router-dom'
 import Logo from "../../assets/images/leaf.png";
@@ -227,7 +227,7 @@ function Register() {
         handleLogin(values)
       }}
     >
-      {({ errors, touched,handleSubmit,values }) => (
+      {({ errors, touched }) => (
       <Form  >
 
       <InputHolder>

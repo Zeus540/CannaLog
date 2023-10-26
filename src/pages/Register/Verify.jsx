@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from 'react'
+import { useEffect,useState } from 'react'
 import { useParams,useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import Logo from "../../assets/images/leaf.png";
@@ -51,10 +51,6 @@ const Inner = styled.div`
   border-radius: 5px;
   padding-bottom: 40px;
 `;
-const LogoImg = styled.img`
-    width: 200px;
-    margin:0 auto
-`;
 
 const Text = styled.p`
     padding-bottom: 15px;
@@ -76,11 +72,9 @@ const navigate = useNavigate()
 const {enqueueSnackbar} = useSnackbar()
 const [msg, setMsg] = useState()
 
-    useEffect(() => {
-        {console.log("params", params.token) }
 
-        
-        axios.post(`${BASE_URL_PROD}/verify`,params)
+const handleVerify =() =>{
+  axios.post(`${BASE_URL_PROD}/verify`,params)
         .then((response) => {
         if(response.data.url){
             setMsg(" Verification Successful")
@@ -100,6 +94,11 @@ const [msg, setMsg] = useState()
             enqueueSnackbar(`${error.response.status} ${error.response.statusText}`,{variant:'error'})
           console.log(error);
         })
+}
+
+    useEffect(() => {
+
+      handleVerify()
 
     }, [])
     
