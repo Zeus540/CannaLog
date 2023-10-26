@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { Heading } from '../../utils/global_styles'
+import { useEffect, useState } from 'react'
 import {
   Root,
   WeekHolder,
@@ -8,7 +7,7 @@ import {
   WeekTextBottom,
   Week
 } from './Weeks_styles'
-import { format, startOfWeek, addWeeks, differenceInWeeks } from 'date-fns';
+import {  startOfWeek, differenceInWeeks } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Pagination } from 'swiper/modules';

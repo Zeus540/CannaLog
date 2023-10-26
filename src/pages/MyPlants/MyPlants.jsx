@@ -1,4 +1,4 @@
-import  { useEffect, useState, } from 'react'
+import  { Suspense, useEffect, useState,lazy } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
@@ -12,7 +12,7 @@ import { IoMdAdd } from "react-icons/io";
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 import PlantCard from '../../components/cards/PlantCard';
 import Blank from '../../components/skeleton/Blank';
-import PopupModal from '../../components/popupModal/PopupModal'
+import Loader from '../../components/loader/Loader'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -39,6 +39,7 @@ const MyPlants = () => {
   const controller = new AbortController
   const signal = controller.signal
 
+const PopupModal = lazy(()=> import('../../components/popupModal/PopupModal'))
 
 
   useEffect(() => {
@@ -125,7 +126,7 @@ const MyPlants = () => {
     >
    
 
-      {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
+      {modalOpen && <Suspense fallback={<Loader/>}><PopupModal openModal={openModal} data={modalData} modalType={modalType} /></Suspense>}
  
       <Holder>
         <FlexRowEnd

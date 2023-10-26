@@ -9,7 +9,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
-import { fetchStages,takeAction } from '../../features';
+import { takeAction } from '../../features';
 import { useSnackbar } from 'notistack';
 
 const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
@@ -17,10 +17,6 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
     const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar()
     
-    useEffect(() => {
-        dispatch(fetchStages())
-    }, [])
-
 
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

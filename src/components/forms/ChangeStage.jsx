@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 
 import { StyledButton } from '../../utils/global_styles';
 import { FormHolder, StyledDateTimePicker, InputField, InputFieldSelect, Label, Error, ButtonHolder, Option, Input, Item, ItemGerm, ItemHarv, ItemTextAccent, ItemHodler, ItemTime, ItemTimeActive } from './Form_styles'
-import { RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';

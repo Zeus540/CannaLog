@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect,Suspense,lazy} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchPlantActionTypes,
@@ -26,7 +26,7 @@ import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
 import Weeks from '../../components/weeks/Weeks'
-
+import Loader from '../../components/loader/Loader'
 import {
     ImgHolderTop,
     ImgHolderTopInfo,
@@ -54,7 +54,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
-import PopupModal from '../../components/popupModal/PopupModal'
+
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -73,7 +73,7 @@ function MyPlantsDetailed() {
     const { enqueueSnackbar } = useSnackbar()
     const dispatch = useDispatch()
 
-    
+    const PopupModal = lazy(()=> import('../../components/popupModal/PopupModal'))
 
     let plant_action_types = useSelector(selectPlantActionTypes)
 
@@ -180,8 +180,12 @@ function MyPlantsDetailed() {
                 setModalType("deleteNote")
                 setModalData(action)
                 setModalOpen(!modalOpen)
-                break;
-
+            break;
+            case "deleteImage":
+                setModalType("deleteImage")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+            break;
         }
     }
 
@@ -223,7 +227,7 @@ function MyPlantsDetailed() {
              
                 
            
-                    {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>}
+                    {modalOpen && <Suspense ><PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/></Suspense>}
                     
                  
                  
@@ -330,7 +334,7 @@ function MyPlantsDetailed() {
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek} />
             <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" openModal={openModal}/>
             <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" />
-            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} />
+            <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} openModal={openModal}/>
 
 
         </Root>

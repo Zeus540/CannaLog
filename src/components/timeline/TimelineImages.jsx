@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import PopupModal from '../popupModal/PopupModal'
+
 
 export const Root = styled(m.div)`
 max-width: 1920px;
@@ -172,7 +172,7 @@ export const RootInner = styled(m.div)`
 
 `
 
-const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCoverImage, publicPage }) => {
+const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, handleSetCoverImage, publicPage }) => {
 
   const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false)
@@ -246,17 +246,7 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
     setter(localizedData.sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
   }
 
-  const openModal = (type, data) => {
-    switch (type) {
-
-      case "deleteImage":
-        setModalType(type)
-        setModalData(data)
-        setModalOpen(!modalOpen)
-        break;
-
-    }
-  }
+  
 
 
 
@@ -269,8 +259,6 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
           {/* <Heading>{title}</Heading> */}
           <RootInner>
           
-            {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} />}
-         
             <Swiper
               pagination={{
                 dynamicBullets: true,
@@ -336,7 +324,6 @@ const TimelineImages = ({ plant, activeWeek, title, actionTypeData, handleSetCov
                         {!publicPage &&
                           <ImageItemInnerActionHolder>
 
-{console.log("a",a)}
                             <TextButtonSvg onClick={() => handleSetCoverImage(a)}><FiEdit /></TextButtonSvg>
                             <TextButtonSvgDelete onClick={() => openModal('deleteImage', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                           </ImageItemInnerActionHolder>

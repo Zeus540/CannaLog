@@ -1,20 +1,24 @@
-import React,{useEffect} from 'react'
+import {useEffect,lazy,Suspense} from 'react'
 import { Root, Modal, ModalClose, ModalCloseHolder, ModalContent, Warn, ModalContentText } from './PopupModal_styles'
 import { VscChromeClose } from "react-icons/vsc";
 import { StyledButton } from '../../utils/global_styles';
 import { deleteEnvironment, deletePlant,deleteAction } from '../../features';
 import { useDispatch } from 'react-redux';
-import AddEvironment from '../forms/AddEvironment';
-import AddPlant from '../forms/AddPlant';
-import ChangeStage from '../forms/ChangeStage';
-import AddNote from '../forms/AddNote';
-import UploadImage from '../forms/UploadImage';
-import AddWatering from '../forms/AddWatering';
 import FormLoader from '../loader/FormLoader';
+import Loader from '../loader/Loader';
 import { AnimatePresence } from 'framer-motion';
 import { createPortal } from 'react-dom';
 
 const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmitting,isSubmitting }) => {
+
+
+const AddEvironment = lazy(()=> import('../forms/AddEvironment'));
+const AddPlant = lazy(()=> import('../forms/AddPlant'));
+const ChangeStage = lazy(()=> import('../forms/ChangeStage'));
+const AddNote = lazy(()=> import('../forms/AddNote'));
+const UploadImage = lazy(()=> import('../forms/UploadImage'));
+const AddWatering = lazy(()=> import('../forms/AddWatering'));
+
 
   const dispatch = useDispatch()
   
@@ -62,7 +66,7 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
       key="popup"
       >
    
-     
+   <Suspense fallback={<Loader/>}>
        <ModalContent
        exit={{ opacity: 0 }} transition={{ duration: 0.0 }}   key="ModalContent">
          <ModalClose ><VscChromeClose onClick={() => openModal(modalType)} /></ModalClose>
@@ -136,7 +140,9 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
          }
 
          {(modalType == "addEnvironment") &&
+    
            <AddEvironment modalType={modalType} openModal={openModal} data={data} />
+         
          }
          {(modalType == "editEnvironment") &&
            <AddEvironment modalType={modalType} openModal={openModal} data={data} />
@@ -153,7 +159,9 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
          }
 
          {(data?.plant_action_type_id == 13) &&
+          
            <AddNote modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting} />
+  
          }
 
          {(data?.plant_action_type_id == 4) &&
@@ -165,7 +173,7 @@ const PopupModal = ({ openModal, data, modalType, plant,setModalOpen,setIsSubmit
          }
 
        </ModalContent>
-
+       </Suspense>
      
      </Modal>
     

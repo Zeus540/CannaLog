@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-
     "@mui/material": "^5.13.7",
     "@mui/x-date-pickers": "^6.9.1",
     "@reduxjs/toolkit": "^1.9.5",
@@ -20,7 +19,6 @@
     "chart.js": "^4.3.3",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
-    "dot-env": "^0.0.1",
     "formik": "^2.4.2",
     "framer-motion": "^10.12.16",
     "notistack": "^3.0.1",
@@ -47,6 +45,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "rollup-plugin-visualizer": "^5.9.2",
     "vite": "^4.3.9"
   }
 }
