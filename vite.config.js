@@ -19,6 +19,56 @@ export default defineConfig({
 
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+
+          if (
+            id.includes('sentry') 
+          )  {
+            return '@sentry';
+          }
+         
+          
+          if (
+            id.includes(' react-icons') ||    id.includes('react-loader-spinner') 
+          )  {
+            return '@loaders-icons';
+          }
+         
+          if (
+            id.includes('react-router-dom') 
+          )  {
+            return '@react-router';
+          }
+          
+          
+          if (id.includes('@mui') || id.includes('formik')) {
+            return '@mui';
+          }
+          // creating a chunk to react routes deps. Reducing the vendor chunk size
+       
+          if (
+            id.includes('reduxjs/toolkit') ||
+            id.includes('react-redux')
+          )  {
+            return '@redux';
+          }
+
+          if (
+            id.includes('framer') 
+          )  {
+            return '@framer';
+          }
+          if (
+            id.includes('date-fns') 
+          )  {
+            return '@date-fns';
+          }
+        },
+      },
+    },
   },
+  
 
 })
