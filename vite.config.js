@@ -29,29 +29,36 @@ export default defineConfig({
             return '@networking';
           }
 
-          // if (
-          //   id.includes('assets')
-          // )  {
-          //   return '@assets';
-          // }
           
-          //  if (
-          //    id.includes('PublicPlants')
-          //  )  {
-          //    return '@publicPlants';
-          //  }
+          if (
+            id.includes('forms')
+          )  {
+            return '@forms';
+          }
 
-          //  if (
-          //    id.includes('MyPlants')
-          //  )  {
-          //    return '@myPlants';
-          //  }
+          if (
+            id.includes('PublicPlants')
+          )  {
+            return '@publicPlants';
+          }
 
-          // if (
-          //   id.includes('Terms') || id.includes('PrivacyPolicy') ||  id.includes('CookiePolicy')
-          // )  {
-          //   return '@legal';
-          // }
+          if (
+            id.includes('MyPlants')
+          )  {
+            return '@myPlants';
+          }
+
+          if (
+            id.includes('notistack')
+          )  {
+            return '@notistack';
+          }
+
+          if (
+            id.includes('Terms') || id.includes('PrivacyPolicy') ||  id.includes('CookiePolicy')
+          )  {
+            return '@legal';
+          }
 
           if (
             id.includes('chart') || id.includes('Chart')
