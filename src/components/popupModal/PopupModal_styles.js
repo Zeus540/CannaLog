@@ -69,6 +69,9 @@ export const ModalCloseHolder = styled(m.div)`
 display: flex;
 margin: 0px -10px;
 justify-content: center;
+button{
+    margin:0px 10px;
+}
 `
 export const ModalContent = styled(m.div)`
 max-height: 60vh;

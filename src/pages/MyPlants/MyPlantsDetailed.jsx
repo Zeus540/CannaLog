@@ -54,7 +54,7 @@ import {
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
-
+import PopupModal from '../../components/popupModal/PopupModal'
 
 function MyPlantsDetailed() {
     const [plant, setPlant] = useState()
@@ -73,7 +73,7 @@ function MyPlantsDetailed() {
     const { enqueueSnackbar } = useSnackbar()
     const dispatch = useDispatch()
 
-    const PopupModal = lazy(()=> import('../../components/popupModal/PopupModal'))
+
 
     let plant_action_types = useSelector(selectPlantActionTypes)
 
@@ -227,7 +227,7 @@ function MyPlantsDetailed() {
              
                 
            
-                    {modalOpen && <Suspense ><PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/></Suspense>}
+                    {modalOpen && <PopupModal openModal={openModal} plant={plant} data={modalData} modalType={modalType} isSubmitting={isSubmitting} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>}
                     
                  
                  

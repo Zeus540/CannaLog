@@ -57,7 +57,7 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
     >
 <AnimatePresence mode='wait'>
       {!isSubmitting ? 
-
+   <Suspense fallback={<FormLoader/>}>
       <Modal
       initial={{ scale:0.4,opacity: 0 }}
       animate={{ scale:1,opacity: 1 }}
@@ -66,7 +66,7 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
       key="popup"
       >
    
-   <Suspense fallback={<Loader/>}>
+
        <ModalContent
        exit={{ opacity: 0 }} transition={{ duration: 0.0 }}   key="ModalContent">
          <ModalClose ><VscChromeClose onClick={() => openModal(modalType)} /></ModalClose>
@@ -122,7 +122,7 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
              </ModalCloseHolder>
            </>
          }
-{modalType == "deleteImage" &&
+        {modalType == "deleteImage" &&
            <>
              <ModalContentText>
                Are you sure you want to delete this image ?
@@ -173,10 +173,10 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
          }
 
        </ModalContent>
-       </Suspense>
+    
      
      </Modal>
-    
+     </Suspense>
     : <FormLoader
     key="loader"
     />}

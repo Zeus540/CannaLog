@@ -1,10 +1,11 @@
-import React, { useEffect,lazy, Suspense } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import styled from 'styled-components';
 import { Routes, Route,useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { SnackbarProvider } from 'notistack'
 import { useSelector } from 'react-redux';
 import { Root } from '../utils/global_styles';
+
 //Pages
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
 import HomePage from '../pages/HomePage/HomePage'

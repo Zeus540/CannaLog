@@ -2,17 +2,16 @@ import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/leaf.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn, selectUser, logout } from "../../features";
-import { FaSun } from "react-icons/fa";
-import { IoMoon } from "react-icons/io5";
-import { RiLogoutCircleRLine } from "react-icons/ri";
+import { IoMoon,IoSunny,IoLogInOutline,IoPersonOutline,IoLogOutOutline } from "react-icons/io5";
+import { BiBell } from "react-icons/bi";
 import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
-import { BiBell } from "react-icons/bi";
 import { useNotification } from "../../context/NotificationContext";
 import { useSocket } from "../../context/SocketContext";
 import { motion as m, AnimatePresence } from 'framer-motion'
+
 import { PiPlantLight, PiPlantFill } from "react-icons/pi";
 import { BsPeople } from "react-icons/bs";
 import { GiGreenhouse } from 'react-icons/gi';
@@ -20,39 +19,28 @@ import { RiMenu2Fill } from 'react-icons/ri'
 
 const Root = styled.div`
 background:${(props) => props.scrollDistance >= 1 ? `${props.theme.glass.background}` : "" || props.sideBarOpen ? `${props.theme.glass.background}` : ""};
-
-
-
 position: fixed;
-transition: background 0.5s ease;
-    top: 0;
-    z-index:50;
-    width: 100%;
-
- 
-  
-  @media (max-width: 425px) {
-    margin: 0px 0px;
-    margin-top: 0px;
-    padding-bottom: 0px;
-  }
+top: 0;
+z-index:50;
+width: 100%;
+@media (max-width: 425px) {
+  margin: 0px 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+}
 `;
 
 const Inner = styled.div`
 backdrop-filter: ${(props) => props.scrollDistance >= 1 ? `blur( 2px )` : ""};
 padding:15px 0px;
-
 margin: 0px auto;
 max-width: 1920px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
- 
-  @media (max-width: 1920px) {
-   
+display: flex;
+align-items: center;
+justify-content: space-between;
+@media (max-width: 1920px) {
 padding:15px;
-  }
+}
 `;
 
 const Img = styled.img`
@@ -94,14 +82,8 @@ h1{
 const Div = styled.div`
 display: flex;
 align-items: center;
-transition: all 0.5s ease;
-:nth-child(1){
-
-
-}
 `;
 const DivMenu = styled.div`
-transition: all 0.5s ease;
 padding-right: 10px;
 
 `;
@@ -137,6 +119,11 @@ const StyledLink = styled(Link)`
   align-items: center;
   text-decoration: none;
   display: flex;
+  svg{
+    color:${props => props.theme.accent};
+    font-size: 25px;
+    margin-right: 10px;
+  }
 `;
 const StyledLinkTop = styled(StyledLink)`
   padding: unset;
@@ -156,14 +143,14 @@ const MenuDropItem = styled.div`
   margin: 0px 0px;
 
   color: ${props => props.theme.text};
-
+  cursor: pointer;  
   align-items: center;
   text-decoration: none;
   display: flex;
  svg{
-  color: ${props => props.theme.accent};
+  color: ${props => props.theme.warn};
   margin-right:10px;
-  font-size: 20px !important;
+  font-size: 25px !important;
  }
 
 `;
@@ -394,7 +381,7 @@ const NavBar = ({ toggleTheme, themeType, }) => {
             </NotificationHolder>
 
 
-            <UserInfoTop onClick={() => { handleMenuOpen() }}>
+            <UserInfoTop >
               <UserAvatar>
                 {user?.user_name?.charAt(0)}
               </UserAvatar>
@@ -405,9 +392,8 @@ const NavBar = ({ toggleTheme, themeType, }) => {
 
         {!isLoggedIn && (
           <MenuLinkLeft>
-            <StyledLink to="/sign-in"> <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>Sign In</StyledLink>
-            <StyledLink to="/sign-up">
-              <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" /></Svg>Sign Up</StyledLink>
+            <StyledLink to="/sign-in"><IoLogInOutline/>Sign In</StyledLink>
+            <StyledLink to="/sign-up"><IoPersonOutline/>Sign Up</StyledLink>
           </MenuLinkLeft>
         )}
       </Inner>
@@ -423,10 +409,6 @@ const NavBar = ({ toggleTheme, themeType, }) => {
             animate={{ transform: "translateX(0%)" }}
             transition={{ duration: 0.10 }}
             exit={{ transform: "translateX(100%)" }}>
-
-
-
-
             {!isLoggedIn && <>
               <StyledLink to="/public-plants" onClick={() => { setSideBarOpen(false); }}>
 
@@ -434,6 +416,13 @@ const NavBar = ({ toggleTheme, themeType, }) => {
                 <FlexLinkText> <PiPlantLight />  Public Plants</FlexLinkText>
 
               </StyledLink>
+
+              <div>
+                <ThemeToggleHolderBottom>
+                  {theme == "light" && <ThemeSvg fill="#005bad" onClick={() => { toggleTheme() }}><IoMoon />Dark Mode</ThemeSvg>}
+                  {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><IoSunny /> Light Mode</ThemeSvg>}
+                </ThemeToggleHolderBottom>
+              </div>
             </>}
             {isLoggedIn &&
               <>
@@ -478,13 +467,11 @@ const NavBar = ({ toggleTheme, themeType, }) => {
 
                   <ThemeToggleHolderBottom>
                     {theme == "light" && <ThemeSvg fill="#005bad" onClick={() => { toggleTheme() }}><IoMoon />Dark Mode</ThemeSvg>}
-                    {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><FaSun /> Light Mode</ThemeSvg>}
+                    {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><IoSunny /> Light Mode</ThemeSvg>}
                   </ThemeToggleHolderBottom>
 
                   <LinkHolderMenuInnerItem>
-                    <MenuDropItem onClick={() => { logOut() }} >
-                      <RiLogoutCircleRLine fill="#f44336" /> Log Out
-                    </MenuDropItem>
+                    <MenuDropItem onClick={() => { logOut() }} ><IoLogOutOutline fill="#f44336" /> Log Out</MenuDropItem>
                   </LinkHolderMenuInnerItem>
                 </div>
 
@@ -499,12 +486,12 @@ const NavBar = ({ toggleTheme, themeType, }) => {
 
                 <ThemeToggleHolderBottom>
                   {theme == "light" && <ThemeSvg fill="#005bad" onClick={() => { toggleTheme() }}><IoMoon />Dark Mode</ThemeSvg>}
-                  {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><FaSun /> Light Mode</ThemeSvg>}
+                  {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><IoSunny /> Light Mode</ThemeSvg>}
                 </ThemeToggleHolderBottom>
 
                 <StyledLink to="/sign-in" onClick={() => { setSideBarOpen(false); }}>
 
-                  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" /></Svg>
+                 <IoLogInOutline/>
                   <FlexLinkText>Sign In</FlexLinkText>
 
                 </StyledLink>
