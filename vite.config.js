@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react-swc'
 import {visualizer} from "rollup-plugin-visualizer";
 import viteCompression from 'vite-plugin-compression';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(),splitVendorChunkPlugin(), sentryVitePlugin({
     org: "sentry",
@@ -13,10 +12,11 @@ export default defineConfig({
     //authToken: process.env.SENTRY_AUTH_TOKEN
   }),
   //viteCompression(),
-  visualizer({
-    emitFile:true,
-    filename:"stats.html"
-  })],
+  // visualizer({
+  //   emitFile:true,
+  //   filename:"stats.html"
+  // })
+],
 
   build: {
     sourcemap: true,
@@ -29,7 +29,6 @@ export default defineConfig({
             return '@networking';
           }
 
-          
           if (
             id.includes('forms')
           )  {
