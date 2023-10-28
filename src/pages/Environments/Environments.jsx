@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef,Suspense,lazy } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
@@ -14,12 +14,13 @@ import {
   selectHasIntialData,
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
-import PopupModal from '../../components/popupModal/PopupModal'
+
 import { IoMdAdd } from "react-icons/io";
 import { useSocket } from '../../context/SocketContext'
 import { useSnackbar } from 'notistack';
 import EnviromentCardSkelton from '../../components/cards/EnviromentCardSkelton'
 import Blank from '../../components/skeleton/Blank'
+import Loader from '../../components/loader/Loader'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -66,7 +67,7 @@ const Environments = () => {
   let environmentsLength = environments.length
 
 
-
+  const PopupModal = lazy(()=> import('../../components/popupModal/PopupModal'))
 
   // useEffect(() => {
 
@@ -188,7 +189,7 @@ const Environments = () => {
       exit={{ opacity: 0 }}
 
     >
-      {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
+      {modalOpen && <Suspense fallback={<Loader/>}><PopupModal openModal={openModal} data={modalData} modalType={modalType} /></Suspense>}
       <Holder>
         <FlexRowEnd>
           {hasIntialData ?  

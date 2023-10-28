@@ -2,8 +2,7 @@ import  { Suspense, useEffect, useState,lazy } from 'react'
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
 import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import {
   selectMyPlants,
   fetchMyPlants
@@ -21,8 +20,6 @@ margin: 0px -10px;
 flex-wrap: wrap;
 
 `
-
-
 
 
 const MyPlants = () => {

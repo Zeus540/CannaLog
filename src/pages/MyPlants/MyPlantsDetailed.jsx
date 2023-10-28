@@ -26,7 +26,7 @@ import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
 import Weeks from '../../components/weeks/Weeks'
-import Loader from '../../components/loader/Loader'
+
 import {
     ImgHolderTop,
     ImgHolderTopInfo,

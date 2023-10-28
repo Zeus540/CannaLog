@@ -2,7 +2,7 @@ import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { defineConfig,splitVendorChunkPlugin } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import {visualizer} from "rollup-plugin-visualizer";
-
+import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +12,7 @@ export default defineConfig({
     url: "https://olympus.zaheerroberts.co.za/",
     //authToken: process.env.SENTRY_AUTH_TOKEN
   }),
+  viteCompression(),
   visualizer({
     emitFile:true,
     filename:"stats.html"
@@ -24,6 +25,24 @@ export default defineConfig({
         manualChunks(id) {
 
           if (
+            id.includes('PublicPlants')
+          )  {
+            return '@publicPlants';
+          }
+
+          if (
+            id.includes('MyPlants')
+          )  {
+            return '@myPlants';
+          }
+
+          if (
+            id.includes('Terms') || id.includes('PrivacyPolicy') ||  id.includes('CookiePolicy')
+          )  {
+            return '@legal';
+          }
+
+          if (
             id.includes('sentry') 
           )  {
             return '@sentry';
@@ -33,7 +52,7 @@ export default defineConfig({
           if (
             id.includes(' react-icons') ||    id.includes('react-loader-spinner') 
           )  {
-            return '@loaders-icons';
+            return '@loaders';
           }
          
           if (
@@ -43,10 +62,10 @@ export default defineConfig({
           }
           
           
-          if (id.includes('@mui') || id.includes('formik')) {
+          if (id.includes('@mui') || id.includes('formik') ||  id.includes('yup') ){
             return '@mui';
           }
-          // creating a chunk to react routes deps. Reducing the vendor chunk size
+
        
           if (
             id.includes('reduxjs/toolkit') ||
