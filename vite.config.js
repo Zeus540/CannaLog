@@ -12,7 +12,7 @@ export default defineConfig({
     url: "https://olympus.zaheerroberts.co.za/",
     //authToken: process.env.SENTRY_AUTH_TOKEN
   }),
-  viteCompression(),
+  //viteCompression(),
   visualizer({
     emitFile:true,
     filename:"stats.html"
@@ -29,29 +29,29 @@ export default defineConfig({
             return '@networking';
           }
 
-          if (
-            id.includes('assets')
-          )  {
-            return '@assets';
-          }
+          // if (
+          //   id.includes('assets')
+          // )  {
+          //   return '@assets';
+          // }
           
-           if (
-             id.includes('PublicPlants')
-           )  {
-             return '@publicPlants';
-           }
+          //  if (
+          //    id.includes('PublicPlants')
+          //  )  {
+          //    return '@publicPlants';
+          //  }
 
-           if (
-             id.includes('MyPlants')
-           )  {
-             return '@myPlants';
-           }
+          //  if (
+          //    id.includes('MyPlants')
+          //  )  {
+          //    return '@myPlants';
+          //  }
 
-          if (
-            id.includes('Terms') || id.includes('PrivacyPolicy') ||  id.includes('CookiePolicy')
-          )  {
-            return '@legal';
-          }
+          // if (
+          //   id.includes('Terms') || id.includes('PrivacyPolicy') ||  id.includes('CookiePolicy')
+          // )  {
+          //   return '@legal';
+          // }
 
           if (
             id.includes('chart') || id.includes('Chart')
