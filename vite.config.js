@@ -23,18 +23,29 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-
           if (
-            id.includes('PublicPlants')
+            id.includes('socket.io') || id.includes('axios')
           )  {
-            return '@publicPlants';
+            return '@networking';
           }
 
           if (
-            id.includes('MyPlants')
+            id.includes('assets')
           )  {
-            return '@myPlants';
+            return '@assets';
           }
+          
+           if (
+             id.includes('PublicPlants')
+           )  {
+             return '@publicPlants';
+           }
+
+           if (
+             id.includes('MyPlants')
+           )  {
+             return '@myPlants';
+           }
 
           if (
             id.includes('Terms') || id.includes('PrivacyPolicy') ||  id.includes('CookiePolicy')
@@ -42,6 +53,12 @@ export default defineConfig({
             return '@legal';
           }
 
+          if (
+            id.includes('chart') || id.includes('Chart')
+          )  {
+            return '@charts';
+          }
+          
           if (
             id.includes('sentry') 
           )  {
