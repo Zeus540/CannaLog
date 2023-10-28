@@ -12,7 +12,7 @@ export default defineConfig({
     url: "https://olympus.zaheerroberts.co.za/",
     //authToken: process.env.SENTRY_AUTH_TOKEN
   }),
-  //viteCompression(),
+  viteCompression(),
   visualizer({
     emitFile:true,
     filename:"stats.html"
