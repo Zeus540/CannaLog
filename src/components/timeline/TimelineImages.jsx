@@ -226,7 +226,6 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
 
   const group_by = (data, setter, plant) => {
 
-    console.log("data", data)
 
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone

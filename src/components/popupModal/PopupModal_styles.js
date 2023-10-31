@@ -68,6 +68,7 @@ svg{
 export const ModalCloseHolder = styled(m.div)`
 display: flex;
 margin: 0px -10px;
+padding-bottom:30px;
 justify-content: center;
 button{
     margin:0px 10px;
@@ -78,6 +79,12 @@ max-height: 60vh;
 overflow-y: auto;
 overflow-x: hidden;
 color:  ${props => props.theme.text};
+-ms-overflow-style:none;
+scrollbar-width:none;
+::-webkit-scrollbar{
+    display:none;
+
+}
 `
 export const Warn = styled(m.p)`
 text-align: center;

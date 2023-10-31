@@ -15,11 +15,7 @@ import axios from '../../lib/axios';
 
 
 const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmitting}) => {
-    const [nutrientsTypes, setNutrientsTypes] = useState([]);
     const [measurementUnits, setMeasurementUnits] = useState([]);
-
-    const [nutrientsList, setNutrientsList] = useState([]);
-    const [nutrientsListData, setNutrientsListData] = useState([]);
     const { enqueueSnackbar } = useSnackbar()
      const dispatch = useDispatch()
 
@@ -28,15 +24,15 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
 
     useEffect(() => {
 
-        axios.get(`${BASE_URL_PROD}/nutrients`)
-            .then((response) => {
-                setNutrientsTypes(response.data)
-                console.log("nutrients", response.data);
-            })
-            .catch((error) => {
-                enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
-                console.log(error);
-            })
+        // axios.get(`${BASE_URL_PROD}/nutrients`)
+        //     .then((response) => {
+        //         setNutrientsTypes(response.data)
+        //         console.log("nutrients", response.data);
+        //     })
+        //     .catch((error) => {
+        //         enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
+        //         console.log(error);
+        //     })
 
         axios.get(`${BASE_URL_PROD}/measurement_units`)
             .then((response) => {
@@ -47,7 +43,7 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
                 console.log(error);
             })
 
-        setNutrientsListData([])
+        
     }, [])
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -63,8 +59,8 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
 
     let intialValues = {
         creation_date: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
-        water_amount: '',
-        water_amount_measurement: '',
+        water_amount: data.water_amount !== undefined ? data.water_amount :'',
+        water_amount_measurement: data.water_amount_measurement !== undefined ? data.water_amount_measurement :'',
         plant_id: plant.plant_id,
         timezone: userTimezone,
         plant_action_type_id:data.plant_action_type_id,
@@ -77,7 +73,6 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
 
     const handleAction = async (values, isSubmitting) => {
         setIsSubmitting(true)
-        values.nutrient_list = nutrientsListData
      
          let res = await  dispatch(takeAction(values))
          if (res.payload.affectedRows > 0) {
@@ -88,30 +83,12 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
 
     }
 
-    const handleAdd = (e, child) => {
-        if (nutrientsListData.map((n) => n.nutrient_id).includes(e.target.value.nutrient_id)) {
 
-        } else {
-            e.target.value.nutrient_amount = '0'
-            e.target.value.nutrient_measurement = 'ml'
-            setNutrientsListData([...nutrientsListData, e.target.value])
-        }
-    }
-
-    const handleAmountChange = (e, child) => {
-        console.log("e", e.target.value)
-        child.nutrient_amount = parseInt(e.target.value)
-
-    }
-    const handleUnitChange = (e, child) => {
-        console.log("e", e.target.value)
-        child.nutrient_measurement = parseInt(e.target.value)
-
-    }
     return (
         <div>
             <Formik
                 initialValues={intialValues}
+                enableReinitialize
                 validationSchema={AddWateringSchema}
                 onSubmit={(values,isSubmitting ) => {
                     setTimeout(() => {
@@ -138,6 +115,7 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
                                 margin='0px 15px 15px 0px'
                                 label="Water Amount"
                                 id='water_amount'
+                                value={values.water_amount}
                                 variant="outlined"
                                 required
                                 onChange={handleChange}
@@ -148,6 +126,7 @@ type='number'
                                 margin='0px 0px 15px 0px'
                                 label="Units"
                                 id='water_amount_measurement'
+                                value={values.water_amount_measurement}
                                 variant="outlined"
                                 required
                                 onChange={(e)=>[setFieldValue("water_amount_measurement",e.target.value)]}
@@ -164,63 +143,7 @@ type='number'
                             </Input>
 
                         </InputHolder>
-                        <InputFull
-                            id="NUTRIENTS"
-                            label="Select Nutrients"
-                            variant="outlined"
-                            onChange={(e, child) => { handleAdd(e, child) }}
-                            select
-                        >
-
-                            {nutrientsTypes?.map((n, index) => {
-                                return (
-                                    <Item key={index} value={n}>
-
-                                        {n?.nutrient_name}
-                                    </Item>
-                                )
-                            })}
-
-                        </InputFull>
-
-
-                        {nutrientsListData.length > 0 && nutrientsListData?.map((n) => {
-                            return (
-                                <NutrientHolcer>
-                                    <p>{n.nutrient_name}</p>
-                                    <InputHolder margin='0px -15px' >
-                                        <Input
-                                            width="50"
-                                            margin='0px 10px'
-                                            label="Amount"
-                                            required
-                                            variant="outlined"
-                                            onChange={(e) => { handleAmountChange(e, n) }}
-
-                                        />
-                                        <Input
-                                            width="50"
-                                            margin='0px 10px'
-                                            label="Units"
-                                            required
-                                            variant="outlined"
-                                            onChange={(e) => { handleUnitChange(e, n) }}
-                                            select
-                                        >
-                                            {measurementUnits?.map((n, index) => {
-                                                return (
-                                                    <Item key={index} value={n.measurement_unit_id}>
-
-                                                        {n?.measurement_unit}
-                                                    </Item>
-                                                )
-                                            })}
-                                        </Input>
-                                    </InputHolder>
-                                </NutrientHolcer>
-                            )
-                        })}
-
+          
                         <ButtonHolder>
                             <StyledButton type="submit" >
                                 Submit

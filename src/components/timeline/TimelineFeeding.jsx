@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { motion as m } from 'framer-motion'
+import { AnimatePresence, motion as m } from 'framer-motion'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizedDate, getWeekandDay } from '../../helpers/getLocalizeDate'
@@ -15,14 +15,15 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import PieChart from '../charts/PieChart'
+import TimeLineHeading from '../headings/TimeLineHeading'
 
 
- const Root = styled(m.div)`
+const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px;
 padding-bottom: 20px;
-width: 80%;
+ width: 70%;
 @media (max-width: 600px) {
   width: unset;
 }
@@ -32,12 +33,10 @@ width: 80%;
 @media (min-width: 769px) and (max-width: 1440px) {
   width: unset;
 }
-@media (min-width: 1921px) and (max-width: 2560px) {
-  width: 60%;
-}
+
 `
 
- const Item = styled(m.div)`
+const Item = styled(m.div)`
 position: relative;
 
 
@@ -64,30 +63,9 @@ margin: 10px auto;
 
 }
 `
- const ItemInner = styled.div`
-color: ${props => props.theme.text}!important;
-cursor: pointer;
-border-radius: 5px;
 
-padding: 15px;
-position: relative;
-display: flex;
-flex-direction: row;
 
-transition: all 0.5s ease;
-z-index: 2;
-justify-content: space-between;
-@media (max-width: 600px) {
-  flex-direction: column-reverse;
-  padding: 0px;
-}
-@media (min-width: 601px) and (max-width: 768px) {
-  flex-direction: column-reverse;
-}
-
-`
-
- const Tag = styled(m.div)`
+const Tag = styled(m.div)`
 background:${props => props.theme.accent};
 padding: 0px 15px;
 width: fit-content;
@@ -96,47 +74,48 @@ color: ${props => props.theme.textW}!important;
 `
 
 
- const ItemInnerActionHolder = styled(m.div)`
+const ItemHolder = styled(m.div)`
 display: flex;
-justify-content: end;
-`
-
- const TextButtonSvg = styled(m.div)`
-svg{
-    color:  ${props => props.theme.accent};
-    font-size: 20px;
-    margin-right: 10px;
-    path{
-      stroke:  ${props => props.theme.accent};
-    }
-  }
-`
- const TextButtonSvgDelete = styled(m.div)`
-color:  ${props => props.theme.warn};;
-font-size: 20px;
-
-font-weight: bold;
-cursor:pointer;
-display: flex;
-
-svg{
-  path{
-    stroke:  ${props => props.theme.warn};
-  }
+justify-content: space-between;
+padding: 10px;
+border-bottom: 2px solid ${props => props.theme.accent};
+div{
+  display: flex;
+}
+p{
+  color: ${props => props.theme.text}!important;
+}
+svg:nth-child(1){
+  color: ${props => props.theme.accent}!important;
+  font-size: 20px;
+  margin-right:10px
+}
+svg:nth-child(2){
+  color: ${props => props.theme.warn}!important;
+  font-size: 20px;
 }
 `
 
- const RootInner = styled(m.div)`
+
+const Holder = styled(m.div)`
+
+width: 40%;
 
 
 `
- const ItemInnerLeft = styled(m.div)`
-width: 35%;
-padding:40px;
-padding-left: 0px;
-padding-bottom: 0px;
+
+const RootInner = styled(m.div)`
+display: flex;
+justify-content: space-between;
+
+`
+const PieChartHolder = styled(m.div)`
+width: 50%;
+padding:40px 0px;
+
 align-items: center;
 display: flex;
+margin: 0 auto;
 @media (max-width: 600px) {
   width: unset;
   padding:40px 0px;
@@ -151,108 +130,17 @@ display: flex;
 
 
 
- const ItemInnerRightOutter = styled(m.div)`
-overflow: hidden;
-width: ${props => props.full ? "60%" :"100%"};
-
-height: fit-content;
-margin:20px;
-position: relative;
-border-radius: 5px;
-@media (max-width: 600px) {
-  width: unset;
-  margin:0px;
-}
-@media (min-width: 601px) and (max-width: 768px) {
-  width: unset;
-  margin:0px;
-}
-h1{
-  margin-bottom:10px;
-}
-`
-
- const ItemInnerRight = styled(m.div)`
-background: ${props => props.theme.primary}!important;
-position: relative;
-z-index: 4;
-border-radius: ${props => props.showMore ? "5px 5px 0px 0px": "5px"};;
-height: fit-content;
-padding:20px;
-
-@media (max-width: 600px) {
-  width: unset;
-}
-@media (min-width: 601px) and (max-width: 768px) {
-  width: unset;
-}
-`
 
 
- const ItemInnerRightTop = styled(m.div)`
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 20px;
-
-`
-
- const ItemInnerRightItemText = styled(m.div)`
-display: flex;
-font-size: 18px;
-justify-content: space-between;
-width: 100%;
-span{
-  white-space: nowrap;
-margin:0px 10px;
-color: ${props => props.theme.accent}!important;
-}
-`
-
- const ItemInnerRightHidden = styled(m.div)`
-transform: ${props => props.showMore ? "translateY(0%)": "translateY(-100%)"};
-position: ${props => props.showMore ? "unset": " absolute"};
-opacity: ${props => props.showMore ? "100%": " 100%"};
-visibility:${props => props.showMore ? "visible": " hidden"};
-padding: 0px 20px;
-background: ${props => props.theme.primary};
-border-radius: 0px 0px 10px 10px;
-transition: all 0.5s ease;
-width: 100%;
-right: 0;
-left: 0px;
-
-`
-
- const ItemInnerRightItem = styled(m.div)`
-display: flex;
-justify-content: space-between;
-padding: 15px 0px;
- border-bottom: 2px solid ${props => props.theme.accent};
-
-`
- const ItemInnerRightItemEnd = styled(m.div)`
-display: flex;
-justify-content: space-between;
-padding: 15px 0px;
-border-bottom: 2px solid ${props => props.theme.accent};
-`
-
- const ShowMore = styled(m.h2)`
-
-text-align: center;
-color: ${props => props.theme.accent};
-padding: 15px 0px;
-padding-bottom: 0px;
-`
-
-const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
+const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
 
   const [feedingData, setFeedingData] = useState([]);
+  const [wateringData, setWateringData] = useState([]);
+  
   const [modalOpen, setModalOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const [feedingDataFound, setFeedingDataFound] = useState(false)
-  
+
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const socket = useSocket()
@@ -262,38 +150,44 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
     if (plant && socket) {
 
-       socket.on(`watering_added${params.plant_id}`, (data) => {
-         let arr = [...feedingData, ...data];
-         console.log('watering_added',arr)
-         group_by(arr, setFeedingData, plant);
-       });
+      socket.on(`watering_added${params.plant_id}`, (data) => {
+        let arr = [...Object.values(wateringData).flat(), data];
+         group_by(arr, setWateringData, plant);
+      });
 
-       socket.on(`feeding_added${params.plant_id}`, (data) => {
-        let arr = [...feedingData, ...data];
-        console.log('feeding_added',arr)
+      socket.on(`feeding_added${params.plant_id}`, (data) => {
+        let arr = [...Object.values(feedingData).flat(), data];
         group_by(arr, setFeedingData, plant);
       });
-       
-      // socket.on(`action_deleted${params.plant_id}`, (data) => {
-      //   console.log('action_deleted', data)
-      //   setFeedingData(feedingData.filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)))
-      // });
+
+        socket.on(`action_deleted${params.plant_id}`, (data) => {
+          console.log('action_deleted', data)
+          group_by(Object.values(wateringData).flat().filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)), setWateringData, plant);
+          group_by(Object.values(feedingData).flat().filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)), setFeedingData, plant);
+        });
 
     }
-  }, [plant,socket]);
+  }, [plant,feedingData,wateringData, socket]);
 
 
   useEffect(() => {
     if (plant) {
 
-
       axios.post(`${BASE_URL_PROD}/plants/actions/1/${plant.plant_id}`)
         .then((response) => {
           if (response.data.length > 0) {
-            group_by(response.data, setFeedingData, plant)
-          } else {
+            group_by(response.data, setWateringData, plant)
+          } 
 
-          }
+        }).catch((err) => {
+          console.log("err", err)
+        })
+
+        axios.post(`${BASE_URL_PROD}/plants/actions/2/${plant.plant_id}`)
+        .then((response) => {
+          if (response.data.length > 0) {
+            group_by(response.data, setFeedingData, plant)
+          } 
 
         }).catch((err) => {
           console.log("err", err)
@@ -302,11 +196,30 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
   }, [plant]);
 
 
+  function groupByAndSortCustomOrder(array, key) {
+    const customOrder = ['Sun', 'Sat', 'Fri', 'Thu', 'Wed', 'Tue', 'Mon'];
 
+    const groupedData = array.reduce((result, obj) => {
+        (result[obj[key]] = result[obj[key]] || []).push(obj);
+        return result;
+    }, {});
+
+    // Sort keys based on the custom order
+    const sortedKeys = Object.keys(groupedData).sort((a, b) => {
+        return customOrder.indexOf(a) - customOrder.indexOf(b);
+    });
+
+    const sortedGroupedData = {};
+    sortedKeys.forEach((key) => {
+        sortedGroupedData[key] = groupedData[key];
+    });
+
+    return sortedGroupedData;
+}
 
 
   const group_by = (data, setter, plant) => {
-  
+
     // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
@@ -322,165 +235,160 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage }) => {
 
     let sorted = localizedData
 
-    const result = sorted.reduce((acc, item) => {
-    
-      const { day } = item;
-      if (!acc[day]) {
-        acc[day] = [];
-      }
-      acc[day].push(item);
-      acc[day] = acc[day].sort(
-        (a, b) => new Date(a.creation_date) - new Date(b.creation_date)
-      );
-      return acc;
-    }, {});
+    const groupedAndSortedData = groupByAndSortCustomOrder(sorted, 'day');
+
+    setter(groupedAndSortedData)
+
+  }
+
+
+
+
  
-    setter(result)
-  
-  }
-
-
-  useEffect(() => {
-    if(Object.values(feedingData)?.flat()?.map((a)=> a.week ).includes(activeWeek)){
-      setFeedingDataFound(true)
-    }else{
-      setFeedingDataFound(false)
-    }
-
-  }, [activeWeek,feedingData])
-
-  const openModal = (type, data) => {
-    switch (type) {
-
-      case "deleteImage":
-        setModalType(type)
-        setModalData(data)
-        setModalOpen(!modalOpen)
-        break;
-
-    }
-  }
 
 
   return (
-   
-       <>
-        {feedingDataFound  && 
-    <Root>
+
+        <Root>
 
 
-      <RootInner>
+          <RootInner>
+          <Holder>
+          <TimeLineHeading heading="Nutrients"/>
+            <Swiper
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
 
-        <Swiper
-          pagination={{
-            dynamicBullets: true,
-          }}
-          modules={[Pagination]}
-     
-          slidesPerView={1}
-          breakpoints={{
-            0: {
-              slidesPerView: 1,
-           
-            },
-            600: {
-              slidesPerView: 1,
-          
-            },
-            768: {
-              slidesPerView: 1,
-             
-            },
-            1024: {
-              slidesPerView: 1,
-         
-            },
-          }}
+              slidesPerView={1}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
 
-        >
+                },
+                600: {
+                  slidesPerView: 1,
 
-          {Object.keys(feedingData).map((i) => {
-            if (feedingData[i]?.filter((a) => a.week == activeWeek).length > 0) {
-              return (
-                <SwiperSlide>
-                  <Item>
+                },
+                768: {
+                  slidesPerView: 1,
 
-                    <ItemInner >
+                },
+                1024: {
+                  slidesPerView: 1,
 
+                },
+              }}
 
-{feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).length > 0 &&  
-                      <ItemInnerLeft>
-             
-                        <PieChart data={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).map((a) => a.nutrient_amount)} labels={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).map((a) => a.nutrient_name)} />
-                      </ItemInnerLeft >
-                    }
-                      <ItemInnerRightOutter full={feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).length > 0}>
-                      {/* <Heading>{title}</Heading>   */}
-                      <ItemInnerRightTop>
-                        <Tag>{feedingData[i][0].day}</Tag>
-                        </ItemInnerRightTop>
-                   
-                      <ItemInnerRight showMore={showMore} >
-                        
-                   
-                      
-                        <ItemInnerRightItemEnd>{feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) } Litres of Water Used </ItemInnerRightItemEnd>
-                        {/* <ItemInnerRightItemEnd>Ph Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd>
-                        <ItemInnerRightItemEnd>Ec Range {feedingData[i]?.filter((a) => a.week == activeWeek).reduce((accumulator, curValue)=>{return accumulator + curValue.water_amount}, 0) }</ItemInnerRightItemEnd> */}
+            >
 
-{feedingData[i]?.filter((a) => a.week == activeWeek && a.plant_feeding_id !== null).length > 0 && <>
-                        <ShowMore onClick={()=>{setShowMore((showMore) => !showMore)}}>Show Nutrients</ShowMore>
-                        
-                        <ItemInnerRightHidden showMore={showMore}>
-                        <div >
-                        {feedingData[i]?.filter((a) => a.week == activeWeek).map((a) => {
-                          if(a.plant_feeding_id !== null){
-                          return (
-                            <ItemInnerRightItem>
-                               
-                            
-                              
-                              <ItemInnerRightItemText>
-                                
-                                <p>{a.nutrient_name}</p>
-                                <span>{a.nutrient_amount} {a.measurement_unit}</span>
-                              </ItemInnerRightItemText>
-                             
+              {Object.keys(feedingData).map((i) => {
+                if (feedingData[i]?.filter((a) => a.week == activeWeek).length > 0) {
+                  return (
+                    <SwiperSlide>
+                      <Item>
+                      <Tag>{i}</Tag>
+                       
+                          {feedingData[i]?.filter((a) => a.week == activeWeek ).length > 0 &&
+                            <PieChartHolder>
+                              <PieChart data={feedingData[i]?.filter((a) => a.week == activeWeek ).map((a) => a.nutrient_amount)} labels={feedingData[i]?.filter((a) => a.week == activeWeek ).map((a) => a.nutrient_name)} />
 
-                              {!publicPage &&
-                                <ItemInnerActionHolder>
+                            </PieChartHolder >
+                          }
 
-                                  <TextButtonSvg onClick={() => openModal('editNote', a)}><FiEdit /></TextButtonSvg>
-                                  <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
-                                </ItemInnerActionHolder>
-                              }
-                            </ItemInnerRightItem>
+                            {feedingData[i].map((itm)=>{
+                          return(
+                            <ItemHolder>
+                              <div>
+                              <p>{itm.nutrient_amount} {itm.measurement_unit } {itm.nutrient_name} </p>
+                           
+                           
+                            </div>
+                            <div>
+                              <FiEdit onClick={() => openModal('editFeeding', itm)}/>
+                              <RiDeleteBin5Line onClick={() => openModal('deleteFeeding', itm)}/>
+                            </div>
+
+                            </ItemHolder>
                           )
+                        })
+
                         }
-                        })}
-                         </div>
-                         </ItemInnerRightHidden>
-                         </>}
-                      </ItemInnerRight >
+                      </Item>
+                    </SwiperSlide>
+                  )
+                }
 
-               
-                         </ItemInnerRightOutter >
-                    </ItemInner>
+              })}
 
-                  </Item>
-                </SwiperSlide>
-              )
-            }
+            </Swiper>
+            </Holder>
+            <Holder>
+             <TimeLineHeading heading="Water"/>
+            <Swiper
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
 
-          })}
+              slidesPerView={1}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
 
-        </Swiper>
-      </RootInner>
-    </Root>
-      }
-    </>
+                },
+                600: {
+                  slidesPerView: 1,
 
- 
+                },
+                768: {
+                  slidesPerView: 1,
+
+                },
+                1024: {
+                  slidesPerView: 1,
+
+                },
+              }}
+
+            >
+
+              {Object.keys(wateringData).map((i) => {
+                if (wateringData[i]?.filter((a) => a.week == activeWeek).length > 0) {
+                  return (
+                    <SwiperSlide>
+                      <Item>
+
+                      <Tag>{i}</Tag>
+                        {wateringData[i].map((itm)=>{
+                          return(
+                            <ItemHolder>
+                            <p>{itm.water_amount} {itm.measurement_unit }</p>
+
+                            <div>
+                              <FiEdit onClick={() => openModal('editWatering', itm)}/>
+                              <RiDeleteBin5Line onClick={() => openModal('deleteWatering', itm)}/>
+                            </div>
+
+                            </ItemHolder>
+                          )
+                        })
+
+                        }
+              
+                      </Item>
+                    </SwiperSlide>
+                  )
+                }
+
+              })}
+
+            </Swiper>
+            </Holder>
+          </RootInner>
+        </Root>
+     
   )
 }
 

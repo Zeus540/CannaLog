@@ -54,6 +54,16 @@ export const takeAction = createAsyncThunk('myPlants/takeAction',(values)=>{
   });
 })
 
+export const editAction = createAsyncThunk('myPlants/editAction',(values)=>{
+
+  return axios.patch(`${BASE_URL_PROD}/plants/${values.plant_id}/edit_action/13`,values)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    throw new Error('Failed to edit plant action');
+  });
+})
 
 export const deleteAction = createAsyncThunk('myPlants/deleteAction',(values)=>{
 

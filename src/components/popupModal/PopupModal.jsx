@@ -18,8 +18,16 @@ const ChangeStage = lazy(()=> import('../forms/ChangeStage'));
 const AddNote = lazy(()=> import('../forms/AddNote'));
 const UploadImage = lazy(()=> import('../forms/UploadImage'));
 const AddWatering = lazy(()=> import('../forms/AddWatering'));
+const AddFeeding = lazy(()=> import('../forms/AddFeeding'));
 
-
+useEffect(() => {
+  document.body.style.overflow = 'hidden';
+ 
+   return () => {
+    document.body.style.overflow = 'unset';
+   }
+ }, [])
+ 
   const dispatch = useDispatch()
   
   const handleSubmit = async (e) => {
@@ -38,13 +46,7 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
     openModal(modalType)
   }
   
- useEffect(() => {
-  document.body.style.overflow = 'hidden';
- 
-   return () => {
-    document.body.style.overflow = 'unset';
-   }
- }, [])
+
  
   return createPortal(
 
@@ -139,6 +141,40 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
            </>
          }
 
+{modalType == "deleteWatering" &&
+           <>
+             <ModalContentText>
+               Are you sure you want to delete this Watering ?
+             </ModalContentText>
+
+             <Warn>
+               Warning this action is irreversible !
+             </Warn>
+
+             <ModalCloseHolder>
+               <StyledButton onClick={() => { handleActionDelete(data) }}>Yes</StyledButton>
+               <StyledButton onClick={() => openModal(modalType)}>Cancel</StyledButton>
+             </ModalCloseHolder>
+           </>
+         }
+
+     {modalType == "deleteFeeding" &&
+           <>
+             <ModalContentText>
+               Are you sure you want to delete this Feeding ?
+             </ModalContentText>
+
+             <Warn>
+               Warning this action is irreversible !
+             </Warn>
+
+             <ModalCloseHolder>
+               <StyledButton onClick={() => { handleActionDelete(data) }}>Yes</StyledButton>
+               <StyledButton onClick={() => openModal(modalType)}>Cancel</StyledButton>
+             </ModalCloseHolder>
+           </>
+         }
+
          {(modalType == "addEnvironment") &&
     
            <AddEvironment modalType={modalType} openModal={openModal} data={data} />
@@ -158,7 +194,7 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
            <ChangeStage modalType={modalType} openModal={openModal} data={data} plant={plant} />
          }
 
-         {(data?.plant_action_type_id == 13) &&
+         {(data?.plant_action_type_id == 13 || modalType == "editNote") &&
           
            <AddNote modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting} />
   
@@ -168,8 +204,12 @@ const AddWatering = lazy(()=> import('../forms/AddWatering'));
            <UploadImage modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
          }
 
-         {(data?.plant_action_type_id == 1) &&
+         {(data?.plant_action_type_id == 1 || modalType == "editWatering") &&
            <AddWatering modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
+         }
+
+          {(data?.plant_action_type_id == 2 || modalType == "editFeeding") &&
+           <AddFeeding modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
          }
 
        </ModalContent>

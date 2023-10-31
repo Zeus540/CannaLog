@@ -9,11 +9,13 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { getLocalizeTime } from '../../helpers/getLocalizeTime';
-import { takeAction } from '../../features';
+import { takeAction,editAction } from '../../features';
 import { useSnackbar } from 'notistack';
 
 const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
 
+ 
+    
     const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar()
     
@@ -29,16 +31,17 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
              .required('Required'),
         plant_action_type_id: Yup.number()
              .required('Required')
-             .min(1)
-             .max(16),
+        
     });
 
     let intialValues = {
-        creation_date: format(new Date(),'yyyy-MM-dd HH:mm:ss'),
+        creation_date: data.plant_note !== undefined ? format(new Date(data.creation_date),'yyyy-MM-dd HH:mm:ss') :  format(new Date(),'yyyy-MM-dd HH:mm:ss'),
         timezone: userTimezone ,
-        plant_note: '',
+        plant_note: data.plant_note || '',
         plant_id:plant.plant_id,
-        plant_action_type_id:data.plant_action_type_id,
+        plant_action_type_id:data.plant_action_type_id == undefined ? 13 : data.plant_action_type_id,
+        plant_action_id:data.plant_action_id,
+        plant_note_id:data.plant_note_id
     }
 
 
@@ -51,15 +54,29 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
         setIsSubmitting(true)
         setSubmitting(true)
 
-        dispatch(takeAction(values))
-        .then((response)=>{
-            if (response.payload.affectedRows > 0) {
-                setIsSubmitting(false)
-                setModalOpen(false)
-                setSubmitting(false)
-                enqueueSnackbar(`Note Uploaded`, { variant: 'success' })
-            }
-        })
+        console.log(values)
+        if(data.plant_note_id){
+            dispatch(editAction(values))
+            .then((response)=>{
+                if (response.payload.affectedRows > 0) {
+                    setIsSubmitting(false)
+                    setModalOpen(false)
+                    setSubmitting(false)
+                    enqueueSnackbar(`Note Edited`, { variant: 'success' })
+                }
+            })
+        }else{
+            dispatch(takeAction(values))
+            .then((response)=>{
+                if (response.payload.affectedRows > 0) {
+                    setIsSubmitting(false)
+                    setModalOpen(false)
+                    setSubmitting(false)
+                    enqueueSnackbar(`Note Uploaded`, { variant: 'success' })
+                }
+            })
+        }
+      
      
        
     }
@@ -69,6 +86,7 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
         <div>
             <Formik
                 initialValues={intialValues}
+                enableReinitialize
                 validationSchema={AddNoteSchema}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
@@ -82,16 +100,15 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
                             <StyledDateTimePicker
                                 name="creation_date"
                                 maxDate={new Date()}
-                             
                                 minDate={new Date(getLocalizeTime(plant.creation_date))}
-                                defaultValue={new Date()}
+                                defaultValue={values.creation_date !== undefined ? new Date(values.creation_date) : new Date()}
                                 onChange={(value) => { handleDate(values,format(value,'yyyy-MM-dd HH:mm:ss')) }}
-                              
                             />
                         </LocalizationProvider>
                             <StyledTextareaAutosize
                             aria-label="textarea"
                             minRows={3}
+                            value={values.plant_note}
                             name="plant_note"
                             onChange={handleChange}
                             placeholder="Enter your text"

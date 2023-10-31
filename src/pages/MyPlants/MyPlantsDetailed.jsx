@@ -176,6 +176,25 @@ function MyPlantsDetailed() {
                 setModalData(action)
                 setModalOpen(!modalOpen)
                 break;
+       
+            //Edits
+            case "editNote":
+                setModalType("editNote")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+            break;
+            case "editWatering":
+                setModalType("editWatering")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+            break;
+            case "editFeeding":
+                setModalType("editFeeding")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+            break;
+            
+            //Deletes
             case "deleteNote":
                 setModalType("deleteNote")
                 setModalData(action)
@@ -183,6 +202,16 @@ function MyPlantsDetailed() {
             break;
             case "deleteImage":
                 setModalType("deleteImage")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+            break;
+            case "deleteWatering":
+                setModalType("deleteWatering")
+                setModalData(action)
+                setModalOpen(!modalOpen)
+            break;
+            case "deleteFeeding":
+                setModalType("deleteFeeding")
                 setModalData(action)
                 setModalOpen(!modalOpen)
             break;
@@ -316,13 +345,13 @@ function MyPlantsDetailed() {
                         return (
                             <QuickAction key={index} onClick={() => { openModal("takeAction", action) }}>
                                 {action.plant_action_type_id == 1 && <MdOutlineWaterDrop />}
-                                {action.plant_action_type_id == 3 && <LiaCutSolid />}
+                                {action.plant_action_type_id == 5 && <LiaCutSolid />}
                                 {action.plant_action_type_id == 4 && <AiOutlineCamera />}
                                 {action.plant_action_type_id == 13 && <TbNotes />}
                                 {action.plant_action_type_id == 16 && <PiPottedPlantLight />}
-                                {action.plant_action_type_id == 6 && <TfiPaintBucket />}
+                                {action.plant_action_type_id == 2 && <TfiPaintBucket />}
                                 {action.plant_action_type_id == 14 && <TbArrowsExchange />}
-                                {action.plant_action_type_id == 5 && <RiScales2Line />}
+                                {action.plant_action_type_id == 6 && <RiScales2Line />}
                                 {action.plant_action_type_id == 15 && <TbExchange />}
                                 <p>{action.plant_action_type_name}</p>
                             </QuickAction>
@@ -333,9 +362,8 @@ function MyPlantsDetailed() {
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek} />
             <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" openModal={openModal}/>
-            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" />
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} openModal={openModal}/>
-
+            <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering"  openModal={openModal}/>
 
         </Root>
 
