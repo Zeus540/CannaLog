@@ -98,16 +98,20 @@ svg:nth-child(2){
 
 
 const Holder = styled(m.div)`
+padding: 0px 20px;
+width: 50%;
 
-width: 40%;
+@media (max-width: 600px) {
+  width: 100%;
 
+}
 
 `
 
 const RootInner = styled(m.div)`
 display: flex;
 justify-content: space-between;
-
+flex-wrap:wrap;
 `
 const PieChartHolder = styled(m.div)`
 width: 50%;
@@ -251,10 +255,10 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
 
         <Root>
 
-
+<TimeLineHeading heading="feeding"/>
           <RootInner>
           <Holder>
-          <TimeLineHeading heading="Nutrients"/>
+       
             <Swiper
               pagination={{
                 dynamicBullets: true,
@@ -305,11 +309,12 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
                            
                            
                             </div>
+                            {!publicPage && 
                             <div>
                               <FiEdit onClick={() => openModal('editFeeding', itm)}/>
                               <RiDeleteBin5Line onClick={() => openModal('deleteFeeding', itm)}/>
                             </div>
-
+                            }
                             </ItemHolder>
                           )
                         })
@@ -325,7 +330,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
             </Swiper>
             </Holder>
             <Holder>
-             <TimeLineHeading heading="Water"/>
+          
             <Swiper
               pagination={{
                 dynamicBullets: true,
@@ -364,12 +369,14 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
                         {wateringData[i].map((itm)=>{
                           return(
                             <ItemHolder>
-                            <p>{itm.water_amount} {itm.measurement_unit }</p>
-
-                            <div>
+                            <p>{itm.water_amount} {itm.measurement_unit } Water</p>
+{!publicPage && 
+<div>
                               <FiEdit onClick={() => openModal('editWatering', itm)}/>
                               <RiDeleteBin5Line onClick={() => openModal('deleteWatering', itm)}/>
                             </div>
+                            }
+                            
 
                             </ItemHolder>
                           )

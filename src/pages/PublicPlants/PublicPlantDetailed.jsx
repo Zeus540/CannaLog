@@ -256,9 +256,11 @@ function PublicPlantDetailed() {
             </ImgHolderTop>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek} />
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" publicPage={true} />
+        
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} publicPage={true} />
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" publicPage={true} />
             <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering" publicPage={true} />
+      
         </Root>
 
     )

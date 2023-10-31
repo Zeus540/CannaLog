@@ -361,10 +361,11 @@ function MyPlantsDetailed() {
             </QuickActionHolder>
 
             <Weeks startDate={plant?.creation_date} actions={plantActions} handleActiveWeeks={handleActiveWeeks} activeWeek={activeWeek} />
-            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" openModal={openModal}/>
+        
             <TimelineImages plant={plant} activeWeek={activeWeek} title="Gallery" handleSetCoverImage={handleSetCoverImage} openModal={openModal}/>
+            <TimelineNotes plant={plant} activeWeek={activeWeek} title="Notes" openModal={openModal}/>
             <TimelineFeeding plant={plant} activeWeek={activeWeek} title="Watering"  openModal={openModal}/>
-
+      
         </Root>
 
     )
