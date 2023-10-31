@@ -20,7 +20,7 @@ export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px;
-padding-bottom: 20px;
+padding-bottom: 0px;
 `
 export const TimeLineHolder = styled(m.div)`
 display: flex;
