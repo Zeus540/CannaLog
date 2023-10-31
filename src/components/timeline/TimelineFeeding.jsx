@@ -143,7 +143,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
   
   const [modalOpen, setModalOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
-  const [feedingDataFound, setFeedingDataFound] = useState(false)
+  const [dataFound, setDataFound] = useState(false)
 
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
@@ -246,13 +246,24 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
   }
 
 
+  useEffect(() => {
+    console.log(Object.values(wateringData).flat().filter((i) => i.week == activeWeek).length > 0)
+    console.log(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0)
+    if(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0 || Object.values(wateringData).flat().filter((i) => i.week == activeWeek).length > 0){
+      setDataFound(true)
+    }else{
+      setDataFound(false)
+    }
+
+  }, [wateringData,feedingData,activeWeek])
 
 
  
 
 
   return (
-
+    <>
+ {dataFound && 
         <Root>
 
 <TimeLineHeading heading="feeding"/>
@@ -395,7 +406,8 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
             </Holder>
           </RootInner>
         </Root>
-     
+      }
+      </>
   )
 }
 
