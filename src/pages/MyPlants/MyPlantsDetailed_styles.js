@@ -188,17 +188,21 @@ padding: 10px 0px;
 export const DayHolderOutterInner = styled.div`
 display: flex;
 flex-wrap: wrap;
-justify-content: space-between;
+justify-content: end;
 color:${(props) => `${props.theme.accent}`};
 max-width: 1920px;
 margin: 0px auto;
-padding: 15px 20px;
+padding: 15px;
 padding-top: 0px;
 @media (max-width: 768px) {
     width: unset;
    
   }
-
+  svg{
+font-size:25px;
+margin-right: 5px;
+color:${(props) => `${props.theme.accent}`};
+  }
 `
 
 export const DayHolderOutter = styled.div`

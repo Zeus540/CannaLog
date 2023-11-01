@@ -77,16 +77,16 @@ function MyPlantsDetailed() {
 
     let plant_action_types = useSelector(selectPlantActionTypes)
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const intervalId = setInterval(() => {
-            setFullDate(getCurrentDayMonthYear().fullDate)
-        }, 30000); // Update every minute
+    //     const intervalId = setInterval(() => {
+    //         setFullDate(getCurrentDayMonthYear().fullDate)
+    //     }, 30000); // Update every minute
 
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
+    //     return () => {
+    //         clearInterval(intervalId);
+    //     };
+    // }, []);
 
 
     useEffect(() => {
@@ -321,7 +321,7 @@ function MyPlantsDetailed() {
 
                     <DayHolderOutter>
                         <DayHolderOutterInner>
-                            {fullDate} <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
+                            <DayHolder><GiBackwardTime />{plant && `Day ${getElapsedDays(plant?.creation_date)}`} </DayHolder>
                         </DayHolderOutterInner>
                     </DayHolderOutter>
                 </ImgHolderTopInfo>
