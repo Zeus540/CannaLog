@@ -138,7 +138,7 @@ const TimelineNotes = ({ plant, activeWeek,openModal, title,publicPage }) => {
 
       socket.on(`action_deleted${params.plant_id}`, (data) => {
         console.log('action_deleted',data)
-        setNotes(notes.filter((i)=> i.plant_action_id !== parseInt(data.plant_action_id)))
+        setNotes(notes.filter((i)=> i.plant_note_id !== parseInt(data.plant_note_id)))
       });
 
     }
@@ -240,7 +240,7 @@ const TimelineNotes = ({ plant, activeWeek,openModal, title,publicPage }) => {
                           </ItemInnerContent>
                           {!publicPage &&
                             <ItemInnerActionHolder>
-
+                           
                               <TextButtonSvg onClick={() => openModal('editNote', a)}><FiEdit /></TextButtonSvg>
                               <TextButtonSvgDelete onClick={() => openModal('deleteNote', a)}><RiDeleteBin5Line /></TextButtonSvgDelete>
                             </ItemInnerActionHolder>

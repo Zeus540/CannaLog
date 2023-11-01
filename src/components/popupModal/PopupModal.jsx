@@ -27,7 +27,7 @@ useEffect(() => {
     document.body.style.overflow = 'unset';
    }
  }, [])
- 
+
   const dispatch = useDispatch()
   
   const handleSubmit = async (e) => {
@@ -194,21 +194,21 @@ useEffect(() => {
            <ChangeStage modalType={modalType} openModal={openModal} data={data} plant={plant} />
          }
 
-         {(data?.plant_action_type_id == 13 || modalType == "editNote") &&
+         {(data?.plant_action_type_id == 13 || modalType == "editNote" ) && modalType !== "deleteNote" &&
           
            <AddNote modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting} />
   
          }
 
-         {(data?.plant_action_type_id == 4) &&
+         {(data?.plant_action_type_id == 4) && modalType !== "deleteImage" &&
            <UploadImage modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
          }
 
-         {(data?.plant_action_type_id == 1 || modalType == "editWatering") &&
+         {(data?.plant_action_type_id == 1 || modalType == "editWatering") && modalType !== "deleteWatering" &&
            <AddWatering modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
          }
 
-          {(data?.plant_action_type_id == 2 || modalType == "editFeeding") &&
+          {(data?.plant_action_type_id == 2 || modalType == "editFeeding")  && modalType !== "deleteFeeding" && 
            <AddFeeding modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
          }
 

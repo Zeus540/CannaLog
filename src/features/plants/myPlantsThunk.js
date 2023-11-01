@@ -66,8 +66,8 @@ export const editAction = createAsyncThunk('myPlants/editAction',(values)=>{
 })
 
 export const deleteAction = createAsyncThunk('myPlants/deleteAction',(values)=>{
-
-  return axios.delete(`${BASE_URL_PROD}/plants/${values.plant_id}/delete_action/${values.plant_action_id}`,values)
+console.log("values",values)
+  return axios.post(`${BASE_URL_PROD}/plants/${values.plant_id}/delete_action/${values.plant_action_type_id}`,values)
   .then((response) => {
     return response.data;
   })

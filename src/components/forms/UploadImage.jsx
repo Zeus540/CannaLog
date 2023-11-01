@@ -35,7 +35,7 @@ function UploadImage({ modalType, openModal, data, plant ,setModalOpen ,setIsSub
   const { enqueueSnackbar } = useSnackbar()
 
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  
+ 
   const handleSubmit = (e) => {
 if(image !== undefined){
   setIsSubmitting(true)
@@ -44,7 +44,8 @@ if(image !== undefined){
   let formData = {
     file:image,
     plant_id:params.plant_id,
-    creation_date:uploadDate
+    creation_date:uploadDate,
+    plant_action_type_id:data.plant_action_type_id
   }
 
 

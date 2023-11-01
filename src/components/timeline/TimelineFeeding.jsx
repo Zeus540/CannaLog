@@ -160,14 +160,17 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
       });
 
       socket.on(`feeding_added${params.plant_id}`, (data) => {
-        let arr = [...Object.values(feedingData).flat(), data];
+        let arr = [...Object.values(feedingData).flat(), ...data];
+        console.log("feeding_added",data)
+        console.log("arr",arr)
         group_by(arr, setFeedingData, plant);
       });
 
         socket.on(`action_deleted${params.plant_id}`, (data) => {
           console.log('action_deleted', data)
-          group_by(Object.values(wateringData).flat().filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)), setWateringData, plant);
-          group_by(Object.values(feedingData).flat().filter((i) => i.plant_action_id !== parseInt(data.plant_action_id)), setFeedingData, plant);
+          
+          group_by(Object.values(wateringData).flat().filter((i) => i.plant_watering_id !== parseInt(data.plant_watering_id)), setWateringData, plant);
+          group_by(Object.values(feedingData).flat().filter((i) => i.plant_feeding_id !== parseInt(data.plant_feeding_id)), setFeedingData, plant);
         });
 
     }
