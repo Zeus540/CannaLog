@@ -42,6 +42,7 @@ import ProgressBar from "../components/progressBar/ProgressBar";
 //Utils
 import ProtectedRoutes from '../utils/ProtectedRoutes';
 import Loader from '../components/loader/Loader';
+import { BackToTop } from '../components/backToTop/BackToTop';
 
 
 
@@ -138,10 +139,11 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                       
                         <Route path="*" element={<NotFoundPage />}/>
                     </Routes>
-        
+                    <BackToTop/>
                 </AnimatePresence>
                 </Suspense>
                 <Footer key="Footer" isLoggedIn={isLoggedIn}/>
+               
                 <WebSocketListener/> 
                 </SocketProvider>
                </NotificationProvider>

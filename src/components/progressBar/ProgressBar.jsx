@@ -21,8 +21,8 @@ const ProgressBar = () => {
 
     return (
         <Root>
-            <RootInner style={{scaleX :scrollYProgress}}>
-            </RootInner>
+            <RootInner style={{scaleX :scrollYProgress}} />
+           
         </Root>
     );
 };

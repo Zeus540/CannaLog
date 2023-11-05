@@ -12,6 +12,8 @@ import {
 import PlantCard from '../../components/cards/PlantCard'
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 import Blank from '../../components/skeleton/Blank'
+import Banner from '../../components/banner/Banner'
+import SearchImg from '../../assets/images/search.jpg'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -19,6 +21,10 @@ display:flex;
 margin: 0px -10px;
 flex-wrap: wrap;
 
+`
+const SRoot = styled(Root)`
+padding-top:0px;
+min-height:unset
 `
 
 const PublicPlants = () => {
@@ -95,8 +101,10 @@ const PublicPlants = () => {
 
   return (
 
+<>
+<Banner bg={SearchImg} heading="Public Grow Logs" txt1="Enhance Your Cannabis Garden! Find Proven Tips for Public Plants. " txt2="Optimize Your Cultivation Today!"/>
 
-    <Root
+    <SRoot
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.10 }}
@@ -104,17 +112,7 @@ const PublicPlants = () => {
     >
 
       <Holder>
-        <FlexRowEnd>
-          {publicPlants.hasIntialData ?
-            <Heading
-            >
-              Public Plants
-            </Heading>
-            :
-            <Blank w="100px" h='30px' />
-          }
 
-        </FlexRowEnd>
         <EnviromentHolder>
           {publicPlants.hasIntialData && <>
             {publicPlants.plants?.map((p, index) => {
@@ -140,8 +138,8 @@ const PublicPlants = () => {
         </EnviromentHolder>
 
       </Holder>
-    </Root>
-
+    </SRoot>
+    </>
   )
 }
 

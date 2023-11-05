@@ -27,7 +27,7 @@ function PieChart({data,labels,unit}) {
         labels: labels,
         datasets: [
           {
-            label: '# of Votes',
+            // label: '# of Votes',
             data: data,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',

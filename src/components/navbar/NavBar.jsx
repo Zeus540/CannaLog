@@ -23,6 +23,7 @@ position: fixed;
 top: 0;
 z-index:50;
 width: 100%;
+transition: background 0.25s linear;
 @media (max-width: 425px) {
   margin: 0px 0px;
   margin-top: 0px;
@@ -417,13 +418,9 @@ const NavBar = ({ toggleTheme, themeType, }) => {
 
               </StyledLink>
 
-              <div>
-                <ThemeToggleHolderBottom>
-                  {theme == "light" && <ThemeSvg fill="#005bad" onClick={() => { toggleTheme() }}><IoMoon />Dark Mode</ThemeSvg>}
-                  {theme == "dark" && <ThemeSvg fill="#ffeb3b" onClick={() => { toggleTheme() }}><IoSunny /> Light Mode</ThemeSvg>}
-                </ThemeToggleHolderBottom>
-              </div>
+           
             </>}
+            
             {isLoggedIn &&
               <>
                 <div>
