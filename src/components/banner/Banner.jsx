@@ -74,29 +74,31 @@ const isLoggedIn = useSelector(selectIsLoggedIn)
     let limit = 10
 
     let sortBy = "DESC"
-  
-    if(isLoggedIn){
-      url = `${BASE_URL_PROD}/plants/public_signed_in/search?limit=${limit}&sort=${sortBy}&search_qeury=${e.target.value}`
-      }else{
-      url = `${BASE_URL_PROD}/plants/public/search?limit=${limit}&sort=${sortBy}&search_qeury=${e.target.value}`
+      if(props.public){
+        if(isLoggedIn){
+          url = `${BASE_URL_PROD}/plants/public_signed_in/search?limit=${limit}&sort=${sortBy}&search_qeury=${e.target.value}`
+          }else{
+          url = `${BASE_URL_PROD}/plants/public/search?limit=${limit}&sort=${sortBy}&search_qeury=${e.target.value}`
+          }
+    
+        axios.get(url,{signal})
+        .then((response)=>{
+          console.log("response",response.data.data)
+          if(response.data.data.length > 0 ){
+            setSearchResultsFound(true)
+            setSearchResults(response.data.data)
+          }else{
+            setSearchResultsFound(false)
+            setSearchResults([])
+          }
+          
+        })
+        .catch((error)=>{
+          setSearchResultsFound(false)
+          setSearchResults([])
+        })
       }
-
-    axios.get(url,{signal})
-    .then((response)=>{
-      console.log("response",response.data.data)
-      if(response.data.data.length > 0 ){
-        setSearchResultsFound(true)
-        setSearchResults(response.data.data)
-      }else{
-        setSearchResultsFound(false)
-        setSearchResults([])
-      }
-      
-    })
-    .catch((error)=>{
-      setSearchResultsFound(false)
-      setSearchResults([])
-    })
+ 
     }
 
   return (
