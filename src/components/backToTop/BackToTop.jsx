@@ -11,7 +11,10 @@ right: -100px;
 z-index: 55;
 padding: 15px;
 display: flex;
+svg{
+    font-size: 25px;
 }
+
 `
 
 export const BackToTop = () => {

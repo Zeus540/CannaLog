@@ -102,7 +102,7 @@ const PublicPlants = () => {
   return (
 
 <>
-<Banner bg={SearchImg} heading="Public Grow Logs" txt1="Enhance Your Cannabis Garden! Find Proven Tips for Public Plants. " txt2="Optimize Your Cultivation Today!"/>
+<Banner bg={SearchImg} heading="Public Grow Logs" txt1="Enhance Your Cannabis Garden! Find Proven Tips. " txt2="Optimize Your Cultivation Today!" public={true}/>
 
     <SRoot
       initial={{ opacity: 0 }}
