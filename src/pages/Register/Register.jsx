@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import styled from 'styled-components';
 import {Link, useNavigate} from 'react-router-dom'
-import Logo from "../../assets/images/leaf.png";
+import Logo from "../../assets/images/logo.svg";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import axios from "axios"
@@ -13,7 +13,7 @@ import {StyledButton} from '../../utils/global_styles'
 const Root = styled.div`
 background:  ${props => props.theme.secondary};
 
-padding-top: 0px;
+padding-top: 60px;
 color:  ${props => props.theme.text};
 min-height: calc(100vh - 180px);
 display: flex;
@@ -110,11 +110,8 @@ font-weight: bold;
 position: relative;
 `;
 const HeadingImg = styled.img`
-position: absolute;
-left: -30px;
-top: 0px;
-height: 30px;
-width: 30px;
+
+width: 150px;
 object-fit: contain;
 `;
 
@@ -209,7 +206,7 @@ function Register() {
       </Helmet>
 
      <RootInner>
-     <Heading>  <HeadingAccent><HeadingImg src={Logo} width="40px" />CANNA</HeadingAccent>LOG   </Heading>
+     <Heading>  <HeadingImg src={Logo} width="100%" />  </Heading>
 
      <HaveAccount>Already have an account? <HaveAccountLink to='/sign-in'>Sign in</HaveAccountLink></HaveAccount>
 {errorM !== "" && <ErrM>{errorM}</ErrM>}

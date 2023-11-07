@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react'
 import { useParams,useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import Logo from "../../assets/images/leaf.png";
+import Logo from "../../assets/images/logo.svg";
 import axios from "axios"
 import {BASE_URL_PROD} from '../../lib/Constants'
 import { useSnackbar } from 'notistack';

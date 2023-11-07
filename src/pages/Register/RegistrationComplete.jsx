@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
-import Logo from "../../assets/images/leaf.png";
+import Logo from "../../assets/images/logo.svg";
 
 const Root = styled.div`
 color:  ${props => props.theme.text};

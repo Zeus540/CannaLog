@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/images/logo.svg";
+import { Heading } from "../../utils/global_styles";
+import {AiOutlineInstagram,AiOutlineFacebook} from 'react-icons/ai'
 
 const Root = styled.div`
 position: relative;
@@ -28,7 +31,7 @@ margin: 0 auto;
 `;
 const LegalText = styled.p`
 margin: 5px 0px;
-text-align: end;
+// text-align: center;
 margin-bottom: 0px;
 span{
   color:  ${props => props.theme.text};
@@ -68,11 +71,24 @@ display: flex;
 
 const Section = styled.div`
 width: calc(100% /3);
+margin: 20px 0px;
+svg{
+  font-size:35px;
 
+  margin: 5px 0px;
+  margin-right:5px;
+}
 @media (max-width: 768px) {
   width: calc(100% /1);
 
 }
+`;
+
+const ImgSection = styled.div`
+width: 150px;
+padding: 20px 0px;
+// margin: 0 auto;
+padding-bottom: 0px;
 `;
 
 
@@ -85,9 +101,19 @@ const Footer = ({isLoggedIn}) => {
   return (
     <Root>
         <Inner>
-        <SectionHolder>      
-    <Section>
+        <SectionHolder> 
+      
+        <Section>
+      
+      <ImgSection>
+            <img src={Logo} width="100%" />
+          </ImgSection>
+          <LegalText><span><sub>CANNA</sub>LOG</span> &#174; - &copy; Copyright 2023  	</LegalText>
+      </Section> 
   
+
+    <Section>
+    <Heading>Useful Links</Heading>
 
                    {isLoggedIn && 
                    
@@ -137,6 +163,8 @@ const Footer = ({isLoggedIn}) => {
 
       <Section>
 
+<Heading>Legal</Heading>
+
         <MenuLinkMobile to="/terms" >
                      <FlexLink>
                      
@@ -159,10 +187,19 @@ const Footer = ({isLoggedIn}) => {
                    </MenuLinkMobile>
 
       </Section>
-      
-  
+
+      <Section>
+      <Heading>Socials</Heading>
+
+<AiOutlineInstagram/>
+
+<AiOutlineFacebook/>
+
+        </Section>
+     
+ 
       </SectionHolder>     
-        <LegalText>&copy; 2023 Copyright - <span><sub>CANNA</sub>LOG</span> 	&#174;</LegalText>
+     
     </Inner>
     </Root>
   )
