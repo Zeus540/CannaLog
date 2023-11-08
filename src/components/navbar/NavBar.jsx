@@ -364,7 +364,7 @@ const NavBar = ({ toggleTheme, themeType, }) => {
           </DivMenu>
           <MenuLinklogo to="/">
             <LogoHolder>
-              <Img src={Logo} width="100%" />
+              {/* <Img src={Logo} width="100%" /> */}
               <h1><span>Canna</span>Log</h1>
               {/* <LogoHolderText>Master Your Grow</LogoHolderText> */}
             </LogoHolder>

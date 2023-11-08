@@ -97,7 +97,7 @@ position: relative;
 `;
 const HeadingImg = styled.img`
 top: 0px;
-width: 150px;
+width: 100px;
 object-fit: contain;
 `;
 

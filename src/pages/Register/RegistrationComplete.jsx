@@ -44,8 +44,7 @@ const HeadingImg = styled.img`
 position: absolute;
 left: -30px;
 top: 0px;
-height: 30px;
-width: 30px;
+width: 100px;
 object-fit: contain;
 `;
 

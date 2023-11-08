@@ -111,7 +111,7 @@ position: relative;
 `;
 const HeadingImg = styled.img`
 
-width: 150px;
+width: 100px;
 object-fit: contain;
 `;
 
