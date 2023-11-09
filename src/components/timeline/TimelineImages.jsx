@@ -236,7 +236,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
     const localizedData = data.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
       const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
-      const week = differenceInWeeks(localizedDate, startDateLocalized) + 1 ;
+      const week = differenceInWeeks(localizedDate, startDateLocalized)  ;
       return { ...item, creation_date: localizedDate, week };
     });
 
@@ -265,6 +265,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
               modules={[Pagination]}
               spaceBetween={50}
               slidesPerView={5}
+              autoHeight={true}
               breakpoints={{
                 0: {
                   slidesPerView: 2,
