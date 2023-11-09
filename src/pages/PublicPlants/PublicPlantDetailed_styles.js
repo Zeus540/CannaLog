@@ -182,7 +182,7 @@ padding: 10px 0px;
 export const DayHolderOutterInner = styled.div`
 display: flex;
 flex-wrap: wrap;
-justify-content: end;
+justify-content: space-between;
 color:${(props) => `${props.theme.accent}`};
 max-width: 1920px;
 margin: 0px auto;
