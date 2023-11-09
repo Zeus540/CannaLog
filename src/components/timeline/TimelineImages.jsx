@@ -236,13 +236,13 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
     const localizedData = data.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
       const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
-      const week = differenceInWeeks(localizedDate, startDateLocalized) + 1;
+      const week = differenceInWeeks(localizedDate, startDateLocalized);
       return { ...item, creation_date: localizedDate, week };
     });
 
 
 
-    setter(localizedData.sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)))
+    setter(localizedData.sort((a, b) => new Date(getLocalizedDate(b.creation_date)) - new Date(getLocalizedDate(a.creation_date))))
   }
 
   

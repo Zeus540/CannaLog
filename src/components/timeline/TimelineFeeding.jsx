@@ -236,7 +236,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
       const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
       let day = getWeekandDay(item.creation_date).day
-      const week = differenceInWeeks(localizedDate, startDateLocalized) + 1;
+      const week = differenceInWeeks(localizedDate, startDateLocalized) ;
       return { ...item, creation_date: localizedDate, week, day };
     });
 

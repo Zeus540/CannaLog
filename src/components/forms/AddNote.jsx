@@ -8,7 +8,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
-import { getLocalizeTime } from '../../helpers/getLocalizeTime';
+import { getLocalizeTime, } from '../../helpers/getLocalizeTime';
+import { getLocalizedDate } from '../../helpers/getLocalizeDate';
 import { takeAction,editAction } from '../../features';
 import { useSnackbar } from 'notistack';
 
@@ -35,7 +36,7 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
     });
 
     let intialValues = {
-        creation_date: data.plant_note !== undefined ? format(new Date(data.creation_date),'yyyy-MM-dd HH:mm:ss') :  format(new Date(),'yyyy-MM-dd HH:mm:ss'),
+        creation_date: data.plant_note !== undefined ? format(new Date(getLocalizedDate(data.creation_date)),'yyyy-MM-dd HH:mm:ss') :  format(new Date(),'yyyy-MM-dd HH:mm:ss'),
         timezone: userTimezone ,
         plant_note: data.plant_note || '',
         plant_id:plant.plant_id,
