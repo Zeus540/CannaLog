@@ -31,7 +31,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
 
 
   useEffect(() => {
-    group_by(startDate, actions, activeWeek)
+    group_by(startDate, actions.filter((a)=> a.plant_action_type_id !== 14), activeWeek)
   }, [startDate,actions,activeWeek]);
 
   const group_by = async(startDate, actions, activeWeek) => {
@@ -41,7 +41,7 @@ const Weeks = ({ startDate, actions, handleActiveWeeks, activeWeek }) => {
     const localizedData = actions.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
       const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 });
-      const week = differenceInWeeks(localizedDate, startDateLocalized) ;
+      const week = differenceInWeeks(localizedDate, startDateLocalized) + 1 ;
       return { ...item, creation_date: localizedDate, week };
     });
 

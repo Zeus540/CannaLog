@@ -173,7 +173,7 @@ const TimelineNotes = ({ plant, activeWeek,openModal, title,publicPage }) => {
     const localizedData = data.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
       const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); 
-      const week = differenceInWeeks(localizedDate, startDateLocalized) ;
+      const week = differenceInWeeks(localizedDate, startDateLocalized) + 1 ;
       return { ...item, creation_date: localizedDate, week };
     });
 
