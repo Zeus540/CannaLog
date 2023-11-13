@@ -211,7 +211,6 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
         return result;
     }, {});
 
-    // Sort keys based on the custom order
     const sortedKeys = Object.keys(groupedData).sort((a, b) => {
         return customOrder.indexOf(a) - customOrder.indexOf(b);
     });
@@ -227,14 +226,13 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
 
   const group_by = (data, setter, plant) => {
 
-    // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
 
-    // Localize each date in the object and calculate the week number
+
     const localizedData = data.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
-      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
+      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); 
       let day = getWeekandDay(item.creation_date).day
       const week = differenceInWeeks(localizedDate, startDateLocalized);
       return { ...item, creation_date: localizedDate, week, day };
@@ -311,11 +309,11 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
                           {feedingData[i]?.filter((a) => a.week == activeWeek ).length > 0 &&
                             <PieChartHolder>
                               <PieChart data={feedingData[i]?.filter((a) => a.week == activeWeek ).map((a) => a.nutrient_amount)} labels={feedingData[i]?.filter((a) => a.week == activeWeek ).map((a) => a.nutrient_name)} />
-
+                              
                             </PieChartHolder >
                           }
 
-                            {feedingData[i].map((itm)=>{
+                            {feedingData[i]?.filter((a) => a.week == activeWeek ).map((itm)=>{
                           return(
                             <ItemHolder>
                               <div>
@@ -380,7 +378,7 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
                       <Item>
 
                       <Tag>{i}</Tag>
-                        {wateringData[i].map((itm)=>{
+                        {wateringData[i]?.filter((a) => a.week == activeWeek ).map((itm)=>{
                           return(
                             <ItemHolder>
                             <p>{itm.water_amount} {itm.measurement_unit } Water</p>
