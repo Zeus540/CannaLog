@@ -16,12 +16,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import PieChart from '../charts/PieChart'
 import TimeLineHeading from '../headings/TimeLineHeading'
-
+import Tag from '../tag/Tag'
 
 const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
-padding: 15px;
+
 padding-bottom: 20px;
  width: 70%;
 @media (max-width: 600px) {
@@ -65,13 +65,7 @@ margin: 10px auto;
 `
 
 
-const Tag = styled(m.div)`
-background:${props => props.theme.accent};
-padding: 0px 15px;
-width: fit-content;
-border-radius: 50px;
-color: ${props => props.theme.textW}!important;
-`
+
 
 
 const ItemHolder = styled(m.div)`
@@ -107,7 +101,16 @@ width: 50%;
 }
 
 `
+const HolderWatering = styled(m.div)`
+padding: 0px 20px;
+width: ${props => props.feedingDataFound ? "50%" : "100%"};
 
+@media (max-width: 600px) {
+  width: 100%;
+
+}
+
+`
 const RootInner = styled(m.div)`
 display: flex;
 justify-content: space-between;
@@ -143,8 +146,10 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
   
   const [modalOpen, setModalOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
-  const [dataFound, setDataFound] = useState(false)
 
+  const [feedingDataFound, setFeedingDataFound] = useState(false)
+  const [wateringDataFound, setWateringDataFound] = useState(false)
+  
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
   const socket = useSocket()
@@ -250,11 +255,18 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
   useEffect(() => {
     console.log(Object.values(wateringData).flat().filter((i) => i.week == activeWeek).length > 0)
     console.log(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0)
-    if(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0 || Object.values(wateringData).flat().filter((i) => i.week == activeWeek).length > 0){
-      setDataFound(true)
+    if(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0 ){
+      setFeedingDataFound(true)
     }else{
-      setDataFound(false)
+      setFeedingDataFound(false)
     }
+
+    if(Object.values(wateringData).flat().filter((i) => i.week == activeWeek).length > 0){
+      setWateringDataFound(true)
+    }else{
+      setWateringDataFound(false)
+    }
+    
 
   }, [wateringData,feedingData,activeWeek])
 
@@ -264,13 +276,14 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
 
   return (
     <>
- {dataFound && 
+
         <Root>
 
-<TimeLineHeading heading="feeding"/>
+
           <RootInner>
+          {feedingDataFound && 
           <Holder>
-       
+          <TimeLineHeading heading="feeding"/>
             <Swiper
               pagination={{
                 dynamicBullets: true,
@@ -341,8 +354,10 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
 
             </Swiper>
             </Holder>
-            <Holder>
-          
+          }
+                {wateringDataFound && 
+            <HolderWatering feedingDataFound={feedingDataFound}>
+            <TimeLineHeading heading="watering"/>
             <Swiper
               pagination={{
                 dynamicBullets: true,
@@ -404,10 +419,11 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
               })}
 
             </Swiper>
-            </Holder>
+            </HolderWatering>
+}
           </RootInner>
         </Root>
-      }
+      
       </>
   )
 }

@@ -7,6 +7,7 @@ background: ${props => props.theme.accent};
 padding: 5px 15px;
 width: fit-content;
 font-size:14px;
+line-height: 14px;
 border-radius: 50px;
 color: ${props => props.theme.textW}!important;
 `

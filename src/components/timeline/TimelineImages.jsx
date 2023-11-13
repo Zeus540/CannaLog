@@ -14,13 +14,14 @@ import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+import TimeLineHeading from '../headings/TimeLineHeading'
+import Tag from '../tag/Tag'
 
 export const Root = styled(m.div)`
 max-width: 1920px;
 margin: 0px auto;
 padding: 15px;
-padding-bottom: 0px;
+
 `
 export const TimeLineHolder = styled(m.div)`
 display: flex;
@@ -87,15 +88,7 @@ transition: all 0.5s ease;
 z-index: 2;
 justify-content: space-between;
 `
-export const Tag = styled(m.div)`
-background: ${props => props.theme.accent};
-padding: 0px 15px;
-width: fit-content;
-border-radius: 50px;
-align-items: center;
-display: flex;
-color: ${props => props.theme.textW}!important;
-`
+
 
 export const ItemInnerUpper = styled(m.div)`
 display: flex;
@@ -255,7 +248,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
 
       {images?.filter((a) => a.week == activeWeek).length > 0 &&
         <Root>
-          {/* <Heading>{title}</Heading> */}
+         <TimeLineHeading heading="gallery"/>
           <RootInner>
           
             <Swiper
@@ -308,7 +301,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
 
                         <ImageItemInnerUpper>
                           <Tag>{getWeekandDay(a.creation_date).day}</Tag>
-                          <h2>{getLocalizedDate(a.creation_date)}</h2>
+                          <Tag>{getLocalizedDate(a.creation_date)}</Tag>
 
 
                         </ImageItemInnerUpper>

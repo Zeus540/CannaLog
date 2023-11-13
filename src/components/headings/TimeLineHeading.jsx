@@ -4,7 +4,7 @@ import { motion as m } from 'framer-motion'
 
 const ItemInnerUpper = styled(m.div)`
 display: flex;
-justify-content: space-between;
+justify-content: center;
 padding: 15px 0px;
 padding-top: 0px;
 align-items: center;
@@ -12,7 +12,7 @@ color: ${props => props.theme.text}!important;
 `
 
 const ItemInnerUpperDiv = styled(m.div)`
-width: 100%;
+width: 25%;
 height: 2px;
 background: ${props => props.theme.accent}!important;
 `

@@ -85,7 +85,7 @@ svg{
 `;
 
 const ImgSection = styled.div`
-width: 150px;
+width: 100px;
 padding: 20px 0px;
 // margin: 0 auto;
 padding-bottom: 0px;
