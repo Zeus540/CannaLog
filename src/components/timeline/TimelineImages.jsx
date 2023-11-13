@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import styled from 'styled-components'
-import { motion as m } from 'framer-motion'
+import { AnimatePresence, motion as m } from 'framer-motion'
 import axios from '../../lib/axios'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { getLocalizedDate, getWeekandDay } from '../../helpers/getLocalizeDate'
@@ -10,12 +10,13 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useSocket } from '../../context/SocketContext'
 import { useParams } from 'react-router-dom'
-import { Swiper, SwiperSlide, } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import TimeLineHeading from '../headings/TimeLineHeading'
 import Tag from '../tag/Tag'
+import Lightbox from '../lightbox/Lightbox'
 
 export const Root = styled(m.div)`
 max-width: 1920px;
@@ -168,6 +169,9 @@ export const RootInner = styled(m.div)`
 const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, handleSetCoverImage, publicPage }) => {
 
   const [images, setImages] = useState([]);
+  const [lightBoxImages, setLightBoxImages] = useState([]);
+  const [lightBoxIndex, setLightBoxIndex] = useState([]);
+  
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
   const [modalType, setModalType] = useState('')
@@ -219,32 +223,34 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
 
   const group_by = (data, setter, plant) => {
 
-
-    // Assuming you have the necessary data and variables
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
 
-
-    // Localize each date in the object and calculate the week number
     const localizedData = data.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
-      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); // Adjust week start day if needed
+      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); 
       const week = differenceInWeeks(localizedDate, startDateLocalized)  ;
       return { ...item, creation_date: localizedDate, week };
     });
-
-
 
     setter(localizedData.sort((a, b) => new Date(getLocalizedDate(b.creation_date)) - new Date(getLocalizedDate(a.creation_date))))
   }
 
   
-
+const handleLightbox = (index)=>{
+  setLightBoxImages(images?.filter((a) => a.week == activeWeek))
+  setLightBoxIndex(index)
+  
+} 
 
 
   return (
     <>
-
+{lightBoxImages.length > 0 &&
+<AnimatePresence mode='wait'>
+  <Lightbox data={lightBoxImages} index={lightBoxIndex}/>
+  </AnimatePresence>
+}
 
       {images?.filter((a) => a.week == activeWeek).length > 0 &&
         <Root>
@@ -296,7 +302,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
                 return (
                   <SwiperSlide  key={index}>
 
-                    <Item >
+                    <Item onClick={()=>handleLightbox(index)}>
                       <ImageItemInner >
 
                         <ImageItemInnerUpper>

@@ -223,7 +223,7 @@ useEffect(() => {
 </AnimatePresence>
     </Root>
   
-  ,modal)
+  ,overlay)
 }
 
 export default PopupModal

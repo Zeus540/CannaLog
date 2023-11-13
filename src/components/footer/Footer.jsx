@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/images/logo.svg";
 import { Heading } from "../../utils/global_styles";
 import {AiOutlineInstagram,AiOutlineFacebook} from 'react-icons/ai'
@@ -190,10 +190,11 @@ const Footer = ({isLoggedIn}) => {
 
       <Section>
       <Heading>Socials</Heading>
-
+<NavLink target="_blank" to='https://www.instagram.com/cannalog8'>
 <AiOutlineInstagram/>
+</NavLink>
 
-<AiOutlineFacebook/>
+{/* <AiOutlineFacebook/> */}
 
         </Section>
      
