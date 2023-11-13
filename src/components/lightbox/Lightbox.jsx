@@ -65,7 +65,7 @@ function Lightbox({data,index}) {
            <Tag>{getWeekandDay(img.creation_date).day}</Tag>
             <Tag>{getLocalizedDate(img.creation_date)}</Tag>
 
-            <Image src={img.full_img} width="100%" /> 
+            <Image src={img.full_img} width="100%" loading='lazy'/> 
             </ImageHolder>
           </SwiperSlide>
         )
