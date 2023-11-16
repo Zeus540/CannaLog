@@ -221,7 +221,7 @@ border-radius: 5px;
 padding: 15px;
 border:${(props) => `2px ${props.theme.secondary} solid`};
 cursor:pointer;
-transition: all 0.5s ease;
+
 display: flex;
 flex-direction: column;
 align-items: center;

@@ -29,7 +29,7 @@ const [show, setShow] = useState(false)
     }, [])
 
     const handleShowBackToTop = ()=>{
-        console.log("handleBackToTop",window.scrollY)
+    
         if(window.scrollY > 300){
             setShow(true)
         }else{

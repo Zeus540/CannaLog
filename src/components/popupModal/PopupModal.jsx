@@ -19,6 +19,7 @@ const AddNote = lazy(()=> import('../forms/AddNote'));
 const UploadImage = lazy(()=> import('../forms/UploadImage'));
 const AddWatering = lazy(()=> import('../forms/AddWatering'));
 const AddFeeding = lazy(()=> import('../forms/AddFeeding'));
+const AddTrainingTechniques = lazy(()=> import('../forms/AddTrainingTechniques'));
 
 useEffect(() => {
   document.body.style.overflow = 'hidden';
@@ -210,6 +211,9 @@ useEffect(() => {
 
           {(data?.plant_action_type_id == 2 || modalType == "editFeeding")  && modalType !== "deleteFeeding" && 
            <AddFeeding modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
+         }
+          {(data?.plant_action_type_id == 5 || modalType == "editTraining")  && modalType !== "deleteTraining" && 
+           <AddTrainingTechniques modalType={modalType} openModal={openModal} data={data} plant={plant} setModalOpen={setModalOpen} setIsSubmitting={setIsSubmitting}/>
          }
 
        </ModalContent>

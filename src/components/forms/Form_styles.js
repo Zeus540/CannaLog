@@ -1,6 +1,6 @@
 import styled,{keyframes} from "styled-components";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Select, MenuItem,InputLabel, TextField } from '@mui/material';
+import { Select, MenuItem,InputLabel, TextField,FormControlLabel } from '@mui/material';
 import {motion as m} from 'framer-motion'
 import { MobileDateTimePicker   } from '@mui/x-date-pickers';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
@@ -15,6 +15,45 @@ const btnAnimation = (theme) => keyframes`
   background:${theme.btn.hover};
   width: 100%;
 }
+`
+
+export const CardSytled = styled.div`
+display: flex;
+color: ${props => props.theme.text};
+width: 100%;
+align-items: center;
+background:${props => props.theme.secondary}!important;
+border: 1px solid ${props => props.theme.secondary};
+padding: 5px;
+border-radius: 5px;
+img{
+  margin-right:10px;
+}
+`
+
+export const FormControlLabelSytled = styled(FormControlLabel)`
+display: flex;
+
+width: calc(100% / 2 - 9px);
+margin:unset!important;
+span{
+  width: 100%;
+}
+`
+
+export const CardCheckedSytled = styled.div`
+display: flex;
+color: ${props => props.theme.text};
+width: 100%;
+align-items: center;
+background:${props => props.theme.secondary}!important;
+border: 1px solid ${props => props.theme.accent};
+padding: 5px;
+border-radius: 5px;
+img{
+  margin-right:10px;
+}
+
 `
 export const StyledTextareaAutosize = styled(TextareaAutosize)`
 white-space: unset;
@@ -40,7 +79,11 @@ svg{
 }
 `
 
-
+export const Flex = styled.div`
+display: flex;
+flex-wrap: wrap;
+margin: 0px -8px;
+`
 
 export const ItemHodler = styled.div`
 display: flex;

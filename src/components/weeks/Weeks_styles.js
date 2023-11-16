@@ -34,7 +34,7 @@ padding: 20px;
 border-radius: 5px;
 text-align: center;
 margin: 10px 0px;
-transition: all 0.5s ease;
+
     cursor: pointer;
 
 `
