@@ -7,12 +7,8 @@ width: ${props => props.homePage ? "calc(100% / 5 - 20px)" : "calc(100% / 8 - 20
 margin: 20px 10px;
 position: relative;
 
-@media (min-width: 0px) and (max-width: 375px) {
-    min-width: calc(100%  - 20px);
-    margin: 10px;
-}
 
-@media (min-width: 376px) and (max-width: 600px) {
+@media (min-width: 0px) and (max-width: 600px) {
     min-width: calc(100% / 2 - 20px);
     margin: 10px;
 }

@@ -4,7 +4,7 @@ import { Root,Heading } from '../../utils/global_styles'
 import styled from 'styled-components'
 import { getElapsedDaysNotificationsFull,getElapsedDaysNotifications } from '../../helpers/getElapsedDays'
 import { useSnackbar } from 'notistack'
-
+import Seo from '../../components/seo/Seo'
 
 export const Holder = styled.div`
 max-width: 1920px;
@@ -142,6 +142,7 @@ const Notifications = () => {
     
   return (
     <Root>
+            <Seo noFollow title="Notifications" content="Welcome to Cannalog your cannabis cultivation hub! Explore a world of possibilities for enthusiasts and growers. we offer a comprehensive platform to elevate your cannabis experience. Join us now and cultivate your passion with like-minded individuals."/>
         <Holder>
             <NotificationHeadingHolder>
             <NotificationHeadingHolderInner><Heading>Notifications </Heading ><NotificationAmount>{notifications.length}</NotificationAmount></NotificationHeadingHolderInner> <p onClick={()=>handleReadAll()}>Mark all as read</p>

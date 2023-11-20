@@ -28,7 +28,7 @@ const PlantCard = ({ data, openModal,homePage }) => {
   const location = useLocation()
 
   const handleRedirect = () => {
-    navigate(`/${path}/${cleanName(data.plant_name)}/${data.environment_id}/${data.plant_id}`)
+    navigate(`/${path}/${cleanName(data.strain_name)}/${cleanName(data.user_name)}/${data.environment_id}/${data.plant_id}`)
   }
 
   function cleanName(name) {

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Root} from '../../utils/global_styles'
-
+import Seo from '../../components/seo/Seo';
 
 const Inner = styled.div`
 
@@ -35,6 +35,8 @@ padding-top: 20px;
 const Terms = () => {
 
   return (
+  <>
+    <Seo title="Terms & Conditions" />
     <Root
     initial={{opacity: 0}}
     animate={{opacity: 1}}
@@ -43,7 +45,7 @@ const Terms = () => {
     > 
   
         <Inner>
-        <Heading >Terms and Conditions</Heading>
+        <Heading >Terms & Conditions</Heading>
 
       <h2>Introduction</h2>
       <p>These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, CannaLog accessible at https://www.cannalog.co.za/.</p>
@@ -101,6 +103,7 @@ const Terms = () => {
 
       </Inner>
     </Root>
+  </>
   )
 }
 

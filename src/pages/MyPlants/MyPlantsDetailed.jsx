@@ -26,6 +26,7 @@ import TimelineNotes from '../../components/timeline/TimelineNotes'
 import TimelineImages from '../../components/timeline/TimelineImages'
 import TimelineFeeding from '../../components/timeline/TimelineFeeding'
 import Weeks from '../../components/weeks/Weeks'
+import Seo from '../../components/seo/Seo'
 
 import {
     ImgHolderTop,
@@ -238,7 +239,10 @@ function MyPlantsDetailed() {
 
     }
 
+    
     return (
+       <>
+        <Seo noFollow title={params.plant_name} user={params.user_name}/>
         <Root
         initial={{ translateX: '-100%',opacity: 1 }}
         animate={{ translateX: '0%',opacity: 1 }}
@@ -368,6 +372,7 @@ function MyPlantsDetailed() {
       
         </Root>
 
+       </>
     )
 }
 

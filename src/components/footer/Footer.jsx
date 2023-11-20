@@ -42,6 +42,13 @@ span{
 }
 `;
 
+const LegalHolder = styled.div`
+
+max-width: 1920px;
+text-align: end;
+
+`;
+
 const MenuLinkMobile = styled(Link)`
 
   padding: 5px 0px;
@@ -86,9 +93,9 @@ svg{
 
 const ImgSection = styled.div`
 width: 100px;
-padding: 20px 0px;
+
 // margin: 0 auto;
-padding-bottom: 0px;
+
 `;
 
 
@@ -103,13 +110,7 @@ const Footer = ({isLoggedIn}) => {
         <Inner>
         <SectionHolder> 
       
-        <Section>
-      
-      <ImgSection>
-            <img src={Logo} width="100%" />
-          </ImgSection>
-          <LegalText><span><sub>CANNA</sub>LOG</span> &#174; - &copy; Copyright 2023  	</LegalText>
-      </Section> 
+  
   
 
     <Section>
@@ -189,8 +190,11 @@ const Footer = ({isLoggedIn}) => {
       </Section>
 
       <Section>
+      <ImgSection>
+            <img src={Logo} width="100%" />
+          </ImgSection>
       <Heading>Socials</Heading>
-<NavLink target="_blank" to='https://www.instagram.com/cannalog8'>
+<NavLink target="_blank" to='https://www.instagram.com/cannalog.co.za'>
 <AiOutlineInstagram/>
 </NavLink>
 
@@ -201,6 +205,9 @@ const Footer = ({isLoggedIn}) => {
  
       </SectionHolder>     
      
+     <LegalHolder>
+      <LegalText><span><sub>CANNA</sub>LOG</span> &#174; - &copy; Copyright 2023  	</LegalText>
+      </LegalHolder>
     </Inner>
     </Root>
   )

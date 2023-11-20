@@ -18,6 +18,7 @@ import { IoMdAdd } from "react-icons/io";
 import EnviromentCardSkelton from '../../components/cards/EnviromentCardSkelton'
 import Blank from '../../components/skeleton/Blank'
 import PopupModal from '../../components/popupModal/PopupModal'
+import Seo from '../../components/seo/Seo'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -177,7 +178,8 @@ const Environments = () => {
   }
 
   return (
-
+<>
+<Seo title="My Environments" noFollow content="Gain insights into your cannabis cultivation environments with our dedicated grow space page. Explore detailed information about your grow setups, monitor conditions, and optimize your cultivation process. Stay in control and maximize your yields by accessing comprehensive data on your cannabis grow environments. Join now for a personalized and informed cultivation experience."/>
     <Root
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -238,6 +240,7 @@ const Environments = () => {
       </Holder>
     </Root>
 
+</>
   )
 }
 

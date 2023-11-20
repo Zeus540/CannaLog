@@ -14,6 +14,7 @@ import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
 import Blank from '../../components/skeleton/Blank'
 import Banner from '../../components/banner/Banner'
 import SearchImg from '../../assets/images/search.jpg'
+import Seo from '../../components/seo/Seo'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -102,6 +103,7 @@ const PublicPlants = () => {
   return (
 
 <>
+<Seo title="Public Grow Logs" content="Enhance Your Cannabis Garden! Find Proven Tips. Optimize Your Cultivation Today!"/>
 <Banner bg={SearchImg} heading="Public Grow Logs" txt1="Enhance Your Cannabis Garden! Find Proven Tips. " txt2="Optimize Your Cultivation Today!" public={true}/>
 
     <SRoot

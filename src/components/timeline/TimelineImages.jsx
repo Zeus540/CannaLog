@@ -171,6 +171,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
   const [images, setImages] = useState([]);
   const [lightBoxImages, setLightBoxImages] = useState([]);
   const [lightBoxIndex, setLightBoxIndex] = useState([]);
+  const [showLightBox, setShowLightBox] = useState(false);
   
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState([])
@@ -240,15 +241,15 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
 const handleLightbox = (index)=>{
   setLightBoxImages(images?.filter((a) => a.week == activeWeek))
   setLightBoxIndex(index)
-  
+  setShowLightBox(true)
 } 
 
 
   return (
     <>
-{lightBoxImages.length > 0 &&
+{showLightBox > 0 &&
 <AnimatePresence mode='wait'>
-  <Lightbox data={lightBoxImages} index={lightBoxIndex}/>
+  <Lightbox data={lightBoxImages} index={lightBoxIndex} setShowLightBox={setShowLightBox}/>
   </AnimatePresence>
 }
 
@@ -302,7 +303,7 @@ const handleLightbox = (index)=>{
                 return (
                   <SwiperSlide  key={index}>
 
-                    <Item onClick={()=>handleLightbox(index)}>
+                    <Item >
                       <ImageItemInner >
 
                         <ImageItemInnerUpper>
@@ -312,7 +313,7 @@ const handleLightbox = (index)=>{
 
                         </ImageItemInnerUpper>
 
-                        <ItemInnerContentImage>
+                        <ItemInnerContentImage onClick={()=>handleLightbox(index)}>
                           <picture>
                             <source srcSet={a.thumbnail_img_next_gen} type="image/webp" alt="webp"/>
                             <Image src={a.thumbnail_img} width="100%" />

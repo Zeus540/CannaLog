@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Root} from "../../utils/global_styles"
-
+import Seo from "../../components/seo/Seo";
 
 const Inner = styled.div`
 
@@ -34,6 +34,8 @@ padding-top: 20px;
 
 const PrivacyPolicy = () => {
   return (
+   <>
+    <Seo title="Privacy Policy" />
     <Root
     initial={{opacity: 0}}
     animate={{opacity: 1}}
@@ -138,8 +140,8 @@ const PrivacyPolicy = () => {
 <p>CannaLog does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
 </Inner>
     </Root>
+   </>
   )
 }
 
-// including; {List the social networks whose features you have integrated with your site?:12},
 export default PrivacyPolicy

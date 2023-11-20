@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import {StyledButton } from '../../utils/global_styles'
-
+import Seo from "../../components/seo/Seo";
 
 const Root = styled.div`
 display: flex;
@@ -74,6 +74,8 @@ const NotFoundPage = () => {
 
  
   return (
+  <>
+    <Seo title="Oops! You seem lost" noFollow />
     <Root
     initial={{opacity: 0}}
     animate={{opacity: 1}}
@@ -90,6 +92,7 @@ const NotFoundPage = () => {
         </TextHolder>
         </Inner>
     </Root>
+  </>
   )
 }
 

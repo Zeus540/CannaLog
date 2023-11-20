@@ -108,13 +108,13 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                         <Route element={<ProtectedRoutes/>}>        
                             <Route path="/my-environments" element={<Environments />} />
                             <Route path="/my-plants" element={<MyPlants />} />
-                            <Route path="/my-plants/:plant_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
+                            <Route path="/my-plants/:plant_name/:user_name/:environment_id/:plant_id" element={<MyPlantsDetailed />} />
                             <Route path="/notifications" element={<Notifications />} />
                             <Route path="/growers" element={<Growers />} />
                         </Route>
                      
                       
-                            <Route path="/public-plants/:plant_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
+                            <Route path="/public-plants/:plant_name/:user_name/:environment_id/:plant_id" element={<PublicPlantDetailed />} />
                             <Route path="/terms" exact element={<Terms />} />
                             <Route path="/cookie-policy" element={<CookiePolicy />} />
                             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

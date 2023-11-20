@@ -5,10 +5,10 @@ import Logo from "../../assets/images/logo.svg";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import axios from "axios"
-import { Helmet } from "react-helmet";
 import {BASE_URL_PROD} from '../../lib/Constants'
 import { useSnackbar} from 'notistack';
 import {StyledButton} from '../../utils/global_styles'
+import Seo from '../../components/seo/Seo';
 
 const Root = styled.div`
 background:  ${props => props.theme.secondary};
@@ -49,8 +49,19 @@ padding-top: 0px;
 color:  ${props => props.theme.text};
 display: flex;
 flex-direction: column;
+
+`;
+const InputHolderCheck = styled.div`
+
+
+
+padding-top: 0px;
+color:  ${props => props.theme.text};
+display: flex;
+flex-direction: column;
 margin-bottom: 15px;
 `;
+
 const InputGrp = styled.div`
 min-width: calc(100% /2 - 20px);
 margin: 0px 10px;
@@ -198,13 +209,7 @@ function Register() {
   
   return (
     <Root>
-
-<Helmet>
-        <meta charSet="utf-8" />
-        <title>{`CannaLog - Sign Up`}</title>
-        <link rel="canonical" href={`https://sweetleaf.co.za/sign-up`} />
-      </Helmet>
-
+<Seo title="Sign Up" content="Unlock a world of cannabis cultivation possibilities. Sign up now to create your account and become a part of our thriving community of growers. Access personalized tools, connect with fellow enthusiasts, and embark on a journey to elevate your cultivation experience. Join us today and cultivate your passion for cannabis."/>
      <RootInner>
      <Heading>  <HeadingImg src={Logo} width="100%" />  </Heading>
 
@@ -228,7 +233,7 @@ function Register() {
       <Form  >
 
       <InputHolder>
-        <Label htmlFor="userName">UserName</Label>
+        {/* <Label htmlFor="userName">UserName</Label> */}
         <Input id="userName" name="userName"  placeholder="UserName" />
         {errors.userName && touched.userName ? (<ErrorText>{errors.userName}</ErrorText>) : null}
 
@@ -236,14 +241,14 @@ function Register() {
 
        <InputGrpFlex>
        <InputGrp>
-        <Label htmlFor="name">Name</Label>
+        {/* <Label htmlFor="name">Name</Label> */}
         <Input id="name" name="name"  placeholder="Name" />
         {errors.name && touched.name ? (<ErrorText>{errors.name}</ErrorText>) : null}
 
         </InputGrp>
 
         <InputGrp>
-        <Label htmlFor="surname">Surname</Label>
+        {/* <Label htmlFor="surname">Surname</Label> */}
         <Input id="surname" name="surname"  placeholder="Surname" />
         {errors.surname && touched.surname ? (<ErrorText>{errors.surname}</ErrorText>) : null}
 
@@ -252,19 +257,19 @@ function Register() {
 
        <InputGrpFlex>
         <InputGrp>
-        <Label htmlFor="email">Email</Label>
+        {/* <Label htmlFor="email">Email</Label> */}
         <Input id="email" name="email" placeholder="Email" type="email"/>
         {errors.email && touched.email ? (<ErrorText>{errors.email}</ErrorText>) : null}
       </InputGrp>
 
         <InputGrp>
-        <Label htmlFor="password">Password</Label>
+        {/* <Label htmlFor="password">Password</Label> */}
         <Input id="password" name="password" placeholder="Password" type="password"/>
         {errors.password && touched.password ? (<ErrorText>{errors.password}</ErrorText>) : null}
       </InputGrp>
       </InputGrpFlex>
 
-      <InputHolder>
+      <InputHolderCheck>
       <label >
                   <Field
                     name="age"
@@ -274,7 +279,7 @@ function Register() {
                   <LabelT>I am 18 years old</LabelT>
                 </label>
       {errors.age && touched.age ? (<ErrorText>{errors.age}</ErrorText>) : null}
-      </InputHolder>
+      </InputHolderCheck>
   
 
       <StyledButton type="submit">Sign Up</StyledButton>

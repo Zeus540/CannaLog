@@ -30,17 +30,6 @@ img{
   margin-right:10px;
 }
 `
-
-export const FormControlLabelSytled = styled(FormControlLabel)`
-display: flex;
-
-width: calc(100% / 2 - 9px);
-margin:unset!important;
-span{
-  width: 100%;
-}
-`
-
 export const CardCheckedSytled = styled.div`
 display: flex;
 color: ${props => props.theme.text};
@@ -55,6 +44,20 @@ img{
 }
 
 `
+export const FormControlLabelSytled = styled(FormControlLabel)`
+display: flex;
+
+width: calc(100% / 2 - 9px);
+margin:unset!important;
+span{
+  width: 100%;
+  :hover{
+    background:unset!important;
+  }
+}
+`
+
+
 export const StyledTextareaAutosize = styled(TextareaAutosize)`
 white-space: unset;
 overflow-wrap: break-word;

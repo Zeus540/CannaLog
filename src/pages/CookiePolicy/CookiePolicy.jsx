@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import {Root} from '../../utils/global_styles'
-
+import Seo from '../../components/seo/Seo';
 
 const Inner = styled.div`
 
@@ -33,6 +33,8 @@ padding-top: 20px;
 `;
 const CookiePolicy = () => {
   return (
+   <>
+    <Seo title="Cookie Policy" />
     <Root
     initial={{opacity: 0}}
     animate={{opacity: 1}}
@@ -118,8 +120,8 @@ const CookiePolicy = () => {
 </ul>
 </Inner>
     </Root>
+   </>
   )
 }
 
-// including; {List the social networks whose features you have integrated with your site?:12},
 export default CookiePolicy

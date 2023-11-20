@@ -5,14 +5,13 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import axios from "axios"
 import { NavLink,useLocation,useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useSnackbar } from 'notistack';
 import { auth } from '../../features';
 import { useDispatch } from 'react-redux';
 import { getCookieValue } from '../../helpers/getCookieValue';
 import {StyledButton} from '../../utils/global_styles'
-
+import Seo from '../../components/seo/Seo';
 
 const Root = styled.div`
 padding-top: 60px;
@@ -48,12 +47,18 @@ width:90%;
 
 const InputGrp = styled.div`
 
-margin: 15px 0px;
+
 padding-top: 0px;
 color:  ${props => props.theme.text};
 display: flex;
 flex-direction: column;
 `;
+const BtnHolder = styled.div`
+
+margin: 10px 0px;
+`;
+
+
 const Label = styled.label`
 color:  ${props => props.theme.text};
 font-weight:bold;
@@ -113,7 +118,7 @@ color:  ${props => props.theme.text};
 margin: 0px;
 font-size: 16px;
 text-align: center;
-padding-top: 20px;
+padding-top: 15px;
 `;
 
 const MenuLink = styled(NavLink)`
@@ -177,12 +182,7 @@ function Login() {
 
   return (
     <Root>
-
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{`CannaLog - Sign In`}</title>
-        <link rel="canonical" href={`https://sweetleaf.co.za/sign-in`} />
-      </Helmet>
+<Seo title="Sign In" content="Sign in to access your personalized cannabis cultivation dashboard. Join our community of growers, track your progress, and engage with fellow enthusiasts. Elevate your cultivation experience by signing in now."/>
 
       <RootInner>
        
@@ -206,19 +206,23 @@ function Login() {
             <Form>
               <ErrMsg >{errMsg}</ErrMsg>
               <InputGrp>
-                <Label htmlFor="email">Email</Label>
+                {/* <Label htmlFor="email">Email</Label> */}
                 <Input id="email" name="email" placeholder="Email" />
                 {errors.email && touched.email ? (<ErrorText>{errors.email}</ErrorText>) : null}
 
               </InputGrp>
 
               <InputGrp>
-                <Label htmlFor="password">Password</Label>
+                {/* <Label htmlFor="password">Password</Label> */}
                 <Input id="password" name="password" placeholder="Password" type="password" />
                 {errors.password && touched.password ? (<ErrorText>{errors.password}</ErrorText>) : null}
               </InputGrp>
 
-              <StyledButton>Login</StyledButton>
+<BtnHolder>
+<StyledButton>Login</StyledButton>
+
+</BtnHolder>
+      
 
               <Help>Need a account?     <MenuLink to="/sign-up">Sign Up Here</MenuLink> </Help>
             </Form>

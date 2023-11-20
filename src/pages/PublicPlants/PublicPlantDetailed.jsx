@@ -39,6 +39,7 @@ import {
 } from './PublicPlantDetailed_styles'
 import { BASE_URL_PROD } from '../../lib/Constants'
 import { useSocket } from '../../context/SocketContext'
+import Seo from '../../components/seo/Seo';
 
 function PublicPlantDetailed() {
     const [plant, setPlant] = useState()
@@ -176,6 +177,8 @@ function PublicPlantDetailed() {
     }
 
     return (
+       <>
+        <Seo title={params.plant_name} user={params.user_name}/>
         <Root
         initial={{ translateX: '-100%',opacity: 0 }}
         animate={{ translateX: '0%',opacity: 1 }}
@@ -263,6 +266,7 @@ function PublicPlantDetailed() {
       
         </Root>
 
+       </>
     )
 }
 

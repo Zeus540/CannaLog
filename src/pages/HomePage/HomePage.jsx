@@ -37,6 +37,7 @@ import { selectPublicJournal } from '../../features'
 import { fetchPublicPlants } from '../../features/plants/publicPlantsThunk';
 import PlantCard from '../../components/cards/PlantCard';
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton';
+import Seo from '../../components/seo/Seo';
 
 const HomePage = () => {
 
@@ -70,6 +71,9 @@ const HomePage = () => {
 
 
   return (
+   <>
+    <Seo title="Grow Logs" content="Welcome to Cannalog your cannabis cultivation hub! Explore a world of possibilities for enthusiasts and growers. we offer a comprehensive platform to elevate your cannabis experience. Join us now and cultivate your passion with like-minded individuals."/>
+    
     <Root
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -198,7 +202,7 @@ const HomePage = () => {
             <PricingItemHeading>Free</PricingItemHeading>
             <PricingItemText>$0/month</PricingItemText>
             <Ul>
-              <Li>3 Grow Journals</Li>
+              <Li>3 Grow Logs</Li>
               {/* <li>Limited Support</li> */}
             </Ul>
             <StyledButton>
@@ -211,7 +215,7 @@ const HomePage = () => {
             <PricingItemHeading>Premium</PricingItemHeading>
             <PricingItemText>$9.99/month</PricingItemText>
             <Ul>
-              <Li>Unlimited Grow Journals</Li>
+              <Li>Unlimited Grow Logs</Li>
               {/* <li>Premium Support</li> */}
             </Ul>
             <StyledButton>
@@ -225,6 +229,7 @@ const HomePage = () => {
 
 
     </Root>
+   </>
   )
 }
 

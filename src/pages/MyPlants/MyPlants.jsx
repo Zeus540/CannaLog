@@ -14,6 +14,7 @@ import Blank from '../../components/skeleton/Blank';
 import PopupModal from '../../components/popupModal/PopupModal'
 import Banner from '../../components/banner/Banner'
 import SearchImg from '../../assets/images/search.jpg'
+import Seo from '../../components/seo/Seo'
 
 const EnviromentHolder = styled(m.div)`
 margin-top:20px;
@@ -121,7 +122,7 @@ const MyPlants = () => {
   return (
 
     <>
-    
+    <Seo noFollow title="My Grow Logs" content="Refine Your Home Cannabis Garden! Personalized Guidance for Your Plants. Optimize Your Grow Today!"/>
      <Banner bg={SearchImg} heading="My Grow Logs" txt1="Refine Your Home Cannabis Garden! Personalized Guidance for Your Plants." txt2="Optimize Your Growth Today!"/>
    
     <SRoot

@@ -4,6 +4,7 @@ import { BASE_URL_PROD } from '../../lib/Constants'
 import styled from 'styled-components'
 import {Root,Holder, Heading} from '../../utils/global_styles'
 import { useSocket } from '../../context/SocketContext'
+import Seo from '../../components/seo/Seo'
 
 const UserCardOutter = styled.div`
 margin-top: 15px;
@@ -63,6 +64,8 @@ const socket = useSocket()
 },[socket])
 
   return (
+<>
+<Seo title="Growers" content="Check the real-time status of cannabis growers on our platform. Discover if your favorite cultivators are currently online. Stay connected, share insights, and engage with active growers in our vibrant cannabis community. Join now to explore the live presence of passionate cultivators."/>
     <Root
     initial={{ opacity: 0}}
     animate={{ opacity: 1 }}
@@ -85,6 +88,7 @@ const socket = useSocket()
       </UserCardOutter>
       </Holder>
     </Root>
+</>
   )
 }
 
