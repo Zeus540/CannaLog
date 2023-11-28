@@ -44,8 +44,6 @@ export const environmentsSlice = createSlice({
     extraReducers: (builder) => {
       builder
         .addCase(fetchEnvironments.pending, (state) => {
-          // state.environments = []
-    
           state.loading = true;
           state.error = null;
         })
@@ -97,10 +95,7 @@ export const environmentsSlice = createSlice({
 
 export const enviromentActions =  environmentsSlice.actions;
 
-export const selectEnvironments = (state) => state.environments.environments;
-export const selectEnvironmentsIsLoading = (state) => state.environments.loading;
-export const selectEnvironmentsHasMore = (state) => state.environments.hasMore;
-export const selectNextCursor = (state) => state.environments.next_cursor;
-export const selectHasIntialData = (state) => state.environments.hasIntialData;
+export const selectEnvironments = (state) => state.environments;
+
 
 

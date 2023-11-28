@@ -5,7 +5,7 @@ import {fetchPublicPlants,fetchPublicPlantsSingedIn} from "./plants/publicPlants
 
 import {myPlantsSlice,selectMyPlants} from "./plants/myPlantsSlice.js"
 import {fetchMyPlants,addPlants,deletePlant,takeAction,deleteAction,editAction} from "./plants/myPlantsThunk.js"
-import {environmentsSlice,enviromentActions,selectEnvironments,selectEnvironmentsIsLoading,selectEnvironmentsHasMore,selectNextCursor,selectHasIntialData} from "./enviroments/environmentsSlice.js"
+import {environmentsSlice,enviromentActions,selectEnvironments} from "./enviroments/environmentsSlice.js"
 import {deleteEnvironment} from "./enviroments/deleteEnvironmentThunk.js"
 import {fetchEnvironments} from "./enviroments/environmentsThunk.js"
 
@@ -44,9 +44,6 @@ export {
     enviromentActions,
     fetchEnvironments,
     deleteEnvironment,
-    selectEnvironmentsIsLoading,
-    selectEnvironmentsHasMore,
-    selectNextCursor,
     fetchEnvironmentTypes,
     environmentTypesSlice,
     fetchMyPlants,
@@ -78,6 +75,5 @@ export {
     fetchNotifications,
     readNotifications,
     readNotification,
-    selectHasIntialData,
     publicPlantActions
 } 

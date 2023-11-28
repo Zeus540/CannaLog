@@ -6,7 +6,7 @@ import Black from './assets/images/black.jpg'
 import White from './assets/images/white.jpg'
 import { getCookieValue } from './helpers/getCookieValue'
 import { useCookies } from 'react-cookie'
-import { publicPlantActions, selectIsLoggedIn,enviromentActions} from './features/index'
+import { publicPlantActions, selectIsLoggedIn,enviromentActions,selectPublicJournal,selectEnvironments} from './features/index'
 
 let light_theme = {
   primary: '#ffffff',
@@ -116,13 +116,21 @@ function App() {
   const dispatch = useDispatch()
   const [cookies, setCookie,removeCookie] = useCookies();
   const IsLoggedIn = useSelector(selectIsLoggedIn)
+  const PublicPlants = useSelector(selectPublicJournal)
+  const Enviroments = useSelector(selectEnvironments)
   
   const [theme, setTheme] = useState(dark_theme)
   const [themeType, setThemeType] = useState("dark")
 
   useEffect(() => {
-    dispatch(publicPlantActions.reset())
-    dispatch(enviromentActions.reset())
+    if(PublicPlants.hasData){
+      dispatch(publicPlantActions.reset())
+    }
+   
+    if(Enviroments.hasData){
+      dispatch(enviromentActions.reset())
+    }
+
   }, [IsLoggedIn])
   
 

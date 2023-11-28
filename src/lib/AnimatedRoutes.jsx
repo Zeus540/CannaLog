@@ -56,35 +56,8 @@ function AnimatedRoutes({themeType,toggleTheme}) {
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const location = useLocation()
 
-
-
-    
-    //const HomePage = lazy(()=>import('../pages/HomePage/HomePage'))
-    //const Notifications = lazy(()=>import('../pages/Notifications/Notifications'))
-    //const Growers = lazy(()=>import('../pages/Growers/Growers'))
-    //const MyPlants = lazy(()=>import('../pages/MyPlants/MyPlants'))
-    //const MyPlantsDetailed = lazy(()=>import('../pages/MyPlants/MyPlantsDetailed'))
-    //const PublicPlants = lazy(()=>import('../pages/PublicPlants/PublicPlants'))
-    //const PublicPlantDetailed = lazy(()=>import('../pages/PublicPlants/PublicPlantDetailed'))
-    //const Environments = lazy(()=>import('../pages/Environments/Environments'))
-    // const Terms = lazy(()=>import('../pages/Terms/Terms'))
-    // const CookiePolicy = lazy(()=>import('../pages/CookiePolicy/CookiePolicy'))
-    // const PrivacyPolicy = lazy(()=>import('../pages/PrivacyPolicy/PrivacyPolicy'))
-    //const Login = lazy(()=>import('../pages/Login/Login'))
-    //const Register = lazy(()=>import('../pages/Register/Register'))
-    //const RegistrationComplete = lazy(()=>import('../pages/Register/RegistrationComplete'))
-    //const Verify = lazy(()=>import('../pages/Register/Verify'))
-
- 
-
     useEffect(() => {
-
         window.scrollTo(0, 0);
-        
-        window.onunload = function () {
-            window.scrollTo(0, 0);
-        }
-
       }, [location]);
 
     

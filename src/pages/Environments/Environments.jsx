@@ -7,10 +7,6 @@ import {
   fetchEnvironments,
   selectMyPlants,
   selectEnvironments,
-  selectEnvironmentsIsLoading,
-  selectEnvironmentsHasMore,
-  selectNextCursor,
-  selectHasIntialData,
 } from '../../features'
 import EnviromentCard from '../../components/cards/EnviromentCard'
 
@@ -53,14 +49,7 @@ const Environments = () => {
   const dispatch = useDispatch()
 
   const environments = useSelector(selectEnvironments)
-  const environmentsIsLoading = useSelector(selectEnvironmentsIsLoading)
 
-  const myPlants = useSelector(selectMyPlants)
-  const hasMore = useSelector(selectEnvironmentsHasMore)
-
-
-  const next_cursor = useSelector(selectNextCursor)
-  const hasIntialData = useSelector(selectHasIntialData)
 
   let environmentsLength = environments.length
 
@@ -111,7 +100,7 @@ const Environments = () => {
       key: undefined,
       signal
     }
-    if (!hasIntialData) {
+    if (!environments.hasIntialData) {
       dispatch(fetchEnvironments(obj))
     }
 
@@ -139,12 +128,12 @@ const Environments = () => {
   }, [])
 
   useEffect(() => {
-    if (pageBottom && hasMore) {
+    if (pageBottom && environments.hasMore) {
 
       let obj = {
         limit: 12,
         limit_mobile: 6,
-        key: next_cursor,
+        key: environments.next_cursor,
         signal
       }
 
@@ -190,7 +179,7 @@ const Environments = () => {
       {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}
       <Holder>
         <FlexRowEnd>
-          {hasIntialData ?  
+          {environments.hasIntialData ?  
           <Heading>
            My Environments
           </Heading>
@@ -198,7 +187,7 @@ const Environments = () => {
           <Blank w="100px" h='30px' />
           }
 
-          {hasIntialData ? 
+          {environments.hasIntialData ? 
           <StyledButton onClick={() => { openModal("addEnvironment") }}><ButtonText><IoMdAdd />Environemt</ButtonText></StyledButton>
           : 
           <Blank w="150px" h='40px' />
@@ -207,8 +196,8 @@ const Environments = () => {
 
         <EnviromentHolder>
 
-          {hasIntialData && <>
-            {environments?.map((e, index) => {
+          {environments.hasIntialData && <>
+            {environments.environments?.map((e, index) => {
               return (
                 <EnviromentCard
                   refValue={lastCard}
@@ -222,7 +211,7 @@ const Environments = () => {
           </>
           }
 
-          {environmentsIsLoading &&
+          {environments.loading &&
 
             [...Array(amount).keys()]?.map((index) => {
               return (

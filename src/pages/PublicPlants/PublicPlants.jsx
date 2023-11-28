@@ -126,6 +126,7 @@ const PublicPlants = () => {
             })}
           </>
           }
+          
           {publicPlants.loading &&
 
             [...Array(amount).keys()]?.map((index) => {

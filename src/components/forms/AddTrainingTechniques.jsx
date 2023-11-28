@@ -80,16 +80,20 @@ const AddTrainingTechniques = ({ plant, modalType, openModal, data,setModalOpen,
     }
 
     const handleChange = (e) => {
-        e.target.checked = true;
+        console.log("checked",e.target.checked)
         
-        console.log("value",e.target.value)
-        setTrainingTechniques([...trainingTechniques,e.target.value])
-        console.log("trainingTechniques",trainingTechniques)
+        // if(e.target.checked == true){
+        //     e.target.checked = false;
+        // }else{
+        //     e.target.checked = true;
+        // }
+        // setTrainingTechniques([...trainingTechniques,e.target.value])
+        // console.log("trainingTechniques",trainingTechniques)
       };
 
       const Card = ({img,name})=>{
         return(
-            <CardSytled>
+            <CardSytled onClick={(e)=>handleChange(e)}>
                 <img src={img} width='50px'/>
                 <div>
                 <p>{name}</p>
@@ -100,7 +104,7 @@ const AddTrainingTechniques = ({ plant, modalType, openModal, data,setModalOpen,
 
       const CardChecked = ({img,name})=>{
         return(
-            <CardCheckedSytled>
+            <CardCheckedSytled onClick={(e)=>handleChange(e)}>
                 <img src={img} width='50px'/>
                 <div>
                 <p>{name}</p>
@@ -139,12 +143,14 @@ const AddTrainingTechniques = ({ plant, modalType, openModal, data,setModalOpen,
                         {trainingTechniquesList?.map((itm, index) => {
                                 return (
                                     <FormControlLabelSytled
-                                    control={<Checkbox value={itm.grow_techniques_id} icon={<Card img={itm?.grow_techniques_image} name={itm?.grow_techniques_name}/>} checkedIcon={<CardChecked img={itm?.grow_techniques_image} name={itm?.grow_techniques_name}/>} onChange={handleChange} />}
-
-                                  />
-                               
-                                    //<TrainingCard key={index} value={itm} img={itm?.grow_techniques_image} name={itm?.grow_techniques_name}/>
-                              
+                                    control={
+                                    <Checkbox 
+                                    value={itm.grow_techniques_id}
+                                    icon={<Card img={itm?.grow_techniques_image} name={itm?.grow_techniques_name}/>} 
+                                    checkedIcon={<CardChecked img={itm?.grow_techniques_image} name={itm?.grow_techniques_name}/>} 
+                                    
+                                    />}
+                                    />
                                 )
                             })}
 </Flex>

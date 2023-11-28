@@ -3,7 +3,7 @@ import axios from "../../lib/axios";
 import { BASE_URL_PROD } from "../../lib/Constants";
 
 export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',async(obj)=>{
-  console.log("here",obj)
+
   
   let limit = obj.limit;
   let signal = obj.signal

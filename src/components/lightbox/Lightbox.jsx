@@ -29,23 +29,24 @@ overflow: hidden;
 
 
 export const Image = styled.img`
-
-
 object-fit: contain;
 aspect-ratio: 26/9;
-
-
 `
 
 export const ImageHolder = styled.div`
 
-
 `
-function Lightbox({data,index}) {
+
+export const Para = styled.p`
+color:white
+`
+
+function Lightbox({data,index,setShowLightBox}) {
 
   
   return createPortal(
     <Holder>
+      <Para onClick={()=>  setShowLightBox(false)}>X</Para>
      <Root>
       <Swiper
               pagination={{

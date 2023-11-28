@@ -3,6 +3,7 @@ import Blank from '../skeleton/Blank'
 import BlankImage from '../skeleton/BlankImage'
 import {Root} from './PlantCard_styles'
 import { Flex } from '../skeleton/Blank_styles'
+
 const PlantCardSkelton = () => {
 
   return (
