@@ -116,7 +116,7 @@ const AddPlant = ({ openModal, modalType, data }) => {
                         required
                         onChange={handleChange}
                     >
-                        {environments?.map((t, index) => {
+                        {environments?.environments?.map((t, index) => {
                             return (
                                 <Item key={index} value={t.environment_id}>
                                     <div> {t.environment_name}</div>
