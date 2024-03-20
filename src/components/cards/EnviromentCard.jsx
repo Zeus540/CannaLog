@@ -47,7 +47,8 @@ const EnviromentCard = ({ openModal,data,index,length,refValue }) => {
   }
   
   const handleRedirect = (p)=>{
-    navigate(`/my-plants/${cleanName(p.strain_name)}/${cleanName(p.user_name)}/${p.environment_id}/${p.plant_id}`)
+    navigate(`/my-plants/${cleanName(p.plant_name)}/${cleanName(p.user_name)}/${p.environment_id}/${p.plant_id}`)
+
   }
   
   
