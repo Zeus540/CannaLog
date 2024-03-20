@@ -123,7 +123,7 @@ margin: 15px 0px;
 
 export const PlantHolder = styled(m.div)`
 // width: 50px;
-width:calc(100% /4 - 10px)
+width:calc(100% /4 - 10px);
 color:  ${props => props.theme.text};
 font-size: 12px;
 display: flex;
