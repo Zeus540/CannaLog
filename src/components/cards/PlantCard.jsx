@@ -11,8 +11,8 @@ import {
   PlantCardTextLogoTop,
   PlantCardTextInner,
   PlantCardTextTopInner,
+  DltButton
 } from './PlantCard_styles'
-import { StyledButton } from '../../utils/global_styles'
 import { PiDnaLight } from 'react-icons/pi';
 import { IoWaterOutline } from 'react-icons/io5';
 import { BsPersonCircle } from "react-icons/bs";
@@ -55,16 +55,14 @@ const PlantCard = ({ data, openModal,homePage }) => {
     >
       <PlantCardImageHolder >
 
-        <PlantCardTextTop >
-          <GiGreenhouse /> {data.environment_name}
-        </PlantCardTextTop>
+     
 
         <EnviromentCardImageHolder>
           <PlantCardTextLogoTop>
             <div> Day</div>
             {getElapsedDays(data?.creation_date)}
           </PlantCardTextLogoTop>
-          {path == 'my-plants' && <StyledButton onClick={() => { openModal("deletePlant", data) }}><RiDeleteBin5Line /></StyledButton>}
+          {path == 'my-plants' && <DltButton position="absolute" type='icon' background="red" onClick={() => { openModal("deletePlant", data) }}><RiDeleteBin5Line /></DltButton>}
 
           <picture onClick={() => handleRedirect()}>
             <source srcSet={data.cover_thumbnail_next_gen} type="image/webp" alt="webp" loading='lazy'/>
@@ -77,6 +75,20 @@ const PlantCard = ({ data, openModal,homePage }) => {
           <PlantCardText>
             {data.plant_name}
           </PlantCardText>
+
+          <PlantCardText >
+         
+        </PlantCardText>
+
+        <PlantCardText>
+            <PlantCardTextLogo>
+               <GiGreenhouse /> 
+            </PlantCardTextLogo>
+            <PlantCardTextInner>
+            {data.environment_name}
+            </PlantCardTextInner>
+          </PlantCardText>
+
           <PlantCardText>
             <PlantCardTextLogo>
               <PiDnaLight />

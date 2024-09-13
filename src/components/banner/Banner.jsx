@@ -105,7 +105,7 @@ const isLoggedIn = useSelector(selectIsLoggedIn)
     <Holder bg={props.bg}>
         <SHeading>{props.heading}</SHeading>
         <form>
-        <Input required type="text" placeholder="Search by Strain,Environment" onChange={(e)=>handleSearch(e)}/>
+        <Input  type="text" placeholder="Search by Strain,Environment" onChange={(e)=>handleSearch(e)}/>
     
         
         {searchResultsFound && 
