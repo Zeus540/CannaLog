@@ -14,14 +14,7 @@ const PlantCardSkelton = () => {
     transition={{ duration: 0.10 }}
     exit={{ opacity: 0 }}
     >
-    <Flex
-      justify='end'>
-    <Blank
-    w="50%"
-    h='30px'
-    margin="10px 0px"
-    />
-    </Flex>
+   
     
     <BlankImage
     w="100%"
@@ -31,6 +24,11 @@ const PlantCardSkelton = () => {
     aspectMobile="16 / 14"
     />
       <Blank
+    w="60%"
+    h='20px'
+    margin="10px 0px"
+    />
+          <Blank
     w="60%"
     h='20px'
     margin="10px 0px"

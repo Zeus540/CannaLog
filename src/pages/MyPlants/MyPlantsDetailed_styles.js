@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion as m } from "framer-motion";
-
+import { StyledButton } from '../../utils/global_styles'
 
 export const Tag = styled(m.div)`
 background:${(props) => `${props.bg}`};
@@ -14,8 +14,19 @@ width: fit-content;
 `
 
 export const Root = styled(m.div)`
-background:${(props) => `${props.theme.secondary}`};
 
+
+`
+
+export const DltButton = styled(StyledButton)`
+color:  ${props => props.theme.text};
+background:  red;
+font-size: 16px;
+padding: 5px;
+border-radius: 50px;
+font-weight: bold;
+cursor:pointer;
+position:  absolute;
 `
 
 export const QuickActionHolderInner = styled.div`

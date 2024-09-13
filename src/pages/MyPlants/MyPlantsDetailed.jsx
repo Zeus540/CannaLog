@@ -244,10 +244,10 @@ function MyPlantsDetailed() {
        <>
         <Seo noFollow title={params.plant_name} user={params.user_name}/>
         <Root
-        initial={{ translateX: '-100%',opacity: 1 }}
-        animate={{ translateX: '0%',opacity: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        exit={{ translateX: '-100%',opacity: 1 }}
+        exit={{ opacity: 0 }}
         >
             <ImgHolderTop img={coverImage}>
                 <EditPlant>

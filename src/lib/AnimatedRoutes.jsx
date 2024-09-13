@@ -74,7 +74,7 @@ function AnimatedRoutes({themeType,toggleTheme}) {
                 <ProgressBar key="ProgressBar"/>
                 <NavBar key="NavBar"  themeType={themeType} toggleTheme={toggleTheme}/>
                 <Suspense fallback={<Root  key="fallback"><Loader/></Root>}>
-                <AnimatePresence   mode="wait">
+                <AnimatePresence mode="wait">
            
                    
                     <Routes location={location} key={location.pathname}>

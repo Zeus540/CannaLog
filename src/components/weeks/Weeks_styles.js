@@ -9,7 +9,7 @@ text-align: center;
 `
 
 export const WeekHolder = styled(m.div)`
-display: flex;
+
 margin: 0px auto;
 overflow: auto;
 width: 80%;

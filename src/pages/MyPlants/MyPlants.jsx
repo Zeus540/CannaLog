@@ -1,7 +1,7 @@
 import  { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { motion as m } from 'framer-motion'
-import { Holder, Root, Heading, FlexRowEnd, StyledButton, ButtonText } from '../../utils/global_styles'
+
+
+import { Holder,  FlexRowEnd,  ButtonText,StyledButton } from '../../utils/global_styles'
 import { useDispatch,useSelector } from 'react-redux'
 import {
   selectMyPlants,
@@ -15,19 +15,7 @@ import PopupModal from '../../components/popupModal/PopupModal'
 import Banner from '../../components/banner/Banner'
 import SearchImg from '../../assets/images/search.jpg'
 import Seo from '../../components/seo/Seo'
-
-const EnviromentHolder = styled(m.div)`
-margin-top:20px;
-display:flex;
-margin: 0px -10px;
-flex-wrap: wrap;
-
-`
-const SRoot = styled(Root)`
-padding-top:0px;
-min-height:unset
-
-`
+import {EnviromentHolder,SRoot} from './MyPlants_styles'
 
 const MyPlants = () => {
 
@@ -125,13 +113,12 @@ const MyPlants = () => {
     <Seo noFollow title="My Grow Logs" content="Refine Your Home Cannabis Garden! Personalized Guidance for Your Plants. Optimize Your Grow Today!"/>
      <Banner bg={SearchImg} heading="My Grow Logs" txt1="Refine Your Home Cannabis Garden! Personalized Guidance for Your Plants." txt2="Optimize Your Growth Today!"/>
    
-    <SRoot
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.10}}
-      exit={{ opacity: 0, }}
-      
-    >
+     <SRoot
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        exit={{ opacity: 0 }}
+        >
    
 
       {modalOpen && <PopupModal openModal={openModal} data={modalData} modalType={modalType} />}

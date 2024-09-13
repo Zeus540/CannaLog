@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { motion as m } from 'framer-motion'
+import { StyledButton } from '../../utils/global_styles'
 
 export const Root = styled.div`
 width: ${props => props.homePage ? "calc(100% / 5 - 20px)" : "calc(100% / 8 - 20px)" };
@@ -158,4 +159,16 @@ line-height: 16px;
 div{
     margin-right: 5px;
 }
+`
+
+export const DltButton = styled(StyledButton)`
+color:  ${props => props.theme.text};
+background:  red;
+font-size: 16px;
+padding: 5px;
+border-radius: 50px;
+font-weight: bold;
+cursor:pointer;
+position:  absolute;
+margin: 8px;
 `
