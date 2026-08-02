@@ -162,20 +162,17 @@ function Register() {
   const handleLogin =(values) =>{
     
     
-    axios.post(`${BASE_URL_PROD}/register`,values)
+    axios.post(`${BASE_URL_PROD}/register`, values)
     .then(function (response) {
-      console.log("response.data",response.data)
-      if(response.data.userRegisterSucces == false){
+      if (response.data.userRegisterSucces == false) {
         setError(response.data.userRegisterMsg)
-      }else{
+      } else {
         navigate(`${response.data.userRegisterMsg}`)
       }
-      
-      
     })
     .catch(function (error) {
-      enqueueSnackbar(`${error.response.status} ${error.response.statusText}`,{variant:'error'})
-      console.log(error);
+      const msg = error.response ? `${error.response.status} ${error.response.statusText}` : error.message
+      enqueueSnackbar(msg, { variant: 'error' })
     })
    
 

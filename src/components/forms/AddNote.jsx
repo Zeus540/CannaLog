@@ -55,7 +55,6 @@ const AddNote = ({ plant,setModalOpen,setIsSubmitting,data }) => {
         setIsSubmitting(true)
         setSubmitting(true)
 
-        console.log(values)
         if(data.plant_note_id){
             dispatch(editAction(values))
             .then((response)=>{

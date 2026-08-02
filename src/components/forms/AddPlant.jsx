@@ -59,14 +59,15 @@ const AddPlant = ({ openModal, modalType, data }) => {
         dispatch(addPlants(values))
         .then((response)=>{
             if (response.payload.length > 0) {
-                enqueueSnackbar('Plant Added',{variant:'success'})
+                enqueueSnackbar('Plant Added', { variant: 'success' })
                 openModal(modalType)
             }
         })
         .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+            const msg = err.response ? `${err.response.status} ${err.response.data}` : err.message
+            enqueueSnackbar(msg, { variant: 'error' })
         })
-        .finnaly(()=>{
+        .finally(()=>{
             setSubmitting(false)
         })
     }

@@ -182,21 +182,34 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
 
 
   useEffect(() => {
-    if (plant && socket) {
+    if (!plant || !socket) return;
 
-      socket.on(`image_added${params.plant_id}`, (data) => {
-        let arr = [...images, data];
-        console.log('image_added')
-        group_by(arr, setImages, plant);
+    const handleImageAdded = (data) => {
+      setImages(prev => {
+        const arr = [...prev, data];
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        const startDateIn = new Date(getLocalizedDate(plant.creation_date))
+        const localizedData = arr.map((item) => {
+          const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
+          const week = differenceInWeeks(localizedDate, startOfWeek(startDateIn, { weekStartsOn: 1 }));
+          return { ...item, creation_date: localizedDate, week };
+        });
+        return localizedData.sort((a, b) => new Date(getLocalizedDate(b.creation_date)) - new Date(getLocalizedDate(a.creation_date)));
       });
+    };
 
-      socket.on(`action_deleted${params.plant_id}`, (data) => {
-        console.log('action_deleted',data)
-        setImages(images.filter((i)=> i.plant_action_id !== parseInt(data.plant_action_id)))
-      });
-      
-    }
-  }, [plant, images,socket]);
+    const handleActionDeleted = (data) => {
+      setImages(prev => prev.filter(i => i.plant_action_id !== parseInt(data.plant_action_id)));
+    };
+
+    socket.on(`image_added${params.plant_id}`, handleImageAdded);
+    socket.on(`action_deleted${params.plant_id}`, handleActionDeleted);
+
+    return () => {
+      socket.off(`image_added${params.plant_id}`, handleImageAdded);
+      socket.off(`action_deleted${params.plant_id}`, handleActionDeleted);
+    };
+  }, [plant, socket]);
 
 
   useEffect(() => {
@@ -212,9 +225,7 @@ const TimelineImages = ({ plant, activeWeek,openModal, title, actionTypeData, ha
           }
 
 
-        }).catch((err) => {
-          console.log("err", err)
-        })
+        }).catch(() => {})
     }
   }, [plant]);
 
@@ -247,7 +258,7 @@ const handleLightbox = (index)=>{
 
   return (
     <>
-{showLightBox > 0 &&
+{showLightBox &&
 <AnimatePresence mode='wait'>
   <Lightbox data={lightBoxImages} index={lightBoxIndex} setShowLightBox={setShowLightBox}/>
   </AnimatePresence>

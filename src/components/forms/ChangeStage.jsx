@@ -93,15 +93,15 @@ const ChangeStage = ({ plant,modalType,openModal,data }) => {
         dispatch(takeAction(values))
         .then((response)=>{
             if (response.payload.affectedRows > 0) {
-                enqueueSnackbar('Plant Stage Updated',{variant:'success'})
+                enqueueSnackbar('Plant Stage Updated', { variant: 'success' })
                 openModal(modalType)
             }
         })
         .catch((err)=>{
-            enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
-          
+            const msg = err.response ? `${err.response.status} ${err.response.data}` : err.message
+            enqueueSnackbar(msg, { variant: 'error' })
         })
-        .finnaly(()=>{
+        .finally(()=>{
             setSubmitting(false)
         })
 

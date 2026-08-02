@@ -62,7 +62,6 @@ function Lightbox({data,index,setShowLightBox}) {
         return(
           <SwiperSlide  key={index}>
            <ImageHolder>
-          {console.log(img)}
            <Tag>{getWeekandDay(img.creation_date).day}</Tag>
             <Tag>{getLocalizedDate(img.creation_date)}</Tag>
 

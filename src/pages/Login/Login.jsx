@@ -145,26 +145,22 @@ function Login() {
 
 
   const handleLogin = (values) => {
-    console.log("values", values);
     setErrMsg("");
     axios.post(`${BASE_URL_PROD}/login`, values, { withCredentials: true })
       .then(function (response) {
-        console.log('response');
         if (response.status == 200) {
           let obj = {
             user: getCookieValue('user'),
             isLoggedIn: true
           }
-
           dispatch(auth(obj))
-          navigate(location.state ? location.state :'/my-environments')
+          navigate(location.state ? location.state : '/my-environments')
         }
-
       })
       .catch(function (error) {
-
-        enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
-        setErrMsg(error.response.data);
+        const msg = error.response ? `${error.response.status} ${error.response.statusText}` : error.message
+        enqueueSnackbar(msg, { variant: 'error' })
+        setErrMsg(error.response?.data ?? 'Login failed')
       })
 
   }

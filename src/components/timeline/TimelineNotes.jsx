@@ -123,26 +123,40 @@ const TimelineNotes = ({ plant, activeWeek,openModal, title,publicPage }) => {
   const socket = useSocket()
 
   useEffect(() => {
+    if (!plant || !socket) return;
 
-    if (plant && socket) {
-        socket.on(`note_added${params.plant_id}`, (data) => {
-        let arr = [...notes, data];
-        group_by(arr, setNotes, plant);
+    const handleNoteAdded = (data) => {
+      setNotes(prev => {
+        const arr = [...prev, data];
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        const startDateIn = new Date(getLocalizedDate(plant.creation_date))
+        const localizedData = arr.map((item) => {
+          const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
+          const week = differenceInWeeks(localizedDate, startOfWeek(startDateIn, { weekStartsOn: 1 }));
+          return { ...item, creation_date: localizedDate, week };
+        });
+        return localizedData.sort((a, b) => new Date(getLocalizedDate(b.creation_date)) - new Date(getLocalizedDate(a.creation_date)));
       });
+    };
 
-      socket.on(`note_edited${params.plant_id}`, (data) => {
-        console.log('data',data)
-        group_by(data, setNotes, plant);
-      });
+    const handleNoteEdited = (data) => {
+      group_by(data, setNotes, plant);
+    };
 
-      socket.on(`action_deleted${params.plant_id}`, (data) => {
-        console.log('action_deleted',data)
-        setNotes(notes.filter((i)=> i.plant_note_id !== parseInt(data.plant_note_id)))
-      });
+    const handleActionDeleted = (data) => {
+      setNotes(prev => prev.filter(i => i.plant_note_id !== parseInt(data.plant_note_id)));
+    };
 
-    }
+    socket.on(`note_added${params.plant_id}`, handleNoteAdded);
+    socket.on(`note_edited${params.plant_id}`, handleNoteEdited);
+    socket.on(`action_deleted${params.plant_id}`, handleActionDeleted);
 
-  }, [plant, notes,socket]);
+    return () => {
+      socket.off(`note_added${params.plant_id}`, handleNoteAdded);
+      socket.off(`note_edited${params.plant_id}`, handleNoteEdited);
+      socket.off(`action_deleted${params.plant_id}`, handleActionDeleted);
+    };
+  }, [plant, socket]);
 
 
   useEffect(() => {
@@ -156,9 +170,7 @@ const TimelineNotes = ({ plant, activeWeek,openModal, title,publicPage }) => {
 
           }
 
-        }).catch((err) => {
-          console.log("err", err)
-        })
+        }).catch(() => {})
     }
   }, [plant]);
 

@@ -1,46 +1,47 @@
-import React,{createContext, useContext,useEffect,useState} from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { io } from "socket.io-client";
 import { BASE_URL_PROD } from "../lib/Constants";
-import {useSelector} from 'react-redux'
-import {selectUser} from '../features/index'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/index'
 
-const SocketContext = createContext()
+const SocketContext = createContext(null)
 
 export const useSocket = () => useContext(SocketContext)
 
-export const SocketProvider = ({children}) =>{
+export const SocketProvider = ({ children }) => {
   const user = useSelector(selectUser)
-  const [socket, setSocket] = useState('')
+  const [socket, setSocket] = useState(null)
+  const socketRef = useRef(null)
 
-    const socketConfig = io(`${BASE_URL_PROD}`,{
-        autoConnect:false,
-        withCredentials:true
-    });
+  useEffect(() => {
+    const s = io(BASE_URL_PROD, {
+      autoConnect: false,
+      withCredentials: true,
+    })
+    socketRef.current = s
 
-    useEffect(() => {
-      socketConfig.connect()
+    s.on('connect', () => {
+      setSocket(s)
+    })
 
-        
-      socketConfig.on('connect',()=>{
-          console.log("connected socket",socketConfig.id)
-          setSocket(socketConfig)
-        })
+    s.on('disconnect', () => {
+      setSocket(null)
+    })
 
+    if (user) {
+      s.connect()
+    }
 
-        socketConfig.on('disconnect',()=>{
-          console.log("disconnect socket",socketConfig.id)
-          setSocket('')
-        })
-      return () => {
-        socketConfig.disconnect()
-      }
-    }, [user])
+    return () => {
+      s.removeAllListeners()
+      s.disconnect()
+      socketRef.current = null
+    }
+  }, [user])
 
-    return(
-        <SocketContext.Provider value={socket}>
-        {children}
-        </SocketContext.Provider>
-    )
+  return (
+    <SocketContext.Provider value={socket}>
+      {children}
+    </SocketContext.Provider>
+  )
 }
-
-

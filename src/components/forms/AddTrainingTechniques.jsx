@@ -27,11 +27,10 @@ const AddTrainingTechniques = ({ plant, modalType, openModal, data,setModalOpen,
         axios.get(`${BASE_URL_PROD}/training_techniques`)
             .then((response) => {
                 setTrainingTechniquesList(response.data)
-                console.log("training_techniques", response.data);
             })
             .catch((error) => {
-                enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
-                console.log(error);
+                const msg = error.response ? `${error.response.status} ${error.response.statusText}` : error.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
     }, [])
@@ -80,15 +79,11 @@ const AddTrainingTechniques = ({ plant, modalType, openModal, data,setModalOpen,
     }
 
     const handleChange = (e) => {
-        console.log("checked",e.target.checked)
-        
-        // if(e.target.checked == true){
-        //     e.target.checked = false;
-        // }else{
-        //     e.target.checked = true;
-        // }
-        // setTrainingTechniques([...trainingTechniques,e.target.value])
-        // console.log("trainingTechniques",trainingTechniques)
+        setTrainingTechniques(prev =>
+          e.target.checked
+            ? [...prev, e.target.value]
+            : prev.filter(v => v !== e.target.value)
+        );
       };
 
       const Card = ({img,name})=>{

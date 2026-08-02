@@ -44,24 +44,21 @@ const socket = useSocket()
     axios.get(`${BASE_URL_PROD}/growers`)
       .then((response) => {
         setGrowers(response.data)
-      }).catch((err) => {
-        console.log(err)
-      })
+      }).catch(() => {})
   }, [])
 
   useEffect(() => {
+    if (!socket) return;
 
-    if (socket) {
+    const handleUserLoggedIn = (data) => {
+      setGrowers(prev => prev.map(g =>
+        g.user_id === parseInt(data) ? { ...g, is_logged_in: 1 } : g
+      ));
+    };
 
-      socket.on(`user_logged_in`, (data) => {
-        // setGrowers(data)
-        console.log("growers",growers)
-        console.log("user",parseInt(data))
-      });
-
-  }
-
-},[socket])
+    socket.on('user_logged_in', handleUserLoggedIn);
+    return () => { socket.off('user_logged_in', handleUserLoggedIn); };
+  }, [socket])
 
   return (
 <>

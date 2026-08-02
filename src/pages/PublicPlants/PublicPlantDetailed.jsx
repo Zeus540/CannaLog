@@ -57,16 +57,18 @@ function PublicPlantDetailed() {
     const socket = useSocket()
 
     useEffect(() => {
-        if (socket) {
-            socket.on(`action_taken${params.plant_id}`, (data) => {
-                setPlantActions(data)
-            });
+        if (!socket) return;
 
-            socket.on(`stage_changed${params.plant_id}`, (data) => {
-                setCurrentStage(data)
-            });
-        }
+        const handleActionTaken = (data) => { setPlantActions(data); };
+        const handleStageChanged = (data) => { setCurrentStage(data); };
 
+        socket.on(`action_taken${params.plant_id}`, handleActionTaken);
+        socket.on(`stage_changed${params.plant_id}`, handleStageChanged);
+
+        return () => {
+            socket.off(`action_taken${params.plant_id}`, handleActionTaken);
+            socket.off(`stage_changed${params.plant_id}`, handleStageChanged);
+        };
     }, [socket])
 
 
@@ -89,7 +91,8 @@ function PublicPlantDetailed() {
                 }
             }
         } catch (error) {
-            enqueueSnackbar(`${error.response.status} ${error.response.data}`, { variant: 'error' })
+            const msg = error.response ? `${error.response.status} ${error.response.data}` : error.message
+            enqueueSnackbar(msg, { variant: 'error' })
         }
 
     }
@@ -103,7 +106,8 @@ function PublicPlantDetailed() {
                 }
             })
             .catch((err) => {
-                enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+                const msg = err.response ? `${err.response.status} ${err.response.data}` : err.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
     }
@@ -117,7 +121,8 @@ function PublicPlantDetailed() {
                 }
             })
             .catch((err) => {
-                enqueueSnackbar(`${err.response.status} Unable to fetch current stage for this plant`, { variant: 'error' })
+                const msg = err.response ? `${err.response.status} Unable to fetch current stage for this plant` : err.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
     }
@@ -129,7 +134,8 @@ function PublicPlantDetailed() {
                     setPlantActions(response.data)
                 }
             }).catch((err) => {
-                enqueueSnackbar(`${err.response.status} Unable to fetch actions for this plant`, { variant: 'error' })
+                const msg = err.response ? `${err.response.status} Unable to fetch actions for this plant` : err.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
     }
 
@@ -144,13 +150,7 @@ function PublicPlantDetailed() {
         }
 
         axios.post(`${BASE_URL_PROD}/plants/viewed/${plant_id}`, data)
-            .then((response) => {
-                console.log(response)
-            })
-
-            .catch((err) => {
-                console.log(err)
-            })
+            .catch(() => {})
 
     }
 
@@ -162,18 +162,13 @@ function PublicPlantDetailed() {
     }
 
     const handleSetCoverImage = (image) => {
-        console.log("handleSetCoverImage", image)
         axios.patch(`${BASE_URL_PROD}/plants/${params.plant_id}/cover_image`, { cover_img: image })
             .then((response) => {
                 if (response.status == 200) {
                     setCoverImage(image)
                 }
-
             })
-            .catch((err) => {
-                console.log(err)
-            })
-
+            .catch(() => {})
     }
 
     return (

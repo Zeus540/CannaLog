@@ -31,11 +31,10 @@ const AddFeeding = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmit
         axios.get(`${BASE_URL_PROD}/nutrients`)
             .then((response) => {
                 setNutrientsTypes(response.data)
-                console.log("nutrients", response.data);
             })
             .catch((error) => {
-                enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
-                console.log(error);
+                const msg = error.response ? `${error.response.status} ${error.response.statusText}` : error.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
         axios.get(`${BASE_URL_PROD}/measurement_units`)
@@ -43,8 +42,8 @@ const AddFeeding = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmit
                 setMeasurementUnits(response.data)
             })
             .catch((error) => {
-                enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
-                console.log(error);
+                const msg = error.response ? `${error.response.status} ${error.response.statusText}` : error.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
 
@@ -94,14 +93,11 @@ const AddFeeding = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmit
     }
 
     const handleAmountChange = (e, child) => {
-        console.log("e", e.target.value)
         child.nutrient_amount = parseInt(e.target.value)
     }
 
     const handleUnitChange = (e, child) => {
-        console.log("e", e.target.value)
         child.nutrient_measurement = parseInt(e.target.value)
-
     }
     return (
         <div>

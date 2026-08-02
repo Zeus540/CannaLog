@@ -18,7 +18,7 @@ export const fetchPublicPlants = createAsyncThunk('publicPlants/fetch',async(obj
       return response.data;
     }
   } catch (error) {
-    throw new Error(`${error.response.status} ${error.response.statusText}`);
+    throw new Error(error.response ? `${error.response.status} ${error.response.statusText}` : error.message);
   }
 
 })
@@ -38,7 +38,7 @@ export const fetchPublicPlantsSingedIn = createAsyncThunk('publicPlantsSingedIn/
       return response.data;
     }
   } catch (error) {
-    throw new Error(`${error.response.status} ${error.response.statusText}`);
+    throw new Error(error.response ? `${error.response.status} ${error.response.statusText}` : error.message);
   }
 })
 

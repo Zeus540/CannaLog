@@ -52,7 +52,6 @@ object-fit: contain;
 
 const RegistrationComplete = () => {
     const params = useParams()
-    { console.log("params", params) }
     return (
         <Root>
             <Inner>

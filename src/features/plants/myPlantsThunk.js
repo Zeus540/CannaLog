@@ -13,7 +13,7 @@ export const fetchMyPlants = createAsyncThunk('myPlants/fetch',(obj)=>{
   }
   let sortBy = "DESC"
 
-  return axios.get(`${BASE_URL_PROD}/plants/my_plants/?limit=${limit}&sort=${sortBy}&key_sort=${obj.key}`,signal)
+  return axios.get(`${BASE_URL_PROD}/plants/my_plants/?limit=${limit}&sort=${sortBy}&key_sort=${obj.key}`, { signal })
   .then((response) => {
     return response.data;
   })

@@ -156,30 +156,43 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
   const params = useParams()
 
   useEffect(() => {
+    if (!plant || !socket) return;
 
-    if (plant && socket) {
-
-      socket.on(`watering_added${params.plant_id}`, (data) => {
-        let arr = [...Object.values(wateringData).flat(), data];
-         group_by(arr, setWateringData, plant);
+    const handleWateringAdded = (data) => {
+      setWateringData(prev => {
+        const arr = [...Object.values(prev).flat(), data];
+        return group_by_pure(arr, plant);
       });
+    };
 
-      socket.on(`feeding_added${params.plant_id}`, (data) => {
-        let arr = [...Object.values(feedingData).flat(), ...data];
-        console.log("feeding_added",data)
-        console.log("arr",arr)
-        group_by(arr, setFeedingData, plant);
+    const handleFeedingAdded = (data) => {
+      setFeedingData(prev => {
+        const arr = [...Object.values(prev).flat(), ...data];
+        return group_by_pure(arr, plant);
       });
+    };
 
-        socket.on(`action_deleted${params.plant_id}`, (data) => {
-          console.log('action_deleted', data)
-          
-          group_by(Object.values(wateringData).flat().filter((i) => i.plant_watering_id !== parseInt(data.plant_watering_id)), setWateringData, plant);
-          group_by(Object.values(feedingData).flat().filter((i) => i.plant_feeding_id !== parseInt(data.plant_feeding_id)), setFeedingData, plant);
-        });
+    const handleActionDeleted = (data) => {
+      setWateringData(prev => {
+        const arr = Object.values(prev).flat().filter(i => i.plant_watering_id !== parseInt(data.plant_watering_id));
+        return group_by_pure(arr, plant);
+      });
+      setFeedingData(prev => {
+        const arr = Object.values(prev).flat().filter(i => i.plant_feeding_id !== parseInt(data.plant_feeding_id));
+        return group_by_pure(arr, plant);
+      });
+    };
 
-    }
-  }, [plant,feedingData,wateringData, socket]);
+    socket.on(`watering_added${params.plant_id}`, handleWateringAdded);
+    socket.on(`feeding_added${params.plant_id}`, handleFeedingAdded);
+    socket.on(`action_deleted${params.plant_id}`, handleActionDeleted);
+
+    return () => {
+      socket.off(`watering_added${params.plant_id}`, handleWateringAdded);
+      socket.off(`feeding_added${params.plant_id}`, handleFeedingAdded);
+      socket.off(`action_deleted${params.plant_id}`, handleActionDeleted);
+    };
+  }, [plant, socket]);
 
 
   useEffect(() => {
@@ -189,21 +202,15 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
         .then((response) => {
           if (response.data.length > 0) {
             group_by(response.data, setWateringData, plant)
-          } 
-
-        }).catch((err) => {
-          console.log("err", err)
-        })
+          }
+        }).catch(() => {})
 
         axios.post(`${BASE_URL_PROD}/plants/actions/2/${plant.plant_id}`)
         .then((response) => {
           if (response.data.length > 0) {
             group_by(response.data, setFeedingData, plant)
-          } 
-
-        }).catch((err) => {
-          console.log("err", err)
-        })
+          }
+        }).catch(() => {})
     }
   }, [plant]);
 
@@ -229,32 +236,25 @@ const TimelineFeeding = ({ plant, activeWeek, publicPage,openModal }) => {
 }
 
 
-  const group_by = (data, setter, plant) => {
-
+  const group_by_pure = (data, plant) => {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const startDateIn = new Date(getLocalizedDate(plant.creation_date))
-
-
     const localizedData = data.map((item) => {
       const localizedDate = utcToZonedTime(item.creation_date, userTimeZone);
-      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 }); 
-      let day = getWeekandDay(item.creation_date).day
+      const startDateLocalized = startOfWeek(startDateIn, { weekStartsOn: 1 });
+      const day = getWeekandDay(item.creation_date).day
       const week = differenceInWeeks(localizedDate, startDateLocalized);
       return { ...item, creation_date: localizedDate, week, day };
     });
+    return groupByAndSortCustomOrder(localizedData, 'day');
+  }
 
-    let sorted = localizedData
-
-    const groupedAndSortedData = groupByAndSortCustomOrder(sorted, 'day');
-
-    setter(groupedAndSortedData)
-
+  const group_by = (data, setter, plant) => {
+    setter(group_by_pure(data, plant))
   }
 
 
   useEffect(() => {
-    console.log(Object.values(wateringData).flat().filter((i) => i.week == activeWeek).length > 0)
-    console.log(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0)
     if(Object.values(feedingData).flat().filter((i) => i.week == activeWeek).length > 0 ){
       setFeedingDataFound(true)
     }else{

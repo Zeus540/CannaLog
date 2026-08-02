@@ -310,13 +310,12 @@ const NavBar = ({ toggleTheme, themeType, }) => {
   const logOut = () => {
     axios.post(`${BASE_URL_PROD}/logout`).then((results) => {
       if (results.status == 200) {
-        socket.on("disconnect", (reason) => {
-          // console.log(reason); prints "io client disconnect"
-        });
-
         dispatch(logout())
         navigate('/')
       }
+    }).catch(() => {
+      dispatch(logout())
+      navigate('/')
     })
   }
 

@@ -91,16 +91,20 @@ function MyPlantsDetailed() {
 
 
     useEffect(() => {
-        if (socket) {
-            socket.on(`action_taken${params.plant_id}`, (data) => {
-                setPlantActions(data)
-            });
+        if (!socket) return;
 
-            socket.on(`stage_changed${params.plant_id}`, (data) => {
-                setCurrentStage(data)
-            });
+        socket.on(`action_taken${params.plant_id}`, (data) => {
+            setPlantActions(data)
+        });
+
+        socket.on(`stage_changed${params.plant_id}`, (data) => {
+            setCurrentStage(data)
+        });
+
+        return () => {
+            socket.off(`action_taken${params.plant_id}`)
+            socket.off(`stage_changed${params.plant_id}`)
         }
-
     }, [socket])
 
 
@@ -124,8 +128,8 @@ function MyPlantsDetailed() {
             }
             
         } catch (error) {
- 
-            enqueueSnackbar(`${error.response.status} ${error.response.data}`, { variant: 'error' })
+            const msg = error.response ? `${error.response.status} ${error.response.data}` : error.message
+            enqueueSnackbar(msg, { variant: 'error' })
         }
 
     }
@@ -139,7 +143,8 @@ function MyPlantsDetailed() {
                 }
             })
             .catch((err) => {
-                enqueueSnackbar(`${err.response.status} ${err.response.data}`, { variant: 'error' })
+                const msg = err.response ? `${err.response.status} ${err.response.data}` : err.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
     }
@@ -151,7 +156,8 @@ function MyPlantsDetailed() {
                     setPlantActions(response.data)
                 }
             }).catch((err) => {
-                enqueueSnackbar(`${err.response.status} Unable to fetch actions for this plant`, { variant: 'error' })
+                const msg = err.response ? `${err.response.status} Unable to fetch actions` : err.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
     }
 
@@ -164,7 +170,8 @@ function MyPlantsDetailed() {
                 }
             })
             .catch((err) => {
-                enqueueSnackbar(`${err.response.status} Unable to fetch current stage for this plant`, { variant: 'error' })
+                const msg = err.response ? `${err.response.status} Unable to fetch stage` : err.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
     }
@@ -220,7 +227,6 @@ function MyPlantsDetailed() {
     }
 
     const handleActiveWeeks = (week) => {
-        console.log(week)
         setActiveWeek(week)
     }
 

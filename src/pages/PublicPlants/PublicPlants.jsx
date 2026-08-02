@@ -7,7 +7,7 @@ import {
   selectPublicJournal,
   selectIsLoggedIn,
   fetchPublicPlants,
-  fetchPublicPlantsSingedIn
+  fetchPublicPlantsSingedIn,
 } from '../../features'
 import PlantCard from '../../components/cards/PlantCard'
 import PlantCardSkelton from '../../components/cards/PlantCardSkelton'
@@ -87,17 +87,18 @@ const PublicPlants = () => {
 
   useEffect(() => {
     if (pageBottom && publicPlants.hasMore) {
-
-        let obj = {
-          limit: 14,
-          limit_mobile: 6,
-          key: publicPlants.next_cursor,
-          signal
-        }
+      const obj = {
+        limit: 14,
+        limit_mobile: 6,
+        key: publicPlants.next_cursor,
+        signal,
+      }
+      if (isLoggedIn) {
+        dispatch(fetchPublicPlantsSingedIn(obj))
+      } else {
         dispatch(fetchPublicPlants(obj))
-    
+      }
     }
-
   }, [pageBottom])
 
   return (

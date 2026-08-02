@@ -39,8 +39,8 @@ const AddWatering = ({ plant, modalType, openModal, data,setModalOpen,setIsSubmi
                 setMeasurementUnits(response.data)
             })
             .catch((error) => {
-                enqueueSnackbar(`${error.response.status} ${error.response.statusText}`, { variant: 'error' })
-                console.log(error);
+                const msg = error.response ? `${error.response.status} ${error.response.statusText}` : error.message
+                enqueueSnackbar(msg, { variant: 'error' })
             })
 
         
